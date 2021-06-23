@@ -214,7 +214,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   child: CheckboxListTile(
                     activeColor: Globals.appColor,
-                    title: RichText(
+                    /* title: RichText(
                       text: TextSpan(
                         text: 'We have updated our ',
                         style: GoogleFonts.notoSerif(
@@ -249,7 +249,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ],
                       ),
-                    ),
+                    ), */
 
                     value: _acceptTerms,
                     onChanged: (newValue) {
