@@ -21,7 +21,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   late String _validationText;
   late bool _isUserNameValid;
+  late bool _isPasswordValid;
   late int _timesTappedUserName;
+  late int _timesTappedPassword;
 
   @override
   void initState() {
@@ -29,11 +31,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
     _validationText = 'Please fill in this field';
     _isUserNameValid = true;
+    _isPasswordValid = true;
     _timesTappedUserName = 0;
+    _timesTappedPassword = 0;
 
     // Start listening to changes
     _userNameController.addListener(() {
-      if (_userNameController.text.isEmpty && _timesTappedUserName != 1) {
+      if (_userNameController.text.isEmpty && _timesTappedUserName > 0) {
         setState(() {
           _isUserNameValid = false;
         });
@@ -43,11 +47,24 @@ class _LoginScreenState extends State<LoginScreen> {
         });
       }
     });
+
+    _passwordController.addListener(() {
+      if (_passwordController.text.isEmpty && _timesTappedPassword > 0) {
+        setState(() {
+          _isPasswordValid = false;
+        });
+      } else {
+        setState(() {
+          _isPasswordValid = true;
+        });
+      }
+    });
   }
 
   @override
   void dispose() {
     _userNameController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -184,67 +201,87 @@ class _LoginScreenState extends State<LoginScreen> {
                         )
                       : Container()
                 ]),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 50.0,
-                    right: 50,
-                    top: 50,
-                  ),
-                  child: TextField(
-                    controller: _passwordController,
-                    obscureText: _isObscure,
-                    decoration: InputDecoration(
-                      labelStyle: GoogleFonts.notoSerif(
-                        fontSize: 14,
-                        color: HexColor('#C9C9C9'),
-                        fontWeight: FontWeight.normal,
-                        //decoration: TextDecoration.underline,
-                      ),
-                      prefixIcon: Transform.scale(
-                        scale: 0.7,
-                        child: SvgPicture.asset(
-                          'assets/images/password.svg',
-                          color: Globals.appColor,
-                          //semanticsLabel: 'Email Mobile',
-                          height: 10,
-                          width: 10,
+                Stack(children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 50.0,
+                      right: 50,
+                      top: 50,
+                    ),
+                    child: TextField(
+                      controller: _passwordController,
+                      onChanged: (value) {
+                        _timesTappedPassword += 1;
+                      },
+                      obscureText: _isObscure,
+                      decoration: InputDecoration(
+                        labelStyle: GoogleFonts.notoSerif(
+                          fontSize: 14,
+                          color: HexColor('#C9C9C9'),
+                          fontWeight: FontWeight.normal,
+                          //decoration: TextDecoration.underline,
                         ),
-                      ),
-                      suffixIcon: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _isObscure = !_isObscure;
-                          });
-                        },
-                        child: Transform.scale(
+                        prefixIcon: Transform.scale(
                           scale: 0.7,
                           child: SvgPicture.asset(
-                            _isObscure
-                                ? 'assets/images/hide.svg'
-                                : 'assets/images/show.svg',
+                            'assets/images/password.svg',
                             color: Globals.appColor,
                             //semanticsLabel: 'Email Mobile',
                             height: 10,
                             width: 10,
                           ),
                         ),
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Globals.appColor),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Globals.appColor),
-                      ),
-                      hintText: 'Password',
-                      hintStyle: GoogleFonts.notoSerif(
-                        fontSize: 14,
-                        color: HexColor('#C9C9C9'),
-                        fontWeight: FontWeight.normal,
-                        //decoration: TextDecoration.underline,
+                        suffixIcon: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _isObscure = !_isObscure;
+                            });
+                          },
+                          child: Transform.scale(
+                            scale: 0.7,
+                            child: SvgPicture.asset(
+                              _isObscure
+                                  ? 'assets/images/hide.svg'
+                                  : 'assets/images/show.svg',
+                              color: Globals.appColor,
+                              //semanticsLabel: 'Email Mobile',
+                              height: 10,
+                              width: 10,
+                            ),
+                          ),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Globals.appColor),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Globals.appColor),
+                        ),
+                        hintText: 'Password',
+                        hintStyle: GoogleFonts.notoSerif(
+                          fontSize: 14,
+                          color: HexColor('#C9C9C9'),
+                          fontWeight: FontWeight.normal,
+                          //decoration: TextDecoration.underline,
+                        ),
                       ),
                     ),
                   ),
-                ),
+                  !_isPasswordValid
+                      ? Positioned(
+                          right: 50.0,
+                          top: 85.0,
+                          child: new Container(
+                            child: Text(
+                              '$_validationText',
+                              style: TextStyle(
+                                color: Globals.validationColor,
+                                fontSize: 10.0,
+                              ),
+                            ),
+                          ),
+                        )
+                      : Container()
+                ]),
                 GestureDetector(
                   onTap: () {},
                   child: Container(
@@ -335,14 +372,23 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: ElevatedButton(
                         onPressed: () async {
                           if (!_isUserNameValid ||
-                              _userNameController.text.isEmpty) {
+                              _userNameController.text.isEmpty ||
+                              !_isPasswordValid ||
+                              _passwordController.text.isEmpty) {
                             if (_userNameController.text.isEmpty)
                               _isUserNameValid = false;
+                            if (_passwordController.text.isEmpty)
+                              _isPasswordValid = false;
 
                             setState(() {});
                             ShowMessage.showFlushBar(
                                 context, 'Please rectify the errors.');
-                          } else {}
+                          } else if (!_acceptTerms) {
+                            ShowMessage.showFlushBar(
+                                context, 'Please accept terms.');
+                          } else {
+                            // Do Login related stuffs.
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
