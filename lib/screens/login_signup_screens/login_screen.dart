@@ -22,6 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
   late String _validationText;
   late bool _isUserNameValid;
   late bool _isPasswordValid;
+  late bool _isUserNameValidMobileOrEmail;
   late int _timesTappedUserName;
   late int _timesTappedPassword;
 
@@ -32,6 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
     _validationText = 'Please fill in this field';
     _isUserNameValid = true;
     _isPasswordValid = true;
+    _isUserNameValidMobileOrEmail = true;
     _timesTappedUserName = 0;
     _timesTappedPassword = 0;
 
@@ -46,6 +48,18 @@ class _LoginScreenState extends State<LoginScreen> {
           _isUserNameValid = true;
         });
       }
+
+      /* if (_userNameController.text.isNotEmpty && _timesTappedUserName > 0) {
+        if (!Globals.isEmail(_userNameController.text) ||
+            !Globals.isValidMobileNumber(_userNameController.text))
+          setState(() {
+            _isUserNameValidMobileOrEmail = false;
+          });
+        else
+          setState(() {
+            _isUserNameValidMobileOrEmail = true;
+          });
+      } */
     });
 
     _passwordController.addListener(() {
@@ -199,7 +213,21 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         )
-                      : Container()
+                      : (!_isUserNameValidMobileOrEmail
+                          ? Positioned(
+                              right: 50.0,
+                              top: 85.0,
+                              child: new Container(
+                                child: Text(
+                                  'Please enter a valid email or mobile number',
+                                  style: TextStyle(
+                                    color: Globals.validationColor,
+                                    fontSize: 10.0,
+                                  ),
+                                ),
+                              ),
+                            )
+                          : Container())
                 ]),
                 Stack(children: [
                   Padding(
@@ -386,7 +414,22 @@ class _LoginScreenState extends State<LoginScreen> {
                           } else if (!_acceptTerms) {
                             ShowMessage.showFlushBar(
                                 context, 'Please accept terms.');
+                          } else if (!(Globals.isEmail(
+                                  _userNameController.text) ||
+                              Globals.isValidMobileNumber(
+                                  _userNameController.text))) {
+                            setState(() {
+                              _isUserNameValidMobileOrEmail = false;
+                            });
+                            ShowMessage.showFlushBar(
+                                context, 'Please rectify the errors.');
                           } else {
+                            setState(() {
+                              _isUserNameValid = true;
+                              _isPasswordValid = true;
+                              _isUserNameValidMobileOrEmail = true;
+                            });
+
                             // Do Login related stuffs.
                           }
                         },
