@@ -45,3 +45,8 @@ app.*.map.json
 .dart_tool/flutter_build/cd7df02e827653e1508281c4e2e758bc/app.dill
 .dart_tool/flutter_build/cd7df02e827653e1508281c4e2e758bc/.filecache
 .flutter-plugins-dependencies
+.dart_tool/flutter_build/cd7df02e827653e1508281c4e2e758bc/flutter_assets.d
+.dart_tool/flutter_build/cd7df02e827653e1508281c4e2e758bc/debug_android_application.stamp
+.dart_tool/flutter_build/cd7df02e827653e1508281c4e2e758bc/app.dill
+.dart_tool/flutter_build/cd7df02e827653e1508281c4e2e758bc/.filecache
+.flutter-plugins-dependencies
