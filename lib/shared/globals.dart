@@ -10,4 +10,7 @@ class Globals {
 
   // Selected Language
   static String selectedAppLanguage = appLanguages[0];
+
+  // Validation message colour
+  static Color validationColor = Color.fromRGBO(250, 74, 91, 1);
 }

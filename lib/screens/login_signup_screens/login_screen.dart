@@ -1,9 +1,9 @@
 import 'package:auto_pilot/shared/globals.dart';
+import 'package:auto_pilot/shared/widgets/show_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:email_validator/email_validator.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -17,10 +17,32 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _acceptTerms = false;
 
   final TextEditingController _userNameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  late String _validationText;
+  late bool _isUserNameValid;
+  late int _timesTappedUserName;
 
   @override
   void initState() {
     super.initState();
+
+    _validationText = 'Please fill in this field';
+    _isUserNameValid = true;
+    _timesTappedUserName = 0;
+
+    // Start listening to changes
+    _userNameController.addListener(() {
+      if (_userNameController.text.isEmpty && _timesTappedUserName != 1) {
+        setState(() {
+          _isUserNameValid = false;
+        });
+      } else {
+        setState(() {
+          _isUserNameValid = true;
+        });
+      }
+    });
   }
 
   @override
@@ -101,47 +123,67 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   child: Image(image: AssetImage('assets/icons/logopng.png')),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 50.0,
-                    right: 50,
-                    top: 50,
-                  ),
-                  child: TextField(
-                    controller: _userNameController,
-                    decoration: InputDecoration(
-                      labelStyle: GoogleFonts.notoSerif(
-                        fontSize: 14,
-                        color: HexColor('#C9C9C9'),
-                        fontWeight: FontWeight.normal,
-                        //decoration: TextDecoration.underline,
-                      ),
-                      prefixIcon: Transform.scale(
-                        scale: 0.7,
-                        child: SvgPicture.asset(
-                          'assets/images/email.svg',
-                          color: Globals.appColor,
-                          //semanticsLabel: 'Email Mobile',
-                          height: 10,
-                          width: 10,
+                Stack(children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 50.0,
+                      right: 50,
+                      top: 50,
+                    ),
+                    child: TextField(
+                      controller: _userNameController,
+                      onChanged: (value) {
+                        _timesTappedUserName += 1;
+                      },
+                      decoration: InputDecoration(
+                        labelStyle: GoogleFonts.notoSerif(
+                          fontSize: 14,
+                          color: HexColor('#C9C9C9'),
+                          fontWeight: FontWeight.normal,
+                          //decoration: TextDecoration.underline,
                         ),
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Globals.appColor),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Globals.appColor),
-                      ),
-                      hintText: 'Email / Mobile',
-                      hintStyle: GoogleFonts.notoSerif(
-                        fontSize: 14,
-                        color: HexColor('#C9C9C9'),
-                        fontWeight: FontWeight.normal,
-                        //decoration: TextDecoration.underline,
+                        prefixIcon: Transform.scale(
+                          scale: 0.7,
+                          child: SvgPicture.asset(
+                            'assets/images/email.svg',
+                            color: Globals.appColor,
+                            //semanticsLabel: 'Email Mobile',
+                            height: 10,
+                            width: 10,
+                          ),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Globals.appColor),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Globals.appColor),
+                        ),
+                        hintText: 'Email / Mobile',
+                        hintStyle: GoogleFonts.notoSerif(
+                          fontSize: 14,
+                          color: HexColor('#C9C9C9'),
+                          fontWeight: FontWeight.normal,
+                          //decoration: TextDecoration.underline,
+                        ),
                       ),
                     ),
                   ),
-                ),
+                  !_isUserNameValid
+                      ? Positioned(
+                          right: 50.0,
+                          top: 85.0,
+                          child: new Container(
+                            child: Text(
+                              '$_validationText',
+                              style: TextStyle(
+                                color: Globals.validationColor,
+                                fontSize: 10.0,
+                              ),
+                            ),
+                          ),
+                        )
+                      : Container()
+                ]),
                 Padding(
                   padding: const EdgeInsets.only(
                     left: 50.0,
@@ -149,6 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     top: 50,
                   ),
                   child: TextField(
+                    controller: _passwordController,
                     obscureText: _isObscure,
                     decoration: InputDecoration(
                       labelStyle: GoogleFonts.notoSerif(
@@ -290,7 +333,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     constraints:
                         BoxConstraints.tightFor(width: 130, height: 55),
                     child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          if (!_isUserNameValid ||
+                              _userNameController.text.isEmpty) {
+                            if (_userNameController.text.isEmpty)
+                              _isUserNameValid = false;
+
+                            setState(() {});
+                            ShowMessage.showFlushBar(
+                                context, 'Please rectify the errors.');
+                          } else {}
+                        },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
