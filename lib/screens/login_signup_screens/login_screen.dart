@@ -207,58 +207,65 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 30.0,
-                    right: 50,
-                  ),
-                  child: CheckboxListTile(
-                    activeColor: Globals.appColor,
-                    title: RichText(
-                      text: TextSpan(
-                        text: 'We have updated our ',
-                        style: GoogleFonts.notoSerif(
-                          fontSize: 14,
-                          color: HexColor('#707070'),
-                          fontWeight: FontWeight.normal,
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Expanded(
+                        child: CheckboxListTile(
+                          activeColor: Globals.appColor,
+
+                          value: _acceptTerms,
+                          onChanged: (newValue) {
+                            setState(() {
+                              _acceptTerms = !_acceptTerms;
+                            });
+                          },
+                          controlAffinity: ListTileControlAffinity
+                              .leading, //  <-- leading Checkbox
                         ),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: 'terms of use',
-                            style: GoogleFonts.notoSerif(
-                              fontSize: 14,
-                              color: Globals.appColor,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                          TextSpan(
-                            text: ' and ',
+                      ),
+                      Expanded(
+                        flex: 4,
+                        child: RichText(
+                          text: TextSpan(
+                            text: 'We have updated our ',
                             style: GoogleFonts.notoSerif(
                               fontSize: 14,
                               color: HexColor('#707070'),
                               fontWeight: FontWeight.normal,
                             ),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: 'terms of use',
+                                style: GoogleFonts.notoSerif(
+                                  fontSize: 14,
+                                  color: Globals.appColor,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                              TextSpan(
+                                text: ' and ',
+                                style: GoogleFonts.notoSerif(
+                                  fontSize: 14,
+                                  color: HexColor('#707070'),
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                              TextSpan(
+                                text: 'privacy policy.',
+                                style: GoogleFonts.notoSerif(
+                                  fontSize: 14,
+                                  color: Globals.appColor,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ],
                           ),
-                          TextSpan(
-                            text: 'privacy policy.',
-                            style: GoogleFonts.notoSerif(
-                              fontSize: 14,
-                              color: Globals.appColor,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    value: _acceptTerms,
-                    onChanged: (newValue) {
-                      setState(() {
-                        _acceptTerms = !_acceptTerms;
-                      });
-                    },
-                    controlAffinity: ListTileControlAffinity
-                        .leading, //  <-- leading Checkbox
+                        ),
+                      )
+                    ],
                   ),
                 ),
                 Padding(
