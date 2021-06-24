@@ -23,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Container(
             margin: EdgeInsets.only(top: 20),
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
+            //height: MediaQuery.of(context).size.height,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
@@ -209,6 +209,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.only(left: 30),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
