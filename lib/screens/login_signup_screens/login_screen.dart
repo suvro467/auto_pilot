@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:email_validator/email_validator.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -14,6 +15,20 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool _isObscure = true;
   bool _acceptTerms = false;
+
+  final TextEditingController _userNameController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _userNameController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     //Globals.selectedAppLanguage = Globals.appLanguages[0];
@@ -23,7 +38,6 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Container(
             margin: EdgeInsets.only(top: 20),
             width: MediaQuery.of(context).size.width,
-            //height: MediaQuery.of(context).size.height,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
@@ -94,6 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     top: 50,
                   ),
                   child: TextField(
+                    controller: _userNameController,
                     decoration: InputDecoration(
                       labelStyle: GoogleFonts.notoSerif(
                         fontSize: 14,
