@@ -22,6 +22,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   final TextEditingController _customerNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _smsOTPController = TextEditingController();
   final TextEditingController _emailOTPController = TextEditingController();
@@ -29,12 +30,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
   late String _validationText;
   late bool _isCustomerNameValid;
   late bool _isEmailValid;
+  late bool _isPhoneValid;
   late bool _isPasswordValid;
   late bool _isValidEmail;
   late bool _isSmsOTPValid;
   late bool _isEmailOTPValid;
   late int _timesTappedCustomerName;
   late int _timesTappedEmail;
+  late int _timesTappedPhone;
   late int _timesTappedPassword;
   late int _timesTappedSmsOTP;
   late int _timesTappedEmailOTP;
@@ -46,12 +49,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _validationText = 'Please fill in this field';
     _isCustomerNameValid = true;
     _isEmailValid = true;
+    _isPhoneValid = true;
     _isPasswordValid = true;
     _isValidEmail = true;
     _isSmsOTPValid = true;
     _isEmailOTPValid = true;
     _timesTappedCustomerName = 0;
     _timesTappedEmail = 0;
+    _timesTappedPhone = 0;
     _timesTappedPassword = 0;
     _timesTappedSmsOTP = 0;
     _timesTappedEmailOTP = 0;
@@ -78,6 +83,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
       } else {
         setState(() {
           _isEmailValid = true;
+        });
+      }
+    });
+
+    _phoneNumberController.addListener(() {
+      if (_phoneNumberController.text.isEmpty && _timesTappedPhone > 0) {
+        setState(() {
+          _isPhoneValid = false;
+        });
+      } else {
+        setState(() {
+          _isPhoneValid = true;
         });
       }
     });
@@ -123,6 +140,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void dispose() {
     _customerNameController.dispose();
     _emailController.dispose();
+    _phoneNumberController.dispose();
     _passwordController.dispose();
     _smsOTPController.dispose();
     _emailOTPController.dispose();
@@ -192,7 +210,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Container(
                     height: 75.0,
                     width: 75.0,
-                    margin: EdgeInsets.only(top: 50),
+                    margin: EdgeInsets.only(top: 20),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.transparent,
@@ -211,7 +229,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       padding: const EdgeInsets.only(
                         left: 50.0,
                         right: 50,
-                        top: 50,
+                        top: 20,
                       ),
                       child: TextField(
                         controller: _customerNameController,
@@ -342,6 +360,129 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               )
                             : Container())
                   ]),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 180,
+                          padding: const EdgeInsets.only(
+                            left: 50.0,
+                            //right: 50,
+                            top: 20,
+                          ),
+                          child: TextField(
+                            enabled: false,
+                            decoration: InputDecoration(
+                              disabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Globals.appColor),
+                              ),
+                              labelStyle: GoogleFonts.notoSerif(
+                                fontSize: 14,
+                                color: HexColor('#C9C9C9'),
+                                fontWeight: FontWeight.normal,
+                              ),
+                              prefixIcon: Transform.scale(
+                                scale: 0.6,
+                                child: SvgPicture.asset(
+                                  'assets/images/phone.svg',
+                                  color: Globals.appColor,
+                                  //semanticsLabel: 'Email Mobile',
+                                  height: 10,
+                                  width: 10,
+                                ),
+                              ),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Globals.appColor),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Globals.appColor),
+                              ),
+                              hintText: '+91 (IND)',
+                              hintStyle: GoogleFonts.notoSerif(
+                                fontSize: 14,
+                                color: HexColor('#C9C9C9'),
+                                fontWeight: FontWeight.normal,
+                                //decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          //flex: 2,
+                          child: Stack(children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: 10.0,
+                                right: 50,
+                                top: 20,
+                              ),
+                              child: TextField(
+                                controller: _phoneNumberController,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly,
+                                  LengthLimitingTextInputFormatter(10)
+                                ],
+                                onChanged: (value) {
+                                  _timesTappedPhone += 1;
+                                },
+                                decoration: InputDecoration(
+                                  labelStyle: GoogleFonts.notoSerif(
+                                    fontSize: 14,
+                                    color: HexColor('#C9C9C9'),
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                  /* prefixIcon: Transform.scale(
+                                    scale: 0.7,
+                                    child: SvgPicture.asset(
+                                      'assets/images/otp.svg',
+                                      color: Globals.appColor,
+                                      //semanticsLabel: 'Email Mobile',
+                                      height: 10,
+                                      width: 10,
+                                    ),
+                                  ), */
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Globals.appColor),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Globals.appColor),
+                                  ),
+                                  hintText: 'Contact Number',
+                                  hintStyle: GoogleFonts.notoSerif(
+                                    fontSize: 14,
+                                    color: HexColor('#C9C9C9'),
+                                    fontWeight: FontWeight.normal,
+                                    //decoration: TextDecoration.underline,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            !_isPhoneValid
+                                ? Positioned(
+                                    right: 50.0,
+                                    top: 55.0,
+                                    child: new Container(
+                                      child: Text(
+                                        '$_validationText',
+                                        style: TextStyle(
+                                          color: Globals.validationColor,
+                                          fontSize: 10.0,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                : Container()
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
                   Stack(children: [
                     Padding(
                       padding: const EdgeInsets.only(
@@ -618,6 +759,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 _customerNameController.text.isEmpty ||
                                 !_isEmailValid ||
                                 _emailController.text.isEmpty ||
+                                !_isPhoneValid ||
+                                _phoneNumberController.text.isEmpty ||
                                 !_isPasswordValid ||
                                 _passwordController.text.isEmpty ||
                                 !_isSmsOTPValid ||
@@ -628,6 +771,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 _isCustomerNameValid = false;
                               if (_emailController.text.isEmpty)
                                 _isEmailValid = false;
+                              if (_phoneNumberController.text.isEmpty)
+                                _isPhoneValid = false;
                               if (_passwordController.text.isEmpty)
                                 _isPasswordValid = false;
                               if (_smsOTPController.text.isEmpty)
@@ -649,6 +794,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               setState(() {
                                 _isCustomerNameValid = true;
                                 _isEmailValid = true;
+                                _isPhoneValid = true;
                                 _isPasswordValid = true;
                                 _isValidEmail = true;
                                 _isSmsOTPValid = true;
@@ -675,7 +821,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(0, 25, 25, 0),
+                    padding: EdgeInsets.fromLTRB(0, 25, 25, 25),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
