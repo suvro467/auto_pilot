@@ -34,7 +34,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   late bool _isSmsOTPValid;
   late bool _isEmailOTPValid;
   late int _timesTappedCustomerName;
-  late int _timesTappedUserName;
+  late int _timesTappedEmail;
   late int _timesTappedPassword;
   late int _timesTappedSmsOTP;
   late int _timesTappedEmailOTP;
@@ -51,7 +51,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _isSmsOTPValid = true;
     _isEmailOTPValid = true;
     _timesTappedCustomerName = 0;
-    _timesTappedUserName = 0;
+    _timesTappedEmail = 0;
     _timesTappedPassword = 0;
     _timesTappedSmsOTP = 0;
     _timesTappedEmailOTP = 0;
@@ -71,7 +71,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     });
 
     _emailController.addListener(() {
-      if (_emailController.text.isEmpty && _timesTappedUserName > 0) {
+      if (_emailController.text.isEmpty && _timesTappedEmail > 0) {
         setState(() {
           _isEmailValid = false;
         });
@@ -277,7 +277,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: TextField(
                         controller: _emailController,
                         onChanged: (value) {
-                          _timesTappedUserName += 1;
+                          _timesTappedEmail += 1;
                         },
                         decoration: InputDecoration(
                           labelStyle: GoogleFonts.notoSerif(
@@ -315,7 +315,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     !_isEmailValid
                         ? Positioned(
                             right: 50.0,
-                            top: 85.0,
+                            top: 55.0,
                             child: new Container(
                               child: Text(
                                 '$_validationText',
@@ -329,7 +329,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         : (!_isValidEmail
                             ? Positioned(
                                 right: 50.0,
-                                top: 85.0,
+                                top: 55.0,
                                 child: new Container(
                                   child: Text(
                                     'Please enter a valid email',
@@ -410,7 +410,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     !_isPasswordValid
                         ? Positioned(
                             right: 50.0,
-                            top: 85.0,
+                            top: 55.0,
                             child: new Container(
                               child: Text(
                                 '$_validationText',
@@ -432,6 +432,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       child: TextField(
                         controller: _smsOTPController,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          //LengthLimitingTextInputFormatter(8)
+                        ],
                         onChanged: (value) {
                           _timesTappedSmsOTP += 1;
                         },
@@ -471,7 +476,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     !_isSmsOTPValid
                         ? Positioned(
                             right: 50.0,
-                            top: 85.0,
+                            top: 55.0,
                             child: new Container(
                               child: Text(
                                 '$_validationText',
@@ -493,6 +498,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       child: TextField(
                         controller: _emailOTPController,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          //LengthLimitingTextInputFormatter(8)
+                        ],
                         onChanged: (value) {
                           _timesTappedSmsOTP += 1;
                         },
@@ -532,7 +542,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     !_isEmailOTPValid
                         ? Positioned(
                             right: 50.0,
-                            top: 85.0,
+                            top: 55.0,
                             child: new Container(
                               child: Text(
                                 '$_validationText',
@@ -613,7 +623,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 !_isSmsOTPValid ||
                                 _smsOTPController.text.isEmpty ||
                                 !_isEmailOTPValid ||
-                                _emailOTPController.text.isEmpty) {
+                                _emailOTPController.text.isEmpty ||
+                                !_isValidEmail) {
                               if (_customerNameController.text.isEmpty)
                                 _isCustomerNameValid = false;
                               if (_emailController.text.isEmpty)
@@ -628,9 +639,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               setState(() {});
                               ShowMessage.showFlushBar(
                                   context, 'Please rectify the errors.');
-                            } else if (!_acceptTerms) {
-                              ShowMessage.showFlushBar(
-                                  context, 'Please accept terms.');
                             } else if (!Globals.isEmail(
                                 _emailController.text)) {
                               setState(() {
