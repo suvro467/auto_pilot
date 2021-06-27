@@ -1,4 +1,3 @@
-import 'package:auto_pilot/screens/login_signup_screens/signup_screen.dart';
 import 'package:auto_pilot/shared/globals.dart';
 import 'package:auto_pilot/shared/widgets/show_message.dart';
 import 'package:flutter/material.dart';
@@ -6,61 +5,73 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({Key? key}) : super(key: key);
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _SignUpScreenState createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   bool _isObscure = true;
   bool _acceptTerms = false;
 
-  final TextEditingController _userNameController = TextEditingController();
+  final TextEditingController _customerNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _smsOTP = TextEditingController();
+  final TextEditingController _emailOTP = TextEditingController();
 
   late String _validationText;
-  late bool _isUserNameValid;
+  late bool _isCustomerNameValid;
+  late bool _isEmailValid;
   late bool _isPasswordValid;
-  late bool _isUserNameValidMobileOrEmail;
+  late bool _isValidEmail;
+  late bool _isSmsOTPValid;
+  late bool _isEmailOTPValid;
+  late int _timesTappedCustomerName;
   late int _timesTappedUserName;
   late int _timesTappedPassword;
+  late int _timesTappedSmsOTP;
+  late int _timesTappedEmailOTP;
 
   @override
   void initState() {
     super.initState();
 
     _validationText = 'Please fill in this field';
-    _isUserNameValid = true;
+    _isCustomerNameValid = true;
+    _isEmailValid = true;
     _isPasswordValid = true;
-    _isUserNameValidMobileOrEmail = true;
+    _isValidEmail = true;
+    _timesTappedCustomerName = 0;
     _timesTappedUserName = 0;
     _timesTappedPassword = 0;
 
     // Start listening to changes
-    _userNameController.addListener(() {
-      if (_userNameController.text.isEmpty && _timesTappedUserName > 0) {
+    _customerNameController.addListener(() {
+      if (_customerNameController.text.isEmpty &&
+          _timesTappedCustomerName > 0) {
         setState(() {
-          _isUserNameValid = false;
+          _isCustomerNameValid = false;
         });
       } else {
         setState(() {
-          _isUserNameValid = true;
+          _isCustomerNameValid = true;
         });
       }
+    });
 
-      /* if (_userNameController.text.isNotEmpty && _timesTappedUserName > 0) {
-        if (!Globals.isEmail(_userNameController.text) ||
-            !Globals.isValidMobileNumber(_userNameController.text))
-          setState(() {
-            _isUserNameValidMobileOrEmail = false;
-          });
-        else
-          setState(() {
-            _isUserNameValidMobileOrEmail = true;
-          });
-      } */
+    _emailController.addListener(() {
+      if (_emailController.text.isEmpty && _timesTappedUserName > 0) {
+        setState(() {
+          _isEmailValid = false;
+        });
+      } else {
+        setState(() {
+          _isEmailValid = true;
+        });
+      }
     });
 
     _passwordController.addListener(() {
@@ -78,7 +89,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void dispose() {
-    _userNameController.dispose();
+    _customerNameController.dispose();
+    _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -95,49 +107,6 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                DropdownButton(
-                  elevation: 16,
-                  iconSize: 36,
-                  iconEnabledColor: Globals.appColor,
-                  underline: Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Divider(
-                      color: Globals.appColor,
-                      height: 1.0,
-                      thickness: 1,
-                    ),
-                  ),
-                  style: GoogleFonts.notoSerif(
-                    fontSize: 14,
-                    color: HexColor('#707070'),
-                    fontWeight: FontWeight.normal,
-                  ),
-                  value: Globals.selectedAppLanguage,
-                  icon: Icon(
-                    Icons.arrow_drop_down,
-                    color: Globals.appColor,
-                    //size: 30,
-                  ),
-                  items: Globals.appLanguages.map((String items) {
-                    return DropdownMenuItem(
-                      value: items,
-                      child: Text(
-                        items,
-                        style: GoogleFonts.notoSerif(
-                          fontSize: 14,
-                          color: HexColor('#707070'),
-                          fontWeight: FontWeight.normal,
-                          //decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      Globals.selectedAppLanguage = value.toString();
-                    });
-                  },
-                ),
                 Container(
                   height: 75.0,
                   width: 75.0,
@@ -163,7 +132,68 @@ class _LoginScreenState extends State<LoginScreen> {
                       top: 50,
                     ),
                     child: TextField(
-                      controller: _userNameController,
+                      controller: _customerNameController,
+                      onChanged: (value) {
+                        _timesTappedCustomerName += 1;
+                      },
+                      decoration: InputDecoration(
+                        labelStyle: GoogleFonts.notoSerif(
+                          fontSize: 14,
+                          color: HexColor('#C9C9C9'),
+                          fontWeight: FontWeight.normal,
+                          //decoration: TextDecoration.underline,
+                        ),
+                        prefixIcon: Transform.scale(
+                          scale: 0.7,
+                          child: SvgPicture.asset(
+                            'assets/images/user.svg',
+                            color: Globals.appColor,
+                            //semanticsLabel: 'Email Mobile',
+                            height: 10,
+                            width: 10,
+                          ),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Globals.appColor),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Globals.appColor),
+                        ),
+                        hintText: 'Name',
+                        hintStyle: GoogleFonts.notoSerif(
+                          fontSize: 14,
+                          color: HexColor('#C9C9C9'),
+                          fontWeight: FontWeight.normal,
+                          //decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                  ),
+                  !_isCustomerNameValid
+                      ? Positioned(
+                          right: 50.0,
+                          top: 85.0,
+                          child: new Container(
+                            child: Text(
+                              '$_validationText',
+                              style: TextStyle(
+                                color: Globals.validationColor,
+                                fontSize: 10.0,
+                              ),
+                            ),
+                          ),
+                        )
+                      : Container()
+                ]),
+                Stack(children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 50.0,
+                      right: 50,
+                      top: 50,
+                    ),
+                    child: TextField(
+                      controller: _emailController,
                       onChanged: (value) {
                         _timesTappedUserName += 1;
                       },
@@ -190,7 +220,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Globals.appColor),
                         ),
-                        hintText: 'Email / Mobile',
+                        hintText: 'Email',
                         hintStyle: GoogleFonts.notoSerif(
                           fontSize: 14,
                           color: HexColor('#C9C9C9'),
@@ -200,7 +230,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                  !_isUserNameValid
+                  !_isEmailValid
                       ? Positioned(
                           right: 50.0,
                           top: 85.0,
@@ -214,13 +244,13 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         )
-                      : (!_isUserNameValidMobileOrEmail
+                      : (!_isValidEmail
                           ? Positioned(
                               right: 50.0,
                               top: 85.0,
                               child: new Container(
                                 child: Text(
-                                  'Please enter a valid email or mobile number',
+                                  'Please enter a valid email',
                                   style: TextStyle(
                                     color: Globals.validationColor,
                                     fontSize: 10.0,
@@ -285,7 +315,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Globals.appColor),
                         ),
-                        hintText: 'Password',
+                        hintText: 'Assign password',
                         hintStyle: GoogleFonts.notoSerif(
                           fontSize: 14,
                           color: HexColor('#C9C9C9'),
@@ -400,12 +430,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         BoxConstraints.tightFor(width: 130, height: 55),
                     child: ElevatedButton(
                         onPressed: () async {
-                          if (!_isUserNameValid ||
-                              _userNameController.text.isEmpty ||
+                          if (!_isCustomerNameValid ||
+                              _customerNameController.text.isEmpty ||
+                              !_isEmailValid ||
+                              _emailController.text.isEmpty ||
                               !_isPasswordValid ||
                               _passwordController.text.isEmpty) {
-                            if (_userNameController.text.isEmpty)
-                              _isUserNameValid = false;
+                            if (_customerNameController.text.isEmpty)
+                              _isCustomerNameValid = false;
+                            if (_emailController.text.isEmpty)
+                              _isEmailValid = false;
                             if (_passwordController.text.isEmpty)
                               _isPasswordValid = false;
 
@@ -415,20 +449,18 @@ class _LoginScreenState extends State<LoginScreen> {
                           } else if (!_acceptTerms) {
                             ShowMessage.showFlushBar(
                                 context, 'Please accept terms.');
-                          } else if (!(Globals.isEmail(
-                                  _userNameController.text) ||
-                              Globals.isValidMobileNumber(
-                                  _userNameController.text))) {
+                          } else if (!Globals.isEmail(_emailController.text)) {
                             setState(() {
-                              _isUserNameValidMobileOrEmail = false;
+                              _isValidEmail = false;
                             });
                             ShowMessage.showFlushBar(
                                 context, 'Please rectify the errors.');
                           } else {
                             setState(() {
-                              _isUserNameValid = true;
+                              _isCustomerNameValid = true;
+                              _isEmailValid = true;
                               _isPasswordValid = true;
-                              _isUserNameValidMobileOrEmail = true;
+                              _isValidEmail = true;
                             });
 
                             // Do Login related stuffs.
@@ -490,14 +522,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         constraints:
                             BoxConstraints.tightFor(width: 100, height: 35),
                         child: ElevatedButton(
-                            onPressed: () async {
-                              var result = await Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) {
-                                  return SignUpScreen();
-                                }),
-                              );
-                            },
+                            onPressed: () {},
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30.0),
