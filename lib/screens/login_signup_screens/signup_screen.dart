@@ -1,3 +1,4 @@
+import 'package:auto_pilot/screens/login_signup_screens/login_screen.dart';
 import 'package:auto_pilot/shared/globals.dart';
 import 'package:auto_pilot/shared/widgets/show_message.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +20,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _customerNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _smsOTP = TextEditingController();
-  final TextEditingController _emailOTP = TextEditingController();
+  final TextEditingController _smsOTPController = TextEditingController();
+  final TextEditingController _emailOTPController = TextEditingController();
 
   late String _validationText;
   late bool _isCustomerNameValid;
@@ -44,9 +45,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _isEmailValid = true;
     _isPasswordValid = true;
     _isValidEmail = true;
+    _isSmsOTPValid = true;
+    _isEmailOTPValid = true;
     _timesTappedCustomerName = 0;
     _timesTappedUserName = 0;
     _timesTappedPassword = 0;
+    _timesTappedSmsOTP = 0;
+    _timesTappedEmailOTP = 0;
 
     // Start listening to changes
     _customerNameController.addListener(() {
@@ -85,6 +90,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
         });
       }
     });
+
+    _smsOTPController.addListener(() {
+      if (_smsOTPController.text.isEmpty && _timesTappedSmsOTP > 0) {
+        setState(() {
+          _isSmsOTPValid = false;
+        });
+      } else {
+        setState(() {
+          _isSmsOTPValid = true;
+        });
+      }
+    });
+
+    _emailOTPController.addListener(() {
+      if (_emailOTPController.text.isEmpty && _timesTappedEmailOTP > 0) {
+        setState(() {
+          _isEmailOTPValid = false;
+        });
+      } else {
+        setState(() {
+          _isEmailOTPValid = true;
+        });
+      }
+    });
   }
 
   @override
@@ -92,6 +121,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _customerNameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    _smsOTPController.dispose();
+    _emailController.dispose();
     super.dispose();
   }
 
@@ -107,10 +138,53 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
+                DropdownButton(
+                  elevation: 16,
+                  iconSize: 36,
+                  iconEnabledColor: Globals.appColor,
+                  underline: Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Divider(
+                      color: Globals.appColor,
+                      height: 1.0,
+                      thickness: 1,
+                    ),
+                  ),
+                  style: GoogleFonts.notoSerif(
+                    fontSize: 14,
+                    color: HexColor('#707070'),
+                    fontWeight: FontWeight.normal,
+                  ),
+                  value: Globals.selectedAppLanguage,
+                  icon: Icon(
+                    Icons.arrow_drop_down,
+                    color: Globals.appColor,
+                    //size: 30,
+                  ),
+                  items: Globals.appLanguages.map((String items) {
+                    return DropdownMenuItem(
+                      value: items,
+                      child: Text(
+                        items,
+                        style: GoogleFonts.notoSerif(
+                          fontSize: 14,
+                          color: HexColor('#707070'),
+                          fontWeight: FontWeight.normal,
+                          //decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      Globals.selectedAppLanguage = value.toString();
+                    });
+                  },
+                ),
                 Container(
                   height: 75.0,
                   width: 75.0,
-                  margin: EdgeInsets.only(top: 100),
+                  margin: EdgeInsets.only(top: 50),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.transparent,
@@ -190,7 +264,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     padding: const EdgeInsets.only(
                       left: 50.0,
                       right: 50,
-                      top: 50,
+                      top: 20,
                     ),
                     child: TextField(
                       controller: _emailController,
@@ -265,7 +339,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     padding: const EdgeInsets.only(
                       left: 50.0,
                       right: 50,
-                      top: 50,
+                      top: 20,
                     ),
                     child: TextField(
                       controller: _passwordController,
@@ -341,52 +415,144 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         )
                       : Container()
                 ]),
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    padding: EdgeInsets.only(
+                Stack(children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 50.0,
                       right: 50,
-                      top: 15,
-                      bottom: 15,
+                      top: 20,
                     ),
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      'Forgot Password',
-                      style: GoogleFonts.notoSerif(
-                        fontSize: 13,
-                        color: Globals.appColor,
-                        fontWeight: FontWeight.normal,
-                        //decoration: TextDecoration.underline,
+                    child: TextField(
+                      controller: _smsOTPController,
+                      onChanged: (value) {
+                        _timesTappedSmsOTP += 1;
+                      },
+                      decoration: InputDecoration(
+                        labelStyle: GoogleFonts.notoSerif(
+                          fontSize: 14,
+                          color: HexColor('#C9C9C9'),
+                          fontWeight: FontWeight.normal,
+                          //decoration: TextDecoration.underline,
+                        ),
+                        prefixIcon: Transform.scale(
+                          scale: 0.7,
+                          child: SvgPicture.asset(
+                            'assets/images/otp.svg',
+                            color: Globals.appColor,
+                            //semanticsLabel: 'Email Mobile',
+                            height: 10,
+                            width: 10,
+                          ),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Globals.appColor),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Globals.appColor),
+                        ),
+                        hintText: 'Enter OTP sent via SMS',
+                        hintStyle: GoogleFonts.notoSerif(
+                          fontSize: 14,
+                          color: HexColor('#C9C9C9'),
+                          fontWeight: FontWeight.normal,
+                          //decoration: TextDecoration.underline,
+                        ),
                       ),
                     ),
                   ),
-                ),
+                  !_isSmsOTPValid
+                      ? Positioned(
+                          right: 50.0,
+                          top: 85.0,
+                          child: new Container(
+                            child: Text(
+                              '$_validationText',
+                              style: TextStyle(
+                                color: Globals.validationColor,
+                                fontSize: 10.0,
+                              ),
+                            ),
+                          ),
+                        )
+                      : Container()
+                ]),
+                Stack(children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 50.0,
+                      right: 50,
+                      top: 20,
+                    ),
+                    child: TextField(
+                      controller: _emailOTPController,
+                      onChanged: (value) {
+                        _timesTappedSmsOTP += 1;
+                      },
+                      decoration: InputDecoration(
+                        labelStyle: GoogleFonts.notoSerif(
+                          fontSize: 14,
+                          color: HexColor('#C9C9C9'),
+                          fontWeight: FontWeight.normal,
+                          //decoration: TextDecoration.underline,
+                        ),
+                        prefixIcon: Transform.scale(
+                          scale: 0.7,
+                          child: SvgPicture.asset(
+                            'assets/images/otp.svg',
+                            color: Globals.appColor,
+                            //semanticsLabel: 'Email Mobile',
+                            height: 10,
+                            width: 10,
+                          ),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Globals.appColor),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Globals.appColor),
+                        ),
+                        hintText: 'Enter OTP sent via EMail',
+                        hintStyle: GoogleFonts.notoSerif(
+                          fontSize: 14,
+                          color: HexColor('#C9C9C9'),
+                          fontWeight: FontWeight.normal,
+                          //decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                  ),
+                  !_isEmailOTPValid
+                      ? Positioned(
+                          right: 50.0,
+                          top: 85.0,
+                          child: new Container(
+                            child: Text(
+                              '$_validationText',
+                              style: TextStyle(
+                                color: Globals.validationColor,
+                                fontSize: 10.0,
+                              ),
+                            ),
+                          ),
+                        )
+                      : Container()
+                ]),
                 Container(
+                  padding: const EdgeInsets.only(
+                    left: 50.0,
+                    right: 50,
+                    top: 20,
+                  ),
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.only(left: 30),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Expanded(
-                        child: CheckboxListTile(
-                          activeColor: Globals.appColor,
-
-                          value: _acceptTerms,
-                          onChanged: (newValue) {
-                            setState(() {
-                              _acceptTerms = !_acceptTerms;
-                            });
-                          },
-                          controlAffinity: ListTileControlAffinity
-                              .leading, //  <-- leading Checkbox
-                        ),
-                      ),
-                      Expanded(
                         flex: 4,
                         child: RichText(
                           text: TextSpan(
-                            text: 'We have updated our ',
-                            style: GoogleFonts.notoSerif(
+                            text: 'By using MyAutoPilot you agree to our ',
+                            style: GoogleFonts.notoSans(
                               fontSize: 14,
                               color: HexColor('#707070'),
                               fontWeight: FontWeight.normal,
@@ -435,13 +601,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               !_isEmailValid ||
                               _emailController.text.isEmpty ||
                               !_isPasswordValid ||
-                              _passwordController.text.isEmpty) {
+                              _passwordController.text.isEmpty ||
+                              !_isSmsOTPValid ||
+                              _smsOTPController.text.isEmpty ||
+                              !_isEmailOTPValid ||
+                              _emailOTPController.text.isEmpty) {
                             if (_customerNameController.text.isEmpty)
                               _isCustomerNameValid = false;
                             if (_emailController.text.isEmpty)
                               _isEmailValid = false;
                             if (_passwordController.text.isEmpty)
                               _isPasswordValid = false;
+                            if (_smsOTPController.text.isEmpty)
+                              _isSmsOTPValid = false;
+                            if (_emailOTPController.text.isEmpty)
+                              _isEmailOTPValid = false;
 
                             setState(() {});
                             ShowMessage.showFlushBar(
@@ -461,9 +635,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               _isEmailValid = true;
                               _isPasswordValid = true;
                               _isValidEmail = true;
+                              _isSmsOTPValid = true;
+                              _isEmailOTPValid = true;
                             });
 
-                            // Do Login related stuffs.
+                            // Do Sign UP related stuffs.
                           }
                         },
                         style: ElevatedButton.styleFrom(
@@ -473,7 +649,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           primary: Globals.appColor,
                         ),
                         child: Text(
-                          'LOGIN',
+                          'SIGN UP',
                           style: GoogleFonts.notoSerif(
                             fontSize: 17,
                             color: Colors.white,
@@ -483,46 +659,46 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(
-                    left: 0.0,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Transform.scale(
-                        scale: 2,
-                        child: SvgPicture.asset(
-                          'assets/images/fingerprint.svg',
-                          color: Globals.appColor,
-                          //semanticsLabel: 'Email Mobile',
-                          height: 10,
-                          width: 10,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10.0),
-                        child: Text(
-                          'Fingerprint Login Enabled',
-                          style: GoogleFonts.notoSans(
-                            fontSize: 12,
-                            color: HexColor('#707070'),
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 75, 25, 0),
+                  padding: EdgeInsets.fromLTRB(0, 25, 25, 0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Already have',
+                              style: GoogleFonts.notoSans(
+                                fontSize: 10,
+                                color: HexColor('#707070'),
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                            Text(
+                              'an account?',
+                              style: GoogleFonts.notoSans(
+                                fontSize: 10,
+                                color: HexColor('#707070'),
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       ConstrainedBox(
                         constraints:
                             BoxConstraints.tightFor(width: 100, height: 35),
                         child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                              var result = await Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) {
+                                  return LoginScreen();
+                                }),
+                              );
+                            },
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30.0),
@@ -530,7 +706,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               primary: Globals.appColor,
                             ),
                             child: Text(
-                              'Sign Up',
+                              'Log In',
                               style: GoogleFonts.notoSerif(
                                 fontSize: 13,
                                 color: Colors.white,
