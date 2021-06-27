@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:auto_pilot/screens/login_signup_screens/login_screen.dart';
 import 'package:auto_pilot/shared/globals.dart';
 import 'package:auto_pilot/shared/widgets/show_message.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -122,602 +125,643 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     _smsOTPController.dispose();
-    _emailController.dispose();
+    _emailOTPController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     //Globals.selectedAppLanguage = Globals.appLanguages[0];
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.only(top: 20),
-            width: MediaQuery.of(context).size.width,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                DropdownButton(
-                  elevation: 16,
-                  iconSize: 36,
-                  iconEnabledColor: Globals.appColor,
-                  underline: Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Divider(
+    return WillPopScope(
+      onWillPop: () {
+        Navigator.pop(context); //return data along with pop
+        return new Future(() => false);
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Container(
+              margin: EdgeInsets.only(top: 20),
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  DropdownButton(
+                    elevation: 16,
+                    iconSize: 36,
+                    iconEnabledColor: Globals.appColor,
+                    underline: Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Divider(
+                        color: Globals.appColor,
+                        height: 1.0,
+                        thickness: 1,
+                      ),
+                    ),
+                    style: GoogleFonts.notoSerif(
+                      fontSize: 14,
+                      color: HexColor('#707070'),
+                      fontWeight: FontWeight.normal,
+                    ),
+                    value: Globals.selectedAppLanguage,
+                    icon: Icon(
+                      Icons.arrow_drop_down,
                       color: Globals.appColor,
-                      height: 1.0,
-                      thickness: 1,
+                      //size: 30,
                     ),
-                  ),
-                  style: GoogleFonts.notoSerif(
-                    fontSize: 14,
-                    color: HexColor('#707070'),
-                    fontWeight: FontWeight.normal,
-                  ),
-                  value: Globals.selectedAppLanguage,
-                  icon: Icon(
-                    Icons.arrow_drop_down,
-                    color: Globals.appColor,
-                    //size: 30,
-                  ),
-                  items: Globals.appLanguages.map((String items) {
-                    return DropdownMenuItem(
-                      value: items,
-                      child: Text(
-                        items,
-                        style: GoogleFonts.notoSerif(
-                          fontSize: 14,
-                          color: HexColor('#707070'),
-                          fontWeight: FontWeight.normal,
-                          //decoration: TextDecoration.underline,
+                    items: Globals.appLanguages.map((String items) {
+                      return DropdownMenuItem(
+                        value: items,
+                        child: Text(
+                          items,
+                          style: GoogleFonts.notoSerif(
+                            fontSize: 14,
+                            color: HexColor('#707070'),
+                            fontWeight: FontWeight.normal,
+                            //decoration: TextDecoration.underline,
+                          ),
                         ),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        Globals.selectedAppLanguage = value.toString();
+                      });
+                    },
+                  ),
+                  Container(
+                    height: 75.0,
+                    width: 75.0,
+                    margin: EdgeInsets.only(top: 50),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.transparent,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          offset: Offset(0.0, 1.0), //(x,y)
+                          blurRadius: 1.0,
+                        ),
+                      ],
+                    ),
+                    child: Image(image: AssetImage('assets/icons/logopng.png')),
+                  ),
+                  Stack(children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 50.0,
+                        right: 50,
+                        top: 50,
                       ),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      Globals.selectedAppLanguage = value.toString();
-                    });
-                  },
-                ),
-                Container(
-                  height: 75.0,
-                  width: 75.0,
-                  margin: EdgeInsets.only(top: 50),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.transparent,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
-                        offset: Offset(0.0, 1.0), //(x,y)
-                        blurRadius: 1.0,
-                      ),
-                    ],
-                  ),
-                  child: Image(image: AssetImage('assets/icons/logopng.png')),
-                ),
-                Stack(children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 50.0,
-                      right: 50,
-                      top: 50,
-                    ),
-                    child: TextField(
-                      controller: _customerNameController,
-                      onChanged: (value) {
-                        _timesTappedCustomerName += 1;
-                      },
-                      decoration: InputDecoration(
-                        labelStyle: GoogleFonts.notoSerif(
-                          fontSize: 14,
-                          color: HexColor('#C9C9C9'),
-                          fontWeight: FontWeight.normal,
-                          //decoration: TextDecoration.underline,
-                        ),
-                        prefixIcon: Transform.scale(
-                          scale: 0.7,
-                          child: SvgPicture.asset(
-                            'assets/images/user.svg',
-                            color: Globals.appColor,
-                            //semanticsLabel: 'Email Mobile',
-                            height: 10,
-                            width: 10,
+                      child: TextField(
+                        controller: _customerNameController,
+                        onChanged: (value) {
+                          _timesTappedCustomerName += 1;
+                        },
+                        decoration: InputDecoration(
+                          labelStyle: GoogleFonts.notoSerif(
+                            fontSize: 14,
+                            color: HexColor('#C9C9C9'),
+                            fontWeight: FontWeight.normal,
+                            //decoration: TextDecoration.underline,
                           ),
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Globals.appColor),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Globals.appColor),
-                        ),
-                        hintText: 'Name',
-                        hintStyle: GoogleFonts.notoSerif(
-                          fontSize: 14,
-                          color: HexColor('#C9C9C9'),
-                          fontWeight: FontWeight.normal,
-                          //decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ),
-                  ),
-                  !_isCustomerNameValid
-                      ? Positioned(
-                          right: 50.0,
-                          top: 85.0,
-                          child: new Container(
-                            child: Text(
-                              '$_validationText',
-                              style: TextStyle(
-                                color: Globals.validationColor,
-                                fontSize: 10.0,
-                              ),
-                            ),
-                          ),
-                        )
-                      : Container()
-                ]),
-                Stack(children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 50.0,
-                      right: 50,
-                      top: 20,
-                    ),
-                    child: TextField(
-                      controller: _emailController,
-                      onChanged: (value) {
-                        _timesTappedUserName += 1;
-                      },
-                      decoration: InputDecoration(
-                        labelStyle: GoogleFonts.notoSerif(
-                          fontSize: 14,
-                          color: HexColor('#C9C9C9'),
-                          fontWeight: FontWeight.normal,
-                          //decoration: TextDecoration.underline,
-                        ),
-                        prefixIcon: Transform.scale(
-                          scale: 0.7,
-                          child: SvgPicture.asset(
-                            'assets/images/email.svg',
-                            color: Globals.appColor,
-                            //semanticsLabel: 'Email Mobile',
-                            height: 10,
-                            width: 10,
-                          ),
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Globals.appColor),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Globals.appColor),
-                        ),
-                        hintText: 'Email',
-                        hintStyle: GoogleFonts.notoSerif(
-                          fontSize: 14,
-                          color: HexColor('#C9C9C9'),
-                          fontWeight: FontWeight.normal,
-                          //decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ),
-                  ),
-                  !_isEmailValid
-                      ? Positioned(
-                          right: 50.0,
-                          top: 85.0,
-                          child: new Container(
-                            child: Text(
-                              '$_validationText',
-                              style: TextStyle(
-                                color: Globals.validationColor,
-                                fontSize: 10.0,
-                              ),
-                            ),
-                          ),
-                        )
-                      : (!_isValidEmail
-                          ? Positioned(
-                              right: 50.0,
-                              top: 85.0,
-                              child: new Container(
-                                child: Text(
-                                  'Please enter a valid email',
-                                  style: TextStyle(
-                                    color: Globals.validationColor,
-                                    fontSize: 10.0,
-                                  ),
-                                ),
-                              ),
-                            )
-                          : Container())
-                ]),
-                Stack(children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 50.0,
-                      right: 50,
-                      top: 20,
-                    ),
-                    child: TextField(
-                      controller: _passwordController,
-                      onChanged: (value) {
-                        _timesTappedPassword += 1;
-                      },
-                      obscureText: _isObscure,
-                      decoration: InputDecoration(
-                        labelStyle: GoogleFonts.notoSerif(
-                          fontSize: 14,
-                          color: HexColor('#C9C9C9'),
-                          fontWeight: FontWeight.normal,
-                          //decoration: TextDecoration.underline,
-                        ),
-                        prefixIcon: Transform.scale(
-                          scale: 0.7,
-                          child: SvgPicture.asset(
-                            'assets/images/password.svg',
-                            color: Globals.appColor,
-                            //semanticsLabel: 'Email Mobile',
-                            height: 10,
-                            width: 10,
-                          ),
-                        ),
-                        suffixIcon: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              _isObscure = !_isObscure;
-                            });
-                          },
-                          child: Transform.scale(
+                          prefixIcon: Transform.scale(
                             scale: 0.7,
                             child: SvgPicture.asset(
-                              _isObscure
-                                  ? 'assets/images/hide.svg'
-                                  : 'assets/images/show.svg',
+                              'assets/images/user.svg',
                               color: Globals.appColor,
                               //semanticsLabel: 'Email Mobile',
                               height: 10,
                               width: 10,
                             ),
                           ),
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Globals.appColor),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Globals.appColor),
-                        ),
-                        hintText: 'Assign password',
-                        hintStyle: GoogleFonts.notoSerif(
-                          fontSize: 14,
-                          color: HexColor('#C9C9C9'),
-                          fontWeight: FontWeight.normal,
-                          //decoration: TextDecoration.underline,
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Globals.appColor),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Globals.appColor),
+                          ),
+                          hintText: 'Name',
+                          hintStyle: GoogleFonts.notoSerif(
+                            fontSize: 14,
+                            color: HexColor('#C9C9C9'),
+                            fontWeight: FontWeight.normal,
+                            //decoration: TextDecoration.underline,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  !_isPasswordValid
-                      ? Positioned(
-                          right: 50.0,
-                          top: 85.0,
-                          child: new Container(
-                            child: Text(
-                              '$_validationText',
-                              style: TextStyle(
-                                color: Globals.validationColor,
-                                fontSize: 10.0,
-                              ),
-                            ),
-                          ),
-                        )
-                      : Container()
-                ]),
-                Stack(children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 50.0,
-                      right: 50,
-                      top: 20,
-                    ),
-                    child: TextField(
-                      controller: _smsOTPController,
-                      onChanged: (value) {
-                        _timesTappedSmsOTP += 1;
-                      },
-                      decoration: InputDecoration(
-                        labelStyle: GoogleFonts.notoSerif(
-                          fontSize: 14,
-                          color: HexColor('#C9C9C9'),
-                          fontWeight: FontWeight.normal,
-                          //decoration: TextDecoration.underline,
-                        ),
-                        prefixIcon: Transform.scale(
-                          scale: 0.7,
-                          child: SvgPicture.asset(
-                            'assets/images/otp.svg',
-                            color: Globals.appColor,
-                            //semanticsLabel: 'Email Mobile',
-                            height: 10,
-                            width: 10,
-                          ),
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Globals.appColor),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Globals.appColor),
-                        ),
-                        hintText: 'Enter OTP sent via SMS',
-                        hintStyle: GoogleFonts.notoSerif(
-                          fontSize: 14,
-                          color: HexColor('#C9C9C9'),
-                          fontWeight: FontWeight.normal,
-                          //decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ),
-                  ),
-                  !_isSmsOTPValid
-                      ? Positioned(
-                          right: 50.0,
-                          top: 85.0,
-                          child: new Container(
-                            child: Text(
-                              '$_validationText',
-                              style: TextStyle(
-                                color: Globals.validationColor,
-                                fontSize: 10.0,
-                              ),
-                            ),
-                          ),
-                        )
-                      : Container()
-                ]),
-                Stack(children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 50.0,
-                      right: 50,
-                      top: 20,
-                    ),
-                    child: TextField(
-                      controller: _emailOTPController,
-                      onChanged: (value) {
-                        _timesTappedSmsOTP += 1;
-                      },
-                      decoration: InputDecoration(
-                        labelStyle: GoogleFonts.notoSerif(
-                          fontSize: 14,
-                          color: HexColor('#C9C9C9'),
-                          fontWeight: FontWeight.normal,
-                          //decoration: TextDecoration.underline,
-                        ),
-                        prefixIcon: Transform.scale(
-                          scale: 0.7,
-                          child: SvgPicture.asset(
-                            'assets/images/otp.svg',
-                            color: Globals.appColor,
-                            //semanticsLabel: 'Email Mobile',
-                            height: 10,
-                            width: 10,
-                          ),
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Globals.appColor),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Globals.appColor),
-                        ),
-                        hintText: 'Enter OTP sent via EMail',
-                        hintStyle: GoogleFonts.notoSerif(
-                          fontSize: 14,
-                          color: HexColor('#C9C9C9'),
-                          fontWeight: FontWeight.normal,
-                          //decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ),
-                  ),
-                  !_isEmailOTPValid
-                      ? Positioned(
-                          right: 50.0,
-                          top: 85.0,
-                          child: new Container(
-                            child: Text(
-                              '$_validationText',
-                              style: TextStyle(
-                                color: Globals.validationColor,
-                                fontSize: 10.0,
-                              ),
-                            ),
-                          ),
-                        )
-                      : Container()
-                ]),
-                Container(
-                  padding: const EdgeInsets.only(
-                    left: 50.0,
-                    right: 50,
-                    top: 20,
-                  ),
-                  width: MediaQuery.of(context).size.width,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Expanded(
-                        flex: 4,
-                        child: RichText(
-                          text: TextSpan(
-                            text: 'By using MyAutoPilot you agree to our ',
-                            style: GoogleFonts.notoSans(
-                              fontSize: 14,
-                              color: HexColor('#707070'),
-                              fontWeight: FontWeight.normal,
-                            ),
-                            children: <TextSpan>[
-                              TextSpan(
-                                text: 'terms of use',
-                                style: GoogleFonts.notoSerif(
-                                  fontSize: 14,
-                                  color: Globals.appColor,
-                                  fontWeight: FontWeight.normal,
+                    !_isCustomerNameValid
+                        ? Positioned(
+                            right: 50.0,
+                            top: 85.0,
+                            child: new Container(
+                              child: Text(
+                                '$_validationText',
+                                style: TextStyle(
+                                  color: Globals.validationColor,
+                                  fontSize: 10.0,
                                 ),
                               ),
-                              TextSpan(
-                                text: ' and ',
-                                style: GoogleFonts.notoSerif(
-                                  fontSize: 14,
+                            ),
+                          )
+                        : Container()
+                  ]),
+                  Stack(children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 50.0,
+                        right: 50,
+                        top: 20,
+                      ),
+                      child: TextField(
+                        controller: _emailController,
+                        onChanged: (value) {
+                          _timesTappedUserName += 1;
+                        },
+                        decoration: InputDecoration(
+                          labelStyle: GoogleFonts.notoSerif(
+                            fontSize: 14,
+                            color: HexColor('#C9C9C9'),
+                            fontWeight: FontWeight.normal,
+                            //decoration: TextDecoration.underline,
+                          ),
+                          prefixIcon: Transform.scale(
+                            scale: 0.7,
+                            child: SvgPicture.asset(
+                              'assets/images/email.svg',
+                              color: Globals.appColor,
+                              //semanticsLabel: 'Email Mobile',
+                              height: 10,
+                              width: 10,
+                            ),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Globals.appColor),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Globals.appColor),
+                          ),
+                          hintText: 'Email',
+                          hintStyle: GoogleFonts.notoSerif(
+                            fontSize: 14,
+                            color: HexColor('#C9C9C9'),
+                            fontWeight: FontWeight.normal,
+                            //decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ),
+                    !_isEmailValid
+                        ? Positioned(
+                            right: 50.0,
+                            top: 85.0,
+                            child: new Container(
+                              child: Text(
+                                '$_validationText',
+                                style: TextStyle(
+                                  color: Globals.validationColor,
+                                  fontSize: 10.0,
+                                ),
+                              ),
+                            ),
+                          )
+                        : (!_isValidEmail
+                            ? Positioned(
+                                right: 50.0,
+                                top: 85.0,
+                                child: new Container(
+                                  child: Text(
+                                    'Please enter a valid email',
+                                    style: TextStyle(
+                                      color: Globals.validationColor,
+                                      fontSize: 10.0,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Container())
+                  ]),
+                  Stack(children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 50.0,
+                        right: 50,
+                        top: 20,
+                      ),
+                      child: TextField(
+                        controller: _passwordController,
+                        onChanged: (value) {
+                          _timesTappedPassword += 1;
+                        },
+                        obscureText: _isObscure,
+                        decoration: InputDecoration(
+                          labelStyle: GoogleFonts.notoSerif(
+                            fontSize: 14,
+                            color: HexColor('#C9C9C9'),
+                            fontWeight: FontWeight.normal,
+                            //decoration: TextDecoration.underline,
+                          ),
+                          prefixIcon: Transform.scale(
+                            scale: 0.7,
+                            child: SvgPicture.asset(
+                              'assets/images/password.svg',
+                              color: Globals.appColor,
+                              //semanticsLabel: 'Email Mobile',
+                              height: 10,
+                              width: 10,
+                            ),
+                          ),
+                          suffixIcon: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                _isObscure = !_isObscure;
+                              });
+                            },
+                            child: Transform.scale(
+                              scale: 0.7,
+                              child: SvgPicture.asset(
+                                _isObscure
+                                    ? 'assets/images/hide.svg'
+                                    : 'assets/images/show.svg',
+                                color: Globals.appColor,
+                                //semanticsLabel: 'Email Mobile',
+                                height: 10,
+                                width: 10,
+                              ),
+                            ),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Globals.appColor),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Globals.appColor),
+                          ),
+                          hintText: 'Assign password',
+                          hintStyle: GoogleFonts.notoSerif(
+                            fontSize: 14,
+                            color: HexColor('#C9C9C9'),
+                            fontWeight: FontWeight.normal,
+                            //decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ),
+                    !_isPasswordValid
+                        ? Positioned(
+                            right: 50.0,
+                            top: 85.0,
+                            child: new Container(
+                              child: Text(
+                                '$_validationText',
+                                style: TextStyle(
+                                  color: Globals.validationColor,
+                                  fontSize: 10.0,
+                                ),
+                              ),
+                            ),
+                          )
+                        : Container()
+                  ]),
+                  Stack(children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 50.0,
+                        right: 50,
+                        top: 20,
+                      ),
+                      child: TextField(
+                        controller: _smsOTPController,
+                        onChanged: (value) {
+                          _timesTappedSmsOTP += 1;
+                        },
+                        decoration: InputDecoration(
+                          labelStyle: GoogleFonts.notoSerif(
+                            fontSize: 14,
+                            color: HexColor('#C9C9C9'),
+                            fontWeight: FontWeight.normal,
+                            //decoration: TextDecoration.underline,
+                          ),
+                          prefixIcon: Transform.scale(
+                            scale: 0.7,
+                            child: SvgPicture.asset(
+                              'assets/images/otp.svg',
+                              color: Globals.appColor,
+                              //semanticsLabel: 'Email Mobile',
+                              height: 10,
+                              width: 10,
+                            ),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Globals.appColor),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Globals.appColor),
+                          ),
+                          hintText: 'Enter OTP sent via SMS',
+                          hintStyle: GoogleFonts.notoSerif(
+                            fontSize: 14,
+                            color: HexColor('#C9C9C9'),
+                            fontWeight: FontWeight.normal,
+                            //decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ),
+                    !_isSmsOTPValid
+                        ? Positioned(
+                            right: 50.0,
+                            top: 85.0,
+                            child: new Container(
+                              child: Text(
+                                '$_validationText',
+                                style: TextStyle(
+                                  color: Globals.validationColor,
+                                  fontSize: 10.0,
+                                ),
+                              ),
+                            ),
+                          )
+                        : Container()
+                  ]),
+                  Stack(children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 50.0,
+                        right: 50,
+                        top: 20,
+                      ),
+                      child: TextField(
+                        controller: _emailOTPController,
+                        onChanged: (value) {
+                          _timesTappedSmsOTP += 1;
+                        },
+                        decoration: InputDecoration(
+                          labelStyle: GoogleFonts.notoSerif(
+                            fontSize: 14,
+                            color: HexColor('#C9C9C9'),
+                            fontWeight: FontWeight.normal,
+                            //decoration: TextDecoration.underline,
+                          ),
+                          prefixIcon: Transform.scale(
+                            scale: 0.7,
+                            child: SvgPicture.asset(
+                              'assets/images/otp.svg',
+                              color: Globals.appColor,
+                              //semanticsLabel: 'Email Mobile',
+                              height: 10,
+                              width: 10,
+                            ),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Globals.appColor),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Globals.appColor),
+                          ),
+                          hintText: 'Enter OTP sent via EMail',
+                          hintStyle: GoogleFonts.notoSerif(
+                            fontSize: 14,
+                            color: HexColor('#C9C9C9'),
+                            fontWeight: FontWeight.normal,
+                            //decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ),
+                    !_isEmailOTPValid
+                        ? Positioned(
+                            right: 50.0,
+                            top: 85.0,
+                            child: new Container(
+                              child: Text(
+                                '$_validationText',
+                                style: TextStyle(
+                                  color: Globals.validationColor,
+                                  fontSize: 10.0,
+                                ),
+                              ),
+                            ),
+                          )
+                        : Container()
+                  ]),
+                  Container(
+                    padding: const EdgeInsets.only(
+                      left: 50.0,
+                      right: 50,
+                      top: 20,
+                    ),
+                    width: MediaQuery.of(context).size.width,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Expanded(
+                          flex: 4,
+                          child: RichText(
+                            text: TextSpan(
+                              text: 'By using MyAutoPilot you agree to our ',
+                              style: GoogleFonts.notoSans(
+                                fontSize: 14,
+                                color: HexColor('#707070'),
+                                fontWeight: FontWeight.normal,
+                              ),
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: 'terms of use',
+                                  style: GoogleFonts.notoSerif(
+                                    fontSize: 14,
+                                    color: Globals.appColor,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: ' and ',
+                                  style: GoogleFonts.notoSerif(
+                                    fontSize: 14,
+                                    color: HexColor('#707070'),
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: 'privacy policy.',
+                                  style: GoogleFonts.notoSerif(
+                                    fontSize: 14,
+                                    color: Globals.appColor,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(25),
+                    child: ConstrainedBox(
+                      constraints:
+                          BoxConstraints.tightFor(width: 130, height: 55),
+                      child: ElevatedButton(
+                          onPressed: () async {
+                            if (!_isCustomerNameValid ||
+                                _customerNameController.text.isEmpty ||
+                                !_isEmailValid ||
+                                _emailController.text.isEmpty ||
+                                !_isPasswordValid ||
+                                _passwordController.text.isEmpty ||
+                                !_isSmsOTPValid ||
+                                _smsOTPController.text.isEmpty ||
+                                !_isEmailOTPValid ||
+                                _emailOTPController.text.isEmpty) {
+                              if (_customerNameController.text.isEmpty)
+                                _isCustomerNameValid = false;
+                              if (_emailController.text.isEmpty)
+                                _isEmailValid = false;
+                              if (_passwordController.text.isEmpty)
+                                _isPasswordValid = false;
+                              if (_smsOTPController.text.isEmpty)
+                                _isSmsOTPValid = false;
+                              if (_emailOTPController.text.isEmpty)
+                                _isEmailOTPValid = false;
+
+                              setState(() {});
+                              ShowMessage.showFlushBar(
+                                  context, 'Please rectify the errors.');
+                            } else if (!_acceptTerms) {
+                              ShowMessage.showFlushBar(
+                                  context, 'Please accept terms.');
+                            } else if (!Globals.isEmail(
+                                _emailController.text)) {
+                              setState(() {
+                                _isValidEmail = false;
+                              });
+                              ShowMessage.showFlushBar(
+                                  context, 'Please rectify the errors.');
+                            } else {
+                              setState(() {
+                                _isCustomerNameValid = true;
+                                _isEmailValid = true;
+                                _isPasswordValid = true;
+                                _isValidEmail = true;
+                                _isSmsOTPValid = true;
+                                _isEmailOTPValid = true;
+                              });
+
+                              // Do Sign UP related stuffs.
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            primary: Globals.appColor,
+                          ),
+                          child: Text(
+                            'SIGN UP',
+                            style: GoogleFonts.notoSerif(
+                              fontSize: 17,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 25, 25, 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Already have',
+                                style: GoogleFonts.notoSans(
+                                  fontSize: 10,
                                   color: HexColor('#707070'),
                                   fontWeight: FontWeight.normal,
                                 ),
                               ),
-                              TextSpan(
-                                text: 'privacy policy.',
-                                style: GoogleFonts.notoSerif(
-                                  fontSize: 14,
-                                  color: Globals.appColor,
+                              Text(
+                                'an account?',
+                                style: GoogleFonts.notoSans(
+                                  fontSize: 10,
+                                  color: HexColor('#707070'),
                                   fontWeight: FontWeight.normal,
                                 ),
                               ),
                             ],
                           ),
                         ),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(25),
-                  child: ConstrainedBox(
-                    constraints:
-                        BoxConstraints.tightFor(width: 130, height: 55),
-                    child: ElevatedButton(
-                        onPressed: () async {
-                          if (!_isCustomerNameValid ||
-                              _customerNameController.text.isEmpty ||
-                              !_isEmailValid ||
-                              _emailController.text.isEmpty ||
-                              !_isPasswordValid ||
-                              _passwordController.text.isEmpty ||
-                              !_isSmsOTPValid ||
-                              _smsOTPController.text.isEmpty ||
-                              !_isEmailOTPValid ||
-                              _emailOTPController.text.isEmpty) {
-                            if (_customerNameController.text.isEmpty)
-                              _isCustomerNameValid = false;
-                            if (_emailController.text.isEmpty)
-                              _isEmailValid = false;
-                            if (_passwordController.text.isEmpty)
-                              _isPasswordValid = false;
-                            if (_smsOTPController.text.isEmpty)
-                              _isSmsOTPValid = false;
-                            if (_emailOTPController.text.isEmpty)
-                              _isEmailOTPValid = false;
-
-                            setState(() {});
-                            ShowMessage.showFlushBar(
-                                context, 'Please rectify the errors.');
-                          } else if (!_acceptTerms) {
-                            ShowMessage.showFlushBar(
-                                context, 'Please accept terms.');
-                          } else if (!Globals.isEmail(_emailController.text)) {
-                            setState(() {
-                              _isValidEmail = false;
-                            });
-                            ShowMessage.showFlushBar(
-                                context, 'Please rectify the errors.');
-                          } else {
-                            setState(() {
-                              _isCustomerNameValid = true;
-                              _isEmailValid = true;
-                              _isPasswordValid = true;
-                              _isValidEmail = true;
-                              _isSmsOTPValid = true;
-                              _isEmailOTPValid = true;
-                            });
-
-                            // Do Sign UP related stuffs.
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          primary: Globals.appColor,
+                        ConstrainedBox(
+                          constraints:
+                              BoxConstraints.tightFor(width: 100, height: 35),
+                          child: ElevatedButton(
+                              onPressed: () async {
+                                await Navigator.pushReplacement(
+                                  context,
+                                  PageRouteBuilder(
+                                    transitionDuration:
+                                        Duration(milliseconds: 500),
+                                    pageBuilder: (BuildContext context,
+                                        Animation<double> animation,
+                                        Animation<double> secondaryAnimation) {
+                                      return LoginScreen();
+                                    },
+                                    transitionsBuilder: (BuildContext context,
+                                        Animation<double> animation,
+                                        Animation<double> secondaryAnimation,
+                                        Widget child) {
+                                      return Align(
+                                        // Other animation types kept here for re-use.
+                                        /* child: FadeTransition(
+                                                  opacity: animation,
+                                                  child: child,
+                                              ), */
+                                        /* child: ScaleTransition(
+                                                  scale: animation,
+                                                  child: child,
+                                              ), */
+                                        /* child: SizeTransition(
+                                                  sizeFactor: animation,
+                                                  child: child,
+                                                  axisAlignment: 0.0,
+                                              ), */
+                                        child: SlideTransition(
+                                          position: Tween(
+                                                  begin: Offset(1.0, 0.0),
+                                                  end: Offset(0.0, 0.0))
+                                              .animate(animation),
+                                          child: child,
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ),
+                                primary: Globals.appColor,
+                              ),
+                              child: Text(
+                                'Log In',
+                                style: GoogleFonts.notoSerif(
+                                  fontSize: 13,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              )),
                         ),
-                        child: Text(
-                          'SIGN UP',
-                          style: GoogleFonts.notoSerif(
-                            fontSize: 17,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )),
+                      ],
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 25, 25, 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Already have',
-                              style: GoogleFonts.notoSans(
-                                fontSize: 10,
-                                color: HexColor('#707070'),
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                            Text(
-                              'an account?',
-                              style: GoogleFonts.notoSans(
-                                fontSize: 10,
-                                color: HexColor('#707070'),
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      ConstrainedBox(
-                        constraints:
-                            BoxConstraints.tightFor(width: 100, height: 35),
-                        child: ElevatedButton(
-                            onPressed: () async {
-                              var result = await Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) {
-                                  return LoginScreen();
-                                }),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30.0),
-                              ),
-                              primary: Globals.appColor,
-                            ),
-                            child: Text(
-                              'Log In',
-                              style: GoogleFonts.notoSerif(
-                                fontSize: 13,
-                                color: Colors.white,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            )),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
