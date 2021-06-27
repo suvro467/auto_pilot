@@ -623,8 +623,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 !_isSmsOTPValid ||
                                 _smsOTPController.text.isEmpty ||
                                 !_isEmailOTPValid ||
-                                _emailOTPController.text.isEmpty ||
-                                !_isValidEmail) {
+                                _emailOTPController.text.isEmpty) {
                               if (_customerNameController.text.isEmpty)
                                 _isCustomerNameValid = false;
                               if (_emailController.text.isEmpty)
