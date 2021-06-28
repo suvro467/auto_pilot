@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:auto_pilot/screens/login_signup_screens/login_screen.dart';
 import 'package:auto_pilot/shared/globals.dart';
+import 'package:auto_pilot/shared/widgets/loading_dialog.dart';
 import 'package:auto_pilot/shared/widgets/show_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -799,6 +800,56 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 _isValidEmail = true;
                                 _isSmsOTPValid = true;
                                 _isEmailOTPValid = true;
+                              });
+
+                              showDialog(
+                                context: context,
+                                barrierDismissible: false,
+                                builder: (BuildContext context) {
+                                  /* return Container(
+                                    width: 60,
+                                    child: Dialog(
+                                      insetPadding: EdgeInsets.all(20),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          shape: BoxShape.rectangle,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black26,
+                                              blurRadius: 10.0,
+                                              offset: const Offset(0.0, 10.0),
+                                            ),
+                                          ],
+                                        ),
+                                        height: 80,
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            CircularProgressIndicator(),
+                                            SizedBox(width: 20),
+                                            Text("Loading"),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ); */
+                                  return LoadingDialog(
+                                    message: 'Please Wait ...',
+                                  );
+                                },
+                              );
+
+                              await Future.delayed(new Duration(seconds: 3),
+                                  () {
+                                Navigator.pop(context); //pop dialog
                               });
 
                               // Do Sign UP related stuffs.
