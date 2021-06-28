@@ -4,7 +4,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 class LoadingDialog extends Dialog {
   final String message;
-  LoadingDialog({this.message = 'Loading'});
+  final double width;
+  final double height;
+  LoadingDialog({
+    this.message = 'Please Wait ...',
+    this.width = 130,
+    this.height = 130,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +18,8 @@ class LoadingDialog extends Dialog {
       type: MaterialType.transparency,
       child: new Center(
         child: new SizedBox(
-          width: 130.0,
-          height: 130.0,
+          width: width,
+          height: height,
           child: new Container(
             decoration: BoxDecoration(
               color: Colors.white,

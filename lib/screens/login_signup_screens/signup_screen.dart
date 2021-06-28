@@ -806,44 +806,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 context: context,
                                 barrierDismissible: false,
                                 builder: (BuildContext context) {
-                                  /* return Container(
-                                    width: 60,
-                                    child: Dialog(
-                                      insetPadding: EdgeInsets.all(20),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          shape: BoxShape.rectangle,
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black26,
-                                              blurRadius: 10.0,
-                                              offset: const Offset(0.0, 10.0),
-                                            ),
-                                          ],
-                                        ),
-                                        height: 80,
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            CircularProgressIndicator(),
-                                            SizedBox(width: 20),
-                                            Text("Loading"),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ); */
-                                  return LoadingDialog(
-                                    message: 'Please Wait ...',
-                                  );
+                                  return LoadingDialog();
                                 },
                               );
 
@@ -852,7 +815,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 Navigator.pop(context); //pop dialog
                               });
 
-                              // Do Sign UP related stuffs.
+                              // Navigate to
                             }
                           },
                           style: ElevatedButton.styleFrom(
