@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:auto_pilot/screens/home.dart';
 import 'package:auto_pilot/screens/login_signup_screens/change_password_screen.dart';
 import 'package:auto_pilot/screens/login_signup_screens/signup_screen.dart';
 import 'package:auto_pilot/shared/globals.dart';
+import 'package:auto_pilot/shared/widgets/loading_dialog.dart';
 import 'package:auto_pilot/shared/widgets/show_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -483,6 +485,60 @@ class _LoginScreenState extends State<LoginScreen> {
                               });
 
                               // Do Login related stuffs.
+                              showDialog(
+                                context: context,
+                                barrierDismissible: false,
+                                builder: (BuildContext context) {
+                                  return LoadingDialog();
+                                },
+                              );
+
+                              await Future.delayed(new Duration(seconds: 3),
+                                  () {
+                                Navigator.pop(context); //pop dialog
+                              }).then((value) {
+                                // After successfull login, navigate to the home screen
+                                Navigator.pushReplacement(
+                                  context,
+                                  PageRouteBuilder(
+                                    transitionDuration:
+                                        Duration(milliseconds: 500),
+                                    pageBuilder: (BuildContext context,
+                                        Animation<double> animation,
+                                        Animation<double> secondaryAnimation) {
+                                      return HomeScreen();
+                                    },
+                                    transitionsBuilder: (BuildContext context,
+                                        Animation<double> animation,
+                                        Animation<double> secondaryAnimation,
+                                        Widget child) {
+                                      return Align(
+                                        // Other animation types kept here for re-use.
+                                        /* child: FadeTransition(
+                                                  opacity: animation,
+                                                  child: child,
+                                              ), */
+                                        /* child: ScaleTransition(
+                                                  scale: animation,
+                                                  child: child,
+                                              ), */
+                                        /* child: SizeTransition(
+                                                  sizeFactor: animation,
+                                                  child: child,
+                                                  axisAlignment: 0.0,
+                                              ), */
+                                        child: SlideTransition(
+                                          position: Tween(
+                                                  begin: Offset(1.0, 0.0),
+                                                  end: Offset(0.0, 0.0))
+                                              .animate(animation),
+                                          child: child,
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                );
+                              });
                             }
                           },
                           style: ElevatedButton.styleFrom(
