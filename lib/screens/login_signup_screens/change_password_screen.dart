@@ -18,17 +18,19 @@ class ChangePasswordScreen extends StatefulWidget {
 
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   bool _isObscure = true;
-  bool _acceptTerms = false;
 
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _otpController = TextEditingController();
 
   late String _validationText;
   late bool _isUserNameValid;
   late bool _isPasswordValid;
   late bool _isUserNameValidMobileOrEmail;
+  late bool _isOTPValid;
   late int _timesTappedUserName;
   late int _timesTappedPassword;
+  late int _timesTappedOTP;
 
   @override
   void initState() {
@@ -37,9 +39,11 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     _validationText = 'Please fill in this field';
     _isUserNameValid = true;
     _isPasswordValid = true;
+    _isOTPValid = true;
     _isUserNameValidMobileOrEmail = true;
     _timesTappedUserName = 0;
     _timesTappedPassword = 0;
+    _timesTappedOTP = 0;
 
     // Start listening to changes
     _userNameController.addListener(() {
@@ -77,12 +81,25 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         });
       }
     });
+
+    _otpController.addListener(() {
+      if (_otpController.text.isEmpty && _timesTappedOTP > 0) {
+        setState(() {
+          _isOTPValid = false;
+        });
+      } else {
+        setState(() {
+          _isOTPValid = true;
+        });
+      }
+    });
   }
 
   @override
   void dispose() {
     _userNameController.dispose();
     _passwordController.dispose();
+    _otpController.dispose();
     super.dispose();
   }
 
@@ -248,7 +265,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       padding: const EdgeInsets.only(
                         left: 50.0,
                         right: 50,
-                        top: 50,
+                        top: 20,
                       ),
                       child: TextField(
                         controller: _passwordController,
@@ -311,7 +328,73 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     !_isPasswordValid
                         ? Positioned(
                             right: 50.0,
-                            top: 85.0,
+                            top: 55.0,
+                            child: new Container(
+                              child: Text(
+                                '$_validationText',
+                                style: TextStyle(
+                                  color: Globals.validationColor,
+                                  fontSize: 10.0,
+                                ),
+                              ),
+                            ),
+                          )
+                        : Container()
+                  ]),
+                  Stack(children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 50.0,
+                        right: 50,
+                        top: 20,
+                      ),
+                      child: TextField(
+                        controller: _otpController,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          //LengthLimitingTextInputFormatter(8)
+                        ],
+                        onChanged: (value) {
+                          _timesTappedOTP += 1;
+                        },
+                        decoration: InputDecoration(
+                          labelStyle: GoogleFonts.notoSerif(
+                            fontSize: 14,
+                            color: HexColor('#C9C9C9'),
+                            fontWeight: FontWeight.normal,
+                            //decoration: TextDecoration.underline,
+                          ),
+                          prefixIcon: Transform.scale(
+                            scale: 0.7,
+                            child: SvgPicture.asset(
+                              'assets/images/otp.svg',
+                              color: Globals.appColor,
+                              //semanticsLabel: 'Email Mobile',
+                              height: 10,
+                              width: 10,
+                            ),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Globals.appColor),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Globals.appColor),
+                          ),
+                          hintText: 'Enter OTP sent via SMS / Email',
+                          hintStyle: GoogleFonts.notoSerif(
+                            fontSize: 14,
+                            color: HexColor('#C9C9C9'),
+                            fontWeight: FontWeight.normal,
+                            //decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ),
+                    !_isOTPValid
+                        ? Positioned(
+                            right: 50.0,
+                            top: 55.0,
                             child: new Container(
                               child: Text(
                                 '$_validationText',
@@ -325,7 +408,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         : Container()
                   ]),
                   Padding(
-                    padding: EdgeInsets.all(25),
+                    padding: EdgeInsets.only(top: 50),
                     child: ConstrainedBox(
                       constraints:
                           BoxConstraints.tightFor(width: 130, height: 55),
@@ -334,18 +417,19 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             if (!_isUserNameValid ||
                                 _userNameController.text.isEmpty ||
                                 !_isPasswordValid ||
-                                _passwordController.text.isEmpty) {
+                                _passwordController.text.isEmpty ||
+                                !_isOTPValid ||
+                                _otpController.text.isEmpty) {
                               if (_userNameController.text.isEmpty)
                                 _isUserNameValid = false;
                               if (_passwordController.text.isEmpty)
                                 _isPasswordValid = false;
+                              if (_otpController.text.isEmpty)
+                                _isOTPValid = false;
 
                               setState(() {});
                               ShowMessage.showFlushBar(
                                   context, 'Please rectify the errors.');
-                            } else if (!_acceptTerms) {
-                              ShowMessage.showFlushBar(
-                                  context, 'Please accept terms.');
                             } else if (!(Globals.isEmail(
                                     _userNameController.text) ||
                                 Globals.isValidMobileNumber(
@@ -359,6 +443,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               setState(() {
                                 _isUserNameValid = true;
                                 _isPasswordValid = true;
+                                _isOTPValid = true;
                                 _isUserNameValidMobileOrEmail = true;
                               });
 

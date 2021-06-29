@@ -647,7 +647,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           //LengthLimitingTextInputFormatter(8)
                         ],
                         onChanged: (value) {
-                          _timesTappedSmsOTP += 1;
+                          _timesTappedEmailOTP += 1;
                         },
                         decoration: InputDecoration(
                           labelStyle: GoogleFonts.notoSerif(
