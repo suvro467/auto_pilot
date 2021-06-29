@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:auto_pilot/screens/home.dart';
+import 'package:auto_pilot/screens/login_signup_screens/login_screen.dart';
 import 'package:auto_pilot/screens/login_signup_screens/signup_screen.dart';
 import 'package:auto_pilot/shared/globals.dart';
 import 'package:auto_pilot/shared/widgets/loading_dialog.dart';
@@ -460,47 +461,183 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               await Future.delayed(new Duration(seconds: 3),
                                   () {
                                 Navigator.pop(context); //pop dialog
-                              }).then((value) {
-                                // After successfull login, navigate to the home screen
-                                Navigator.pushReplacement(
-                                  context,
-                                  PageRouteBuilder(
-                                    transitionDuration:
-                                        Duration(milliseconds: 500),
-                                    pageBuilder: (BuildContext context,
-                                        Animation<double> animation,
-                                        Animation<double> secondaryAnimation) {
-                                      return HomeScreen();
-                                    },
-                                    transitionsBuilder: (BuildContext context,
-                                        Animation<double> animation,
-                                        Animation<double> secondaryAnimation,
-                                        Widget child) {
-                                      return Align(
-                                        // Other animation types kept here for re-use.
-                                        /* child: FadeTransition(
-                                                  opacity: animation,
-                                                  child: child,
-                                              ), */
-                                        /* child: ScaleTransition(
-                                                  scale: animation,
-                                                  child: child,
-                                              ), */
-                                        /* child: SizeTransition(
-                                                  sizeFactor: animation,
-                                                  child: child,
-                                                  axisAlignment: 0.0,
-                                              ), */
-                                        child: SlideTransition(
-                                          position: Tween(
-                                                  begin: Offset(1.0, 0.0),
-                                                  end: Offset(0.0, 0.0))
-                                              .animate(animation),
-                                          child: child,
+                              }).then((value) async {
+                                // After successfully changing the password, navigate to the login screen
+                                await showDialog(
+                                  context: context,
+                                  barrierDismissible: false,
+                                  builder: (BuildContext context) {
+                                    return WillPopScope(
+                                      onWillPop: () async =>
+                                          false, // Need to change this to false later.
+                                      child: Material(
+                                        type: MaterialType.transparency,
+                                        child: Center(
+                                          child: SizedBox(
+                                            //width: width,
+                                            height: 350,
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                shape: BoxShape.rectangle,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black26,
+                                                    blurRadius: 10.0,
+                                                    offset:
+                                                        const Offset(0.0, 10.0),
+                                                  ),
+                                                ],
+                                              ),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: <Widget>[
+                                                  Container(
+                                                    height: 75.0,
+                                                    width: 75.0,
+                                                    margin: EdgeInsets.only(
+                                                        top: 50),
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      color: Colors.transparent,
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.grey
+                                                              .withOpacity(0.2),
+                                                          offset: Offset(
+                                                              0.0, 1.0), //(x,y)
+                                                          blurRadius: 1.0,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    child: Image(
+                                                        image: AssetImage(
+                                                            'assets/icons/logopng.png')),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        top: 20),
+                                                    child: Text(
+                                                      'You can now login',
+                                                      style:
+                                                          GoogleFonts.notoSerif(
+                                                        fontSize: 16,
+                                                        color: Globals.appColor,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        //decoration: TextDecoration.underline,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                      top: 20,
+                                                      left: 20,
+                                                      right: 20,
+                                                    ),
+                                                    child: Text(
+                                                      'Your password has been changed successfully.',
+                                                      style:
+                                                          GoogleFonts.notoSans(
+                                                        fontSize: 14,
+                                                        color:
+                                                            HexColor('#707070'),
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        //decoration: TextDecoration.underline,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding: EdgeInsets.all(25),
+                                                    child: ConstrainedBox(
+                                                      constraints:
+                                                          BoxConstraints
+                                                              .tightFor(
+                                                                  width: 160,
+                                                                  height: 55),
+                                                      child: ElevatedButton(
+                                                          onPressed: () async {
+                                                            await Navigator
+                                                                .pushReplacement(
+                                                              context,
+                                                              PageRouteBuilder(
+                                                                transitionDuration:
+                                                                    Duration(
+                                                                        milliseconds:
+                                                                            500),
+                                                                pageBuilder: (BuildContext context,
+                                                                    Animation<
+                                                                            double>
+                                                                        animation,
+                                                                    Animation<
+                                                                            double>
+                                                                        secondaryAnimation) {
+                                                                  return LoginScreen();
+                                                                },
+                                                                transitionsBuilder: (BuildContext context,
+                                                                    Animation<
+                                                                            double>
+                                                                        animation,
+                                                                    Animation<
+                                                                            double>
+                                                                        secondaryAnimation,
+                                                                    Widget
+                                                                        child) {
+                                                                  return Align(
+                                                                    child:
+                                                                        SlideTransition(
+                                                                      position: Tween(
+                                                                              begin: Offset(1.0, 0.0),
+                                                                              end: Offset(0.0, 0.0))
+                                                                          .animate(animation),
+                                                                      child:
+                                                                          child,
+                                                                    ),
+                                                                  );
+                                                                },
+                                                              ),
+                                                            );
+                                                          },
+                                                          style: ElevatedButton
+                                                              .styleFrom(
+                                                            shape:
+                                                                RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          30.0),
+                                                            ),
+                                                            primary: Globals
+                                                                .appColor,
+                                                          ),
+                                                          child: Text(
+                                                            'GO TO LOGIN',
+                                                            style: GoogleFonts
+                                                                .notoSerif(
+                                                              fontSize: 17,
+                                                              color:
+                                                                  Colors.white,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                            ),
+                                                          )),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
                                         ),
-                                      );
-                                    },
-                                  ),
+                                      ),
+                                    );
+                                  },
                                 );
                               });
                             }
