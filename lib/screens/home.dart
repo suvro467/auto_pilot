@@ -1,5 +1,8 @@
 import 'dart:io';
 
+import 'package:auto_pilot/screens/bottom_navigation_screens/auto_pilot_calendar.dart';
+import 'package:auto_pilot/screens/bottom_navigation_screens/auto_pilot_score.dart';
+import 'package:auto_pilot/screens/bottom_navigation_screens/auto_pilot_tasks.dart';
 import 'package:auto_pilot/shared/drawer/auto_pilot_drawer.dart';
 import 'package:auto_pilot/shared/globals.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
@@ -65,6 +68,50 @@ class _HomeScreenState extends State<HomeScreen> {
           _currentIndex = index;
         });
       },
+      children: [
+        // Page 0
+        Container(
+          color: Colors.transparent,
+          child: Center(
+            child: FutureBuilder(
+              builder: (context, snapshot) {
+                return Container(
+                  // Task
+                  child: AutoPilotTasks(),
+                );
+              },
+            ),
+          ),
+        ),
+        // Page 1
+        Container(
+          color: Colors.transparent,
+          child: Center(
+            child: FutureBuilder(
+              builder: (context, snapshot) {
+                return Container(
+                  // Score
+                  child: AutoPilotScore(),
+                );
+              },
+            ),
+          ),
+        ),
+        // Page 2
+        Container(
+          color: Colors.transparent,
+          child: Center(
+            child: FutureBuilder(
+              builder: (context, snapshot) {
+                return Container(
+                  // Calendar
+                  child: AutoPilotCalendar(),
+                );
+              },
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -149,99 +196,13 @@ class _HomeScreenState extends State<HomeScreen> {
         body: SizedBox.expand(
           child: pageView,
         ),
-        /* bottomNavigationBar: Padding(
-          padding: const EdgeInsets.all(
-            10,
-          ),
-          child: BottomNavyBar(
-            containerHeight: 70,
-            backgroundColor: Colors.transparent,
-            showElevation: false,
-            selectedIndex: _currentIndex,
-            curve: Curves.easeIn,
-            onItemSelected: (index) {
-              isDrawerClicked = false;
-              setState(() => _currentIndex = index);
-
-              if (_pageController.hasClients) {
-                if (index == 2) {
-                  if (!_scaffoldKey.currentState!.isDrawerOpen) {
-                    _scaffoldKey.currentState!.openDrawer();
-                  }
-                } else {
-                  /* _pageController.animateToPage(index,
-                      duration: Duration(milliseconds: 300),
-                      curve: Curves.easeIn); */
-                  _pageController.jumpToPage(index);
-                }
-              }
-            },
-            items: <BottomNavyBarItem>[
-              BottomNavyBarItem(
-                activeColor: Color.fromRGBO(252, 128, 25, 1),
-                title: Text(
-                  'TASK',
-                  style: TextStyle(
-                    fontFamily: 'Proxima',
-                    fontSize: 10,
-                    color: Color.fromRGBO(252, 128, 25, 1),
-                  ),
-                ),
-                icon: SvgPicture.asset(
-                  'assets/images/task 2.svg',
-                  color: Globals.appColor,
-                  height: 30,
-                  width: 30,
-                ),
-                inactiveColor: Colors.grey,
-              ),
-              BottomNavyBarItem(
-                activeColor: Color.fromRGBO(252, 128, 25, 1),
-                title: Text(
-                  'SCORE',
-                  style: TextStyle(
-                    fontFamily: 'Proxima',
-                    fontSize: 10,
-                    color: Color.fromRGBO(252, 128, 25, 1),
-                  ),
-                ),
-                icon: SvgPicture.asset(
-                  'assets/images/score2.svg',
-                  color: Globals.appColor,
-                  height: 30,
-                  width: 30,
-                ),
-                inactiveColor: Colors.grey,
-              ),
-              BottomNavyBarItem(
-                textAlign: TextAlign.justify,
-                activeColor: Color.fromRGBO(252, 128, 25, 1),
-                title: Text(
-                  'SCORE',
-                  style: TextStyle(
-                    fontFamily: 'Proxima',
-                    fontSize: 10,
-                    color: Color.fromRGBO(252, 128, 25, 1),
-                  ),
-                ),
-                icon: SvgPicture.asset(
-                  'assets/images/calendar.svg',
-                  color: Globals.appColor,
-                  height: 30,
-                  width: 30,
-                ),
-                inactiveColor: Colors.grey,
-              ),
-            ],
-          ),
-        ), */
         bottomNavigationBar: BottomNavigationBar(
           onTap: (value) {
             isDrawerClicked = false;
             setState(() => _currentIndex = value);
 
             if (_pageController.hasClients) {
-              if (value == 2) {
+              /* if (value == 2) {
                 if (!_scaffoldKey.currentState!.isDrawerOpen) {
                   _scaffoldKey.currentState!.openDrawer();
                 }
@@ -250,11 +211,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       duration: Duration(milliseconds: 300),
                       curve: Curves.easeIn); */
                 _pageController.jumpToPage(value);
-              }
+              } */
+              _pageController.jumpToPage(value);
             }
           },
           elevation: 0,
-          currentIndex: 0, // this will be set when a new tab is tapped
+          currentIndex:
+              _currentIndex, // this will be set when a new tab is tapped
 
           selectedLabelStyle: GoogleFonts.alegreyaSc(
             fontSize: 14,
@@ -267,6 +230,7 @@ class _HomeScreenState extends State<HomeScreen> {
             fontWeight: FontWeight.normal,
           ),
           selectedItemColor: HexColor('#416271'),
+          unselectedItemColor: Colors.grey,
           items: [
             BottomNavigationBarItem(
               icon: SvgPicture.asset(
