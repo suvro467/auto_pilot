@@ -5,7 +5,6 @@ import 'package:auto_pilot/screens/bottom_navigation_screens/auto_pilot_score.da
 import 'package:auto_pilot/screens/bottom_navigation_screens/auto_pilot_tasks.dart';
 import 'package:auto_pilot/shared/drawer/auto_pilot_drawer.dart';
 import 'package:auto_pilot/shared/globals.dart';
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -47,8 +46,6 @@ class _HomeScreenState extends State<HomeScreen> {
       pageController: _pageController,
     );
 
-    BottomNavyBar bottomNavyBar;
-
     // Initialize the pageview
     pageView = PageView(
       physics: NeverScrollableScrollPhysics(),
@@ -72,15 +69,13 @@ class _HomeScreenState extends State<HomeScreen> {
         // Page 0
         Container(
           color: Colors.transparent,
-          child: Center(
-            child: FutureBuilder(
-              builder: (context, snapshot) {
-                return Container(
-                  // Task
-                  child: AutoPilotTasks(),
-                );
-              },
-            ),
+          child: FutureBuilder(
+            builder: (context, snapshot) {
+              return Container(
+                // Task
+                child: AutoPilotTasks(),
+              );
+            },
           ),
         ),
         // Page 1
@@ -193,8 +188,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        body: SizedBox.expand(
-          child: pageView,
+        body: SafeArea(
+          child: SizedBox.expand(
+            child: pageView,
+          ),
         ),
         bottomNavigationBar: BottomNavigationBar(
           onTap: (value) {
