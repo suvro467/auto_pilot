@@ -21,8 +21,8 @@ class _AutoPilotTasksState extends State<AutoPilotTasks> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.all(0),
+            Container(
+              margin: EdgeInsets.only(top: 10),
               child: Card(
                 elevation: 2,
                 shadowColor: Colors.white30,
@@ -39,14 +39,14 @@ class _AutoPilotTasksState extends State<AutoPilotTasks> {
 
                 child: Container(
                   //width: MediaQuery.of(context).size.width * 80 / 100,
-                  height: 150,
+                  height: 125,
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
                         width: 130,
-                        padding: EdgeInsets.only(top: 20),
+                        padding: EdgeInsets.only(top: 10),
                         child: Column(
                           //crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -55,7 +55,7 @@ class _AutoPilotTasksState extends State<AutoPilotTasks> {
                                 dataMap: tasksCompleted,
                                 animationDuration: Duration(milliseconds: 800),
                                 chartLegendSpacing: 0,
-                                chartRadius: 65,
+                                chartRadius: 50,
                                 colorList: [
                                   HexColor('#416271'),
                                   Colors.transparent
@@ -82,8 +82,8 @@ class _AutoPilotTasksState extends State<AutoPilotTasks> {
                                 ),
                               ),
                               Positioned(
-                                left: 100,
-                                top: 40,
+                                left: 95,
+                                top: 35,
                                 child: Text(
                                   tasksCompleted['Flutter']!
                                       .toStringAsFixed(0)
@@ -96,8 +96,8 @@ class _AutoPilotTasksState extends State<AutoPilotTasks> {
                                 ),
                               ),
                               Positioned(
-                                left: 118,
-                                top: 40,
+                                left: 113,
+                                top: 38,
                                 child: Text(
                                   '%',
                                   style: GoogleFonts.notoSerif(
@@ -141,7 +141,7 @@ class _AutoPilotTasksState extends State<AutoPilotTasks> {
                       ),
                       Container(
                         width: 130,
-                        padding: EdgeInsets.only(top: 20),
+                        padding: EdgeInsets.only(top: 10),
                         child: Column(
                           //crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -150,7 +150,7 @@ class _AutoPilotTasksState extends State<AutoPilotTasks> {
                                 dataMap: tasksOnTime,
                                 animationDuration: Duration(milliseconds: 800),
                                 chartLegendSpacing: 0,
-                                chartRadius: 65,
+                                chartRadius: 50,
                                 colorList: [
                                   HexColor('#075A80'),
                                   Colors.transparent
@@ -177,8 +177,8 @@ class _AutoPilotTasksState extends State<AutoPilotTasks> {
                                 ),
                               ),
                               Positioned(
-                                left: 100,
-                                top: 40,
+                                left: 95,
+                                top: 35,
                                 child: Text(
                                   tasksOnTime['Flutter']!
                                       .toStringAsFixed(0)
@@ -191,8 +191,8 @@ class _AutoPilotTasksState extends State<AutoPilotTasks> {
                                 ),
                               ),
                               Positioned(
-                                left: 118,
-                                top: 40,
+                                left: 113,
+                                top: 38,
                                 child: Text(
                                   '%',
                                   style: GoogleFonts.notoSerif(
@@ -235,7 +235,7 @@ class _AutoPilotTasksState extends State<AutoPilotTasks> {
                       ),
                       Container(
                         width: 130,
-                        padding: EdgeInsets.only(top: 20),
+                        padding: EdgeInsets.only(top: 10),
                         child: Column(
                           //crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -244,7 +244,7 @@ class _AutoPilotTasksState extends State<AutoPilotTasks> {
                                 dataMap: approvedBenchaMark,
                                 animationDuration: Duration(milliseconds: 800),
                                 chartLegendSpacing: 0,
-                                chartRadius: 65,
+                                chartRadius: 50,
                                 colorList: [
                                   HexColor('#82C4E2'),
                                   Colors.transparent
@@ -271,8 +271,8 @@ class _AutoPilotTasksState extends State<AutoPilotTasks> {
                                 ),
                               ),
                               Positioned(
-                                left: 100,
-                                top: 40,
+                                left: 95,
+                                top: 35,
                                 child: Text(
                                   approvedBenchaMark['Flutter']!
                                       .toStringAsFixed(0)
@@ -285,8 +285,8 @@ class _AutoPilotTasksState extends State<AutoPilotTasks> {
                                 ),
                               ),
                               Positioned(
-                                left: 118,
-                                top: 40,
+                                left: 113,
+                                top: 38,
                                 child: Text(
                                   '%',
                                   style: GoogleFonts.notoSerif(
