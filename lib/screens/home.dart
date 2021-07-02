@@ -21,7 +21,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late PageController _pageController;
-  int _currentIndex = 0;
+  late int _currentIndex;
   bool isDrawerClicked = true;
 
   // PageView object
@@ -38,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
 
     isDrawerClicked = true;
+    _currentIndex = 0;
 
     // Initialize the drawer
 
