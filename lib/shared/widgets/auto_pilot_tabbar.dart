@@ -564,10 +564,6 @@ class _Indicator extends StatelessWidget {
           height: _height,
           width: _width,
           decoration: BoxDecoration(
-            border: Border.all(
-              color: Globals.appColor,
-              width: 2,
-            ),
             color: _color,
             borderRadius: _borderRadius,
             boxShadow: _useShadow
@@ -607,10 +603,6 @@ class _ExpandedInnerContainer extends StatelessWidget {
       decoration: BoxDecoration(
         color: _color,
         borderRadius: _borderRadius,
-        border: Border.all(
-          color: Globals.appColor,
-          width: 2,
-        ),
       ),
       child: _child,
     );
