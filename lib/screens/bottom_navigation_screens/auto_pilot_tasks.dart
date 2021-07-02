@@ -1,3 +1,5 @@
+import 'package:auto_pilot/shared/globals.dart';
+import 'package:auto_pilot/shared/widgets/auto_pilot_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -14,6 +16,23 @@ class _AutoPilotTasksState extends State<AutoPilotTasks> {
   Map<String, double> tasksCompleted = {'Flutter': 90, 'Kotlin': 10};
   Map<String, double> tasksOnTime = {'Flutter': 60, 'Kotlin': 40};
   Map<String, double> approvedBenchaMark = {'Flutter': 80, 'Kotlin': 20};
+
+  int cupertinoTabBarIValue = 0;
+  int cupertinoTabBarIValueGetter() => cupertinoTabBarIValue;
+  int cupertinoTabBarIIValue = 1;
+  int cupertinoTabBarIIValueGetter() => cupertinoTabBarIIValue;
+  int cupertinoTabBarIIIValue = 3;
+  int cupertinoTabBarIIIValueGetter() => cupertinoTabBarIIIValue;
+  int cupertinoTabBarIVValue = 0;
+  int cupertinoTabBarIVValueGetter() => cupertinoTabBarIVValue;
+  int cupertinoTabBarVValue = 0;
+  int cupertinoTabBarVValueGetter() => cupertinoTabBarVValue;
+  int cupertinoTabBarVIValue = 0;
+  int cupertinoTabBarVIValueGetter() => cupertinoTabBarVIValue;
+  int cupertinoTabBarVIIValue = 2;
+  int cupertinoTabBarVIIValueGetter() => cupertinoTabBarVIIValue;
+  int cupertinoTabBarVIIIValue = 2;
+  int cupertinoTabBarVIIIValueGetter() => cupertinoTabBarVIIIValue;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -21,6 +40,7 @@ class _AutoPilotTasksState extends State<AutoPilotTasks> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            // This is the top card showing the total number of tasks completed, tasks ontime, approved benchmark.
             Container(
               margin: EdgeInsets.only(top: 10),
               child: Card(
@@ -326,6 +346,75 @@ class _AutoPilotTasksState extends State<AutoPilotTasks> {
                   ),
                 ),
               ),
+            ),
+            // CuprtinoTabBars Example
+
+            Container(
+              constraints: const BoxConstraints.expand(height: 30.0),
+            ),
+
+            CupertinoTabBar(
+              Colors.white,
+              Globals.appColor,
+              [
+                Text(
+                  "Today",
+                  style: GoogleFonts.notoSerif(
+                    color: cupertinoTabBarIIIValue == 0
+                        ? Colors.white
+                        : HexColor('#707070'),
+                    fontWeight: FontWeight.normal,
+                    fontSize: 14,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  "Weekly",
+                  style: GoogleFonts.notoSerif(
+                    color: cupertinoTabBarIIIValue == 1
+                        ? Colors.white
+                        : HexColor('#707070'),
+                    fontWeight: FontWeight.normal,
+                    fontSize: 14,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  "Monthly",
+                  style: GoogleFonts.notoSerif(
+                    color: cupertinoTabBarIIIValue == 2
+                        ? Colors.white
+                        : HexColor('#707070'),
+                    fontWeight: FontWeight.normal,
+                    fontSize: 14,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  "Yearly",
+                  style: GoogleFonts.notoSerif(
+                    color: cupertinoTabBarIIIValue == 3
+                        ? Colors.white
+                        : HexColor('#707070'),
+                    fontWeight: FontWeight.normal,
+                    fontSize: 14,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+              cupertinoTabBarIIIValueGetter,
+              (int index) {
+                setState(() {
+                  cupertinoTabBarIIIValue = index;
+                });
+              },
+              useShadow: false,
+              //innerHorizontalPadding: 20,
+              //outerHorizontalPadding: 5,
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+            ),
+            Container(
+              constraints: const BoxConstraints.expand(height: 20.0),
             ),
           ],
         ),
