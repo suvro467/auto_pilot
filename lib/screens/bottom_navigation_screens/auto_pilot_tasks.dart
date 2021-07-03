@@ -36,11 +36,18 @@ class _AutoPilotTasksState extends State<AutoPilotTasks> {
   int cupertinoTabBarVIIIValueGetter() => cupertinoTabBarVIIIValue;
 
   int totalDelegatedTasks = 11;
-  late Icon trailingIcon = Icon(
-    Icons.arrow_downward,
-    color: Globals.appColor,
-    size: 36,
-  );
+  late Icon trailingIcon;
+
+  @override
+  void initState() {
+    super.initState();
+
+    trailingIcon = Icon(
+      Icons.arrow_drop_down,
+      color: Globals.appColor,
+      size: 36,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
