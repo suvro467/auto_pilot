@@ -1,6 +1,5 @@
 import 'package:auto_pilot/shared/globals.dart';
 import 'package:auto_pilot/shared/widgets/auto_pilot_tabbar.dart';
-import 'package:auto_pilot/shared/widgets/custom_expansion_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
