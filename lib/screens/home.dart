@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
 
     _pageController = PageController(
-      initialPage: 4,
+      initialPage: 0,
     );
 
     isDrawerClicked = true;
