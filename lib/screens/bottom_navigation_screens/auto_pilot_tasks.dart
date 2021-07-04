@@ -1,5 +1,5 @@
+import 'package:auto_pilot/screens/menu_screens/task_list/task_list.dart';
 import 'package:auto_pilot/shared/globals.dart';
-import 'package:auto_pilot/shared/widgets/auto_pilot_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,7 +7,17 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 class AutoPilotTasks extends StatefulWidget {
-  const AutoPilotTasks({Key? key}) : super(key: key);
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  final PageController pageController;
+  final AppBar myAutoPilotAppBar;
+  final BottomNavigationBar myAutoPilotBottomNavigationAppBar;
+  AutoPilotTasks(
+      {required this.scaffoldKey,
+      required this.pageController,
+      required this.myAutoPilotAppBar,
+      required this.myAutoPilotBottomNavigationAppBar,
+      Key? key})
+      : super(key: key);
 
   @override
   _AutoPilotTasksState createState() => _AutoPilotTasksState();
@@ -573,109 +583,93 @@ class _AutoPilotTasksState extends State<AutoPilotTasks>
               children: [
                 // Today
                 ListView(children: [
-                  Card(
-                    elevation: 5,
-                    shadowColor: Colors.black,
-                    //color: Colors.amber[100],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.elliptical(2, 2),
-                        bottomRight: Radius.elliptical(2, 2),
-                        topLeft: Radius.elliptical(2, 2),
-                        bottomLeft: Radius.elliptical(2, 2),
+                  InkWell(
+                    onTap: () async {
+                      await goToTaskList(_tabController.index, 0);
+                    },
+                    child: Card(
+                      elevation: 5,
+                      shadowColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.elliptical(2, 2),
+                          bottomRight: Radius.elliptical(2, 2),
+                          topLeft: Radius.elliptical(2, 2),
+                          bottomLeft: Radius.elliptical(2, 2),
+                        ),
                       ),
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    child: ExpansionTile(
-                      maintainState: true,
-                      title: Container(
-                          height: 70,
-                          color: Colors.white,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Transform.scale(
-                                      scale: 2.5,
-                                      child: SvgPicture.asset(
-                                        'assets/images/delegate task.svg',
-                                        color: Globals.appColor,
-                                        //semanticsLabel: 'Email Mobile',
-                                        height: 10,
-                                        width: 10,
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 20,
-                                      ),
-                                      child: Text(
-                                        totalDelegatedTasks.toString(),
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 10,
-                                      ),
-                                      child: Text(
-                                        'Delegated Tasks',
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                  ]),
-                            ],
-                          )),
-                      onExpansionChanged: (value) {
-                        if (value) {
-                          trailingIconDelegatedTask = Icon(
-                            Icons.arrow_right,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        } else {
-                          trailingIconDelegatedTask = Icon(
-                            Icons.arrow_drop_down,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        }
-
-                        setState(() {});
-                      },
-                      trailing: Container(
+                      clipBehavior: Clip.antiAlias,
+                      child: Container(
+                        padding: EdgeInsets.only(left: 20, right: 20),
+                        height: 70,
                         color: Colors.white,
-                        child: trailingIconDelegatedTask,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Transform.scale(
+                                    scale: 2.5,
+                                    child: SvgPicture.asset(
+                                      'assets/images/delegate task.svg',
+                                      color: Globals.appColor,
+                                      //semanticsLabel: 'Email Mobile',
+                                      height: 10,
+                                      width: 10,
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 20,
+                                    ),
+                                    child: Text(
+                                      totalDelegatedTasks.toString(),
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 10,
+                                    ),
+                                    child: Text(
+                                      'Delegated Tasks',
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                          ],
+                        ),
                       ),
-                      children: _getDelegatedTasks(0),
                     ),
                   ),
-                  Card(
-                    elevation: 5,
-                    shadowColor: Colors.black,
-                    //color: Colors.amber[100],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.elliptical(2, 2),
-                        bottomRight: Radius.elliptical(2, 2),
-                        topLeft: Radius.elliptical(2, 2),
-                        bottomLeft: Radius.elliptical(2, 2),
+                  InkWell(
+                    onTap: () {
+                      goToTaskList(_tabController.index, 1);
+                    },
+                    child: Card(
+                      elevation: 5,
+                      shadowColor: Colors.black,
+                      //color: Colors.amber[100],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.elliptical(2, 2),
+                          bottomRight: Radius.elliptical(2, 2),
+                          topLeft: Radius.elliptical(2, 2),
+                          bottomLeft: Radius.elliptical(2, 2),
+                        ),
                       ),
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    child: ExpansionTile(
-                      maintainState: true,
-                      title: Container(
+                      clipBehavior: Clip.antiAlias,
+                      child: Container(
+                          padding: EdgeInsets.only(left: 20, right: 20),
                           height: 70,
                           color: Colors.white,
                           child: Row(
@@ -723,133 +717,96 @@ class _AutoPilotTasksState extends State<AutoPilotTasks>
                                   ]),
                             ],
                           )),
-                      onExpansionChanged: (value) {
-                        if (value) {
-                          trailingIconRepeatTask = Icon(
-                            Icons.arrow_right,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        } else {
-                          trailingIconRepeatTask = Icon(
-                            Icons.arrow_drop_down,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        }
-
-                        setState(() {});
-                      },
-                      trailing: Container(
-                        color: Colors.white,
-                        child: trailingIconRepeatTask,
-                      ),
-                      children: _getRepeatTasks(0),
                     ),
                   ),
-                  Card(
-                    elevation: 5,
-                    shadowColor: Colors.black,
-                    //color: Colors.amber[100],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.elliptical(2, 2),
-                        bottomRight: Radius.elliptical(2, 2),
-                        topLeft: Radius.elliptical(2, 2),
-                        bottomLeft: Radius.elliptical(2, 2),
+                  InkWell(
+                    onTap: () {
+                      goToTaskList(_tabController.index, 2);
+                    },
+                    child: Card(
+                      elevation: 5,
+                      shadowColor: Colors.black,
+                      //color: Colors.amber[100],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.elliptical(2, 2),
+                          bottomRight: Radius.elliptical(2, 2),
+                          topLeft: Radius.elliptical(2, 2),
+                          bottomLeft: Radius.elliptical(2, 2),
+                        ),
                       ),
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    child: ExpansionTile(
-                      maintainState: true,
-                      title: Container(
-                          height: 70,
-                          color: Colors.white,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Transform.scale(
-                                      scale: 2.5,
-                                      child: SvgPicture.asset(
-                                        'assets/images/support.svg',
-                                        color: Globals.appColor,
-                                        //semanticsLabel: 'Email Mobile',
-                                        height: 10,
-                                        width: 10,
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 20,
-                                      ),
-                                      child: Text(
-                                        totalSupportTasks.toString(),
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 10,
-                                      ),
-                                      child: Text(
-                                        'Support Tasks',
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                  ]),
-                            ],
-                          )),
-                      onExpansionChanged: (value) {
-                        if (value) {
-                          trailingIconSupportTask = Icon(
-                            Icons.arrow_right,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        } else {
-                          trailingIconSupportTask = Icon(
-                            Icons.arrow_drop_down,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        }
-
-                        setState(() {});
-                      },
-                      trailing: Container(
+                      clipBehavior: Clip.antiAlias,
+                      child: Container(
+                        padding: EdgeInsets.only(left: 20, right: 20),
+                        height: 70,
                         color: Colors.white,
-                        child: trailingIconSupportTask,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Transform.scale(
+                                    scale: 2.5,
+                                    child: SvgPicture.asset(
+                                      'assets/images/support.svg',
+                                      color: Globals.appColor,
+                                      //semanticsLabel: 'Email Mobile',
+                                      height: 10,
+                                      width: 10,
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 20,
+                                    ),
+                                    child: Text(
+                                      totalSupportTasks.toString(),
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 10,
+                                    ),
+                                    child: Text(
+                                      'Support Tasks',
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                          ],
+                        ),
                       ),
-                      children: _getSupportTasks(0),
                     ),
                   ),
-                  Card(
-                    elevation: 5,
-                    shadowColor: Colors.black,
-                    //color: Colors.amber[100],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.elliptical(2, 2),
-                        bottomRight: Radius.elliptical(2, 2),
-                        topLeft: Radius.elliptical(2, 2),
-                        bottomLeft: Radius.elliptical(2, 2),
+                  InkWell(
+                    onTap: () {
+                      goToTaskList(_tabController.index, 3);
+                    },
+                    child: Card(
+                      elevation: 5,
+                      shadowColor: Colors.black,
+                      //color: Colors.amber[100],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.elliptical(2, 2),
+                          bottomRight: Radius.elliptical(2, 2),
+                          topLeft: Radius.elliptical(2, 2),
+                          bottomLeft: Radius.elliptical(2, 2),
+                        ),
                       ),
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    child: ExpansionTile(
-                      maintainState: true,
-                      title: Container(
+                      clipBehavior: Clip.antiAlias,
+                      child: Container(
+                          padding: EdgeInsets.only(left: 20, right: 20),
                           height: 70,
                           color: Colors.white,
                           child: Row(
@@ -897,136 +854,95 @@ class _AutoPilotTasksState extends State<AutoPilotTasks>
                                   ]),
                             ],
                           )),
-                      onExpansionChanged: (value) {
-                        if (value) {
-                          trailingIconPersonalTask = Icon(
-                            Icons.arrow_right,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        } else {
-                          trailingIconPersonalTask = Icon(
-                            Icons.arrow_drop_down,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        }
-
-                        setState(() {});
-                      },
-                      trailing: Container(
-                        color: Colors.white,
-                        child: trailingIconPersonalTask,
-                      ),
-                      children: _getPersonalTasks(0),
                     ),
                   ),
                 ]),
                 // Weekly
                 ListView(children: [
-                  Card(
-                    elevation: 5,
-                    shadowColor: Colors.black,
-                    //color: Colors.amber[100],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.elliptical(2, 2),
-                        bottomRight: Radius.elliptical(2, 2),
-                        topLeft: Radius.elliptical(2, 2),
-                        bottomLeft: Radius.elliptical(2, 2),
+                  InkWell(
+                    onTap: () {},
+                    child: Card(
+                      elevation: 5,
+                      shadowColor: Colors.black,
+                      //color: Colors.amber[100],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.elliptical(2, 2),
+                          bottomRight: Radius.elliptical(2, 2),
+                          topLeft: Radius.elliptical(2, 2),
+                          bottomLeft: Radius.elliptical(2, 2),
+                        ),
                       ),
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    child: ExpansionTile(
-                      maintainState: true,
-                      title: Container(
-                          height: 70,
-                          color: Colors.white,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Transform.scale(
-                                      scale: 2.5,
-                                      child: SvgPicture.asset(
-                                        'assets/images/delegate task.svg',
-                                        color: Globals.appColor,
-                                        //semanticsLabel: 'Email Mobile',
-                                        height: 10,
-                                        width: 10,
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 20,
-                                      ),
-                                      child: Text(
-                                        totalDelegatedTasksWeekly.toString(),
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 10,
-                                      ),
-                                      child: Text(
-                                        'Delegated Tasks',
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                  ]),
-                            ],
-                          )),
-                      onExpansionChanged: (value) {
-                        if (value) {
-                          trailingIconDelegatedTask = Icon(
-                            Icons.arrow_right,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        } else {
-                          trailingIconDelegatedTask = Icon(
-                            Icons.arrow_drop_down,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        }
-
-                        setState(() {});
-                      },
-                      trailing: Container(
+                      clipBehavior: Clip.antiAlias,
+                      child: Container(
+                        padding: EdgeInsets.only(left: 20, right: 20),
+                        height: 70,
                         color: Colors.white,
-                        child: trailingIconDelegatedTask,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Transform.scale(
+                                    scale: 2.5,
+                                    child: SvgPicture.asset(
+                                      'assets/images/delegate task.svg',
+                                      color: Globals.appColor,
+                                      //semanticsLabel: 'Email Mobile',
+                                      height: 10,
+                                      width: 10,
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 20,
+                                    ),
+                                    child: Text(
+                                      totalDelegatedTasksWeekly.toString(),
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 10,
+                                    ),
+                                    child: Text(
+                                      'Delegated Tasks',
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                          ],
+                        ),
                       ),
-                      children: _getDelegatedTasks(1),
                     ),
                   ),
-                  Card(
-                    elevation: 5,
-                    shadowColor: Colors.black,
-                    //color: Colors.amber[100],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.elliptical(2, 2),
-                        bottomRight: Radius.elliptical(2, 2),
-                        topLeft: Radius.elliptical(2, 2),
-                        bottomLeft: Radius.elliptical(2, 2),
+                  InkWell(
+                    onTap: () {},
+                    child: Card(
+                      elevation: 5,
+                      shadowColor: Colors.black,
+                      //color: Colors.amber[100],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.elliptical(2, 2),
+                          bottomRight: Radius.elliptical(2, 2),
+                          topLeft: Radius.elliptical(2, 2),
+                          bottomLeft: Radius.elliptical(2, 2),
+                        ),
                       ),
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    child: ExpansionTile(
-                      maintainState: true,
-                      title: Container(
+                      clipBehavior: Clip.antiAlias,
+                      child: Container(
+                          padding: EdgeInsets.only(left: 20, right: 20),
                           height: 70,
                           color: Colors.white,
                           child: Row(
@@ -1074,46 +990,25 @@ class _AutoPilotTasksState extends State<AutoPilotTasks>
                                   ]),
                             ],
                           )),
-                      onExpansionChanged: (value) {
-                        if (value) {
-                          trailingIconRepeatTask = Icon(
-                            Icons.arrow_right,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        } else {
-                          trailingIconRepeatTask = Icon(
-                            Icons.arrow_drop_down,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        }
-
-                        setState(() {});
-                      },
-                      trailing: Container(
-                        color: Colors.white,
-                        child: trailingIconRepeatTask,
-                      ),
-                      children: _getRepeatTasks(1),
                     ),
                   ),
-                  Card(
-                    elevation: 5,
-                    shadowColor: Colors.black,
-                    //color: Colors.amber[100],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.elliptical(2, 2),
-                        bottomRight: Radius.elliptical(2, 2),
-                        topLeft: Radius.elliptical(2, 2),
-                        bottomLeft: Radius.elliptical(2, 2),
+                  InkWell(
+                    onTap: () {},
+                    child: Card(
+                      elevation: 5,
+                      shadowColor: Colors.black,
+                      //color: Colors.amber[100],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.elliptical(2, 2),
+                          bottomRight: Radius.elliptical(2, 2),
+                          topLeft: Radius.elliptical(2, 2),
+                          bottomLeft: Radius.elliptical(2, 2),
+                        ),
                       ),
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    child: ExpansionTile(
-                      maintainState: true,
-                      title: Container(
+                      clipBehavior: Clip.antiAlias,
+                      child: Container(
+                          padding: EdgeInsets.only(left: 20, right: 20),
                           height: 70,
                           color: Colors.white,
                           child: Row(
@@ -1161,819 +1056,617 @@ class _AutoPilotTasksState extends State<AutoPilotTasks>
                                   ]),
                             ],
                           )),
-                      onExpansionChanged: (value) {
-                        if (value) {
-                          trailingIconSupportTask = Icon(
-                            Icons.arrow_right,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        } else {
-                          trailingIconSupportTask = Icon(
-                            Icons.arrow_drop_down,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        }
-
-                        setState(() {});
-                      },
-                      trailing: Container(
-                        color: Colors.white,
-                        child: trailingIconSupportTask,
-                      ),
-                      children: _getSupportTasks(1),
                     ),
                   ),
-                  Card(
-                    elevation: 5,
-                    shadowColor: Colors.black,
-                    //color: Colors.amber[100],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.elliptical(2, 2),
-                        bottomRight: Radius.elliptical(2, 2),
-                        topLeft: Radius.elliptical(2, 2),
-                        bottomLeft: Radius.elliptical(2, 2),
+                  InkWell(
+                    onTap: () {},
+                    child: Card(
+                      elevation: 5,
+                      shadowColor: Colors.black,
+                      //color: Colors.amber[100],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.elliptical(2, 2),
+                          bottomRight: Radius.elliptical(2, 2),
+                          topLeft: Radius.elliptical(2, 2),
+                          bottomLeft: Radius.elliptical(2, 2),
+                        ),
                       ),
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    child: ExpansionTile(
-                      maintainState: true,
-                      title: Container(
-                          height: 70,
-                          color: Colors.white,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Transform.scale(
-                                      scale: 2.5,
-                                      child: SvgPicture.asset(
-                                        'assets/images/personal tasks.svg',
-                                        color: Globals.appColor,
-                                        //semanticsLabel: 'Email Mobile',
-                                        height: 10,
-                                        width: 10,
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 20,
-                                      ),
-                                      child: Text(
-                                        totalPersonalTasksWeekly.toString(),
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 10,
-                                      ),
-                                      child: Text(
-                                        'Personal Tasks',
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                  ]),
-                            ],
-                          )),
-                      onExpansionChanged: (value) {
-                        if (value) {
-                          trailingIconPersonalTask = Icon(
-                            Icons.arrow_right,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        } else {
-                          trailingIconPersonalTask = Icon(
-                            Icons.arrow_drop_down,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        }
-
-                        setState(() {});
-                      },
-                      trailing: Container(
+                      clipBehavior: Clip.antiAlias,
+                      child: Container(
+                        padding: EdgeInsets.only(left: 20, right: 20),
+                        height: 70,
                         color: Colors.white,
-                        child: trailingIconPersonalTask,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Transform.scale(
+                                    scale: 2.5,
+                                    child: SvgPicture.asset(
+                                      'assets/images/personal tasks.svg',
+                                      color: Globals.appColor,
+                                      //semanticsLabel: 'Email Mobile',
+                                      height: 10,
+                                      width: 10,
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 20,
+                                    ),
+                                    child: Text(
+                                      totalPersonalTasksWeekly.toString(),
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 10,
+                                    ),
+                                    child: Text(
+                                      'Personal Tasks',
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                          ],
+                        ),
                       ),
-                      children: _getPersonalTasks(1),
                     ),
                   ),
                 ]),
 
                 // Monthly
                 ListView(children: [
-                  Card(
-                    elevation: 5,
-                    shadowColor: Colors.black,
-                    //color: Colors.amber[100],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.elliptical(2, 2),
-                        bottomRight: Radius.elliptical(2, 2),
-                        topLeft: Radius.elliptical(2, 2),
-                        bottomLeft: Radius.elliptical(2, 2),
+                  InkWell(
+                    onTap: () {},
+                    child: Card(
+                      elevation: 5,
+                      shadowColor: Colors.black,
+                      //color: Colors.amber[100],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.elliptical(2, 2),
+                          bottomRight: Radius.elliptical(2, 2),
+                          topLeft: Radius.elliptical(2, 2),
+                          bottomLeft: Radius.elliptical(2, 2),
+                        ),
                       ),
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    child: ExpansionTile(
-                      maintainState: true,
-                      title: Container(
-                          height: 70,
-                          color: Colors.white,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Transform.scale(
-                                      scale: 2.5,
-                                      child: SvgPicture.asset(
-                                        'assets/images/delegate task.svg',
-                                        color: Globals.appColor,
-                                        //semanticsLabel: 'Email Mobile',
-                                        height: 10,
-                                        width: 10,
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 20,
-                                      ),
-                                      child: Text(
-                                        totalDelegatedTasksMonthly.toString(),
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 10,
-                                      ),
-                                      child: Text(
-                                        'Delegated Tasks',
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                  ]),
-                            ],
-                          )),
-                      onExpansionChanged: (value) {
-                        if (value) {
-                          trailingIconDelegatedTask = Icon(
-                            Icons.arrow_right,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        } else {
-                          trailingIconDelegatedTask = Icon(
-                            Icons.arrow_drop_down,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        }
-
-                        setState(() {});
-                      },
-                      trailing: Container(
+                      clipBehavior: Clip.antiAlias,
+                      child: Container(
+                        padding: EdgeInsets.only(left: 20, right: 20),
+                        height: 70,
                         color: Colors.white,
-                        child: trailingIconDelegatedTask,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Transform.scale(
+                                    scale: 2.5,
+                                    child: SvgPicture.asset(
+                                      'assets/images/delegate task.svg',
+                                      color: Globals.appColor,
+                                      //semanticsLabel: 'Email Mobile',
+                                      height: 10,
+                                      width: 10,
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 20,
+                                    ),
+                                    child: Text(
+                                      totalDelegatedTasksMonthly.toString(),
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 10,
+                                    ),
+                                    child: Text(
+                                      'Delegated Tasks',
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                          ],
+                        ),
                       ),
-                      children: _getDelegatedTasks(2),
                     ),
                   ),
-                  Card(
-                    elevation: 5,
-                    shadowColor: Colors.black,
-                    //color: Colors.amber[100],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.elliptical(2, 2),
-                        bottomRight: Radius.elliptical(2, 2),
-                        topLeft: Radius.elliptical(2, 2),
-                        bottomLeft: Radius.elliptical(2, 2),
+                  InkWell(
+                    onTap: () {},
+                    child: Card(
+                      elevation: 5,
+                      shadowColor: Colors.black,
+                      //color: Colors.amber[100],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.elliptical(2, 2),
+                          bottomRight: Radius.elliptical(2, 2),
+                          topLeft: Radius.elliptical(2, 2),
+                          bottomLeft: Radius.elliptical(2, 2),
+                        ),
                       ),
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    child: ExpansionTile(
-                      maintainState: true,
-                      title: Container(
-                          height: 70,
-                          color: Colors.white,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Transform.scale(
-                                      scale: 2.5,
-                                      child: SvgPicture.asset(
-                                        'assets/images/repeat.svg',
-                                        color: Globals.appColor,
-                                        //semanticsLabel: 'Email Mobile',
-                                        height: 10,
-                                        width: 10,
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 20,
-                                      ),
-                                      child: Text(
-                                        totalRepeatTasksMonthly.toString(),
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 10,
-                                      ),
-                                      child: Text(
-                                        'Repeat Tasks',
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                  ]),
-                            ],
-                          )),
-                      onExpansionChanged: (value) {
-                        if (value) {
-                          trailingIconRepeatTask = Icon(
-                            Icons.arrow_right,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        } else {
-                          trailingIconRepeatTask = Icon(
-                            Icons.arrow_drop_down,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        }
-
-                        setState(() {});
-                      },
-                      trailing: Container(
+                      clipBehavior: Clip.antiAlias,
+                      child: Container(
+                        padding: EdgeInsets.only(left: 20, right: 20),
+                        height: 70,
                         color: Colors.white,
-                        child: trailingIconRepeatTask,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Transform.scale(
+                                    scale: 2.5,
+                                    child: SvgPicture.asset(
+                                      'assets/images/repeat.svg',
+                                      color: Globals.appColor,
+                                      //semanticsLabel: 'Email Mobile',
+                                      height: 10,
+                                      width: 10,
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 20,
+                                    ),
+                                    child: Text(
+                                      totalRepeatTasksMonthly.toString(),
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 10,
+                                    ),
+                                    child: Text(
+                                      'Repeat Tasks',
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                          ],
+                        ),
                       ),
-                      children: _getRepeatTasks(2),
                     ),
                   ),
-                  Card(
-                    elevation: 5,
-                    shadowColor: Colors.black,
-                    //color: Colors.amber[100],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.elliptical(2, 2),
-                        bottomRight: Radius.elliptical(2, 2),
-                        topLeft: Radius.elliptical(2, 2),
-                        bottomLeft: Radius.elliptical(2, 2),
+                  InkWell(
+                    onTap: () {},
+                    child: Card(
+                      elevation: 5,
+                      shadowColor: Colors.black,
+                      //color: Colors.amber[100],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.elliptical(2, 2),
+                          bottomRight: Radius.elliptical(2, 2),
+                          topLeft: Radius.elliptical(2, 2),
+                          bottomLeft: Radius.elliptical(2, 2),
+                        ),
                       ),
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    child: ExpansionTile(
-                      maintainState: true,
-                      title: Container(
-                          height: 70,
-                          color: Colors.white,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Transform.scale(
-                                      scale: 2.5,
-                                      child: SvgPicture.asset(
-                                        'assets/images/support.svg',
-                                        color: Globals.appColor,
-                                        //semanticsLabel: 'Email Mobile',
-                                        height: 10,
-                                        width: 10,
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 20,
-                                      ),
-                                      child: Text(
-                                        totalSupportTasksMonthly.toString(),
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 10,
-                                      ),
-                                      child: Text(
-                                        'Support Tasks',
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                  ]),
-                            ],
-                          )),
-                      onExpansionChanged: (value) {
-                        if (value) {
-                          trailingIconSupportTask = Icon(
-                            Icons.arrow_right,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        } else {
-                          trailingIconSupportTask = Icon(
-                            Icons.arrow_drop_down,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        }
-
-                        setState(() {});
-                      },
-                      trailing: Container(
+                      clipBehavior: Clip.antiAlias,
+                      child: Container(
+                        padding: EdgeInsets.only(left: 20, right: 20),
+                        height: 70,
                         color: Colors.white,
-                        child: trailingIconSupportTask,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Transform.scale(
+                                    scale: 2.5,
+                                    child: SvgPicture.asset(
+                                      'assets/images/support.svg',
+                                      color: Globals.appColor,
+                                      //semanticsLabel: 'Email Mobile',
+                                      height: 10,
+                                      width: 10,
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 20,
+                                    ),
+                                    child: Text(
+                                      totalSupportTasksMonthly.toString(),
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 10,
+                                    ),
+                                    child: Text(
+                                      'Support Tasks',
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                          ],
+                        ),
                       ),
-                      children: _getSupportTasks(2),
                     ),
                   ),
-                  Card(
-                    elevation: 5,
-                    shadowColor: Colors.black,
-                    //color: Colors.amber[100],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.elliptical(2, 2),
-                        bottomRight: Radius.elliptical(2, 2),
-                        topLeft: Radius.elliptical(2, 2),
-                        bottomLeft: Radius.elliptical(2, 2),
+                  InkWell(
+                    onTap: () {},
+                    child: Card(
+                      elevation: 5,
+                      shadowColor: Colors.black,
+                      //color: Colors.amber[100],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.elliptical(2, 2),
+                          bottomRight: Radius.elliptical(2, 2),
+                          topLeft: Radius.elliptical(2, 2),
+                          bottomLeft: Radius.elliptical(2, 2),
+                        ),
                       ),
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    child: ExpansionTile(
-                      maintainState: true,
-                      title: Container(
-                          height: 70,
-                          color: Colors.white,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Transform.scale(
-                                      scale: 2.5,
-                                      child: SvgPicture.asset(
-                                        'assets/images/personal tasks.svg',
-                                        color: Globals.appColor,
-                                        //semanticsLabel: 'Email Mobile',
-                                        height: 10,
-                                        width: 10,
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 20,
-                                      ),
-                                      child: Text(
-                                        totalPersonalTasksMonthly.toString(),
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 10,
-                                      ),
-                                      child: Text(
-                                        'Personal Tasks',
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                  ]),
-                            ],
-                          )),
-                      onExpansionChanged: (value) {
-                        if (value) {
-                          trailingIconPersonalTask = Icon(
-                            Icons.arrow_right,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        } else {
-                          trailingIconPersonalTask = Icon(
-                            Icons.arrow_drop_down,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        }
-
-                        setState(() {});
-                      },
-                      trailing: Container(
+                      clipBehavior: Clip.antiAlias,
+                      child: Container(
+                        padding: EdgeInsets.only(left: 20, right: 20),
+                        height: 70,
                         color: Colors.white,
-                        child: trailingIconPersonalTask,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Transform.scale(
+                                    scale: 2.5,
+                                    child: SvgPicture.asset(
+                                      'assets/images/personal tasks.svg',
+                                      color: Globals.appColor,
+                                      //semanticsLabel: 'Email Mobile',
+                                      height: 10,
+                                      width: 10,
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 20,
+                                    ),
+                                    child: Text(
+                                      totalPersonalTasksMonthly.toString(),
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 10,
+                                    ),
+                                    child: Text(
+                                      'Personal Tasks',
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                          ],
+                        ),
                       ),
-                      children: _getPersonalTasks(2),
                     ),
                   ),
                 ]),
 
                 // Over Due
                 ListView(children: [
-                  Card(
-                    elevation: 5,
-                    shadowColor: Colors.black,
-                    //color: Colors.amber[100],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.elliptical(2, 2),
-                        bottomRight: Radius.elliptical(2, 2),
-                        topLeft: Radius.elliptical(2, 2),
-                        bottomLeft: Radius.elliptical(2, 2),
+                  InkWell(
+                    onTap: () {},
+                    child: Card(
+                      elevation: 5,
+                      shadowColor: Colors.black,
+                      //color: Colors.amber[100],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.elliptical(2, 2),
+                          bottomRight: Radius.elliptical(2, 2),
+                          topLeft: Radius.elliptical(2, 2),
+                          bottomLeft: Radius.elliptical(2, 2),
+                        ),
                       ),
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    child: ExpansionTile(
-                      maintainState: true,
-                      title: Container(
-                          height: 70,
-                          color: Colors.white,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Transform.scale(
-                                      scale: 2.5,
-                                      child: SvgPicture.asset(
-                                        'assets/images/delegate task.svg',
-                                        color: Globals.appColor,
-                                        //semanticsLabel: 'Email Mobile',
-                                        height: 10,
-                                        width: 10,
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 20,
-                                      ),
-                                      child: Text(
-                                        totalDelegatedTasksOverDue.toString(),
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 10,
-                                      ),
-                                      child: Text(
-                                        'Delegated Tasks',
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                  ]),
-                            ],
-                          )),
-                      onExpansionChanged: (value) {
-                        if (value) {
-                          trailingIconDelegatedTask = Icon(
-                            Icons.arrow_right,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        } else {
-                          trailingIconDelegatedTask = Icon(
-                            Icons.arrow_drop_down,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        }
-
-                        setState(() {});
-                      },
-                      trailing: Container(
+                      clipBehavior: Clip.antiAlias,
+                      child: Container(
+                        padding: EdgeInsets.only(left: 20, right: 20),
+                        height: 70,
                         color: Colors.white,
-                        child: trailingIconDelegatedTask,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Transform.scale(
+                                    scale: 2.5,
+                                    child: SvgPicture.asset(
+                                      'assets/images/delegate task.svg',
+                                      color: Globals.appColor,
+                                      //semanticsLabel: 'Email Mobile',
+                                      height: 10,
+                                      width: 10,
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 20,
+                                    ),
+                                    child: Text(
+                                      totalDelegatedTasksOverDue.toString(),
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 10,
+                                    ),
+                                    child: Text(
+                                      'Delegated Tasks',
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                          ],
+                        ),
                       ),
-                      children: _getDelegatedTasks(3),
                     ),
                   ),
-                  Card(
-                    elevation: 5,
-                    shadowColor: Colors.black,
-                    //color: Colors.amber[100],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.elliptical(2, 2),
-                        bottomRight: Radius.elliptical(2, 2),
-                        topLeft: Radius.elliptical(2, 2),
-                        bottomLeft: Radius.elliptical(2, 2),
+                  InkWell(
+                    onTap: () {},
+                    child: Card(
+                      elevation: 5,
+                      shadowColor: Colors.black,
+                      //color: Colors.amber[100],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.elliptical(2, 2),
+                          bottomRight: Radius.elliptical(2, 2),
+                          topLeft: Radius.elliptical(2, 2),
+                          bottomLeft: Radius.elliptical(2, 2),
+                        ),
                       ),
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    child: ExpansionTile(
-                      maintainState: true,
-                      title: Container(
-                          height: 70,
-                          color: Colors.white,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Transform.scale(
-                                      scale: 2.5,
-                                      child: SvgPicture.asset(
-                                        'assets/images/repeat.svg',
-                                        color: Globals.appColor,
-                                        //semanticsLabel: 'Email Mobile',
-                                        height: 10,
-                                        width: 10,
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 20,
-                                      ),
-                                      child: Text(
-                                        totalRepeatTasksOverDue.toString(),
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 10,
-                                      ),
-                                      child: Text(
-                                        'Repeat Tasks',
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                  ]),
-                            ],
-                          )),
-                      onExpansionChanged: (value) {
-                        if (value) {
-                          trailingIconRepeatTask = Icon(
-                            Icons.arrow_right,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        } else {
-                          trailingIconRepeatTask = Icon(
-                            Icons.arrow_drop_down,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        }
-
-                        setState(() {});
-                      },
-                      trailing: Container(
+                      clipBehavior: Clip.antiAlias,
+                      child: Container(
+                        padding: EdgeInsets.only(left: 20, right: 20),
+                        height: 70,
                         color: Colors.white,
-                        child: trailingIconRepeatTask,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Transform.scale(
+                                    scale: 2.5,
+                                    child: SvgPicture.asset(
+                                      'assets/images/repeat.svg',
+                                      color: Globals.appColor,
+                                      //semanticsLabel: 'Email Mobile',
+                                      height: 10,
+                                      width: 10,
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 20,
+                                    ),
+                                    child: Text(
+                                      totalRepeatTasksOverDue.toString(),
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 10,
+                                    ),
+                                    child: Text(
+                                      'Repeat Tasks',
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                          ],
+                        ),
                       ),
-                      children: _getRepeatTasks(3),
                     ),
                   ),
-                  Card(
-                    elevation: 5,
-                    shadowColor: Colors.black,
-                    //color: Colors.amber[100],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.elliptical(2, 2),
-                        bottomRight: Radius.elliptical(2, 2),
-                        topLeft: Radius.elliptical(2, 2),
-                        bottomLeft: Radius.elliptical(2, 2),
+                  InkWell(
+                    onTap: () {},
+                    child: Card(
+                      elevation: 5,
+                      shadowColor: Colors.black,
+                      //color: Colors.amber[100],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.elliptical(2, 2),
+                          bottomRight: Radius.elliptical(2, 2),
+                          topLeft: Radius.elliptical(2, 2),
+                          bottomLeft: Radius.elliptical(2, 2),
+                        ),
                       ),
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    child: ExpansionTile(
-                      maintainState: true,
-                      title: Container(
-                          height: 70,
-                          color: Colors.white,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Transform.scale(
-                                      scale: 2.5,
-                                      child: SvgPicture.asset(
-                                        'assets/images/support.svg',
-                                        color: Globals.appColor,
-                                        //semanticsLabel: 'Email Mobile',
-                                        height: 10,
-                                        width: 10,
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 20,
-                                      ),
-                                      child: Text(
-                                        totalSupportTasksOverDue.toString(),
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 10,
-                                      ),
-                                      child: Text(
-                                        'Support Tasks',
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                  ]),
-                            ],
-                          )),
-                      onExpansionChanged: (value) {
-                        if (value) {
-                          trailingIconSupportTask = Icon(
-                            Icons.arrow_right,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        } else {
-                          trailingIconSupportTask = Icon(
-                            Icons.arrow_drop_down,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        }
-
-                        setState(() {});
-                      },
-                      trailing: Container(
+                      clipBehavior: Clip.antiAlias,
+                      child: Container(
+                        padding: EdgeInsets.only(left: 20, right: 20),
+                        height: 70,
                         color: Colors.white,
-                        child: trailingIconSupportTask,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Transform.scale(
+                                    scale: 2.5,
+                                    child: SvgPicture.asset(
+                                      'assets/images/support.svg',
+                                      color: Globals.appColor,
+                                      //semanticsLabel: 'Email Mobile',
+                                      height: 10,
+                                      width: 10,
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 20,
+                                    ),
+                                    child: Text(
+                                      totalSupportTasksOverDue.toString(),
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 10,
+                                    ),
+                                    child: Text(
+                                      'Support Tasks',
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                          ],
+                        ),
                       ),
-                      children: _getSupportTasks(3),
                     ),
                   ),
-                  Card(
-                    elevation: 5,
-                    shadowColor: Colors.black,
-                    //color: Colors.amber[100],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.elliptical(2, 2),
-                        bottomRight: Radius.elliptical(2, 2),
-                        topLeft: Radius.elliptical(2, 2),
-                        bottomLeft: Radius.elliptical(2, 2),
+                  InkWell(
+                    onTap: () {},
+                    child: Card(
+                      elevation: 5,
+                      shadowColor: Colors.black,
+                      //color: Colors.amber[100],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.elliptical(2, 2),
+                          bottomRight: Radius.elliptical(2, 2),
+                          topLeft: Radius.elliptical(2, 2),
+                          bottomLeft: Radius.elliptical(2, 2),
+                        ),
                       ),
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    child: ExpansionTile(
-                      maintainState: true,
-                      title: Container(
-                          height: 70,
-                          color: Colors.white,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Transform.scale(
-                                      scale: 2.5,
-                                      child: SvgPicture.asset(
-                                        'assets/images/personal tasks.svg',
-                                        color: Globals.appColor,
-                                        //semanticsLabel: 'Email Mobile',
-                                        height: 10,
-                                        width: 10,
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 20,
-                                      ),
-                                      child: Text(
-                                        totalPersonalTasksOverDue.toString(),
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 10,
-                                      ),
-                                      child: Text(
-                                        'Personal Tasks',
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                  ]),
-                            ],
-                          )),
-                      onExpansionChanged: (value) {
-                        if (value) {
-                          trailingIconPersonalTask = Icon(
-                            Icons.arrow_right,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        } else {
-                          trailingIconPersonalTask = Icon(
-                            Icons.arrow_drop_down,
-                            color: Globals.appColor,
-                            size: 36,
-                          );
-                        }
-
-                        setState(() {});
-                      },
-                      trailing: Container(
+                      clipBehavior: Clip.antiAlias,
+                      child: Container(
+                        padding: EdgeInsets.only(left: 20, right: 20),
+                        height: 70,
                         color: Colors.white,
-                        child: trailingIconPersonalTask,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Transform.scale(
+                                    scale: 2.5,
+                                    child: SvgPicture.asset(
+                                      'assets/images/personal tasks.svg',
+                                      color: Globals.appColor,
+                                      //semanticsLabel: 'Email Mobile',
+                                      height: 10,
+                                      width: 10,
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 20,
+                                    ),
+                                    child: Text(
+                                      totalPersonalTasksOverDue.toString(),
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 10,
+                                    ),
+                                    child: Text(
+                                      'Personal Tasks',
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                          ],
+                        ),
                       ),
-                      children: _getPersonalTasks(3),
                     ),
                   ),
                 ]),
@@ -2375,5 +2068,36 @@ class _AutoPilotTasksState extends State<AutoPilotTasks>
       ));
     }
     return returnedWidgets;
+  }
+
+  goToTaskList(int tabMenuSelected, int taskItemTapped) async {
+    /* await Navigator.push(
+      context,
+      PageRouteBuilder(
+        transitionDuration: Duration(milliseconds: 500),
+        pageBuilder: (BuildContext context, Animation<double> animation,
+            Animation<double> secondaryAnimation) {
+          return TaskList(
+              scaffoldKey: widget.scaffoldKey,
+              pageController: widget.pageController,
+              myAutoPilotAppBar: widget.myAutoPilotAppBar,
+              myAutoPilotBottomNavigationAppBar:
+                  widget.myAutoPilotBottomNavigationAppBar,
+              tabMenuSelected: tabMenuSelected,
+              taskItemTapped: taskItemTapped);
+        },
+        transitionsBuilder: (BuildContext context, Animation<double> animation,
+            Animation<double> secondaryAnimation, Widget child) {
+          return Align(
+            child: SlideTransition(
+              position: Tween(begin: Offset(1.0, 0.0), end: Offset(0.0, 0.0))
+                  .animate(animation),
+              child: child,
+            ),
+          );
+        },
+      ),
+    ); */
+    if (widget.pageController.hasClients) widget.pageController.jumpToPage(3);
   }
 }
