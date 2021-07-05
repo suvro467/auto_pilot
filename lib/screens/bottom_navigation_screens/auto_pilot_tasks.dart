@@ -2098,6 +2098,11 @@ class _AutoPilotTasksState extends State<AutoPilotTasks>
         },
       ),
     ); */
-    if (widget.pageController.hasClients) widget.pageController.jumpToPage(3);
+
+    setState(() {
+      if (widget.pageController.hasClients)
+        widget.pageController.animateToPage(1,
+            duration: Duration(milliseconds: 300), curve: Curves.easeIn);
+    });
   }
 }

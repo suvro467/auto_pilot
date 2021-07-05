@@ -134,7 +134,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       curve: Curves.easeIn); */
                 _pageController.jumpToPage(value);
               } */
-          _pageController.jumpToPage(value);
+          if (value == 0) _pageController.jumpToPage(0);
+          if (value == 1) _pageController.jumpToPage(2);
+          if (value == 2) _pageController.jumpToPage(3);
         }
       },
       elevation: 0,
@@ -147,11 +149,12 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       unselectedLabelStyle: GoogleFonts.alegreyaSc(
         fontSize: 14,
-        color: HexColor('#416271'),
+        color: Colors.grey,
         fontWeight: FontWeight.normal,
       ),
       selectedItemColor: HexColor('#416271'),
       unselectedItemColor: Colors.grey,
+      type: BottomNavigationBarType.fixed,
       items: [
         BottomNavigationBarItem(
           icon: SvgPicture.asset(
@@ -228,8 +231,11 @@ class _HomeScreenState extends State<HomeScreen> {
             child: FutureBuilder(
               builder: (context, snapshot) {
                 return Container(
-                  // Score
-                  child: AutoPilotScore(),
+                  // TaskList
+                  child: TaskList(
+                    scaffoldKey: _scaffoldKey,
+                    pageController: _pageController,
+                  ),
                 );
               },
             ),
@@ -242,8 +248,8 @@ class _HomeScreenState extends State<HomeScreen> {
             child: FutureBuilder(
               builder: (context, snapshot) {
                 return Container(
-                  // Calendar
-                  child: AutoPilotCalendar(),
+                  // Score
+                  child: AutoPilotScore(),
                 );
               },
             ),
@@ -257,10 +263,7 @@ class _HomeScreenState extends State<HomeScreen> {
               builder: (context, snapshot) {
                 return Container(
                   // Calendar
-                  child: TaskList(
-                    scaffoldKey: _scaffoldKey,
-                    pageController: _pageController,
-                  ),
+                  child: AutoPilotCalendar(),
                 );
               },
             ),
