@@ -202,13 +202,48 @@ class _TaskListState extends State<TaskList>
           mainAxisAlignment: MainAxisAlignment.start,
           //mainAxisSize: MainAxisSize.min,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  children: [],
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 40.0,
+                right: 40.0,
+                top: 20,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Your Tasks',
+                        style: GoogleFonts.notoSerif(
+                          color: HexColor('#707070'),
+                          fontWeight: FontWeight.normal,
+                          fontSize: 18,
+                        ),
+                      ),
+                      Text(
+                          '${_tabController.index == 0 ? (totalDelegatedTasks + totalRepeatTasks + totalSupportTasks).toString() : (_tabController.index == 1 ? (totalDelegatedTasksWeekly + totalRepeatTasksWeekly + totalSupportTasksWeekly).toString() : (_tabController.index == 2 ? (totalDelegatedTasksMonthly + totalRepeatTasksMonthly + totalSupportTasksMonthly).toString() : (totalDelegatedTasksOverDue + totalRepeatTasksOverDue + totalSupportTasksOverDue).toString()))}  tasks remaining',
+                          style: GoogleFonts.notoSerif(
+                            color: Globals.appColor,
+                            fontWeight: FontWeight.normal,
+                            fontSize: 12,
+                          )),
+                    ],
+                  ),
+                  InkWell(
+                    borderRadius: BorderRadius.circular(40),
+                    onTap: () {},
+                    child: SvgPicture.asset(
+                      'assets/images/plus.svg',
+                      color: Globals.appColor,
+                      //semanticsLabel: 'Email Mobile',
+                      height: 40,
+                      width: 40,
+                    ),
+                  )
+                ],
+              ),
             ),
             // Custom Tab Bar
             Container(
@@ -222,6 +257,9 @@ class _TaskListState extends State<TaskList>
                     borderRadius: BorderRadius.all(Radius.circular(25)),
                     border: Border.all(width: 2, color: Globals.appColor)),
                 child: TabBar(
+                  onTap: (value) {
+                    setState(() {});
+                  },
                   labelPadding: EdgeInsets.zero,
                   labelStyle: GoogleFonts.notoSerif(
                     color: Colors.white,
