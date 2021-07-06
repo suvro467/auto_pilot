@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // Initialize the appbar
     myAutoPilotAppBar = AppBar(
       elevation: 0,
-      automaticallyImplyLeading: true,
+      automaticallyImplyLeading: false,
       toolbarHeight: 90,
       backgroundColor: Colors.transparent,
       title: Padding(
@@ -98,7 +98,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             IconButton(
               padding: EdgeInsets.all(0),
-              onPressed: () {},
+              onPressed: () {
+                _scaffoldKey.currentState!.openDrawer();
+              },
               icon: Icon(
                 Icons.menu,
                 color: Globals.appColor,
@@ -284,8 +286,10 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       child: Scaffold(
         key: _scaffoldKey,
-        //drawer: myAutoPilotDrawer,
-        endDrawerEnableOpenDragGesture: false,
+        drawer: myAutoPilotDrawer,
+        drawerEnableOpenDragGesture: false,
+        //endDrawerEnableOpenDragGesture: false,
+
         appBar: myAutoPilotAppBar,
         body: SafeArea(
           child: SizedBox.expand(
