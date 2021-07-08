@@ -8,6 +8,7 @@ class MyAutoPilotStyles {
   /// Styles :
   // Background common colour for the widgets in the app
   static Color appColor = HexColor('#82C4E2');
+  static Color notificationColor = HexColor('#C41717');
   static TextStyle listTileHeaderTitle = GoogleFonts.notoSans(
     fontSize: 14,
     color: HexColor('#707070'),

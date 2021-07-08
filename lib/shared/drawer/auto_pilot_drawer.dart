@@ -281,6 +281,19 @@ class _MyAutoPilotDrawerState extends State<MyAutoPilotDrawer> {
                   },
                 ),
               ),
+              // Notification colour is to be shown only if there is unread elements.
+              Positioned(
+                right: 10,
+                top: 5,
+                child: Container(
+                  width: 10,
+                  height: 10,
+                  decoration: BoxDecoration(
+                    color: MyAutoPilotStyles.notificationColor,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              )
             ]),
             MyAutoPilotStyles.menuItemDivider,
             Stack(children: [
