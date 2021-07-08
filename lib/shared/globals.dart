@@ -44,4 +44,11 @@ class Globals {
     }
     return true;
   }
+
+  // Store user related information after login.
+  static String userFirstName = '';
+
+  static String userLastName = '';
+
+  static String designation = '';
 }

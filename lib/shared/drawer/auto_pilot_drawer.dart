@@ -5,6 +5,8 @@ import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class MyAutoPilotDrawer extends StatefulWidget {
   GlobalKey<ScaffoldState> homeScaffoldKey;
@@ -38,6 +40,7 @@ class _MyAutoPilotDrawerState extends State<MyAutoPilotDrawer> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
+            // This is the custom drawer header.
             Container(
               color: Colors.transparent,
               child: Padding(
@@ -139,23 +142,92 @@ class _MyAutoPilotDrawerState extends State<MyAutoPilotDrawer> {
                             },
                           )
                         ],
-                      )
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(
+                          top: 10,
+                          bottom: 10,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 60,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 5,
+                                    blurRadius: 7,
+                                    offset: Offset(
+                                        0, 3), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(
+                                left: 20,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    Globals.userFirstName +
+                                        ' ' +
+                                        Globals.userLastName,
+                                    style: GoogleFonts.notoSans(
+                                      fontSize: 14,
+                                      color: HexColor('#707070'),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    Globals.designation,
+                                    style: GoogleFonts.notoSans(
+                                      fontSize: 12,
+                                      color: HexColor('#707070'),
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ]),
               ),
             ),
-            MyAutoPilotStyles.menuItemDivider,
-            ListTile(
-              title: Text(
-                'Dashboard',
-                style: MyAutoPilotStyles.listTileHeaderTitle,
+            Stack(children: [
+              Container(
+                height: 45,
+                padding: EdgeInsets.only(
+                  left: 10,
+                ),
+                child: ListTile(
+                  leading: SvgPicture.asset(
+                    'assets/images/dashboard.svg',
+                    color: Globals.appColor,
+                    height: 22,
+                    width: 22,
+                  ),
+                  title: Text(
+                    'Dashboard',
+                    style: MyAutoPilotStyles.listTileHeaderTitle,
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    setState(() {
+                      widget.pageController.jumpToPage(0);
+                    });
+                  },
+                ),
               ),
-              onTap: () {
-                Navigator.pop(context);
-                setState(() {
-                  widget.pageController.jumpToPage(0);
-                });
-              },
-            ),
+            ]),
             MyAutoPilotStyles.menuItemDivider,
           ],
         ),

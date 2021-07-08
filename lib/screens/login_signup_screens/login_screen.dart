@@ -493,6 +493,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                 },
                               );
 
+                              // Store user related information in the Globals file here
+                              // Need to delete the hardcoded values here
+
+                              Globals.userFirstName = 'Kuntal';
+                              Globals.userLastName = 'Dutta';
+                              Globals.designation = 'Managing Director';
+
                               await Future.delayed(new Duration(seconds: 3),
                                   () {
                                 Navigator.pop(context); //pop dialog
