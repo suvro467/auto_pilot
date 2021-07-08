@@ -1,4 +1,5 @@
 import 'package:auto_pilot/shared/globals.dart';
+import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -104,85 +105,85 @@ class _TaskListState extends State<TaskList>
 
     trailingIconDelegatedTask = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
     trailingIconRepeatTask = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
     trailingIconSupportTask = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
     trailingIconPersonalTask = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
 
     trailingIconDelegatedTaskWeekly = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
     trailingIconRepeatTaskWeekly = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
     trailingIconSupportTaskWeekly = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
     trailingIconPersonalTaskWeekly = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
 
     trailingIconDelegatedTaskMonthly = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
     trailingIconRepeatTaskMonthly = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
     trailingIconSupportTaskMonthly = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
     trailingIconPersonalTaskMonthly = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
 
     trailingIconDelegatedTaskOverDue = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
     trailingIconRepeatTaskOverDue = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
     trailingIconSupportTaskOverDue = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
     trailingIconPersonalTaskOverDue = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
   }
@@ -225,7 +226,7 @@ class _TaskListState extends State<TaskList>
                       Text(
                           '${_tabController.index == 0 ? (totalDelegatedTasks + totalRepeatTasks + totalSupportTasks).toString() : (_tabController.index == 1 ? (totalDelegatedTasksWeekly + totalRepeatTasksWeekly + totalSupportTasksWeekly).toString() : (_tabController.index == 2 ? (totalDelegatedTasksMonthly + totalRepeatTasksMonthly + totalSupportTasksMonthly).toString() : (totalDelegatedTasksOverDue + totalRepeatTasksOverDue + totalSupportTasksOverDue).toString()))}  tasks remaining',
                           style: GoogleFonts.notoSerif(
-                            color: Globals.appColor,
+                            color: MyAutoPilotStyles.appColor,
                             fontWeight: FontWeight.normal,
                             fontSize: 12,
                           )),
@@ -236,7 +237,7 @@ class _TaskListState extends State<TaskList>
                     onTap: () {},
                     child: SvgPicture.asset(
                       'assets/images/plus.svg',
-                      color: Globals.appColor,
+                      color: MyAutoPilotStyles.appColor,
                       //semanticsLabel: 'Email Mobile',
                       height: 40,
                       width: 40,
@@ -255,7 +256,8 @@ class _TaskListState extends State<TaskList>
               child: DecoratedBox(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(25)),
-                    border: Border.all(width: 2, color: Globals.appColor)),
+                    border: Border.all(
+                        width: 2, color: MyAutoPilotStyles.appColor)),
                 child: TabBar(
                   onTap: (value) {
                     setState(() {});
@@ -272,7 +274,7 @@ class _TaskListState extends State<TaskList>
                     borderRadius: BorderRadius.circular(
                       25.0,
                     ),
-                    color: Globals.appColor,
+                    color: MyAutoPilotStyles.appColor,
                   ),
                   unselectedLabelStyle: GoogleFonts.notoSerif(
                     color: HexColor('#707070'),
@@ -347,7 +349,7 @@ class _TaskListState extends State<TaskList>
                                         scale: 2.5,
                                         child: SvgPicture.asset(
                                           'assets/images/delegate task.svg',
-                                          color: Globals.appColor,
+                                          color: MyAutoPilotStyles.appColor,
                                           //semanticsLabel: 'Email Mobile',
                                           height: 10,
                                           width: 10,
@@ -386,13 +388,13 @@ class _TaskListState extends State<TaskList>
                           if (value) {
                             trailingIconDelegatedTask = Icon(
                               Icons.arrow_right,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           } else {
                             trailingIconDelegatedTask = Icon(
                               Icons.arrow_drop_down,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           }
@@ -434,7 +436,7 @@ class _TaskListState extends State<TaskList>
                                         scale: 2.5,
                                         child: SvgPicture.asset(
                                           'assets/images/repeat.svg',
-                                          color: Globals.appColor,
+                                          color: MyAutoPilotStyles.appColor,
                                           //semanticsLabel: 'Email Mobile',
                                           height: 10,
                                           width: 10,
@@ -473,13 +475,13 @@ class _TaskListState extends State<TaskList>
                           if (value) {
                             trailingIconRepeatTask = Icon(
                               Icons.arrow_right,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           } else {
                             trailingIconRepeatTask = Icon(
                               Icons.arrow_drop_down,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           }
@@ -521,7 +523,7 @@ class _TaskListState extends State<TaskList>
                                         scale: 2.5,
                                         child: SvgPicture.asset(
                                           'assets/images/support.svg',
-                                          color: Globals.appColor,
+                                          color: MyAutoPilotStyles.appColor,
                                           //semanticsLabel: 'Email Mobile',
                                           height: 10,
                                           width: 10,
@@ -560,13 +562,13 @@ class _TaskListState extends State<TaskList>
                           if (value) {
                             trailingIconSupportTask = Icon(
                               Icons.arrow_right,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           } else {
                             trailingIconSupportTask = Icon(
                               Icons.arrow_drop_down,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           }
@@ -608,7 +610,7 @@ class _TaskListState extends State<TaskList>
                                         scale: 2.5,
                                         child: SvgPicture.asset(
                                           'assets/images/personal tasks.svg',
-                                          color: Globals.appColor,
+                                          color: MyAutoPilotStyles.appColor,
                                           //semanticsLabel: 'Email Mobile',
                                           height: 10,
                                           width: 10,
@@ -647,13 +649,13 @@ class _TaskListState extends State<TaskList>
                           if (value) {
                             trailingIconPersonalTask = Icon(
                               Icons.arrow_right,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           } else {
                             trailingIconPersonalTask = Icon(
                               Icons.arrow_drop_down,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           }
@@ -698,7 +700,7 @@ class _TaskListState extends State<TaskList>
                                         scale: 2.5,
                                         child: SvgPicture.asset(
                                           'assets/images/delegate task.svg',
-                                          color: Globals.appColor,
+                                          color: MyAutoPilotStyles.appColor,
                                           //semanticsLabel: 'Email Mobile',
                                           height: 10,
                                           width: 10,
@@ -737,13 +739,13 @@ class _TaskListState extends State<TaskList>
                           if (value) {
                             trailingIconDelegatedTask = Icon(
                               Icons.arrow_right,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           } else {
                             trailingIconDelegatedTask = Icon(
                               Icons.arrow_drop_down,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           }
@@ -785,7 +787,7 @@ class _TaskListState extends State<TaskList>
                                         scale: 2.5,
                                         child: SvgPicture.asset(
                                           'assets/images/repeat.svg',
-                                          color: Globals.appColor,
+                                          color: MyAutoPilotStyles.appColor,
                                           //semanticsLabel: 'Email Mobile',
                                           height: 10,
                                           width: 10,
@@ -824,13 +826,13 @@ class _TaskListState extends State<TaskList>
                           if (value) {
                             trailingIconRepeatTask = Icon(
                               Icons.arrow_right,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           } else {
                             trailingIconRepeatTask = Icon(
                               Icons.arrow_drop_down,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           }
@@ -872,7 +874,7 @@ class _TaskListState extends State<TaskList>
                                         scale: 2.5,
                                         child: SvgPicture.asset(
                                           'assets/images/support.svg',
-                                          color: Globals.appColor,
+                                          color: MyAutoPilotStyles.appColor,
                                           //semanticsLabel: 'Email Mobile',
                                           height: 10,
                                           width: 10,
@@ -911,13 +913,13 @@ class _TaskListState extends State<TaskList>
                           if (value) {
                             trailingIconSupportTask = Icon(
                               Icons.arrow_right,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           } else {
                             trailingIconSupportTask = Icon(
                               Icons.arrow_drop_down,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           }
@@ -959,7 +961,7 @@ class _TaskListState extends State<TaskList>
                                         scale: 2.5,
                                         child: SvgPicture.asset(
                                           'assets/images/personal tasks.svg',
-                                          color: Globals.appColor,
+                                          color: MyAutoPilotStyles.appColor,
                                           //semanticsLabel: 'Email Mobile',
                                           height: 10,
                                           width: 10,
@@ -998,13 +1000,13 @@ class _TaskListState extends State<TaskList>
                           if (value) {
                             trailingIconPersonalTask = Icon(
                               Icons.arrow_right,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           } else {
                             trailingIconPersonalTask = Icon(
                               Icons.arrow_drop_down,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           }
@@ -1050,7 +1052,7 @@ class _TaskListState extends State<TaskList>
                                         scale: 2.5,
                                         child: SvgPicture.asset(
                                           'assets/images/delegate task.svg',
-                                          color: Globals.appColor,
+                                          color: MyAutoPilotStyles.appColor,
                                           //semanticsLabel: 'Email Mobile',
                                           height: 10,
                                           width: 10,
@@ -1089,13 +1091,13 @@ class _TaskListState extends State<TaskList>
                           if (value) {
                             trailingIconDelegatedTask = Icon(
                               Icons.arrow_right,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           } else {
                             trailingIconDelegatedTask = Icon(
                               Icons.arrow_drop_down,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           }
@@ -1137,7 +1139,7 @@ class _TaskListState extends State<TaskList>
                                         scale: 2.5,
                                         child: SvgPicture.asset(
                                           'assets/images/repeat.svg',
-                                          color: Globals.appColor,
+                                          color: MyAutoPilotStyles.appColor,
                                           //semanticsLabel: 'Email Mobile',
                                           height: 10,
                                           width: 10,
@@ -1176,13 +1178,13 @@ class _TaskListState extends State<TaskList>
                           if (value) {
                             trailingIconRepeatTask = Icon(
                               Icons.arrow_right,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           } else {
                             trailingIconRepeatTask = Icon(
                               Icons.arrow_drop_down,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           }
@@ -1224,7 +1226,7 @@ class _TaskListState extends State<TaskList>
                                         scale: 2.5,
                                         child: SvgPicture.asset(
                                           'assets/images/support.svg',
-                                          color: Globals.appColor,
+                                          color: MyAutoPilotStyles.appColor,
                                           //semanticsLabel: 'Email Mobile',
                                           height: 10,
                                           width: 10,
@@ -1263,13 +1265,13 @@ class _TaskListState extends State<TaskList>
                           if (value) {
                             trailingIconSupportTask = Icon(
                               Icons.arrow_right,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           } else {
                             trailingIconSupportTask = Icon(
                               Icons.arrow_drop_down,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           }
@@ -1311,7 +1313,7 @@ class _TaskListState extends State<TaskList>
                                         scale: 2.5,
                                         child: SvgPicture.asset(
                                           'assets/images/personal tasks.svg',
-                                          color: Globals.appColor,
+                                          color: MyAutoPilotStyles.appColor,
                                           //semanticsLabel: 'Email Mobile',
                                           height: 10,
                                           width: 10,
@@ -1350,13 +1352,13 @@ class _TaskListState extends State<TaskList>
                           if (value) {
                             trailingIconPersonalTask = Icon(
                               Icons.arrow_right,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           } else {
                             trailingIconPersonalTask = Icon(
                               Icons.arrow_drop_down,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           }
@@ -1402,7 +1404,7 @@ class _TaskListState extends State<TaskList>
                                         scale: 2.5,
                                         child: SvgPicture.asset(
                                           'assets/images/delegate task.svg',
-                                          color: Globals.appColor,
+                                          color: MyAutoPilotStyles.appColor,
                                           //semanticsLabel: 'Email Mobile',
                                           height: 10,
                                           width: 10,
@@ -1441,13 +1443,13 @@ class _TaskListState extends State<TaskList>
                           if (value) {
                             trailingIconDelegatedTask = Icon(
                               Icons.arrow_right,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           } else {
                             trailingIconDelegatedTask = Icon(
                               Icons.arrow_drop_down,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           }
@@ -1489,7 +1491,7 @@ class _TaskListState extends State<TaskList>
                                         scale: 2.5,
                                         child: SvgPicture.asset(
                                           'assets/images/repeat.svg',
-                                          color: Globals.appColor,
+                                          color: MyAutoPilotStyles.appColor,
                                           //semanticsLabel: 'Email Mobile',
                                           height: 10,
                                           width: 10,
@@ -1528,13 +1530,13 @@ class _TaskListState extends State<TaskList>
                           if (value) {
                             trailingIconRepeatTask = Icon(
                               Icons.arrow_right,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           } else {
                             trailingIconRepeatTask = Icon(
                               Icons.arrow_drop_down,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           }
@@ -1576,7 +1578,7 @@ class _TaskListState extends State<TaskList>
                                         scale: 2.5,
                                         child: SvgPicture.asset(
                                           'assets/images/support.svg',
-                                          color: Globals.appColor,
+                                          color: MyAutoPilotStyles.appColor,
                                           //semanticsLabel: 'Email Mobile',
                                           height: 10,
                                           width: 10,
@@ -1615,13 +1617,13 @@ class _TaskListState extends State<TaskList>
                           if (value) {
                             trailingIconSupportTask = Icon(
                               Icons.arrow_right,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           } else {
                             trailingIconSupportTask = Icon(
                               Icons.arrow_drop_down,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           }
@@ -1663,7 +1665,7 @@ class _TaskListState extends State<TaskList>
                                         scale: 2.5,
                                         child: SvgPicture.asset(
                                           'assets/images/personal tasks.svg',
-                                          color: Globals.appColor,
+                                          color: MyAutoPilotStyles.appColor,
                                           //semanticsLabel: 'Email Mobile',
                                           height: 10,
                                           width: 10,
@@ -1702,13 +1704,13 @@ class _TaskListState extends State<TaskList>
                           if (value) {
                             trailingIconPersonalTask = Icon(
                               Icons.arrow_right,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           } else {
                             trailingIconPersonalTask = Icon(
                               Icons.arrow_drop_down,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             );
                           }

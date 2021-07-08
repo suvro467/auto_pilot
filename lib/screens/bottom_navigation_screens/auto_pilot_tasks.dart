@@ -1,5 +1,6 @@
 import 'package:auto_pilot/screens/menu_screens/task_list/task_list.dart';
 import 'package:auto_pilot/shared/globals.dart';
+import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -103,85 +104,85 @@ class _AutoPilotTasksState extends State<AutoPilotTasks>
 
     trailingIconDelegatedTask = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
     trailingIconRepeatTask = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
     trailingIconSupportTask = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
     trailingIconPersonalTask = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
 
     trailingIconDelegatedTaskWeekly = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
     trailingIconRepeatTaskWeekly = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
     trailingIconSupportTaskWeekly = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
     trailingIconPersonalTaskWeekly = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
 
     trailingIconDelegatedTaskMonthly = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
     trailingIconRepeatTaskMonthly = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
     trailingIconSupportTaskMonthly = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
     trailingIconPersonalTaskMonthly = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
 
     trailingIconDelegatedTaskOverDue = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
     trailingIconRepeatTaskOverDue = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
     trailingIconSupportTaskOverDue = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
     trailingIconPersonalTaskOverDue = Icon(
       Icons.arrow_drop_down,
-      color: Globals.appColor,
+      color: MyAutoPilotStyles.appColor,
       size: 36,
     );
   }
@@ -522,7 +523,8 @@ class _AutoPilotTasksState extends State<AutoPilotTasks>
             child: DecoratedBox(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(25)),
-                  border: Border.all(width: 2, color: Globals.appColor)),
+                  border:
+                      Border.all(width: 2, color: MyAutoPilotStyles.appColor)),
               child: TabBar(
                 labelPadding: EdgeInsets.zero,
                 labelStyle: GoogleFonts.notoSerif(
@@ -536,7 +538,7 @@ class _AutoPilotTasksState extends State<AutoPilotTasks>
                   borderRadius: BorderRadius.circular(
                     25.0,
                   ),
-                  color: Globals.appColor,
+                  color: MyAutoPilotStyles.appColor,
                 ),
                 unselectedLabelStyle: GoogleFonts.notoSerif(
                   color: HexColor('#707070'),
@@ -613,7 +615,7 @@ class _AutoPilotTasksState extends State<AutoPilotTasks>
                                     scale: 2.5,
                                     child: SvgPicture.asset(
                                       'assets/images/delegate task.svg',
-                                      color: Globals.appColor,
+                                      color: MyAutoPilotStyles.appColor,
                                       //semanticsLabel: 'Email Mobile',
                                       height: 10,
                                       width: 10,
@@ -682,7 +684,7 @@ class _AutoPilotTasksState extends State<AutoPilotTasks>
                                       scale: 2.5,
                                       child: SvgPicture.asset(
                                         'assets/images/repeat.svg',
-                                        color: Globals.appColor,
+                                        color: MyAutoPilotStyles.appColor,
                                         //semanticsLabel: 'Email Mobile',
                                         height: 10,
                                         width: 10,
@@ -750,7 +752,7 @@ class _AutoPilotTasksState extends State<AutoPilotTasks>
                                     scale: 2.5,
                                     child: SvgPicture.asset(
                                       'assets/images/support.svg',
-                                      color: Globals.appColor,
+                                      color: MyAutoPilotStyles.appColor,
                                       //semanticsLabel: 'Email Mobile',
                                       height: 10,
                                       width: 10,
@@ -819,7 +821,7 @@ class _AutoPilotTasksState extends State<AutoPilotTasks>
                                       scale: 2.5,
                                       child: SvgPicture.asset(
                                         'assets/images/personal tasks.svg',
-                                        color: Globals.appColor,
+                                        color: MyAutoPilotStyles.appColor,
                                         //semanticsLabel: 'Email Mobile',
                                         height: 10,
                                         width: 10,
@@ -888,7 +890,7 @@ class _AutoPilotTasksState extends State<AutoPilotTasks>
                                     scale: 2.5,
                                     child: SvgPicture.asset(
                                       'assets/images/delegate task.svg',
-                                      color: Globals.appColor,
+                                      color: MyAutoPilotStyles.appColor,
                                       //semanticsLabel: 'Email Mobile',
                                       height: 10,
                                       width: 10,
@@ -955,7 +957,7 @@ class _AutoPilotTasksState extends State<AutoPilotTasks>
                                       scale: 2.5,
                                       child: SvgPicture.asset(
                                         'assets/images/repeat.svg',
-                                        color: Globals.appColor,
+                                        color: MyAutoPilotStyles.appColor,
                                         //semanticsLabel: 'Email Mobile',
                                         height: 10,
                                         width: 10,
@@ -1021,7 +1023,7 @@ class _AutoPilotTasksState extends State<AutoPilotTasks>
                                       scale: 2.5,
                                       child: SvgPicture.asset(
                                         'assets/images/support.svg',
-                                        color: Globals.appColor,
+                                        color: MyAutoPilotStyles.appColor,
                                         //semanticsLabel: 'Email Mobile',
                                         height: 10,
                                         width: 10,
@@ -1087,7 +1089,7 @@ class _AutoPilotTasksState extends State<AutoPilotTasks>
                                     scale: 2.5,
                                     child: SvgPicture.asset(
                                       'assets/images/personal tasks.svg',
-                                      color: Globals.appColor,
+                                      color: MyAutoPilotStyles.appColor,
                                       //semanticsLabel: 'Email Mobile',
                                       height: 10,
                                       width: 10,
@@ -1158,7 +1160,7 @@ class _AutoPilotTasksState extends State<AutoPilotTasks>
                                     scale: 2.5,
                                     child: SvgPicture.asset(
                                       'assets/images/delegate task.svg',
-                                      color: Globals.appColor,
+                                      color: MyAutoPilotStyles.appColor,
                                       //semanticsLabel: 'Email Mobile',
                                       height: 10,
                                       width: 10,
@@ -1225,7 +1227,7 @@ class _AutoPilotTasksState extends State<AutoPilotTasks>
                                     scale: 2.5,
                                     child: SvgPicture.asset(
                                       'assets/images/repeat.svg',
-                                      color: Globals.appColor,
+                                      color: MyAutoPilotStyles.appColor,
                                       //semanticsLabel: 'Email Mobile',
                                       height: 10,
                                       width: 10,
@@ -1292,7 +1294,7 @@ class _AutoPilotTasksState extends State<AutoPilotTasks>
                                     scale: 2.5,
                                     child: SvgPicture.asset(
                                       'assets/images/support.svg',
-                                      color: Globals.appColor,
+                                      color: MyAutoPilotStyles.appColor,
                                       //semanticsLabel: 'Email Mobile',
                                       height: 10,
                                       width: 10,
@@ -1359,7 +1361,7 @@ class _AutoPilotTasksState extends State<AutoPilotTasks>
                                     scale: 2.5,
                                     child: SvgPicture.asset(
                                       'assets/images/personal tasks.svg',
-                                      color: Globals.appColor,
+                                      color: MyAutoPilotStyles.appColor,
                                       //semanticsLabel: 'Email Mobile',
                                       height: 10,
                                       width: 10,
@@ -1430,7 +1432,7 @@ class _AutoPilotTasksState extends State<AutoPilotTasks>
                                     scale: 2.5,
                                     child: SvgPicture.asset(
                                       'assets/images/delegate task.svg',
-                                      color: Globals.appColor,
+                                      color: MyAutoPilotStyles.appColor,
                                       //semanticsLabel: 'Email Mobile',
                                       height: 10,
                                       width: 10,
@@ -1497,7 +1499,7 @@ class _AutoPilotTasksState extends State<AutoPilotTasks>
                                     scale: 2.5,
                                     child: SvgPicture.asset(
                                       'assets/images/repeat.svg',
-                                      color: Globals.appColor,
+                                      color: MyAutoPilotStyles.appColor,
                                       //semanticsLabel: 'Email Mobile',
                                       height: 10,
                                       width: 10,
@@ -1564,7 +1566,7 @@ class _AutoPilotTasksState extends State<AutoPilotTasks>
                                     scale: 2.5,
                                     child: SvgPicture.asset(
                                       'assets/images/support.svg',
-                                      color: Globals.appColor,
+                                      color: MyAutoPilotStyles.appColor,
                                       //semanticsLabel: 'Email Mobile',
                                       height: 10,
                                       width: 10,
@@ -1631,7 +1633,7 @@ class _AutoPilotTasksState extends State<AutoPilotTasks>
                                     scale: 2.5,
                                     child: SvgPicture.asset(
                                       'assets/images/personal tasks.svg',
-                                      color: Globals.appColor,
+                                      color: MyAutoPilotStyles.appColor,
                                       //semanticsLabel: 'Email Mobile',
                                       height: 10,
                                       width: 10,

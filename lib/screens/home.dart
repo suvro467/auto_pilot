@@ -6,6 +6,7 @@ import 'package:auto_pilot/screens/bottom_navigation_screens/auto_pilot_tasks.da
 import 'package:auto_pilot/screens/menu_screens/task_list/task_list.dart';
 import 'package:auto_pilot/shared/drawer/auto_pilot_drawer.dart';
 import 'package:auto_pilot/shared/globals.dart';
+import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -70,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () {},
               icon: SvgPicture.asset(
                 'assets/images/user outline.svg',
-                color: Globals.appColor,
+                color: MyAutoPilotStyles.appColor,
                 //semanticsLabel: 'Email Mobile',
                 height: 40,
                 width: 40,
@@ -80,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () {},
               icon: SvgPicture.asset(
                 'assets/images/bell.svg',
-                color: Globals.appColor,
+                color: MyAutoPilotStyles.appColor,
                 //semanticsLabel: 'Email Mobile',
                 height: 40,
                 width: 40,
@@ -90,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () {},
               icon: SvgPicture.asset(
                 'assets/images/search thin.svg',
-                color: Globals.appColor,
+                color: MyAutoPilotStyles.appColor,
                 //semanticsLabel: 'Email Mobile',
                 height: 40,
                 width: 40,
@@ -103,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               icon: Icon(
                 Icons.menu,
-                color: Globals.appColor,
+                color: MyAutoPilotStyles.appColor,
                 size: 42,
               ),
             ),
@@ -161,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
         BottomNavigationBarItem(
           icon: SvgPicture.asset(
             'assets/images/task 2.svg',
-            color: Globals.appColor,
+            color: MyAutoPilotStyles.appColor,
             height: 30,
             width: 30,
           ),
@@ -170,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
         BottomNavigationBarItem(
           icon: SvgPicture.asset(
             'assets/images/score2.svg',
-            color: Globals.appColor,
+            color: MyAutoPilotStyles.appColor,
             height: 30,
             width: 30,
           ),
@@ -179,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
         BottomNavigationBarItem(
           icon: SvgPicture.asset(
             'assets/images/calendar.svg',
-            color: Globals.appColor,
+            color: MyAutoPilotStyles.appColor,
             height: 30,
             width: 30,
           ),

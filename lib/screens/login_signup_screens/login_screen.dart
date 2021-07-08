@@ -4,6 +4,7 @@ import 'package:auto_pilot/screens/home.dart';
 import 'package:auto_pilot/screens/login_signup_screens/change_password_screen.dart';
 import 'package:auto_pilot/screens/login_signup_screens/signup_screen.dart';
 import 'package:auto_pilot/shared/globals.dart';
+import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:auto_pilot/shared/widgets/loading_dialog.dart';
 import 'package:auto_pilot/shared/widgets/show_message.dart';
 import 'package:flutter/material.dart';
@@ -111,11 +112,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   DropdownButton(
                     elevation: 16,
                     iconSize: 36,
-                    iconEnabledColor: Globals.appColor,
+                    iconEnabledColor: MyAutoPilotStyles.appColor,
                     underline: Padding(
                       padding: const EdgeInsets.only(top: 8.0),
                       child: Divider(
-                        color: Globals.appColor,
+                        color: MyAutoPilotStyles.appColor,
                         height: 1.0,
                         thickness: 1,
                       ),
@@ -128,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     value: Globals.selectedAppLanguage,
                     icon: Icon(
                       Icons.arrow_drop_down,
-                      color: Globals.appColor,
+                      color: MyAutoPilotStyles.appColor,
                       //size: 30,
                     ),
                     items: Globals.appLanguages.map((String items) {
@@ -191,17 +192,19 @@ class _LoginScreenState extends State<LoginScreen> {
                             scale: 0.7,
                             child: SvgPicture.asset(
                               'assets/images/email.svg',
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               //semanticsLabel: 'Email Mobile',
                               height: 10,
                               width: 10,
                             ),
                           ),
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Globals.appColor),
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
                           ),
                           focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Globals.appColor),
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
                           ),
                           hintText: 'Email / Mobile',
                           hintStyle: GoogleFonts.notoSerif(
@@ -267,7 +270,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             scale: 0.7,
                             child: SvgPicture.asset(
                               'assets/images/password.svg',
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               //semanticsLabel: 'Email Mobile',
                               height: 10,
                               width: 10,
@@ -285,7 +288,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 _isObscure
                                     ? 'assets/images/hide.svg'
                                     : 'assets/images/show.svg',
-                                color: Globals.appColor,
+                                color: MyAutoPilotStyles.appColor,
                                 //semanticsLabel: 'Email Mobile',
                                 height: 10,
                                 width: 10,
@@ -293,10 +296,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Globals.appColor),
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
                           ),
                           focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Globals.appColor),
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
                           ),
                           hintText: 'Password',
                           hintStyle: GoogleFonts.notoSerif(
@@ -377,7 +382,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         'Forgot Password',
                         style: GoogleFonts.notoSerif(
                           fontSize: 13,
-                          color: Globals.appColor,
+                          color: MyAutoPilotStyles.appColor,
                           fontWeight: FontWeight.normal,
                           //decoration: TextDecoration.underline,
                         ),
@@ -392,7 +397,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         Expanded(
                           child: CheckboxListTile(
-                            activeColor: Globals.appColor,
+                            activeColor: MyAutoPilotStyles.appColor,
 
                             value: _acceptTerms,
                             onChanged: (newValue) {
@@ -419,7 +424,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   text: 'terms of use',
                                   style: GoogleFonts.notoSerif(
                                     fontSize: 14,
-                                    color: Globals.appColor,
+                                    color: MyAutoPilotStyles.appColor,
                                     fontWeight: FontWeight.normal,
                                   ),
                                 ),
@@ -435,7 +440,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   text: 'privacy policy.',
                                   style: GoogleFonts.notoSerif(
                                     fontSize: 14,
-                                    color: Globals.appColor,
+                                    color: MyAutoPilotStyles.appColor,
                                     fontWeight: FontWeight.normal,
                                   ),
                                 ),
@@ -552,7 +557,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),
                             ),
-                            primary: Globals.appColor,
+                            primary: MyAutoPilotStyles.appColor,
                           ),
                           child: Text(
                             'LOGIN',
@@ -575,7 +580,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           scale: 2,
                           child: SvgPicture.asset(
                             'assets/images/fingerprint.svg',
-                            color: Globals.appColor,
+                            color: MyAutoPilotStyles.appColor,
                             //semanticsLabel: 'Email Mobile',
                             height: 10,
                             width: 10,
@@ -650,7 +655,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30.0),
                                 ),
-                                primary: Globals.appColor,
+                                primary: MyAutoPilotStyles.appColor,
                               ),
                               child: Text(
                                 'Sign Up',
