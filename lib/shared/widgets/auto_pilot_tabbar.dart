@@ -10,6 +10,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:auto_pilot/shared/globals.dart';
+import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -633,7 +634,7 @@ class _RegularInnerContainer extends StatelessWidget {
         color: _color,
         borderRadius: _borderRadius,
         border: Border.all(
-          color: Globals.appColor,
+          color: MyAutoPilotStyles.appColor,
           width: 2,
         ),
       ),

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:auto_pilot/screens/login_signup_screens/login_screen.dart';
 import 'package:auto_pilot/screens/login_signup_screens/change_password_screen.dart';
 import 'package:auto_pilot/shared/globals.dart';
+import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:auto_pilot/shared/widgets/loading_dialog.dart';
 import 'package:auto_pilot/shared/widgets/show_message.dart';
 import 'package:flutter/material.dart';
@@ -169,11 +170,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   DropdownButton(
                     elevation: 16,
                     iconSize: 36,
-                    iconEnabledColor: Globals.appColor,
+                    iconEnabledColor: MyAutoPilotStyles.appColor,
                     underline: Padding(
                       padding: const EdgeInsets.only(top: 8.0),
                       child: Divider(
-                        color: Globals.appColor,
+                        color: MyAutoPilotStyles.appColor,
                         height: 1.0,
                         thickness: 1,
                       ),
@@ -186,7 +187,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     value: Globals.selectedAppLanguage,
                     icon: Icon(
                       Icons.arrow_drop_down,
-                      color: Globals.appColor,
+                      color: MyAutoPilotStyles.appColor,
                       //size: 30,
                     ),
                     items: Globals.appLanguages.map((String items) {
@@ -249,17 +250,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             scale: 0.7,
                             child: SvgPicture.asset(
                               'assets/images/user.svg',
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               //semanticsLabel: 'Email Mobile',
                               height: 10,
                               width: 10,
                             ),
                           ),
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Globals.appColor),
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
                           ),
                           focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Globals.appColor),
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
                           ),
                           hintText: 'Name',
                           hintStyle: GoogleFonts.notoSerif(
@@ -310,17 +313,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             scale: 0.7,
                             child: SvgPicture.asset(
                               'assets/images/email.svg',
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               //semanticsLabel: 'Email Mobile',
                               height: 10,
                               width: 10,
                             ),
                           ),
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Globals.appColor),
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
                           ),
                           focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Globals.appColor),
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
                           ),
                           hintText: 'Email',
                           hintStyle: GoogleFonts.notoSerif(
@@ -379,7 +384,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             enabled: false,
                             decoration: InputDecoration(
                               disabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Globals.appColor),
+                                borderSide: BorderSide(
+                                    color: MyAutoPilotStyles.appColor),
                               ),
                               labelStyle: GoogleFonts.notoSerif(
                                 fontSize: 14,
@@ -390,17 +396,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 scale: 0.6,
                                 child: SvgPicture.asset(
                                   'assets/images/phone.svg',
-                                  color: Globals.appColor,
+                                  color: MyAutoPilotStyles.appColor,
                                   //semanticsLabel: 'Email Mobile',
                                   height: 10,
                                   width: 10,
                                 ),
                               ),
                               enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Globals.appColor),
+                                borderSide: BorderSide(
+                                    color: MyAutoPilotStyles.appColor),
                               ),
                               focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Globals.appColor),
+                                borderSide: BorderSide(
+                                    color: MyAutoPilotStyles.appColor),
                               ),
                               hintText: '+91 (IND)',
                               hintStyle: GoogleFonts.notoSerif(
@@ -441,19 +449,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     scale: 0.7,
                                     child: SvgPicture.asset(
                                       'assets/images/otp.svg',
-                                      color: Globals.appColor,
+                                      color: MyAutoPilotStyles.appColor,
                                       //semanticsLabel: 'Email Mobile',
                                       height: 10,
                                       width: 10,
                                     ),
                                   ), */
                                   enabledBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Globals.appColor),
+                                    borderSide: BorderSide(
+                                        color: MyAutoPilotStyles.appColor),
                                   ),
                                   focusedBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Globals.appColor),
+                                    borderSide: BorderSide(
+                                        color: MyAutoPilotStyles.appColor),
                                   ),
                                   hintText: 'Contact Number',
                                   hintStyle: GoogleFonts.notoSerif(
@@ -509,7 +517,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             scale: 0.7,
                             child: SvgPicture.asset(
                               'assets/images/password.svg',
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               //semanticsLabel: 'Email Mobile',
                               height: 10,
                               width: 10,
@@ -527,7 +535,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 _isObscure
                                     ? 'assets/images/hide.svg'
                                     : 'assets/images/show.svg',
-                                color: Globals.appColor,
+                                color: MyAutoPilotStyles.appColor,
                                 //semanticsLabel: 'Email Mobile',
                                 height: 10,
                                 width: 10,
@@ -535,10 +543,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                           ),
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Globals.appColor),
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
                           ),
                           focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Globals.appColor),
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
                           ),
                           hintText: 'Assign password',
                           hintStyle: GoogleFonts.notoSerif(
@@ -594,17 +604,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             scale: 0.7,
                             child: SvgPicture.asset(
                               'assets/images/otp.svg',
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               //semanticsLabel: 'Email Mobile',
                               height: 10,
                               width: 10,
                             ),
                           ),
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Globals.appColor),
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
                           ),
                           focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Globals.appColor),
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
                           ),
                           hintText: 'Enter OTP sent via SMS',
                           hintStyle: GoogleFonts.notoSerif(
@@ -660,17 +672,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             scale: 0.7,
                             child: SvgPicture.asset(
                               'assets/images/otp.svg',
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               //semanticsLabel: 'Email Mobile',
                               height: 10,
                               width: 10,
                             ),
                           ),
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Globals.appColor),
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
                           ),
                           focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Globals.appColor),
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
                           ),
                           hintText: 'Enter OTP sent via EMail',
                           hintStyle: GoogleFonts.notoSerif(
@@ -723,7 +737,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   text: 'terms of use',
                                   style: GoogleFonts.notoSerif(
                                     fontSize: 14,
-                                    color: Globals.appColor,
+                                    color: MyAutoPilotStyles.appColor,
                                     fontWeight: FontWeight.normal,
                                   ),
                                 ),
@@ -739,7 +753,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   text: 'privacy policy.',
                                   style: GoogleFonts.notoSerif(
                                     fontSize: 14,
-                                    color: Globals.appColor,
+                                    color: MyAutoPilotStyles.appColor,
                                     fontWeight: FontWeight.normal,
                                   ),
                                 ),
@@ -883,7 +897,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                                       style:
                                                           GoogleFonts.notoSerif(
                                                         fontSize: 16,
-                                                        color: Globals.appColor,
+                                                        color: MyAutoPilotStyles
+                                                            .appColor,
                                                         fontWeight:
                                                             FontWeight.bold,
                                                         //decoration: TextDecoration.underline,
@@ -997,8 +1012,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                                                       .circular(
                                                                           30.0),
                                                             ),
-                                                            primary: Globals
-                                                                .appColor,
+                                                            primary:
+                                                                MyAutoPilotStyles
+                                                                    .appColor,
                                                           ),
                                                           child: Text(
                                                             'GO TO LOGIN',
@@ -1030,7 +1046,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),
                             ),
-                            primary: Globals.appColor,
+                            primary: MyAutoPilotStyles.appColor,
                           ),
                           child: Text(
                             'SIGN UP',
@@ -1121,7 +1137,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30.0),
                                 ),
-                                primary: Globals.appColor,
+                                primary: MyAutoPilotStyles.appColor,
                               ),
                               child: Text(
                                 'Log In',

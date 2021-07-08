@@ -6,6 +6,8 @@ import 'package:hexcolor/hexcolor.dart';
 
 class MyAutoPilotStyles {
   /// Styles :
+  // Background common colour for the widgets in the app
+  static Color appColor = HexColor('#82C4E2');
   static TextStyle listTileHeaderTitle = GoogleFonts.notoSans(
     fontSize: 14,
     color: HexColor('#707070'),
@@ -74,7 +76,7 @@ class MyAutoPilotStyles {
       scale: 0.7,
       child: SvgPicture.asset(
         'assets/images/exit.svg',
-        color: Globals.appColor,
+        color: MyAutoPilotStyles.appColor,
         //semanticsLabel: 'Email Mobile',
         height: 10,
         width: 10,

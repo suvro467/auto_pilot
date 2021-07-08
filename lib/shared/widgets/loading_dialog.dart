@@ -1,4 +1,5 @@
 import 'package:auto_pilot/shared/globals.dart';
+import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -39,13 +40,13 @@ class LoadingDialog extends Dialog {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10.0),
-                  child: CircularProgressIndicator(color: Globals.appColor),
+                  child: CircularProgressIndicator(color: MyAutoPilotStyles.appColor),
                 ),
                 Text(
                   message,
                   style: GoogleFonts.notoSerif(
                     fontSize: 14,
-                    color: Globals.appColor,
+                    color: MyAutoPilotStyles.appColor,
                     fontWeight: FontWeight.normal,
                     //decoration: TextDecoration.underline,
                   ),

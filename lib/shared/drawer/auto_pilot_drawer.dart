@@ -56,7 +56,7 @@ class _MyAutoPilotDrawerState extends State<MyAutoPilotDrawer> {
                             padding: const EdgeInsets.all(0),
                             icon: Icon(
                               Icons.arrow_left,
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               size: 36,
                             ),
                             onPressed: () {
@@ -69,7 +69,7 @@ class _MyAutoPilotDrawerState extends State<MyAutoPilotDrawer> {
                             padding: const EdgeInsets.all(0),
                             icon: SvgPicture.asset(
                               'assets/images/exit.svg',
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               height: 22,
                               width: 22,
                             ),
@@ -128,7 +128,7 @@ class _MyAutoPilotDrawerState extends State<MyAutoPilotDrawer> {
                                           style: TextStyle(
                                             fontFamily: 'Proxima',
                                             fontSize: 16,
-                                            color: Globals.appColor,
+                                            color: MyAutoPilotStyles.appColor,
                                           ),
                                         ),
                                         onPressed: () {
@@ -211,12 +211,255 @@ class _MyAutoPilotDrawerState extends State<MyAutoPilotDrawer> {
                 child: ListTile(
                   leading: SvgPicture.asset(
                     'assets/images/dashboard.svg',
-                    color: Globals.appColor,
+                    color: MyAutoPilotStyles.appColor,
                     height: 22,
                     width: 22,
                   ),
                   title: Text(
                     'Dashboard',
+                    style: MyAutoPilotStyles.listTileHeaderTitle,
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    setState(() {
+                      widget.pageController.jumpToPage(0);
+                    });
+                  },
+                ),
+              ),
+            ]),
+            MyAutoPilotStyles.menuItemDivider,
+            Stack(children: [
+              Container(
+                height: 45,
+                padding: EdgeInsets.only(
+                  left: 10,
+                ),
+                child: ListTile(
+                  leading: SvgPicture.asset(
+                    'assets/images/task 2.svg',
+                    color: MyAutoPilotStyles.appColor,
+                    height: 26,
+                    width: 26,
+                  ),
+                  title: Text(
+                    'Task List',
+                    style: MyAutoPilotStyles.listTileHeaderTitle,
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    setState(() {
+                      widget.pageController.jumpToPage(0);
+                    });
+                  },
+                ),
+              ),
+            ]),
+            MyAutoPilotStyles.menuItemDivider,
+            Stack(children: [
+              Container(
+                height: 45,
+                padding: EdgeInsets.only(
+                  left: 10,
+                ),
+                child: ListTile(
+                  leading: SvgPicture.asset(
+                    'assets/images/audit-task.svg',
+                    color: MyAutoPilotStyles.appColor,
+                    height: 26,
+                    width: 26,
+                  ),
+                  title: Text(
+                    'Audit Tasks',
+                    style: MyAutoPilotStyles.listTileHeaderTitle,
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    setState(() {
+                      widget.pageController.jumpToPage(0);
+                    });
+                  },
+                ),
+              ),
+            ]),
+            MyAutoPilotStyles.menuItemDivider,
+            Stack(children: [
+              Container(
+                height: 45,
+                padding: EdgeInsets.only(
+                  left: 10,
+                ),
+                child: ListTile(
+                  leading: SvgPicture.asset(
+                    'assets/images/observer task.svg',
+                    color: MyAutoPilotStyles.appColor,
+                    height: 26,
+                    width: 26,
+                  ),
+                  title: Text(
+                    'Observe Tasks',
+                    style: MyAutoPilotStyles.listTileHeaderTitle,
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    setState(() {
+                      widget.pageController.jumpToPage(0);
+                    });
+                  },
+                ),
+              ),
+            ]),
+            MyAutoPilotStyles.menuItemDivider,
+            Stack(children: [
+              Container(
+                height: 45,
+                padding: EdgeInsets.only(
+                  left: 10,
+                ),
+                child: ListTile(
+                  leading: SvgPicture.asset(
+                    'assets/images/user outline.svg',
+                    color: MyAutoPilotStyles.appColor,
+                    height: 26,
+                    width: 26,
+                  ),
+                  title: Text(
+                    'Users',
+                    style: MyAutoPilotStyles.listTileHeaderTitle,
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    setState(() {
+                      widget.pageController.jumpToPage(0);
+                    });
+                  },
+                ),
+              ),
+            ]),
+            MyAutoPilotStyles.menuItemDivider,
+            Stack(children: [
+              Container(
+                height: 45,
+                padding: EdgeInsets.only(
+                  left: 10,
+                ),
+                child: ListTile(
+                  leading: SvgPicture.asset(
+                    'assets/images/team list.svg',
+                    color: MyAutoPilotStyles.appColor,
+                    height: 22,
+                    width: 22,
+                  ),
+                  title: Text(
+                    'Team List',
+                    style: MyAutoPilotStyles.listTileHeaderTitle,
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    setState(() {
+                      widget.pageController.jumpToPage(0);
+                    });
+                  },
+                ),
+              ),
+            ]),
+            MyAutoPilotStyles.menuItemDivider,
+            Stack(children: [
+              Container(
+                height: 45,
+                padding: EdgeInsets.only(
+                  left: 10,
+                ),
+                child: ListTile(
+                  leading: SvgPicture.asset(
+                    'assets/images/score2.svg',
+                    color: MyAutoPilotStyles.appColor,
+                    height: 22,
+                    width: 22,
+                  ),
+                  title: Text(
+                    'Score Board',
+                    style: MyAutoPilotStyles.listTileHeaderTitle,
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    setState(() {
+                      widget.pageController.jumpToPage(0);
+                    });
+                  },
+                ),
+              ),
+            ]),
+            MyAutoPilotStyles.menuItemDivider,
+            Stack(children: [
+              Container(
+                height: 45,
+                padding: EdgeInsets.only(
+                  left: 10,
+                ),
+                child: ListTile(
+                  leading: SvgPicture.asset(
+                    'assets/images/calendar.svg',
+                    color: MyAutoPilotStyles.appColor,
+                    height: 22,
+                    width: 22,
+                  ),
+                  title: Text(
+                    'Calendar',
+                    style: MyAutoPilotStyles.listTileHeaderTitle,
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    setState(() {
+                      widget.pageController.jumpToPage(0);
+                    });
+                  },
+                ),
+              ),
+            ]),
+            MyAutoPilotStyles.menuItemDivider,
+            Stack(children: [
+              Container(
+                height: 45,
+                padding: EdgeInsets.only(
+                  left: 10,
+                ),
+                child: ListTile(
+                  leading: SvgPicture.asset(
+                    'assets/images/support.svg',
+                    color: MyAutoPilotStyles.appColor,
+                    height: 26,
+                    width: 26,
+                  ),
+                  title: Text(
+                    'Support',
+                    style: MyAutoPilotStyles.listTileHeaderTitle,
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    setState(() {
+                      widget.pageController.jumpToPage(0);
+                    });
+                  },
+                ),
+              ),
+            ]),
+            MyAutoPilotStyles.menuItemDivider,
+            Stack(children: [
+              Container(
+                height: 45,
+                padding: EdgeInsets.only(
+                  left: 10,
+                ),
+                child: ListTile(
+                  leading: SvgPicture.asset(
+                    'assets/images/kra update.svg',
+                    color: MyAutoPilotStyles.appColor,
+                    height: 26,
+                    width: 26,
+                  ),
+                  title: Text(
+                    'KRA Update',
                     style: MyAutoPilotStyles.listTileHeaderTitle,
                   ),
                   onTap: () {

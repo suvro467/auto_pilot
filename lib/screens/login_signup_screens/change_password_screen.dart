@@ -4,6 +4,7 @@ import 'package:auto_pilot/screens/home.dart';
 import 'package:auto_pilot/screens/login_signup_screens/login_screen.dart';
 import 'package:auto_pilot/screens/login_signup_screens/signup_screen.dart';
 import 'package:auto_pilot/shared/globals.dart';
+import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:auto_pilot/shared/widgets/loading_dialog.dart';
 import 'package:auto_pilot/shared/widgets/show_message.dart';
 import 'package:flutter/material.dart';
@@ -131,11 +132,11 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   DropdownButton(
                     elevation: 16,
                     iconSize: 36,
-                    iconEnabledColor: Globals.appColor,
+                    iconEnabledColor: MyAutoPilotStyles.appColor,
                     underline: Padding(
                       padding: const EdgeInsets.only(top: 8.0),
                       child: Divider(
-                        color: Globals.appColor,
+                        color: MyAutoPilotStyles.appColor,
                         height: 1.0,
                         thickness: 1,
                       ),
@@ -148,7 +149,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     value: Globals.selectedAppLanguage,
                     icon: Icon(
                       Icons.arrow_drop_down,
-                      color: Globals.appColor,
+                      color: MyAutoPilotStyles.appColor,
                       //size: 30,
                     ),
                     items: Globals.appLanguages.map((String items) {
@@ -211,17 +212,19 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             scale: 0.7,
                             child: SvgPicture.asset(
                               'assets/images/email.svg',
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               //semanticsLabel: 'Email Mobile',
                               height: 10,
                               width: 10,
                             ),
                           ),
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Globals.appColor),
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
                           ),
                           focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Globals.appColor),
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
                           ),
                           hintText: 'Email / Mobile',
                           hintStyle: GoogleFonts.notoSerif(
@@ -287,7 +290,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             scale: 0.7,
                             child: SvgPicture.asset(
                               'assets/images/password.svg',
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               //semanticsLabel: 'Email Mobile',
                               height: 10,
                               width: 10,
@@ -305,7 +308,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                 _isObscure
                                     ? 'assets/images/hide.svg'
                                     : 'assets/images/show.svg',
-                                color: Globals.appColor,
+                                color: MyAutoPilotStyles.appColor,
                                 //semanticsLabel: 'Email Mobile',
                                 height: 10,
                                 width: 10,
@@ -313,10 +316,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             ),
                           ),
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Globals.appColor),
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
                           ),
                           focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Globals.appColor),
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
                           ),
                           hintText: 'New Password',
                           hintStyle: GoogleFonts.notoSerif(
@@ -372,17 +377,19 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             scale: 0.7,
                             child: SvgPicture.asset(
                               'assets/images/otp.svg',
-                              color: Globals.appColor,
+                              color: MyAutoPilotStyles.appColor,
                               //semanticsLabel: 'Email Mobile',
                               height: 10,
                               width: 10,
                             ),
                           ),
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Globals.appColor),
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
                           ),
                           focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Globals.appColor),
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
                           ),
                           hintText: 'Enter OTP sent via SMS / Email',
                           hintStyle: GoogleFonts.notoSerif(
@@ -527,7 +534,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                                       style:
                                                           GoogleFonts.notoSerif(
                                                         fontSize: 16,
-                                                        color: Globals.appColor,
+                                                        color: MyAutoPilotStyles
+                                                            .appColor,
                                                         fontWeight:
                                                             FontWeight.bold,
                                                         //decoration: TextDecoration.underline,
@@ -613,8 +621,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                                                       .circular(
                                                                           30.0),
                                                             ),
-                                                            primary: Globals
-                                                                .appColor,
+                                                            primary:
+                                                                MyAutoPilotStyles
+                                                                    .appColor,
                                                           ),
                                                           child: Text(
                                                             'GO TO LOGIN',
@@ -646,7 +655,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),
                             ),
-                            primary: Globals.appColor,
+                            primary: MyAutoPilotStyles.appColor,
                           ),
                           child: Text(
                             'CONFIRM',
@@ -675,7 +684,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
-                                  primary: Globals.appColor,
+                                  primary: MyAutoPilotStyles.appColor,
                                 ),
                                 child: Text(
                                   'Cancel',
