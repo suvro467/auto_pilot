@@ -1,7 +1,7 @@
 import 'dart:io';
 
+import 'package:auto_pilot/screens/login_signup_screens/first_time_login_screen.dart';
 import 'package:auto_pilot/screens/login_signup_screens/login_screen.dart';
-import 'package:auto_pilot/screens/login_signup_screens/change_password_screen.dart';
 import 'package:auto_pilot/shared/globals.dart';
 import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:auto_pilot/shared/widgets/loading_dialog.dart';
@@ -277,7 +277,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     !_isCustomerNameValid
                         ? Positioned(
                             right: 50.0,
-                            top: 85.0,
+                            top: 55.0,
                             child: new Container(
                               child: Text(
                                 '$_validationText',
@@ -800,7 +800,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ShowMessage.showFlushBar(
                                   context, 'Please rectify the errors.');
                             } else if (!Globals.isEmail(
-                                _emailController.text)) {
+                                _emailController.text.trim())) {
                               setState(() {
                                 _isValidEmail = false;
                               });
@@ -963,7 +963,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                                                     Animation<
                                                                             double>
                                                                         secondaryAnimation) {
-                                                                  return LoginScreen();
+                                                                  return FirstTimeLoginScreen();
                                                                 },
                                                                 transitionsBuilder: (BuildContext context,
                                                                     Animation<
@@ -975,20 +975,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                                                     Widget
                                                                         child) {
                                                                   return Align(
-                                                                    // Other animation types kept here for re-use.
-                                                                    /* child: FadeTransition(
-                                                  opacity: animation,
-                                                  child: child,
-                                              ), */
-                                                                    /* child: ScaleTransition(
-                                                  scale: animation,
-                                                  child: child,
-                                              ), */
-                                                                    /* child: SizeTransition(
-                                                  sizeFactor: animation,
-                                                  child: child,
-                                                  axisAlignment: 0.0,
-                                              ), */
                                                                     child:
                                                                         SlideTransition(
                                                                       position: Tween(
