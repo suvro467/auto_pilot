@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:auto_pilot/screens/app_bar_screens/search_screen.dart';
 import 'package:auto_pilot/screens/bottom_navigation_screens/auto_pilot_calendar.dart';
 import 'package:auto_pilot/screens/bottom_navigation_screens/auto_pilot_score.dart';
 import 'package:auto_pilot/screens/bottom_navigation_screens/auto_pilot_tasks.dart';
@@ -88,7 +89,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                _pageController.jumpToPage(4);
+              },
               icon: SvgPicture.asset(
                 'assets/images/search thin.svg',
                 color: MyAutoPilotStyles.appColor,
@@ -267,6 +270,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 return Container(
                   // Calendar
                   child: AutoPilotCalendar(),
+                );
+              },
+            ),
+          ),
+        ),
+        // Page 4
+        Container(
+          color: Colors.transparent,
+          child: Center(
+            child: FutureBuilder(
+              builder: (context, snapshot) {
+                return Container(
+                  // Calendar
+                  child: SearchScreen(
+                    scaffoldKey: _scaffoldKey,
+                    pageController: _pageController,
+                  ),
                 );
               },
             ),
