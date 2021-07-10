@@ -36,7 +36,9 @@ class _SearchScreenState extends State<SearchScreen> {
 
   bool isSelectedDates = false;
   bool isSelectedAssignment = false;
-  bool isSelectedTaskType = false;
+  bool isSelectedTaskType = true;
+
+  List<Map<String, dynamic>> searchResults = [];
 
   @override
   void initState() {
@@ -59,8 +61,8 @@ class _SearchScreenState extends State<SearchScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.only(
-                left: 40.0,
-                right: 40.0,
+                left: 20.0,
+                right: 20.0,
                 top: 20,
               ),
               child: TextField(
@@ -101,8 +103,8 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                left: 40.0,
-                right: 40.0,
+                left: 20.0,
+                right: 20.0,
                 top: 10,
               ),
               child: Row(
@@ -122,48 +124,131 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                left: 40.0,
-                right: 40.0,
+                left: 20.0,
+                right: 20.0,
                 top: 20,
               ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ConstrainedBox(
-                    constraints:
-                        BoxConstraints.tightFor(width: 110, height: 45),
-                    child: ElevatedButton(
-                      onPressed: () async {},
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                        primary: isSelectedDates
-                            ? selectedBackgroundColour
-                            : unselectedBackgroundColour,
+                  ElevatedButton(
+                    onPressed: () async {},
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.only(
+                        left: 10,
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Dates',
-                            style: GoogleFonts.notoSerif(
-                              fontSize: 12,
-                              color: isSelectedDates
-                                  ? selectedTextColour
-                                  : unselectedTextColour,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                          Icon(
-                            Icons.arrow_drop_down,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      primary: isSelectedDates
+                          ? selectedBackgroundColour
+                          : unselectedBackgroundColour,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Dates',
+                          style: GoogleFonts.notoSerif(
+                            fontSize: 12,
                             color: isSelectedDates
-                                ? selectedDropDownColour
-                                : unselectedDropDownColour,
-                            size: 36,
+                                ? selectedTextColour
+                                : unselectedTextColour,
+                            fontWeight: FontWeight.normal,
                           ),
-                        ],
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Icon(
+                          Icons.arrow_drop_down,
+                          color: isSelectedDates
+                              ? selectedDropDownColour
+                              : unselectedDropDownColour,
+                          size: 36,
+                        ),
+                      ],
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () async {},
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.only(
+                        left: 10,
                       ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      primary: isSelectedAssignment
+                          ? selectedBackgroundColour
+                          : unselectedBackgroundColour,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Assignment',
+                          style: GoogleFonts.notoSerif(
+                            fontSize: 12,
+                            color: isSelectedAssignment
+                                ? selectedTextColour
+                                : unselectedTextColour,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                        /* SizedBox(
+                          width: 10,
+                        ), */
+                        Icon(
+                          Icons.arrow_drop_down,
+                          color: isSelectedAssignment
+                              ? selectedDropDownColour
+                              : unselectedDropDownColour,
+                          size: 36,
+                        ),
+                      ],
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () async {},
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.only(
+                        left: 10,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      primary: isSelectedTaskType
+                          ? selectedBackgroundColour
+                          : unselectedBackgroundColour,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Task Type',
+                          style: GoogleFonts.notoSerif(
+                            fontSize: 12,
+                            color: isSelectedTaskType
+                                ? selectedTextColour
+                                : unselectedTextColour,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                        /* SizedBox(
+                          width: 10,
+                        ), */
+                        Icon(
+                          Icons.arrow_drop_down,
+                          color: isSelectedTaskType
+                              ? selectedDropDownColour
+                              : unselectedDropDownColour,
+                          size: 36,
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -173,5 +258,14 @@ class _SearchScreenState extends State<SearchScreen> {
         ),
       ),
     );
+  }
+
+  getSearchResults() {
+    for (int i = 0; i < 10; i++) {
+      searchResults.add({
+        'Description': 'This is the small description of the tasks assigned.',
+        'By': 'Sujoy Banerjee'
+      });
+    }
   }
 }
