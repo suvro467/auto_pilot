@@ -33,7 +33,7 @@ class MyAutoPilotStyles {
   static const Color drawerMenuColor = Color.fromRGBO(252, 128, 25, 1);
   static const Color buttonBlackColor = Colors.black;
   static const Color buttonOrangeColor = Color.fromRGBO(252, 128, 25, 1);
-  static const Color dineOrderGreyColor = Color.fromRGBO(126, 128, 140, 1);
+  static const Color AutoPilotGreyColor = Color.fromRGBO(126, 128, 140, 1);
   static const Color drawerHeaderColor =
       Colors.grey; //Color.fromRGBO(217, 227, 227, 1);
   static const Color validationColor = Color.fromRGBO(250, 74, 91, 1);
@@ -90,7 +90,7 @@ class MyAutoPilotStyles {
 
   /// Dividers:
   static const Divider menuItemDivider = Divider(
-    color: dineOrderGreyColor,
+    color: AutoPilotGreyColor,
   );
 
   // Box Decorations:
@@ -106,7 +106,7 @@ class MyAutoPilotStyles {
   );
 
   // DateTime Format
-  static String getDineOrderDateFormat(DateTime dt) {
+  static String getAutoPilotDateFormat(DateTime dt) {
     if (DateTime.now().year == dt.year) {
       return 'd M H:i A';
     } else {
@@ -114,11 +114,11 @@ class MyAutoPilotStyles {
     }
   }
 
-  static String getDineOrderDateFormatMultiDate(DateTime dt) {
+  static String getAutoPilotDateFormatMultiDate(DateTime dt) {
     return 'd M Y H:i A';
   }
 
-  static String getDineOrderDateFormatMultiDateInitial(DateTime dt) {
+  static String getAutoPilotDateFormatMultiDateInitial(DateTime dt) {
     if (DateTime.now().year == dt.year) {
       return 'd M ';
     } else {
@@ -126,7 +126,7 @@ class MyAutoPilotStyles {
     }
   }
 
-  static String getDineOrderSingleDateFormat(DateTime dt) {
+  static String getAutoPilotSingleDateFormat(DateTime dt) {
     return 'd M Y ';
   }
 }
