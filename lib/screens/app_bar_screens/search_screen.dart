@@ -1,5 +1,6 @@
 import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -41,6 +42,8 @@ class _SearchScreenState extends State<SearchScreen> {
 
   List<Map<String, dynamic>> searchResults = [];
   List<Widget> searchCards = [];
+
+  DateTime? startFromDate;
 
   @override
   void initState() {
@@ -212,18 +215,41 @@ class _SearchScreenState extends State<SearchScreen> {
                                                         .width *
                                                     35 /
                                                     100,
-                                                child: TextField(
-                                                  textAlign: TextAlign.left,
-                                                  decoration: InputDecoration(
-                                                    labelStyle:
-                                                        GoogleFonts.notoSerif(
-                                                      fontSize: 14,
-                                                      color:
-                                                          HexColor('#C9C9C9'),
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                                child: GestureDetector(
+                                                  onTap: () async {
+                                                    DateTime? newDateTime =
+                                                        await showRoundedDatePicker(
+                                                      context: context,
+                                                      initialDate:
+                                                          DateTime.now(),
+                                                      firstDate: DateTime(
+                                                          DateTime.now().year -
+                                                              1),
+                                                      lastDate: DateTime(
+                                                          DateTime.now().year +
+                                                              1),
+                                                      borderRadius: 2,
+                                                    );
+                                                    print(newDateTime);
+                                                    if (newDateTime != null) {
+                                                      setState(() =>
+                                                          startFromDate =
+                                                              newDateTime);
+                                                    }
+                                                  },
+                                                  child: TextField(
+                                                    textAlign: TextAlign.left,
+                                                    decoration: InputDecoration(
+                                                      labelStyle:
+                                                          GoogleFonts.notoSerif(
+                                                        fontSize: 14,
+                                                        color:
+                                                            HexColor('#C9C9C9'),
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                                      enabled: false,
                                                     ),
-                                                    enabled: false,
                                                   ),
                                                 ),
                                               ),
