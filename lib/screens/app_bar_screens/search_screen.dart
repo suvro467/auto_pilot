@@ -134,7 +134,486 @@ class _SearchScreenState extends State<SearchScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ElevatedButton(
-                  onPressed: () async {},
+                  onPressed: () async {
+                    await showModalBottomSheet(
+                        context: context,
+                        backgroundColor: Colors.transparent,
+                        builder: (builder) {
+                          return Align(
+                            alignment: Alignment.bottomCenter,
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints.tight(Size(
+                                  MediaQuery.of(context).size.width * 90 / 100,
+                                  MediaQuery.of(context).size.height *
+                                      60 /
+                                      100)),
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: const Radius.circular(20.0),
+                                      topRight: const Radius.circular(20.0),
+                                    ),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                          top: 30,
+                                          left: 30,
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Text('Add Date Filter',
+                                                style: GoogleFonts.notoSerif(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: MyAutoPilotStyles
+                                                      .appColor,
+                                                )),
+                                          ],
+                                        ),
+                                      ),
+                                      // Start Date
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                          top: 40,
+                                          left: 30,
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              'Start Date',
+                                              style: GoogleFonts.notoSans(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.normal,
+                                                color: HexColor('#707070'),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        alignment: Alignment.centerLeft,
+                                        margin: EdgeInsets.only(
+                                          top: 10,
+                                          left: 30,
+                                          right: 40,
+                                        ),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Stack(children: [
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    35 /
+                                                    100,
+                                                child: TextField(
+                                                  textAlign: TextAlign.left,
+                                                  decoration: InputDecoration(
+                                                    labelStyle:
+                                                        GoogleFonts.notoSerif(
+                                                      fontSize: 14,
+                                                      color:
+                                                          HexColor('#C9C9C9'),
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                    ),
+                                                    enabled: false,
+                                                  ),
+                                                ),
+                                              ),
+                                              Positioned(
+                                                top: 15,
+                                                child: SvgPicture.asset(
+                                                  'assets/images/calendar.svg',
+                                                  color: MyAutoPilotStyles
+                                                      .appColor,
+                                                  width: 25,
+                                                  height: 25,
+                                                ),
+                                              )
+                                            ]),
+                                            Stack(children: [
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    35 /
+                                                    100,
+                                                child: TextField(
+                                                  textAlign: TextAlign.left,
+                                                  decoration: InputDecoration(
+                                                    labelStyle:
+                                                        GoogleFonts.notoSerif(
+                                                      fontSize: 14,
+                                                      color:
+                                                          HexColor('#C9C9C9'),
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                    ),
+                                                    enabled: false,
+                                                  ),
+                                                ),
+                                              ),
+                                              Positioned(
+                                                top: 15,
+                                                child: SvgPicture.asset(
+                                                  'assets/images/calendar.svg',
+                                                  color: MyAutoPilotStyles
+                                                      .appColor,
+                                                  width: 25,
+                                                  height: 25,
+                                                ),
+                                              )
+                                            ]),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                          top: 5,
+                                          left: 30,
+                                          right: 40,
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  35 /
+                                                  100,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                children: [
+                                                  Container(),
+                                                  Text(
+                                                    'From',
+                                                    style: GoogleFonts.notoSans(
+                                                      fontSize: 10,
+                                                      color:
+                                                          HexColor('#707070'),
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  35 /
+                                                  100,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                children: [
+                                                  Text(
+                                                    'To',
+                                                    style: GoogleFonts.notoSans(
+                                                      fontSize: 10,
+                                                      color:
+                                                          HexColor('#707070'),
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ), // Target Date
+                                      // Target Date
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                          top: 40,
+                                          left: 30,
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              'Target Date',
+                                              style: GoogleFonts.notoSans(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.normal,
+                                                color: HexColor('#707070'),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        alignment: Alignment.centerLeft,
+                                        margin: EdgeInsets.only(
+                                          top: 10,
+                                          left: 30,
+                                          right: 40,
+                                        ),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Stack(children: [
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    35 /
+                                                    100,
+                                                child: TextField(
+                                                  textAlign: TextAlign.left,
+                                                  decoration: InputDecoration(
+                                                    labelStyle:
+                                                        GoogleFonts.notoSerif(
+                                                      fontSize: 14,
+                                                      color:
+                                                          HexColor('#C9C9C9'),
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                    ),
+                                                    enabled: false,
+                                                  ),
+                                                ),
+                                              ),
+                                              Positioned(
+                                                top: 15,
+                                                child: SvgPicture.asset(
+                                                  'assets/images/calendar.svg',
+                                                  color: MyAutoPilotStyles
+                                                      .appColor,
+                                                  width: 25,
+                                                  height: 25,
+                                                ),
+                                              )
+                                            ]),
+                                            Stack(children: [
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    35 /
+                                                    100,
+                                                child: TextField(
+                                                  textAlign: TextAlign.left,
+                                                  decoration: InputDecoration(
+                                                    labelStyle:
+                                                        GoogleFonts.notoSerif(
+                                                      fontSize: 14,
+                                                      color:
+                                                          HexColor('#C9C9C9'),
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                    ),
+                                                    enabled: false,
+                                                  ),
+                                                ),
+                                              ),
+                                              Positioned(
+                                                top: 15,
+                                                child: SvgPicture.asset(
+                                                  'assets/images/calendar.svg',
+                                                  color: MyAutoPilotStyles
+                                                      .appColor,
+                                                  width: 25,
+                                                  height: 25,
+                                                ),
+                                              )
+                                            ]),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                          top: 5,
+                                          left: 30,
+                                          right: 40,
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  35 /
+                                                  100,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                children: [
+                                                  Container(),
+                                                  Text(
+                                                    'From',
+                                                    style: GoogleFonts.notoSans(
+                                                      fontSize: 10,
+                                                      color:
+                                                          HexColor('#707070'),
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  35 /
+                                                  100,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                children: [
+                                                  Text(
+                                                    'To',
+                                                    style: GoogleFonts.notoSans(
+                                                      fontSize: 10,
+                                                      color:
+                                                          HexColor('#707070'),
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ), // Set Filter Button
+                                      Container(
+                                        padding: EdgeInsets.only(top: 20),
+                                        child: ConstrainedBox(
+                                          constraints: BoxConstraints.tightFor(
+                                              width: 150, height: 55),
+                                          child: ElevatedButton(
+                                            onPressed: () async {
+                                              /* if (!_isSmsOTPValid ||
+                                  _smsOTPController.text.isEmpty ||
+                                  !_isEmailOTPValid ||
+                                  _emailOTPController.text.isEmpty ||
+                                  !_isPasswordValid ||
+                                  _passwordController.text.isEmpty) {
+                                if (_smsOTPController.text.isEmpty)
+                                  _isSmsOTPValid = false;
+                                if (_emailOTPController.text.isEmpty)
+                                  _isEmailOTPValid = false;
+                                if (_passwordController.text.isEmpty)
+                                  _isPasswordValid = false;
+
+                                setState(() {});
+                                ShowMessage.showFlushBar(
+                                    context, 'Please rectify the errors.');
+                              } else {
+                                setState(() {
+                                  _isSmsOTPValid = true;
+                                  _isEmailOTPValid = true;
+                                  _isPasswordValid = true;
+                                });
+
+                                // Do Login related stuffs.
+                                showDialog(
+                                  context: context,
+                                  barrierDismissible: false,
+                                  builder: (BuildContext context) {
+                                    return LoadingDialog();
+                                  },
+                                );
+
+                                // Store user related information in the Globals file here
+                                // Need to delete the hardcoded values here
+
+                                Globals.userFirstName = 'Kuntal';
+                                Globals.userLastName = 'Dutta';
+                                Globals.designation = 'Managing Director';
+
+                                await Future.delayed(new Duration(seconds: 3),
+                                    () {
+                                  Navigator.pop(context); //pop dialog
+                                }).then((value) {
+                                  // After successfull login, navigate to the home screen
+                                  Navigator.pushReplacement(
+                                    context,
+                                    PageRouteBuilder(
+                                      transitionDuration:
+                                          Duration(milliseconds: 500),
+                                      pageBuilder: (BuildContext context,
+                                          Animation<double> animation,
+                                          Animation<double>
+                                              secondaryAnimation) {
+                                        return HomeScreen();
+                                      },
+                                      transitionsBuilder: (BuildContext context,
+                                          Animation<double> animation,
+                                          Animation<double> secondaryAnimation,
+                                          Widget child) {
+                                        return Align(
+                                          // Other animation types kept here for re-use.
+                                          /* child: FadeTransition(
+                                                      opacity: animation,
+                                                      child: child,
+                                                  ), */
+                                          /* child: ScaleTransition(
+                                                      scale: animation,
+                                                      child: child,
+                                                  ), */
+                                          /* child: SizeTransition(
+                                                      sizeFactor: animation,
+                                                      child: child,
+                                                      axisAlignment: 0.0,
+                                                  ), */
+                                          child: SlideTransition(
+                                            position: Tween(
+                                              begin: Offset(1.0, 0.0),
+                                              end: Offset(0.0, 0.0),
+                                            ).animate(animation),
+                                            child: child,
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  );
+                                });
+                              } */
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(30.0),
+                                              ),
+                                              primary:
+                                                  MyAutoPilotStyles.appColor,
+                                            ),
+                                            child: Text(
+                                              'SET FILTER',
+                                              style: GoogleFonts.notoSerif(
+                                                fontSize: 17,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )),
+                            ),
+                          );
+                        });
+                  },
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.only(
                       left: 10,
