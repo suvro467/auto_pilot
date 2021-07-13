@@ -259,124 +259,115 @@ class _SearchScreenState extends State<SearchScreen> {
                                                       ),
                                                       styleDatePicker:
                                                           MaterialRoundedDatePickerStyle(
-                                                              textStyleYearButton:
-                                                                  GoogleFonts
-                                                                      .notoSans(
-                                                                fontSize: 40,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .normal,
-                                                                color: Colors
-                                                                    .white,
-                                                              ),
-                                                              textStyleDayButton:
-                                                                  GoogleFonts
-                                                                      .notoSans(
-                                                                fontSize: 24,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .normal,
-                                                                color: Colors
-                                                                    .white,
-                                                              ),
-                                                              textStyleDayHeader:
-                                                                  GoogleFonts
-                                                                      .notoSans(
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .normal,
-                                                                color: Colors
-                                                                    .grey[800],
-                                                              ),
-                                                              paddingMonthHeader:
-                                                                  EdgeInsets.only(
-                                                                      top: 12),
-                                                              sizeArrow: 35,
-                                                              colorArrowNext:
-                                                                  MyAutoPilotStyles
-                                                                      .appColor,
-                                                              colorArrowPrevious:
-                                                                  MyAutoPilotStyles
-                                                                      .appColor,
-                                                              textStyleDayOnCalendar:
-                                                                  GoogleFonts
-                                                                      .notoSerif(
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .normal,
-                                                                color: HexColor(
-                                                                    '#707070'),
-                                                              ),
-                                                              textStyleDayOnCalendarSelected:
-                                                                  GoogleFonts
-                                                                      .notoSerif(
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .normal,
-                                                                color: Colors
-                                                                    .white,
-                                                              ),
-                                                              decorationDateSelected: BoxDecoration(
-                                                                  color: MyAutoPilotStyles
-                                                                      .appColor,
-                                                                  shape: BoxShape
-                                                                      .circle),
-                                                              textStyleCurrentDayOnCalendar:
-                                                                  GoogleFonts
-                                                                      .notoSerif(
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .normal,
-                                                                color: Colors
-                                                                    .greenAccent,
-                                                              ),
-                                                              textStyleDayOnCalendarDisabled:
-                                                                  GoogleFonts
-                                                                      .notoSerif(
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .normal,
-                                                                color: Colors
-                                                                    .white
-                                                                    .withOpacity(
-                                                                        0.1),
-                                                              ),
-                                                              backgroundActionBar:
-                                                                  MyAutoPilotStyles
-                                                                      .appColor,
-                                                              textStyleButtonPositive:
-                                                                  GoogleFonts.notoSans(
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .normal,
-                                                                color: Colors
-                                                                    .white,
-                                                              ),
-                                                              textStyleButtonNegative: GoogleFonts.notoSans(
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .normal,
-                                                                color: Colors
-                                                                    .white
-                                                                    .withOpacity(
-                                                                        0.5),
-                                                              ),
-                                                              paddingActionBar: EdgeInsets.all(0),
-                                                              textStyleMonthYearHeader: GoogleFonts.notoSans(
-                                                                fontSize: 16,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .normal,
-                                                                color: HexColor(
-                                                                    '#707070'),
-                                                              )),
+                                                        textStyleYearButton:
+                                                            GoogleFonts
+                                                                .notoSans(
+                                                          fontSize: 40,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          color: Colors.white,
+                                                        ),
+                                                        textStyleDayButton:
+                                                            GoogleFonts
+                                                                .notoSans(
+                                                          fontSize: 24,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          color: Colors.black,
+                                                        ),
+                                                        textStyleDayHeader:
+                                                            GoogleFonts
+                                                                .notoSans(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          color:
+                                                              Colors.grey[800],
+                                                        ),
+                                                        paddingMonthHeader:
+                                                            EdgeInsets.only(
+                                                                top: 12),
+                                                        sizeArrow: 35,
+                                                        colorArrowNext:
+                                                            MyAutoPilotStyles
+                                                                .appColor,
+                                                        colorArrowPrevious:
+                                                            MyAutoPilotStyles
+                                                                .appColor,
+                                                        textStyleDayOnCalendar:
+                                                            GoogleFonts
+                                                                .notoSerif(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          color: HexColor(
+                                                              '#707070'),
+                                                        ),
+                                                        textStyleDayOnCalendarSelected:
+                                                            GoogleFonts
+                                                                .notoSerif(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          color: Colors.white,
+                                                        ),
+                                                        decorationDateSelected:
+                                                            BoxDecoration(
+                                                                color:
+                                                                    MyAutoPilotStyles
+                                                                        .appColor,
+                                                                shape: BoxShape
+                                                                    .circle),
+                                                        textStyleCurrentDayOnCalendar:
+                                                            GoogleFonts
+                                                                .notoSerif(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          color: Colors
+                                                              .greenAccent,
+                                                        ),
+                                                        textStyleDayOnCalendarDisabled:
+                                                            GoogleFonts
+                                                                .notoSerif(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          color: Colors.white
+                                                              .withOpacity(0.1),
+                                                        ),
+                                                        backgroundActionBar:
+                                                            MyAutoPilotStyles
+                                                                .appColor,
+                                                        textStyleButtonPositive:
+                                                            GoogleFonts
+                                                                .notoSans(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          color: Colors.white,
+                                                        ),
+                                                        textStyleButtonNegative:
+                                                            GoogleFonts
+                                                                .notoSans(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          color: Colors.white
+                                                              .withOpacity(0.5),
+                                                        ),
+                                                        paddingActionBar:
+                                                            EdgeInsets.all(0),
+                                                        textStyleMonthYearHeader:
+                                                            GoogleFonts
+                                                                .notoSans(
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          color: HexColor(
+                                                              '#707070'),
+                                                        ),
+                                                      ),
                                                     );
                                                     print(newDateTime);
                                                     if (newDateTime != null) {
