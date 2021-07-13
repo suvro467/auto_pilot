@@ -221,6 +221,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                                   onTap: () async {
                                                     DateTime? newDateTime =
                                                         await showRoundedDatePicker(
+                                                      initialDatePickerMode:
+                                                          DatePickerMode.day,
                                                       initialDate:
                                                           startFromDate,
                                                       firstDate: DateTime(
@@ -303,7 +305,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                                           fontSize: 24,
                                                           fontWeight:
                                                               FontWeight.normal,
-                                                          color: Colors.black,
+                                                          color: Colors.white,
                                                         ),
                                                         textStyleDayHeader:
                                                             GoogleFonts
