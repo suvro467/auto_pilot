@@ -1,6 +1,8 @@
 import 'package:auto_pilot/shared/presentation/styles.dart';
+import 'package:auto_pilot/shared/widgets/custom_date_picker/custom_date_picker.dart';
+import 'package:auto_pilot/shared/widgets/custom_date_picker/material_rounded_date_picker_style.dart';
+import 'package:auto_pilot/shared/widgets/custom_date_picker/material_rounded_year_picker_style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -60,99 +62,105 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      //height: MediaQuery.of(context).size.height,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        //mainAxisSize: MainAxisSize.min,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 20.0,
-              right: 20.0,
-              top: 20,
-            ),
-            child: TextField(
-              controller: _searchController,
-              onChanged: (value) {},
-              decoration: InputDecoration(
-                labelStyle: GoogleFonts.notoSerif(
-                  fontSize: 14,
-                  color: HexColor('#C9C9C9'),
-                  fontWeight: FontWeight.normal,
-                  //decoration: TextDecoration.underline,
-                ),
-                prefixIcon: Transform.scale(
-                  scale: 0.7,
-                  child: SvgPicture.asset(
-                    'assets/images/search.svg',
-                    color: HexColor('#C9C9C9'),
-                    //semanticsLabel: 'Email Mobile',
-                    height: 10,
-                    width: 10,
-                  ),
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: HexColor('#C9C9C9')),
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: MyAutoPilotStyles.appColor),
-                ),
-                hintText: 'Search',
-                hintStyle: GoogleFonts.notoSans(
-                  fontSize: 14,
-                  color: HexColor('#707070'),
-                  fontWeight: FontWeight.normal,
-                  //decoration: TextDecoration.underline,
-                ),
+      body: Container(
+        //height: MediaQuery.of(context).size.height,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          //mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 20.0,
+                right: 20.0,
+                top: 20,
               ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 20.0,
-              right: 20.0,
-              top: 10,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  'Filter By',
-                  style: GoogleFonts.notoSans(
-                    fontSize: 12,
+              child: TextField(
+                controller: _searchController,
+                onChanged: (value) {},
+                decoration: InputDecoration(
+                  labelStyle: GoogleFonts.notoSerif(
+                    fontSize: 14,
+                    color: HexColor('#C9C9C9'),
+                    fontWeight: FontWeight.normal,
+                    //decoration: TextDecoration.underline,
+                  ),
+                  prefixIcon: Transform.scale(
+                    scale: 0.7,
+                    child: SvgPicture.asset(
+                      'assets/images/search.svg',
+                      color: HexColor('#C9C9C9'),
+                      //semanticsLabel: 'Email Mobile',
+                      height: 10,
+                      width: 10,
+                    ),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: HexColor('#C9C9C9'),
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: MyAutoPilotStyles.appColor),
+                  ),
+                  hintText: 'Search',
+                  hintStyle: GoogleFonts.notoSans(
+                    fontSize: 14,
                     color: HexColor('#707070'),
                     fontWeight: FontWeight.normal,
                     //decoration: TextDecoration.underline,
                   ),
-                )
-              ],
+                ),
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 20.0,
-              right: 20.0,
-              top: 20,
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 20.0,
+                right: 20.0,
+                top: 10,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    'Filter By',
+                    style: GoogleFonts.notoSans(
+                      fontSize: 12,
+                      color: HexColor('#707070'),
+                      fontWeight: FontWeight.normal,
+                      //decoration: TextDecoration.underline,
+                    ),
+                  )
+                ],
+              ),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ElevatedButton(
-                  onPressed: () async {
-                    await showModalBottomSheet(
-                        context: context,
-                        backgroundColor: Colors.transparent,
-                        builder: (builder) {
-                          return Align(
-                            alignment: Alignment.bottomCenter,
-                            child: ConstrainedBox(
-                              constraints: BoxConstraints.tight(Size(
-                                  MediaQuery.of(context).size.width * 90 / 100,
-                                  MediaQuery.of(context).size.height *
-                                      60 /
-                                      100)),
-                              child: Container(
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 20.0,
+                right: 20.0,
+                top: 20,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ElevatedButton(
+                    onPressed: () async {
+                      await showModalBottomSheet(
+                          context: context,
+                          backgroundColor: Colors.transparent,
+                          builder: (builder) {
+                            return Align(
+                              alignment: Alignment.bottomCenter,
+                              child: ConstrainedBox(
+                                constraints: BoxConstraints.tight(
+                                  Size(
+                                      MediaQuery.of(context).size.width *
+                                          90 /
+                                          100,
+                                      MediaQuery.of(context).size.height *
+                                          60 /
+                                          100),
+                                ),
+                                child: Container(
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.only(
@@ -169,13 +177,15 @@ class _SearchScreenState extends State<SearchScreen> {
                                         ),
                                         child: Row(
                                           children: [
-                                            Text('Add Date Filter',
-                                                style: GoogleFonts.notoSerif(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: MyAutoPilotStyles
-                                                      .appColor,
-                                                )),
+                                            Text(
+                                              'Add Date Filter',
+                                              style: GoogleFonts.notoSerif(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold,
+                                                color:
+                                                    MyAutoPilotStyles.appColor,
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -219,8 +229,20 @@ class _SearchScreenState extends State<SearchScreen> {
                                                     100,
                                                 child: GestureDetector(
                                                   onTap: () async {
+                                                    //final DateTime? picked =
+                                                    /* await showCustomDatePicker(
+                                                      confirmText: 'PROCEED',
+                                                      cancelText: 'CANCEL',
+                                                      context: context,
+                                                      initialDate:
+                                                          startFromDate,
+                                                      firstDate:
+                                                          DateTime(1900, 1),
+                                                      lastDate: DateTime(2101),
+                                                    ); */
+
                                                     DateTime? newDateTime =
-                                                        await showRoundedDatePicker(
+                                                        await showCustomDatePicker(
                                                       initialDatePickerMode:
                                                           DatePickerMode.day,
                                                       initialDate:
@@ -245,8 +267,9 @@ class _SearchScreenState extends State<SearchScreen> {
                                                             Colors.purple[50],
                                                         textTheme: TextTheme(
                                                           bodyText2: TextStyle(
-                                                              color: HexColor(
-                                                                  '#707070')),
+                                                            color: HexColor(
+                                                                '#707070'),
+                                                          ),
                                                           caption: TextStyle(
                                                               color:
                                                                   Colors.blue),
@@ -828,140 +851,142 @@ class _SearchScreenState extends State<SearchScreen> {
                                         ),
                                       ),
                                     ],
-                                  )),
-                            ),
-                          );
-                        });
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.only(
-                      left: 10,
+                                  ),
+                                ),
+                              ),
+                            );
+                          });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.only(
+                        left: 10,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      primary: isSelectedDates
+                          ? selectedBackgroundColour
+                          : unselectedBackgroundColour,
                     ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    primary: isSelectedDates
-                        ? selectedBackgroundColour
-                        : unselectedBackgroundColour,
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Dates',
-                        style: GoogleFonts.notoSerif(
-                          fontSize: 12,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Dates',
+                          style: GoogleFonts.notoSerif(
+                            fontSize: 12,
+                            color: isSelectedDates
+                                ? selectedTextColour
+                                : unselectedTextColour,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Icon(
+                          Icons.arrow_drop_down,
                           color: isSelectedDates
-                              ? selectedTextColour
-                              : unselectedTextColour,
-                          fontWeight: FontWeight.normal,
+                              ? selectedDropDownColour
+                              : unselectedDropDownColour,
+                          size: 36,
                         ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Icon(
-                        Icons.arrow_drop_down,
-                        color: isSelectedDates
-                            ? selectedDropDownColour
-                            : unselectedDropDownColour,
-                        size: 36,
-                      ),
-                    ],
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () async {},
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.only(
-                      left: 10,
+                      ],
                     ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    primary: isSelectedAssignment
-                        ? selectedBackgroundColour
-                        : unselectedBackgroundColour,
                   ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Assignment',
-                        style: GoogleFonts.notoSerif(
-                          fontSize: 12,
+                  ElevatedButton(
+                    onPressed: () async {},
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.only(
+                        left: 10,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      primary: isSelectedAssignment
+                          ? selectedBackgroundColour
+                          : unselectedBackgroundColour,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Assignment',
+                          style: GoogleFonts.notoSerif(
+                            fontSize: 12,
+                            color: isSelectedAssignment
+                                ? selectedTextColour
+                                : unselectedTextColour,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                        /* SizedBox(
+                    width: 10,
+                  ), */
+                        Icon(
+                          Icons.arrow_drop_down,
                           color: isSelectedAssignment
-                              ? selectedTextColour
-                              : unselectedTextColour,
-                          fontWeight: FontWeight.normal,
+                              ? selectedDropDownColour
+                              : unselectedDropDownColour,
+                          size: 36,
                         ),
+                      ],
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () async {},
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.only(
+                        left: 10,
                       ),
-                      /* SizedBox(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      primary: isSelectedTaskType
+                          ? selectedBackgroundColour
+                          : unselectedBackgroundColour,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Task Type',
+                          style: GoogleFonts.notoSerif(
+                            fontSize: 12,
+                            color: isSelectedTaskType
+                                ? selectedTextColour
+                                : unselectedTextColour,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                        /* SizedBox(
                     width: 10,
                   ), */
-                      Icon(
-                        Icons.arrow_drop_down,
-                        color: isSelectedAssignment
-                            ? selectedDropDownColour
-                            : unselectedDropDownColour,
-                        size: 36,
-                      ),
-                    ],
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () async {},
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.only(
-                      left: 10,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    primary: isSelectedTaskType
-                        ? selectedBackgroundColour
-                        : unselectedBackgroundColour,
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Task Type',
-                        style: GoogleFonts.notoSerif(
-                          fontSize: 12,
+                        Icon(
+                          Icons.arrow_drop_down,
                           color: isSelectedTaskType
-                              ? selectedTextColour
-                              : unselectedTextColour,
-                          fontWeight: FontWeight.normal,
+                              ? selectedDropDownColour
+                              : unselectedDropDownColour,
+                          size: 36,
                         ),
-                      ),
-                      /* SizedBox(
-                    width: 10,
-                  ), */
-                      Icon(
-                        Icons.arrow_drop_down,
-                        color: isSelectedTaskType
-                            ? selectedDropDownColour
-                            : unselectedDropDownColour,
-                        size: 36,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Expanded(
-            child: ListView(
-              children: getSearchResults(),
-            ),
-          )
-        ],
+            Expanded(
+              child: ListView(
+                children: getSearchResults(),
+              ),
+            )
+          ],
+        ),
       ),
-    ));
+    );
   }
 
   List<Widget> getSearchResults() {
