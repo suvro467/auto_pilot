@@ -317,11 +317,12 @@ class _SearchScreenState extends State<SearchScreen> {
                                                         textStyleYearButton:
                                                             GoogleFonts
                                                                 .notoSans(
-                                                          fontSize: 40,
+                                                          fontSize: 33,
                                                           fontWeight:
                                                               FontWeight.normal,
                                                           color: Colors.white,
                                                         ),
+                                                        // This property is not working
                                                         textStyleDayButton:
                                                             GoogleFonts
                                                                 .notoSans(

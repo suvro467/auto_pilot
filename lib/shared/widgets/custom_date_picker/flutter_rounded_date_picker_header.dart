@@ -1,6 +1,7 @@
 import 'package:auto_pilot/shared/widgets/custom_date_picker/era_mode.dart';
 import 'package:auto_pilot/shared/widgets/custom_date_picker/material_rounded_date_picker_style.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class FlutterRoundedDatePickerHeader extends StatelessWidget {
   const FlutterRoundedDatePickerHeader(
@@ -172,7 +173,31 @@ class FlutterRoundedDatePickerHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           yearButton,
-          dayButton,
+          // Suvradip Roy.
+          //dayButton,
+          IgnorePointer(
+            ignoring: mode == DatePickerMode.day,
+            ignoringSemantics: false,
+            child: _DateHeaderButton(
+              color: Colors.transparent,
+              onTap: Feedback.wrapForTap(
+                () => _handleChangeMode(DatePickerMode.day),
+                context,
+              ),
+              child: Semantics(
+                selected: mode == DatePickerMode.day,
+                child: Text(
+                  localizations.formatMediumDate(selectedDate),
+                  textScaleFactor: 1,
+                  style: GoogleFonts.notoSans(
+                    fontSize: 16,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ),
           const SizedBox(height: 4.0),
           Visibility(
             visible: description.isNotEmpty,
