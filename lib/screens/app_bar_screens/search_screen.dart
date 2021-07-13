@@ -229,18 +229,6 @@ class _SearchScreenState extends State<SearchScreen> {
                                                     100,
                                                 child: GestureDetector(
                                                   onTap: () async {
-                                                    //final DateTime? picked =
-                                                    /* await showCustomDatePicker(
-                                                      confirmText: 'PROCEED',
-                                                      cancelText: 'CANCEL',
-                                                      context: context,
-                                                      initialDate:
-                                                          startFromDate,
-                                                      firstDate:
-                                                          DateTime(1900, 1),
-                                                      lastDate: DateTime(2101),
-                                                    ); */
-
                                                     DateTime? newDateTime =
                                                         await showCustomDatePicker(
                                                       initialDatePickerMode:
@@ -255,34 +243,6 @@ class _SearchScreenState extends State<SearchScreen> {
                                                               100),
                                                       context: context,
                                                       height: 300,
-                                                      //theme: ThemeData.dark(),
-                                                      /* theme: ThemeData(
-                                                        primaryColor:
-                                                            MyAutoPilotStyles
-                                                                .appColor,
-                                                        accentColor:
-                                                            MyAutoPilotStyles
-                                                                .appColor,
-                                                        dialogBackgroundColor:
-                                                            Colors.purple[50],
-                                                        textTheme: TextTheme(
-                                                          bodyText2: TextStyle(
-                                                            color: HexColor(
-                                                                '#707070'),
-                                                          ),
-                                                          caption: TextStyle(
-                                                              color:
-                                                                  Colors.blue),
-                                                        ),
-                                                        disabledColor:
-                                                            Colors.orange,
-                                                        accentTextTheme:
-                                                            TextTheme(
-                                                          bodyText1: TextStyle(
-                                                              color:
-                                                                  Colors.white),
-                                                        ),
-                                                      ), */
                                                       theme: ThemeData(
                                                         primaryColor:
                                                             MyAutoPilotStyles
