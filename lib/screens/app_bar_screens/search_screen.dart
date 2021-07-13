@@ -223,6 +223,12 @@ class _SearchScreenState extends State<SearchScreen> {
                                                         await showRoundedDatePicker(
                                                       initialDate:
                                                           startFromDate,
+                                                      firstDate: DateTime(
+                                                          startFromDate.year -
+                                                              100),
+                                                      lastDate: DateTime(
+                                                          startFromDate.year +
+                                                              100),
                                                       context: context,
                                                       height: 300,
                                                       //theme: ThemeData.dark(),
@@ -256,6 +262,30 @@ class _SearchScreenState extends State<SearchScreen> {
                                                         primaryColor:
                                                             MyAutoPilotStyles
                                                                 .appColor,
+                                                      ),
+                                                      styleYearPicker:
+                                                          MaterialRoundedYearPickerStyle(
+                                                        textStyleYear:
+                                                            GoogleFonts
+                                                                .notoSerif(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          color: HexColor(
+                                                              '#707070'),
+                                                        ),
+                                                        textStyleYearSelected:
+                                                            GoogleFonts
+                                                                .notoSerif(
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: HexColor(
+                                                              '#707070'),
+                                                        ),
+                                                        heightYearRow: 50,
+                                                        //backgroundPicker: Colors
+                                                        //.deepPurple[400],
                                                       ),
                                                       styleDatePicker:
                                                           MaterialRoundedDatePickerStyle(
@@ -385,7 +415,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                                   child: Padding(
                                                     padding:
                                                         const EdgeInsets.only(
-                                                            left: 0),
+                                                            top: 0),
                                                     child: TextField(
                                                       style:
                                                           GoogleFonts.notoSerif(
