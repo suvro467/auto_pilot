@@ -2,6 +2,7 @@ import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:auto_pilot/shared/widgets/custom_date_picker/custom_date_picker.dart';
 import 'package:auto_pilot/shared/widgets/custom_date_picker/material_rounded_date_picker_style.dart';
 import 'package:auto_pilot/shared/widgets/custom_date_picker/material_rounded_year_picker_style.dart';
+import 'package:auto_pilot/shared/widgets/show_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -46,7 +47,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   bool isSelectedDates = false;
   bool isSelectedAssignment = false;
-  bool isSelectedTaskType = true;
+  bool isSelectedTaskType = false;
 
   List<Map<String, dynamic>> searchResults = [];
   List<Widget> searchCards = [];
@@ -1246,6 +1247,26 @@ class _SearchScreenState extends State<SearchScreen> {
                                               width: 150, height: 55),
                                           child: ElevatedButton(
                                             onPressed: () async {
+                                              if (_startFromDateController
+                                                      .text.isEmpty ||
+                                                  _startToDateController
+                                                      .text.isEmpty ||
+                                                  _targetFromDateController
+                                                      .text.isEmpty ||
+                                                  _targetToDateController
+                                                      .text.isEmpty) {
+                                                setState(() {
+                                                  isSelectedDates = false;
+                                                });
+                                                ShowMessage.showFlushBar(
+                                                    context,
+                                                    'Please select all the dates.');
+                                              } else {
+                                                setState(() {
+                                                  isSelectedDates = true;
+                                                });
+                                                Navigator.pop(context);
+                                              }
                                               /* if (!_isSmsOTPValid ||
                                   _smsOTPController.text.isEmpty ||
                                   !_isEmailOTPValid ||
