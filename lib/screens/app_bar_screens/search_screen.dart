@@ -60,6 +60,26 @@ class _SearchScreenState extends State<SearchScreen> {
   DateTime targetFromDate = DateTime.now();
   DateTime targetToDate = DateTime.now().add(Duration(days: 10));
 
+  List<String> tasksAssignedToMeValues = [
+    '1dshdsddsasasasl;k asdskadksaksd,',
+    '2,',
+    '3,',
+    '4,',
+    '5,',
+    '6,',
+    '7,',
+    '8,',
+    '9,',
+    '10',
+    '11,',
+  ];
+
+  var columnGetTasksAssignedToMe;
+
+  refresh() {
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
@@ -77,6 +97,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    columnGetTasksAssignedToMe = Column(children: getTaksAssignedToMe());
     return Scaffold(
       body: Container(
         //height: MediaQuery.of(context).size.height,
@@ -1495,12 +1516,12 @@ class _SearchScreenState extends State<SearchScreen> {
 
                                             checkColor: Colors.white,
                                             /* checkColor:
-                                                HexColor('#707070'),
-                                            activeColor: Colors.white,
-                                            selectedTileColor:
-                                                HexColor('#707070'),
-                                            tileColor:
-                                                HexColor('#707070'), */
+                                                                              HexColor('#707070'),
+                                                                          activeColor: Colors.white,
+                                                                          selectedTileColor:
+                                                                              HexColor('#707070'),
+                                                                          tileColor:
+                                                                              HexColor('#707070'), */
                                             value: isSelectedTasksAssignedTo,
                                             onChanged: (newValue) {
                                               setState(() {
@@ -1518,7 +1539,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                             right: 30,
                                           ),
                                           elevation: 2,
-                                          shadowColor: Colors.blueAccent,
+                                          shadowColor: Colors.black,
                                           //color: Colors.amber[100],
                                           shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.only(
@@ -1536,17 +1557,15 @@ class _SearchScreenState extends State<SearchScreen> {
 
                                           child: Container(
                                             padding: EdgeInsets.only(
-                                              left: 20,
-                                              right: 20,
-                                              top: 18,
-                                              bottom: 18,
+                                              left: 10,
+                                              right: 10,
+                                              top: 10,
+                                              bottom: 10,
                                             ),
                                             height: 150,
                                             color: Colors.white,
                                             child: SingleChildScrollView(
-                                              child: Column(
-                                                  children:
-                                                      getTaksAssignedToMe()),
+                                              child: columnGetTasksAssignedToMe,
                                             ),
                                           ),
                                         ),
@@ -1776,28 +1795,136 @@ class _SearchScreenState extends State<SearchScreen> {
 
   List<Widget> getTaksAssignedToMe() {
     List<Row> returnedWidget = [];
-    List<String> values = [
-      '1,',
-      '2,',
-      '3,',
-      '4,',
-      '5,',
-      '6,',
-      '7,',
-      '8,',
-      '9,',
-      '10'
-    ];
-    for (int i = 0; i < values.length; i++) {
+
+    for (int i = 0; i < tasksAssignedToMeValues.length; i++) {
       int h = i % 2;
       if (h == 0) {
         returnedWidget.add(
           Row(
-            children: [Text(values[i])],
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Stack(children: [
+                Card(
+                  elevation: 2,
+                  shadowColor: Colors.black45,
+                  //color: Colors.amber[100],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.elliptical(15, 15),
+                      bottomRight: Radius.elliptical(15, 15),
+                      topLeft: Radius.elliptical(15, 15),
+                      bottomLeft: Radius.elliptical(15, 15),
+                    ),
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  child: Container(
+                    color: HexColor('#707070'),
+                    padding: EdgeInsets.all(10),
+                    width: 130,
+                    child: Text(
+                      tasksAssignedToMeValues[i],
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.notoSans(
+                        fontSize: 12,
+                        color: Colors.white,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  right: 0,
+                  child: Container(
+                    width: 25,
+                    height: 25,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: Colors.grey,
+                        width: 1,
+                      ),
+                      color: Colors.white,
+                    ),
+                    child: IconButton(
+                      padding: EdgeInsets.all(0),
+                      splashRadius: 25,
+                      color: Colors.grey,
+                      onPressed: () {
+                        tasksAssignedToMeValues.removeAt(i);
+                        setState(() {});
+                      },
+                      iconSize: 16,
+                      icon: Icon(
+                        Icons.close,
+                      ),
+                    ),
+                  ),
+                )
+              ])
+            ],
           ),
         );
       } else {
-        returnedWidget.last.children.add(Text(values[i]));
+        returnedWidget.last.children.add(Stack(children: [
+          Card(
+            elevation: 2,
+            shadowColor: Colors.black45,
+            //color: Colors.amber[100],
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topRight: Radius.elliptical(15, 15),
+                bottomRight: Radius.elliptical(15, 15),
+                topLeft: Radius.elliptical(15, 15),
+                bottomLeft: Radius.elliptical(15, 15),
+              ),
+            ),
+            clipBehavior: Clip.antiAlias,
+            child: Container(
+              color: HexColor('#707070'),
+              padding: EdgeInsets.all(10),
+              width: 130,
+              child: Text(
+                tasksAssignedToMeValues[i],
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: GoogleFonts.notoSans(
+                  fontSize: 12,
+                  color: Colors.white,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            right: 0,
+            child: Container(
+              width: 25,
+              height: 25,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: Colors.grey,
+                  width: 1,
+                ),
+                color: Colors.white,
+              ),
+              child: IconButton(
+                padding: EdgeInsets.all(0),
+                splashRadius: 25,
+                color: Colors.grey,
+                onPressed: () {
+                  tasksAssignedToMeValues.removeAt(i);
+                  setState(() {});
+                },
+                iconSize: 16,
+                icon: Icon(
+                  Icons.close,
+                ),
+              ),
+            ),
+          )
+        ]));
       }
     }
     return returnedWidget;
