@@ -1541,17 +1541,12 @@ class _SearchScreenState extends State<SearchScreen> {
                                               top: 18,
                                               bottom: 18,
                                             ),
-                                            height: 80,
+                                            height: 150,
                                             color: Colors.white,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Row(
-                                                  children: [],
-                                                )
-                                              ],
+                                            child: SingleChildScrollView(
+                                              child: Column(
+                                                  children:
+                                                      getTaksAssignedToMe()),
                                             ),
                                           ),
                                         ),
@@ -1617,8 +1612,8 @@ class _SearchScreenState extends State<SearchScreen> {
                           ),
                         ),
                         /* SizedBox(
-                                                                      width: 10,
-                                                                    ), */
+                                                                                                                      width: 10,
+                                                                                                                    ), */
                         Icon(
                           Icons.arrow_drop_down,
                           color: isSelectedAssignment
@@ -1657,8 +1652,8 @@ class _SearchScreenState extends State<SearchScreen> {
                           ),
                         ),
                         /* SizedBox(
-                                                                      width: 10,
-                                                                    ), */
+                                                                                                                      width: 10,
+                                                                                                                    ), */
                         Icon(
                           Icons.arrow_drop_down,
                           color: isSelectedTaskType
@@ -1777,6 +1772,35 @@ class _SearchScreenState extends State<SearchScreen> {
       return Colors.blue;
     }
     return Colors.red;
+  }
+
+  List<Widget> getTaksAssignedToMe() {
+    List<Row> returnedWidget = [];
+    List<String> values = [
+      '1,',
+      '2,',
+      '3,',
+      '4,',
+      '5,',
+      '6,',
+      '7,',
+      '8,',
+      '9,',
+      '10'
+    ];
+    for (int i = 0; i < values.length; i++) {
+      int h = i % 2;
+      if (h == 0) {
+        returnedWidget.add(
+          Row(
+            children: [Text(values[i])],
+          ),
+        );
+      } else {
+        returnedWidget.last.children.add(Text(values[i]));
+      }
+    }
+    return returnedWidget;
   }
 }
 
