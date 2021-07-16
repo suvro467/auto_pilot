@@ -74,7 +74,7 @@ class _SearchScreenState extends State<SearchScreen> {
     '11,',
   ];
 
-  var columnGetTasksAssignedToMe;
+  //var columnGetTasksAssignedToMe;
 
   refresh() {
     setState(() {});
@@ -95,9 +95,12 @@ class _SearchScreenState extends State<SearchScreen> {
     super.dispose();
   }
 
+  columnGetTasksAssignedToMe(StateSetter setModalState) {
+    return Column(children: getTaksAssignedToMe(setModalState));
+  }
+
   @override
   Widget build(BuildContext context) {
-    columnGetTasksAssignedToMe = Column(children: getTaksAssignedToMe());
     return Scaffold(
       body: Container(
         //height: MediaQuery.of(context).size.height,
@@ -1451,7 +1454,8 @@ class _SearchScreenState extends State<SearchScreen> {
                           backgroundColor: Colors.transparent,
                           builder: (builder) {
                             return StatefulBuilder(builder:
-                                (BuildContext context, StateSetter setState) {
+                                (BuildContext context,
+                                    StateSetter setModalState) {
                               return Align(
                                 alignment: Alignment.bottomCenter,
                                 child: ConstrainedBox(
@@ -1565,7 +1569,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                             height: 150,
                                             color: Colors.white,
                                             child: SingleChildScrollView(
-                                              child: columnGetTasksAssignedToMe,
+                                              child: columnGetTasksAssignedToMe(
+                                                  setModalState),
                                             ),
                                           ),
                                         ),
@@ -1793,7 +1798,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return Colors.red;
   }
 
-  List<Widget> getTaksAssignedToMe() {
+  List<Widget> getTaksAssignedToMe(StateSetter setModalState) {
     List<Row> returnedWidget = [];
 
     for (int i = 0; i < tasksAssignedToMeValues.length; i++) {
@@ -1852,7 +1857,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       color: Colors.grey,
                       onPressed: () {
                         tasksAssignedToMeValues.removeAt(i);
-                        setState(() {});
+                        setModalState(() {});
                       },
                       iconSize: 16,
                       icon: Icon(
@@ -1915,7 +1920,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 color: Colors.grey,
                 onPressed: () {
                   tasksAssignedToMeValues.removeAt(i);
-                  setState(() {});
+                  setModalState(() {});
                 },
                 iconSize: 16,
                 icon: Icon(
