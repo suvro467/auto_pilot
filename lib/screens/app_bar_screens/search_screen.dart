@@ -1528,7 +1528,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                                                               HexColor('#707070'), */
                                             value: isSelectedTasksAssignedTo,
                                             onChanged: (newValue) {
-                                              setState(() {
+                                              setModalState(() {
                                                 isSelectedTasksAssignedTo =
                                                     !isSelectedTasksAssignedTo;
                                               });
