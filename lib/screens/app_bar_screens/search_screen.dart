@@ -50,7 +50,7 @@ class _SearchScreenState extends State<SearchScreen> {
   bool isSelectedTaskType = false;
 
   bool isSelectedTasksAssignedTo = false;
-  bool? isSelectedTasksAssignedBy = false;
+  bool isSelectedTasksAssignedBy = false;
 
   List<Map<String, dynamic>> searchResults = [];
   List<Widget> searchCards = [];
@@ -72,6 +72,20 @@ class _SearchScreenState extends State<SearchScreen> {
     '9,',
     '10',
     '11,',
+  ];
+
+  List<String> tasksAssignedByMeValues = [
+    'ABCDEFGH,',
+    'dsaasdasasj,',
+    'ewowieowoei,',
+    'euwiwuewjj,',
+    'dskdsjsdsds5,',
+    '4jrrsdsd,',
+    'rrrrr rr r r,',
+    'yyyyyyyy,',
+    'ewewew,',
+    '10eww',
+    'dasjdkjas,',
   ];
 
   //var columnGetTasksAssignedToMe;
@@ -96,7 +110,11 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   columnGetTasksAssignedToMe(StateSetter setModalState) {
-    return Column(children: getTaksAssignedToMe(setModalState));
+    return Column(children: getTasksAssignedToMe(setModalState));
+  }
+
+  columnGetTasksAssignedByMe(StateSetter setModalState) {
+    return Column(children: getTasksAssignedByMe(setModalState));
   }
 
   @override
@@ -1465,7 +1483,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                             90 /
                                             100,
                                         MediaQuery.of(context).size.height *
-                                            60 /
+                                            70 /
                                             100),
                                   ),
                                   child: Container(
@@ -1500,9 +1518,9 @@ class _SearchScreenState extends State<SearchScreen> {
                                         // CheckBox
                                         Container(
                                           margin: EdgeInsets.only(
-                                            top: 40,
+                                            top: 20,
                                             left: 0,
-                                            bottom: 30,
+                                            bottom: 0,
                                           ),
                                           width:
                                               MediaQuery.of(context).size.width,
@@ -1517,15 +1535,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                                 color: HexColor('#707070'),
                                               ),
                                             ),
-
+                                            dense: true,
                                             checkColor: Colors.white,
-                                            /* checkColor:
-                                                                              HexColor('#707070'),
-                                                                          activeColor: Colors.white,
-                                                                          selectedTileColor:
-                                                                              HexColor('#707070'),
-                                                                          tileColor:
-                                                                              HexColor('#707070'), */
                                             value: isSelectedTasksAssignedTo,
                                             onChanged: (newValue) {
                                               setModalState(() {
@@ -1544,7 +1555,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                           ),
                                           elevation: 2,
                                           shadowColor: Colors.black,
-                                          //color: Colors.amber[100],
+                                          color: Colors.amber[100],
                                           shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.only(
                                               topRight:
@@ -1558,7 +1569,6 @@ class _SearchScreenState extends State<SearchScreen> {
                                             ),
                                           ),
                                           clipBehavior: Clip.antiAlias,
-
                                           child: Container(
                                             padding: EdgeInsets.only(
                                               left: 10,
@@ -1570,6 +1580,75 @@ class _SearchScreenState extends State<SearchScreen> {
                                             color: Colors.white,
                                             child: SingleChildScrollView(
                                               child: columnGetTasksAssignedToMe(
+                                                  setModalState),
+                                            ),
+                                          ),
+                                        ),
+                                        // CheckBox
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                            top: 20,
+                                            left: 0,
+                                            bottom: 0,
+                                          ),
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          //height: 100,
+                                          child: CheckboxListTile(
+                                            activeColor: HexColor('#707070'),
+                                            title: Text(
+                                              'Tasks assigned by me',
+                                              style: GoogleFonts.notoSans(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.normal,
+                                                color: HexColor('#707070'),
+                                              ),
+                                            ),
+                                            dense: true,
+                                            checkColor: Colors.white,
+                                            value: isSelectedTasksAssignedBy,
+                                            onChanged: (newValue) {
+                                              setModalState(() {
+                                                isSelectedTasksAssignedBy =
+                                                    !isSelectedTasksAssignedBy;
+                                              });
+                                            },
+                                            controlAffinity: ListTileControlAffinity
+                                                .leading, //  <-- leading Checkbox
+                                          ),
+                                        ),
+                                        Card(
+                                          margin: EdgeInsets.only(
+                                            left: 30,
+                                            right: 30,
+                                          ),
+                                          elevation: 2,
+                                          shadowColor: Colors.black,
+                                          color: Colors.amber[100],
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.only(
+                                              topRight:
+                                                  Radius.elliptical(15, 15),
+                                              bottomRight:
+                                                  Radius.elliptical(15, 15),
+                                              topLeft:
+                                                  Radius.elliptical(15, 15),
+                                              bottomLeft:
+                                                  Radius.elliptical(15, 15),
+                                            ),
+                                          ),
+                                          clipBehavior: Clip.antiAlias,
+                                          child: Container(
+                                            padding: EdgeInsets.only(
+                                              left: 10,
+                                              right: 10,
+                                              top: 10,
+                                              bottom: 10,
+                                            ),
+                                            height: 150,
+                                            color: Colors.white,
+                                            child: SingleChildScrollView(
+                                              child: columnGetTasksAssignedByMe(
                                                   setModalState),
                                             ),
                                           ),
@@ -1636,8 +1715,8 @@ class _SearchScreenState extends State<SearchScreen> {
                           ),
                         ),
                         /* SizedBox(
-                                                                                                                      width: 10,
-                                                                                                                    ), */
+                                                                                                                                                                    width: 10,
+                                                                                                                                                                  ), */
                         Icon(
                           Icons.arrow_drop_down,
                           color: isSelectedAssignment
@@ -1676,8 +1755,8 @@ class _SearchScreenState extends State<SearchScreen> {
                           ),
                         ),
                         /* SizedBox(
-                                                                                                                      width: 10,
-                                                                                                                    ), */
+                                                                                                                                                                    width: 10,
+                                                                                                                                                                  ), */
                         Icon(
                           Icons.arrow_drop_down,
                           color: isSelectedTaskType
@@ -1798,7 +1877,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return Colors.red;
   }
 
-  List<Widget> getTaksAssignedToMe(StateSetter setModalState) {
+  List<Widget> getTasksAssignedToMe(StateSetter setModalState) {
     List<Row> returnedWidget = [];
 
     for (int i = 0; i < tasksAssignedToMeValues.length; i++) {
@@ -1920,6 +1999,143 @@ class _SearchScreenState extends State<SearchScreen> {
                 color: Colors.grey,
                 onPressed: () {
                   tasksAssignedToMeValues.removeAt(i);
+                  setModalState(() {});
+                },
+                iconSize: 16,
+                icon: Icon(
+                  Icons.close,
+                ),
+              ),
+            ),
+          )
+        ]));
+      }
+    }
+    return returnedWidget;
+  }
+
+  List<Widget> getTasksAssignedByMe(StateSetter setModalState) {
+    List<Row> returnedWidget = [];
+
+    for (int i = 0; i < tasksAssignedByMeValues.length; i++) {
+      int h = i % 2;
+      if (h == 0) {
+        returnedWidget.add(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Stack(children: [
+                Card(
+                  elevation: 2,
+                  shadowColor: Colors.black45,
+                  //color: Colors.amber[100],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.elliptical(15, 15),
+                      bottomRight: Radius.elliptical(15, 15),
+                      topLeft: Radius.elliptical(15, 15),
+                      bottomLeft: Radius.elliptical(15, 15),
+                    ),
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  child: Container(
+                    color: HexColor('#707070'),
+                    padding: EdgeInsets.all(10),
+                    width: 130,
+                    child: Text(
+                      tasksAssignedByMeValues[i],
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.notoSans(
+                        fontSize: 12,
+                        color: Colors.white,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  right: 0,
+                  child: Container(
+                    width: 25,
+                    height: 25,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: Colors.grey,
+                        width: 1,
+                      ),
+                      color: Colors.white,
+                    ),
+                    child: IconButton(
+                      padding: EdgeInsets.all(0),
+                      splashRadius: 25,
+                      color: Colors.grey,
+                      onPressed: () {
+                        tasksAssignedByMeValues.removeAt(i);
+                        setModalState(() {});
+                      },
+                      iconSize: 16,
+                      icon: Icon(
+                        Icons.close,
+                      ),
+                    ),
+                  ),
+                )
+              ])
+            ],
+          ),
+        );
+      } else {
+        returnedWidget.last.children.add(Stack(children: [
+          Card(
+            elevation: 2,
+            shadowColor: Colors.black45,
+            //color: Colors.amber[100],
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topRight: Radius.elliptical(15, 15),
+                bottomRight: Radius.elliptical(15, 15),
+                topLeft: Radius.elliptical(15, 15),
+                bottomLeft: Radius.elliptical(15, 15),
+              ),
+            ),
+            clipBehavior: Clip.antiAlias,
+            child: Container(
+              color: HexColor('#707070'),
+              padding: EdgeInsets.all(10),
+              width: 130,
+              child: Text(
+                tasksAssignedByMeValues[i],
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: GoogleFonts.notoSans(
+                  fontSize: 12,
+                  color: Colors.white,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            right: 0,
+            child: Container(
+              width: 25,
+              height: 25,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: Colors.grey,
+                  width: 1,
+                ),
+                color: Colors.white,
+              ),
+              child: IconButton(
+                padding: EdgeInsets.all(0),
+                splashRadius: 25,
+                color: Colors.grey,
+                onPressed: () {
+                  tasksAssignedByMeValues.removeAt(i);
                   setModalState(() {});
                 },
                 iconSize: 16,
