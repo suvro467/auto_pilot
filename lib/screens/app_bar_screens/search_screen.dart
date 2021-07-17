@@ -214,9 +214,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                       MediaQuery.of(context).size.width *
                                           90 /
                                           100,
-                                      MediaQuery.of(context).size.height *
-                                          60 /
-                                          100),
+                                      430),
                                 ),
                                 child: Container(
                                   decoration: BoxDecoration(
