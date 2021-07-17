@@ -2,6 +2,7 @@ import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:auto_pilot/shared/widgets/custom_date_picker/custom_date_picker.dart';
 import 'package:auto_pilot/shared/widgets/custom_date_picker/material_rounded_date_picker_style.dart';
 import 'package:auto_pilot/shared/widgets/custom_date_picker/material_rounded_year_picker_style.dart';
+import 'package:auto_pilot/shared/widgets/labeled_checkbox.dart';
 import 'package:auto_pilot/shared/widgets/show_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -51,6 +52,14 @@ class _SearchScreenState extends State<SearchScreen> {
 
   bool isSelectedTasksAssignedTo = false;
   bool isSelectedTasksAssignedBy = false;
+
+  bool isSelectedHigh = false;
+  bool isSelectedNormal = false;
+  bool isSelectedLow = false;
+
+  bool isSelectedDTL = false;
+  bool isSelectedRTL = false;
+  bool isSelectedSTL = false;
 
   List<Map<String, dynamic>> searchResults = [];
   List<Widget> searchCards = [];
@@ -1725,7 +1734,288 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () async {},
+                    onPressed: () async {
+                      await showModalBottomSheet(
+                          context: context,
+                          backgroundColor: Colors.transparent,
+                          isScrollControlled: true,
+                          builder: (builder) {
+                            return StatefulBuilder(builder:
+                                (BuildContext context,
+                                    StateSetter setModalState) {
+                              return Align(
+                                alignment: Alignment.bottomCenter,
+                                child: ConstrainedBox(
+                                  constraints: BoxConstraints.tight(
+                                    Size(
+                                        MediaQuery.of(context).size.width *
+                                            90 /
+                                            100,
+                                        370),
+                                  ),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: const Radius.circular(20.0),
+                                        topRight: const Radius.circular(20.0),
+                                      ),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                            top: 30,
+                                            left: 30,
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                'Add Task Type Filter',
+                                                style: GoogleFonts.notoSerif(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: MyAutoPilotStyles
+                                                      .appColor,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          padding: EdgeInsets.only(
+                                            left: 30,
+                                            top: 30,
+                                          ),
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          child: Text(
+                                            'Select Task Type',
+                                            textAlign: TextAlign.left,
+                                            style: GoogleFonts.notoSans(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.normal,
+                                              color: HexColor('#707070'),
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          margin: EdgeInsets.only(
+                                            top: 10,
+                                            left: 15,
+                                            bottom: 0,
+                                          ),
+                                          //padding: EdgeInsets.only(left: 30),
+                                          child: Row(
+                                            /* mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween, */
+                                            children: [
+                                              Expanded(
+                                                child: LabeledCheckbox(
+                                                  checkColor: Colors.white,
+                                                  activeColor:
+                                                      HexColor('#707070'),
+                                                  label: 'DTL',
+                                                  onChanged: (newValue) {
+                                                    setModalState(() {
+                                                      isSelectedDTL =
+                                                          !isSelectedDTL;
+                                                    });
+                                                  },
+                                                  padding: EdgeInsets.zero,
+                                                  value: isSelectedDTL,
+                                                  style: GoogleFonts.notoSans(
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    color: HexColor('#707070'),
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: LabeledCheckbox(
+                                                  checkColor: Colors.white,
+                                                  activeColor:
+                                                      HexColor('#707070'),
+                                                  label: 'RTL',
+                                                  onChanged: (newValue) {
+                                                    setModalState(() {
+                                                      isSelectedRTL =
+                                                          !isSelectedRTL;
+                                                    });
+                                                  },
+                                                  padding: EdgeInsets.zero,
+                                                  value: isSelectedRTL,
+                                                  style: GoogleFonts.notoSans(
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    color: HexColor('#707070'),
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: LabeledCheckbox(
+                                                  checkColor: Colors.white,
+                                                  activeColor:
+                                                      HexColor('#707070'),
+                                                  label: 'STL',
+                                                  onChanged: (newValue) {
+                                                    setModalState(() {
+                                                      isSelectedSTL =
+                                                          !isSelectedSTL;
+                                                    });
+                                                  },
+                                                  padding: EdgeInsets.zero,
+                                                  value: isSelectedSTL,
+                                                  style: GoogleFonts.notoSans(
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    color: HexColor('#707070'),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          padding: EdgeInsets.only(
+                                            left: 30,
+                                            top: 30,
+                                          ),
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          child: Text(
+                                            'Select Priority',
+                                            textAlign: TextAlign.left,
+                                            style: GoogleFonts.notoSans(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.normal,
+                                              color: HexColor('#707070'),
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          margin: EdgeInsets.only(
+                                            top: 10,
+                                            left: 15,
+                                            bottom: 0,
+                                          ),
+                                          //padding: EdgeInsets.only(left: 30),
+                                          child: Row(
+                                            /* mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween, */
+                                            children: [
+                                              Expanded(
+                                                child: LabeledCheckbox(
+                                                  checkColor: Colors.white,
+                                                  activeColor:
+                                                      HexColor('#707070'),
+                                                  label: 'High',
+                                                  onChanged: (newValue) {
+                                                    setModalState(() {
+                                                      isSelectedHigh =
+                                                          !isSelectedHigh;
+                                                    });
+                                                  },
+                                                  padding: EdgeInsets.zero,
+                                                  value: isSelectedHigh,
+                                                  style: GoogleFonts.notoSans(
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    color: HexColor('#707070'),
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: LabeledCheckbox(
+                                                  checkColor: Colors.white,
+                                                  activeColor:
+                                                      HexColor('#707070'),
+                                                  label: 'Normal',
+                                                  onChanged: (newValue) {
+                                                    setModalState(() {
+                                                      isSelectedNormal =
+                                                          !isSelectedNormal;
+                                                    });
+                                                  },
+                                                  padding: EdgeInsets.zero,
+                                                  value: isSelectedNormal,
+                                                  style: GoogleFonts.notoSans(
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    color: HexColor('#707070'),
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: LabeledCheckbox(
+                                                  checkColor: Colors.white,
+                                                  activeColor:
+                                                      HexColor('#707070'),
+                                                  label: 'Low',
+                                                  onChanged: (newValue) {
+                                                    setModalState(() {
+                                                      isSelectedLow =
+                                                          !isSelectedLow;
+                                                    });
+                                                  },
+                                                  padding: EdgeInsets.zero,
+                                                  value: isSelectedLow,
+                                                  style: GoogleFonts.notoSans(
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    color: HexColor('#707070'),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          padding: EdgeInsets.only(top: 20),
+                                          child: ConstrainedBox(
+                                            constraints:
+                                                BoxConstraints.tightFor(
+                                                    width: 150, height: 55),
+                                            child: ElevatedButton(
+                                              onPressed: () async {},
+                                              style: ElevatedButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          30.0),
+                                                ),
+                                                primary:
+                                                    MyAutoPilotStyles.appColor,
+                                              ),
+                                              child: Text(
+                                                'SET FILTER',
+                                                style: GoogleFonts.notoSerif(
+                                                  fontSize: 17,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            });
+                          });
+                    },
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.only(
                         left: 10,
