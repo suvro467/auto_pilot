@@ -1470,6 +1470,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       await showModalBottomSheet(
                           context: context,
                           backgroundColor: Colors.transparent,
+                          isScrollControlled: true,
                           builder: (builder) {
                             return StatefulBuilder(builder:
                                 (BuildContext context,
@@ -1482,9 +1483,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                         MediaQuery.of(context).size.width *
                                             90 /
                                             100,
-                                        MediaQuery.of(context).size.height *
-                                            70 /
-                                            100),
+                                        585),
                                   ),
                                   child: Container(
                                     decoration: BoxDecoration(
