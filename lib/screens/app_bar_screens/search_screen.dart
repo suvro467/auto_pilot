@@ -1666,7 +1666,9 @@ class _SearchScreenState extends State<SearchScreen> {
                                                 BoxConstraints.tightFor(
                                                     width: 150, height: 55),
                                             child: ElevatedButton(
-                                              onPressed: () async {},
+                                              onPressed: () async {
+                                                Navigator.pop(context);
+                                              },
                                               style: ElevatedButton.styleFrom(
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
@@ -1987,7 +1989,9 @@ class _SearchScreenState extends State<SearchScreen> {
                                                 BoxConstraints.tightFor(
                                                     width: 150, height: 55),
                                             child: ElevatedButton(
-                                              onPressed: () async {},
+                                              onPressed: () async {
+                                                Navigator.pop(context);
+                                              },
                                               style: ElevatedButton.styleFrom(
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
