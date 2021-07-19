@@ -6,7 +6,6 @@ import 'package:auto_pilot/screens/bottom_navigation_screens/auto_pilot_score.da
 import 'package:auto_pilot/screens/bottom_navigation_screens/auto_pilot_tasks.dart';
 import 'package:auto_pilot/screens/menu_screens/task_list/task_list.dart';
 import 'package:auto_pilot/shared/drawer/auto_pilot_drawer.dart';
-import 'package:auto_pilot/shared/globals.dart';
 import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -255,7 +254,13 @@ class _HomeScreenState extends State<HomeScreen> {
               builder: (context, snapshot) {
                 return Container(
                   // Score
-                  child: AutoPilotScore(),
+                  child: AutoPilotScore(
+                    scaffoldKey: _scaffoldKey,
+                    pageController: _pageController,
+                    myAutoPilotAppBar: myAutoPilotAppBar,
+                    myAutoPilotBottomNavigationAppBar:
+                        myAutoPilotBottomNavigationBar,
+                  ),
                 );
               },
             ),
