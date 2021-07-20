@@ -564,19 +564,30 @@ class _DatePickerDialogState extends State<DatePickerDialog>
         : textTheme.headline4?.copyWith(color: onPrimarySurface);
 
     final Widget actions = Container(
-      alignment: AlignmentDirectional.centerEnd,
-      constraints: const BoxConstraints(minHeight: 52.0),
-      padding: const EdgeInsets.symmetric(horizontal: 8),
+      alignment: AlignmentDirectional.center,
+      padding: const EdgeInsets.only(bottom: 10),
       child: OverflowBar(
         spacing: 8,
         children: <Widget>[
-          TextButton(
-            child: Text(widget.cancelText ?? localizations.cancelButtonLabel),
-            onPressed: _handleCancel,
-          ),
-          TextButton(
-            child: Text(widget.confirmText ?? localizations.okButtonLabel),
-            onPressed: _handleOk,
+          ConstrainedBox(
+            constraints: BoxConstraints.tightFor(width: 130, height: 55),
+            child: ElevatedButton(
+              onPressed: _handleOk,
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                primary: MyAutoPilotStyles.appColor,
+              ),
+              child: Text(
+                'Set Period',
+                style: GoogleFonts.notoSerif(
+                  fontSize: 17,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ),
         ],
       ),

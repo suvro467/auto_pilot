@@ -25,6 +25,7 @@ class AutoPilotScore extends StatefulWidget {
 
 class _AutoPilotScoreState extends State<AutoPilotScore>
     with TickerProviderStateMixin {
+  Map<String, DateTime>? fromToDates;
   late TabController _tabController;
   late TabController _tabControllerCustomDate;
 
@@ -229,7 +230,7 @@ class _AutoPilotScoreState extends State<AutoPilotScore>
             });
        */
 
-        Map<String, DateTime>? fromToDates = await showDatePickerTimePeriod(
+        fromToDates = await showDatePickerTimePeriod(
             initialEntryMode: DatePickerEntryMode.calendarOnly,
             tabControllerCustomDate: _tabControllerCustomDate,
             customFromDateStyle: customFromDateStyle,
