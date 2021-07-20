@@ -231,6 +231,9 @@ class _AutoPilotScoreState extends State<AutoPilotScore>
 
         await showDatePickerTimePeriod(
             initialEntryMode: DatePickerEntryMode.calendarOnly,
+            tabControllerCustomDate: _tabControllerCustomDate,
+            customFromDateStyle: customFromDateStyle,
+            customToDateStyle: customToDateStyle,
             context: context,
             firstDate: DateTime(1900),
             lastDate: DateTime(2100),

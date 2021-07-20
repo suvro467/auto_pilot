@@ -4,12 +4,15 @@
 
 import 'dart:math' as math;
 
+import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:auto_pilot/shared/widgets/custom_date_picker_time_period/custom_dialog.dart';
 import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 const Size _calendarPortraitDialogSize = Size(330.0, 518.0);
 const Size _calendarLandscapeDialogSize = Size(496.0, 346.0);
@@ -191,6 +194,9 @@ Future<DateTime?> showDatePickerTimePeriod({
   String? errorInvalidText,
   String? fieldHintText,
   String? fieldLabelText,
+  required TabController tabControllerCustomDate,
+  TextStyle? customFromDateStyle,
+  TextStyle? customToDateStyle,
 }) async {
   assert(context != null);
   assert(initialDate != null);
@@ -220,7 +226,189 @@ Future<DateTime?> showDatePickerTimePeriod({
   assert(initialDatePickerMode != null);
   assert(debugCheckHasMaterialLocalizations(context));
 
-  Widget dialog = DatePickerDialog(
+  tabControllerCustomDate.addListener(() {
+    if (tabControllerCustomDate.index == 0) {
+      customFromDateStyle = GoogleFonts.notoSans(
+        color: Colors.white,
+        fontWeight: FontWeight.normal,
+        fontSize: 12,
+      );
+      customToDateStyle = GoogleFonts.notoSans(
+        color: HexColor('#707070'),
+        fontWeight: FontWeight.normal,
+        fontSize: 12,
+      );
+    } else if (tabControllerCustomDate.index == 1) {
+      customFromDateStyle = GoogleFonts.notoSans(
+        color: HexColor('#707070'),
+        fontWeight: FontWeight.normal,
+        fontSize: 12,
+      );
+      customToDateStyle = GoogleFonts.notoSans(
+        color: Colors.white,
+        fontWeight: FontWeight.normal,
+        fontSize: 12,
+      );
+    }
+  });
+
+  Widget dialog = Container(
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.only(
+        topLeft: const Radius.circular(20.0),
+        topRight: const Radius.circular(20.0),
+      ),
+    ),
+    child: Column(
+      children: [
+        Container(
+          margin: EdgeInsets.only(
+            top: 30,
+            left: 30,
+          ),
+          child: Row(
+            children: [
+              Text(
+                'Select Time Period',
+                style: GoogleFonts.notoSerif(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: MyAutoPilotStyles.appColor,
+                ),
+              ),
+            ],
+          ),
+        ),
+        // Custom Date TabBar.
+        Container(
+          width: MediaQuery.of(context).size.width * 80 / 100,
+          margin: EdgeInsets.only(
+            top: 20,
+            bottom: 5,
+            left: 20,
+            right: 20,
+          ),
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(25)),
+                border:
+                    Border.all(width: 2, color: MyAutoPilotStyles.appColor)),
+            child: TabBar(
+              labelPadding: EdgeInsets.zero,
+              labelStyle: GoogleFonts.notoSans(
+                color: Colors.white,
+                fontWeight: FontWeight.normal,
+                fontSize: 14,
+              ),
+              controller: tabControllerCustomDate,
+              // give the indicator a decoration (color and border radius)
+              indicator: BoxDecoration(
+                borderRadius: BorderRadius.circular(
+                  25.0,
+                ),
+                color: MyAutoPilotStyles.appColor,
+              ),
+              unselectedLabelStyle: GoogleFonts.notoSans(
+                color: HexColor('#707070'),
+                fontWeight: FontWeight.normal,
+                fontSize: 14,
+              ),
+
+              unselectedLabelColor: HexColor('#707070'),
+              tabs: [
+                Container(
+                  //width: 65,
+
+                  child: Tab(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        SizedBox(
+                          height: 3,
+                        ),
+                        Text('From'),
+                        Text(
+                          'Selected Date',
+                          style: customFromDateStyle,
+                        ),
+                        SizedBox(
+                          height: 3,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  //width: 65,
+
+                  child: Tab(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        SizedBox(
+                          height: 3,
+                        ),
+                        Text('To'),
+                        Text(
+                          'Selected Date',
+                          style: customToDateStyle,
+                        ),
+                        SizedBox(
+                          height: 3,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Flexible(
+          child: TabBarView(
+              controller: tabControllerCustomDate,
+              physics: NeverScrollableScrollPhysics(),
+              children: [
+                DatePickerDialog(
+                  initialDate: initialDate,
+                  firstDate: firstDate,
+                  lastDate: lastDate,
+                  currentDate: currentDate,
+                  initialEntryMode: initialEntryMode,
+                  selectableDayPredicate: selectableDayPredicate,
+                  helpText: helpText,
+                  cancelText: cancelText,
+                  confirmText: confirmText,
+                  initialCalendarMode: initialDatePickerMode,
+                  errorFormatText: errorFormatText,
+                  errorInvalidText: errorInvalidText,
+                  fieldHintText: fieldHintText,
+                  fieldLabelText: fieldLabelText,
+                ),
+                DatePickerDialog(
+                  initialDate: initialDate,
+                  firstDate: firstDate,
+                  lastDate: lastDate,
+                  currentDate: currentDate,
+                  initialEntryMode: initialEntryMode,
+                  selectableDayPredicate: selectableDayPredicate,
+                  helpText: helpText,
+                  cancelText: cancelText,
+                  confirmText: confirmText,
+                  initialCalendarMode: initialDatePickerMode,
+                  errorFormatText: errorFormatText,
+                  errorInvalidText: errorInvalidText,
+                  fieldHintText: fieldHintText,
+                  fieldLabelText: fieldLabelText,
+                ),
+              ]),
+        )
+      ],
+    ),
+  );
+
+  /* DatePickerDialog(
     initialDate: initialDate,
     firstDate: firstDate,
     lastDate: lastDate,
@@ -235,7 +423,7 @@ Future<DateTime?> showDatePickerTimePeriod({
     errorInvalidText: errorInvalidText,
     fieldHintText: fieldHintText,
     fieldLabelText: fieldLabelText,
-  );
+  ); */
 
   if (textDirection != null) {
     dialog = Directionality(
@@ -625,7 +813,7 @@ class _DatePickerDialogState extends State<DatePickerDialog>
           borderRadius: BorderRadius.all(Radius.circular(20.0))),
       child: AnimatedContainer(
         width: dialogSize.width,
-        height: dialogSize.height,
+        height: 280,
         duration: _dialogSizeAnimationDuration,
         curve: Curves.easeIn,
         child: MediaQuery(
