@@ -4,6 +4,7 @@
 
 import 'dart:math' as math;
 
+import 'package:auto_pilot/shared/widgets/custom_date_picker_time_period/custom_dialog.dart';
 import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -69,7 +70,6 @@ const double _inputFormLandscapeHeight = 108.0;
 /// direction chosen for the [locale].
 ///
 /// The [context], [useRootNavigator] and [routeSettings] arguments are passed to
-/// [showDialog], the documentation for which discusses how it is used. [context]
 /// and [useRootNavigator] must be non-null.
 ///
 /// The [builder] parameter can be used to wrap the dialog widget
@@ -252,7 +252,8 @@ Future<DateTime?> showDatePickerTimePeriod({
     );
   }
 
-  return showDialog<DateTime>(
+  return showModalBottomSheet<DateTime>(
+    backgroundColor: Colors.transparent,
     context: context,
     useRootNavigator: useRootNavigator,
     routeSettings: routeSettings,
@@ -577,11 +578,14 @@ class _DatePickerDialogState extends State<DatePickerDialog>
     switch (_entryMode.value) {
       case DatePickerEntryMode.calendar:
         picker = calendarDatePicker();
-        entryModeButton = IconButton(
-          icon: const Icon(Icons.edit),
-          color: onPrimarySurface,
-          tooltip: localizations.inputDateModeButtonLabel,
-          onPressed: _handleEntryModeToggle,
+        entryModeButton = Opacity(
+          opacity: 0,
+          child: IconButton(
+            icon: const Icon(Icons.edit),
+            color: onPrimarySurface,
+            tooltip: localizations.inputDateModeButtonLabel,
+            onPressed: _handleEntryModeToggle,
+          ),
         );
         break;
 
@@ -616,7 +620,9 @@ class _DatePickerDialogState extends State<DatePickerDialog>
     );
 
     final Size dialogSize = _dialogSize(context) * textScaleFactor;
-    return Dialog(
+    return CustomDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20.0))),
       child: AnimatedContainer(
         width: dialogSize.width,
         height: dialogSize.height,
@@ -629,14 +635,23 @@ class _DatePickerDialogState extends State<DatePickerDialog>
           child: Builder(builder: (BuildContext context) {
             switch (orientation) {
               case Orientation.portrait:
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    header,
-                    Expanded(child: picker),
-                    actions,
-                  ],
+                return Container(
+                  /* decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: const Radius.circular(20.0),
+                      bottomRight: const Radius.circular(20.0),
+                    ),
+                  ), */
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      //header,
+                      Expanded(child: picker),
+                      actions,
+                    ],
+                  ),
                 );
               case Orientation.landscape:
                 return Row(
@@ -797,19 +812,28 @@ class _DatePickerHeader extends StatelessWidget {
                 start: 24,
                 end: 12,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  const SizedBox(height: 16),
-                  help,
-                  const Flexible(child: SizedBox(height: 38)),
-                  Row(
-                    children: <Widget>[
-                      Expanded(child: title),
-                      if (entryModeButton != null) entryModeButton!,
-                    ],
+              child: Container(
+                /* decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.only(
+                    topLeft: const Radius.circular(20.0),
+                    topRight: const Radius.circular(20.0),
                   ),
-                ],
+                ), */
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    const SizedBox(height: 16),
+                    help,
+                    const Flexible(child: SizedBox(height: 38)),
+                    Row(
+                      children: <Widget>[
+                        Expanded(child: title),
+                        if (entryModeButton != null) entryModeButton!,
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

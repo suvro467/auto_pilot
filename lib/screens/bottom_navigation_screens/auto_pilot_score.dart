@@ -230,6 +230,7 @@ class _AutoPilotScoreState extends State<AutoPilotScore>
        */
 
         await showDatePickerTimePeriod(
+            initialEntryMode: DatePickerEntryMode.calendarOnly,
             context: context,
             firstDate: DateTime(1900),
             lastDate: DateTime(2100),
