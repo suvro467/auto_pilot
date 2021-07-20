@@ -5,6 +5,7 @@
 import 'dart:math' as math;
 
 import 'package:auto_pilot/shared/presentation/styles.dart';
+import 'package:auto_pilot/shared/widgets/custom_date_picker_time_period/custom_calendar_date_picker.dart';
 import 'package:auto_pilot/shared/widgets/custom_date_picker_time_period/custom_dialog.dart';
 import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/material.dart';
@@ -593,8 +594,8 @@ class _DatePickerDialogState extends State<DatePickerDialog>
       ),
     );
 
-    CalendarDatePicker calendarDatePicker() {
-      return CalendarDatePicker(
+    CustomCalendarDatePicker calendarDatePicker() {
+      return CustomCalendarDatePicker(
         key: _calendarPickerKey,
         initialDate: _selectedDate.value,
         firstDate: widget.firstDate,
