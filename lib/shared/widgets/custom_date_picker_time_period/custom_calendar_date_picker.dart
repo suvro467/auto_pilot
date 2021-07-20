@@ -301,7 +301,7 @@ class _CustomCalendarDatePickerState extends State<CustomCalendarDatePicker> {
         // Put the mode toggle button on top so that it won't be covered up by the _MonthPicker
         _DatePickerModeToggleButton(
           mode: _mode,
-          title: _localizations.formatMonthYear(_currentDisplayedMonthDate),
+          title: _localizations.formatYear(_currentDisplayedMonthDate),
           onTitlePressed: () {
             // Toggle the day/year mode.
             _handleModeChanged(_mode == DatePickerMode.day
@@ -376,7 +376,7 @@ class _DatePickerModeToggleButtonState
     final Color controlColor = colorScheme.onSurface.withOpacity(0.60);
 
     return Container(
-      padding: const EdgeInsetsDirectional.only(start: 16, end: 4),
+      padding: const EdgeInsets.only(right: 20),
       height: _subHeaderHeight,
       child: Row(
         children: <Widget>[
@@ -389,36 +389,34 @@ class _DatePickerModeToggleButtonState
                 height: _subHeaderHeight,
                 child: InkWell(
                   onTap: widget.onTitlePressed,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Row(
-                      children: <Widget>[
-                        Flexible(
-                          child: Text(
-                            widget.title,
-                            overflow: TextOverflow.ellipsis,
-                            style: textTheme.subtitle2?.copyWith(
-                              color: controlColor,
-                            ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Flexible(
+                        child: Text(
+                          widget.title,
+                          overflow: TextOverflow.ellipsis,
+                          style: textTheme.subtitle2?.copyWith(
+                            color: controlColor,
                           ),
                         ),
-                        RotationTransition(
-                          turns: _controller,
-                          child: Icon(
-                            Icons.arrow_drop_down,
-                            color: MyAutoPilotStyles.appColor,
-                          ),
+                      ),
+                      RotationTransition(
+                        turns: _controller,
+                        child: Icon(
+                          Icons.arrow_drop_down,
+                          color: controlColor,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
           ),
-          if (widget.mode == DatePickerMode.day)
+          /* if (widget.mode == DatePickerMode.day)
             // Give space for the prev/next month buttons that are underneath this row
-            const SizedBox(width: _monthNavButtonsWidth),
+            const SizedBox(width: _monthNavButtonsWidth), */
         ],
       ),
     );
@@ -772,8 +770,7 @@ class _MonthPickerState extends State<_MonthPicker> {
         '${_localizations.previousMonthTooltip} ${_localizations.formatMonthYear(_previousMonthDate)}';
     final String nextTooltipText =
         '${_localizations.nextMonthTooltip} ${_localizations.formatMonthYear(_nextMonthDate)}';
-    final Color controlColor =
-        Theme.of(context).colorScheme.onSurface.withOpacity(0.60);
+    final Color controlColor = MyAutoPilotStyles.appColor;
 
     return Semantics(
       child: Column(
@@ -783,7 +780,7 @@ class _MonthPickerState extends State<_MonthPicker> {
             height: _subHeaderHeight,
             child: Row(
               children: <Widget>[
-                const Spacer(),
+                //const Spacer(),
                 IconButton(
                   icon: const Icon(Icons.chevron_left),
                   color: controlColor,

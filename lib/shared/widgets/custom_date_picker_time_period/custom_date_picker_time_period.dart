@@ -571,7 +571,7 @@ class _DatePickerDialogState extends State<DatePickerDialog>
         spacing: 8,
         children: <Widget>[
           ConstrainedBox(
-            constraints: BoxConstraints.tightFor(width: 130, height: 55),
+            constraints: BoxConstraints.tightFor(width: 130, height: 50),
             child: ElevatedButton(
               onPressed: _handleOk,
               style: ElevatedButton.styleFrom(
