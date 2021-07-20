@@ -1,4 +1,5 @@
 import 'package:auto_pilot/shared/presentation/styles.dart';
+import 'package:auto_pilot/shared/widgets/custom_date_picker_time_period/custom_date_picker_time_period.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -59,7 +60,7 @@ class _AutoPilotScoreState extends State<AutoPilotScore>
 
     _tabController.addListener(() async {
       if (!_tabController.indexIsChanging && _tabController.index == 2) {
-        await showModalBottomSheet(
+        /* await showModalBottomSheet(
             context: context,
             backgroundColor: Colors.transparent,
             builder: (builder) {
@@ -226,6 +227,13 @@ class _AutoPilotScoreState extends State<AutoPilotScore>
                 },
               );
             });
+       */
+
+        await showDatePickerTimePeriod(
+            context: context,
+            firstDate: DateTime(1900),
+            lastDate: DateTime(2100),
+            initialDate: DateTime.now());
       }
     });
   }
