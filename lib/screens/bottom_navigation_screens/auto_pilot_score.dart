@@ -26,10 +26,14 @@ class _AutoPilotScoreState extends State<AutoPilotScore>
     with TickerProviderStateMixin {
   late TabController _tabController;
   late TabController _tabControllerCustomDate;
+
   bool isDelegatesExpanded = false;
   bool isRepeatExpanded = false;
   bool isSupportExpanded = false;
   bool isPersonalExpanded = false;
+
+  late TextStyle customFromDateStyle;
+  late TextStyle customToDateStyle;
 
   Map<String, double> tasksCompleted = {'Flutter': 90, 'Kotlin': 10};
   Map<String, double> tasksOnTime = {'Flutter': 60, 'Kotlin': 40};
@@ -42,6 +46,17 @@ class _AutoPilotScoreState extends State<AutoPilotScore>
     _tabController = TabController(length: 3, vsync: this);
     _tabControllerCustomDate = TabController(length: 2, vsync: this);
 
+    customFromDateStyle = GoogleFonts.notoSans(
+      color: Colors.white,
+      fontWeight: FontWeight.normal,
+      fontSize: 12,
+    );
+    customToDateStyle = GoogleFonts.notoSans(
+      color: HexColor('#707070'),
+      fontWeight: FontWeight.normal,
+      fontSize: 12,
+    );
+
     _tabController.addListener(() async {
       if (!_tabController.indexIsChanging && _tabController.index == 2) {
         await showModalBottomSheet(
@@ -49,8 +64,36 @@ class _AutoPilotScoreState extends State<AutoPilotScore>
             backgroundColor: Colors.transparent,
             builder: (builder) {
               return StatefulBuilder(
-                builder: (BuildContext context,
-                    void Function(void Function()) setModalState) {
+                builder: (BuildContext context, StateSetter setModalState) {
+                  _tabControllerCustomDate.addListener(() {
+                    if (_tabControllerCustomDate.index == 0) {
+                      setModalState(() {
+                        customFromDateStyle = GoogleFonts.notoSans(
+                          color: Colors.white,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 12,
+                        );
+                        customToDateStyle = GoogleFonts.notoSans(
+                          color: HexColor('#707070'),
+                          fontWeight: FontWeight.normal,
+                          fontSize: 12,
+                        );
+                      });
+                    } else if (_tabControllerCustomDate.index == 1) {
+                      setModalState(() {
+                        customFromDateStyle = GoogleFonts.notoSans(
+                          color: HexColor('#707070'),
+                          fontWeight: FontWeight.normal,
+                          fontSize: 12,
+                        );
+                        customToDateStyle = GoogleFonts.notoSans(
+                          color: Colors.white,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 12,
+                        );
+                      });
+                    }
+                  });
                   return Align(
                     alignment: Alignment.bottomCenter,
                     child: ConstrainedBox(
@@ -104,7 +147,7 @@ class _AutoPilotScoreState extends State<AutoPilotScore>
                                         color: MyAutoPilotStyles.appColor)),
                                 child: TabBar(
                                   labelPadding: EdgeInsets.zero,
-                                  labelStyle: GoogleFonts.notoSerif(
+                                  labelStyle: GoogleFonts.notoSans(
                                     color: Colors.white,
                                     fontWeight: FontWeight.normal,
                                     fontSize: 14,
@@ -117,7 +160,7 @@ class _AutoPilotScoreState extends State<AutoPilotScore>
                                     ),
                                     color: MyAutoPilotStyles.appColor,
                                   ),
-                                  unselectedLabelStyle: GoogleFonts.notoSerif(
+                                  unselectedLabelStyle: GoogleFonts.notoSans(
                                     color: HexColor('#707070'),
                                     fontWeight: FontWeight.normal,
                                     fontSize: 14,
@@ -126,15 +169,49 @@ class _AutoPilotScoreState extends State<AutoPilotScore>
                                   unselectedLabelColor: HexColor('#707070'),
                                   tabs: [
                                     Container(
-                                      width: 65,
+                                      //width: 65,
+
                                       child: Tab(
-                                        text: 'From',
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            SizedBox(
+                                              height: 3,
+                                            ),
+                                            Text('From'),
+                                            Text(
+                                              'Selected Date',
+                                              style: customFromDateStyle,
+                                            ),
+                                            SizedBox(
+                                              height: 3,
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                     Container(
-                                      width: 65,
+                                      //width: 65,
+
                                       child: Tab(
-                                        text: 'To',
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            SizedBox(
+                                              height: 3,
+                                            ),
+                                            Text('To'),
+                                            Text(
+                                              'Selected Date',
+                                              style: customToDateStyle,
+                                            ),
+                                            SizedBox(
+                                              height: 3,
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ],
