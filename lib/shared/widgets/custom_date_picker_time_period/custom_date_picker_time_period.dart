@@ -199,11 +199,11 @@ Future<Map<String, DateTime>?> showDatePickerTimePeriod({
                 ),
                 color: MyAutoPilotStyles.appColor,
               ),
-              unselectedLabelStyle: GoogleFonts.notoSans(
+              /* unselectedLabelStyle: GoogleFonts.notoSans(
                 color: HexColor('#707070'),
                 fontWeight: FontWeight.normal,
                 fontSize: 14,
-              ),
+              ), */
 
               unselectedLabelColor: HexColor('#707070'),
               tabs: [
@@ -215,16 +215,16 @@ Future<Map<String, DateTime>?> showDatePickerTimePeriod({
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         SizedBox(
-                          height: 3,
+                          height: 1,
                         ),
                         Text('From'),
                         Text(
                           intl.DateFormat('dd MMM yyyy')
                               .format(fromDateSelected),
-                          style: customFromDateStyle,
+                          //style: customFromDateStyle,
                         ),
                         SizedBox(
-                          height: 3,
+                          height: 1,
                         ),
                       ],
                     ),
@@ -238,15 +238,15 @@ Future<Map<String, DateTime>?> showDatePickerTimePeriod({
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         SizedBox(
-                          height: 3,
+                          height: 1,
                         ),
                         Text('To'),
                         Text(
                           intl.DateFormat('dd MMM yyyy').format(toDateSelected),
-                          style: customToDateStyle,
+                          //style: customToDateStyle,
                         ),
                         SizedBox(
-                          height: 3,
+                          height: 1,
                         ),
                       ],
                     ),
@@ -486,11 +486,7 @@ class _DatePickerDialogState extends State<DatePickerDialog>
       returnedDates!['toDate'] = _selectedDate.value;
       toDateSelected = _selectedDate.value;
     }
-    if (returnedDates!.isNotEmpty &&
-        returnedDates!.containsKey('fromDate') &&
-        returnedDates!.containsKey('toDate') &&
-        returnedDates!['fromDate'] != null &&
-        returnedDates!['toDate'] != null) {
+    if (returnedDates!.isNotEmpty) {
       Navigator.pop(context, returnedDates);
     }
   }
