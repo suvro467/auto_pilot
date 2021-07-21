@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 const Duration _monthScrollDuration = Duration(milliseconds: 200);
 
@@ -373,12 +375,21 @@ class _DatePickerModeToggleButtonState
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final TextTheme textTheme = Theme.of(context).textTheme;
-    final Color controlColor = colorScheme.onSurface.withOpacity(0.60);
+    final Color controlColor = MyAutoPilotStyles.appColor;
 
     return Container(
       padding: const EdgeInsets.only(right: 20),
+      //width: 320,
+      /* decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.black,
+          width: 1,
+        ),
+      ), */
+      //width: 200,
       height: _subHeaderHeight,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           Flexible(
             child: Semantics(
@@ -386,30 +397,33 @@ class _DatePickerModeToggleButtonState
               excludeSemantics: true,
               button: true,
               child: SizedBox(
+                width: 300,
                 height: _subHeaderHeight,
-                child: InkWell(
-                  onTap: widget.onTitlePressed,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Flexible(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Flexible(
+                      child: InkWell(
+                        onTap: widget.onTitlePressed,
                         child: Text(
                           widget.title,
                           overflow: TextOverflow.ellipsis,
-                          style: textTheme.subtitle2?.copyWith(
-                            color: controlColor,
+                          style: GoogleFonts.notoSans(
+                            color: HexColor('#707070'),
+                            fontWeight: FontWeight.normal,
+                            fontSize: 14,
                           ),
                         ),
                       ),
-                      RotationTransition(
-                        turns: _controller,
-                        child: Icon(
-                          Icons.arrow_drop_down,
-                          color: controlColor,
-                        ),
+                    ),
+                    RotationTransition(
+                      turns: _controller,
+                      child: Icon(
+                        Icons.arrow_drop_down,
+                        color: controlColor,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -788,6 +802,7 @@ class _MonthPickerState extends State<_MonthPicker> {
                   onPressed:
                       _isDisplayingFirstMonth ? null : _handlePreviousMonth,
                 ),
+                Text(formatMonth(_currentMonth)),
                 IconButton(
                   icon: const Icon(Icons.chevron_right),
                   color: controlColor,
@@ -1334,3 +1349,23 @@ class _YearPickerGridDelegate extends SliverGridDelegate {
 
 const _YearPickerGridDelegate _yearPickerGridDelegate =
     _YearPickerGridDelegate();
+
+String formatMonth(DateTime date) {
+  final String month = _months[date.month - DateTime.january];
+  return '$month';
+}
+
+const List<String> _months = <String>[
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
