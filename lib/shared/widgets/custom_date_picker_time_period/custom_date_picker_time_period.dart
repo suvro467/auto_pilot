@@ -14,6 +14,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:intl/intl.dart' as intl;
 
 const Size _calendarPortraitDialogSize = Size(330.0, 518.0);
 const Size _calendarLandscapeDialogSize = Size(496.0, 346.0);
@@ -24,6 +25,8 @@ const Duration _dialogSizeAnimationDuration = Duration(milliseconds: 200);
 const double _inputFormPortraitHeight = 98.0;
 const double _inputFormLandscapeHeight = 108.0;
 Map<String, DateTime>? returnedDates = {};
+DateTime fromDateSelected = DateTime.now();
+DateTime toDateSelected = DateTime.now();
 
 Future<Map<String, DateTime>?> showDatePickerTimePeriod({
   required BuildContext context,
@@ -106,7 +109,7 @@ Future<Map<String, DateTime>?> showDatePickerTimePeriod({
 
   var fromDatePickerDialog = DatePickerDialog(
     calledFrom: 'fromDate',
-    initialDate: initialDate,
+    initialDate: fromDateSelected,
     firstDate: firstDate,
     lastDate: lastDate,
     currentDate: currentDate,
@@ -124,7 +127,7 @@ Future<Map<String, DateTime>?> showDatePickerTimePeriod({
 
   var toDatePickerDialog = DatePickerDialog(
     calledFrom: 'toDate',
-    initialDate: initialDate,
+    initialDate: toDateSelected,
     firstDate: firstDate,
     lastDate: lastDate,
     currentDate: currentDate,
@@ -216,7 +219,8 @@ Future<Map<String, DateTime>?> showDatePickerTimePeriod({
                         ),
                         Text('From'),
                         Text(
-                          'Selected Date',
+                          intl.DateFormat('dd MMM yyyy')
+                              .format(fromDateSelected),
                           style: customFromDateStyle,
                         ),
                         SizedBox(
@@ -238,7 +242,7 @@ Future<Map<String, DateTime>?> showDatePickerTimePeriod({
                         ),
                         Text('To'),
                         Text(
-                          'Selected Date',
+                          intl.DateFormat('dd MMM yyyy').format(toDateSelected),
                           style: customToDateStyle,
                         ),
                         SizedBox(
@@ -303,7 +307,9 @@ Future<Map<String, DateTime>?> showDatePickerTimePeriod({
     useRootNavigator: useRootNavigator,
     routeSettings: routeSettings,
     builder: (BuildContext context) {
-      return builder == null ? dialog : builder(context, dialog);
+      return StatefulBuilder(builder: (context, setModalState) {
+        return builder == null ? dialog : builder(context, dialog);
+      });
     },
   );
 }
@@ -473,10 +479,13 @@ class _DatePickerDialogState extends State<DatePickerDialog>
       }
       form.save();
     }
-    if (widget.calledFrom == 'fromDate')
+    if (widget.calledFrom == 'fromDate') {
       returnedDates!['fromDate'] = _selectedDate.value;
-    else if (widget.calledFrom == 'toDate')
+      fromDateSelected = _selectedDate.value;
+    } else if (widget.calledFrom == 'toDate') {
       returnedDates!['toDate'] = _selectedDate.value;
+      toDateSelected = _selectedDate.value;
+    }
     if (returnedDates!.isNotEmpty &&
         returnedDates!.containsKey('fromDate') &&
         returnedDates!.containsKey('toDate') &&
@@ -512,6 +521,11 @@ class _DatePickerDialogState extends State<DatePickerDialog>
   void _handleDateChanged(DateTime date) {
     setState(() {
       _selectedDate.value = date;
+      if (widget.calledFrom == 'fromDate') {
+        fromDateSelected = date;
+      } else if (widget.calledFrom == 'toDate') {
+        toDateSelected = date;
+      }
     });
   }
 
