@@ -107,169 +107,183 @@ Future<Map<String, DateTime>?> showDatePickerTimePeriod({
     }
   });
 
-  var fromDatePickerDialog = DatePickerDialog(
-    calledFrom: 'fromDate',
-    initialDate: fromDateSelected,
-    firstDate: firstDate,
-    lastDate: lastDate,
-    currentDate: currentDate,
-    initialEntryMode: initialEntryMode,
-    selectableDayPredicate: selectableDayPredicate,
-    helpText: helpText,
-    cancelText: cancelText,
-    confirmText: confirmText,
-    initialCalendarMode: initialDatePickerMode,
-    errorFormatText: errorFormatText,
-    errorInvalidText: errorInvalidText,
-    fieldHintText: fieldHintText,
-    fieldLabelText: fieldLabelText,
-  );
+  return showModalBottomSheet<Map<String, DateTime>>(
+    backgroundColor: Colors.transparent,
+    context: context,
+    useRootNavigator: useRootNavigator,
+    routeSettings: routeSettings,
+    builder: (BuildContext context) {
+      return StatefulBuilder(builder: (context, StateSetter setModalState) {
+        var fromDatePickerDialog = DatePickerDialog(
+          calledFrom: 'fromDate',
+          initialDate: fromDateSelected,
+          firstDate: firstDate,
+          lastDate: lastDate,
+          currentDate: currentDate,
+          initialEntryMode: initialEntryMode,
+          selectableDayPredicate: selectableDayPredicate,
+          helpText: helpText,
+          cancelText: cancelText,
+          confirmText: confirmText,
+          initialCalendarMode: initialDatePickerMode,
+          errorFormatText: errorFormatText,
+          errorInvalidText: errorInvalidText,
+          fieldHintText: fieldHintText,
+          fieldLabelText: fieldLabelText,
+          callback: () {
+            setModalState(() {});
+          },
+        );
 
-  var toDatePickerDialog = DatePickerDialog(
-    calledFrom: 'toDate',
-    initialDate: toDateSelected,
-    firstDate: firstDate,
-    lastDate: lastDate,
-    currentDate: currentDate,
-    initialEntryMode: initialEntryMode,
-    selectableDayPredicate: selectableDayPredicate,
-    helpText: helpText,
-    cancelText: cancelText,
-    confirmText: confirmText,
-    initialCalendarMode: initialDatePickerMode,
-    errorFormatText: errorFormatText,
-    errorInvalidText: errorInvalidText,
-    fieldHintText: fieldHintText,
-    fieldLabelText: fieldLabelText,
-  );
-  Widget dialog = Container(
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.only(
-        topLeft: const Radius.circular(20.0),
-        topRight: const Radius.circular(20.0),
-      ),
-    ),
-    child: Column(
-      children: [
-        Container(
-          margin: EdgeInsets.only(
-            top: 30,
-            left: 30,
+        var toDatePickerDialog = DatePickerDialog(
+          calledFrom: 'toDate',
+          initialDate: toDateSelected,
+          firstDate: firstDate,
+          lastDate: lastDate,
+          currentDate: currentDate,
+          initialEntryMode: initialEntryMode,
+          selectableDayPredicate: selectableDayPredicate,
+          helpText: helpText,
+          cancelText: cancelText,
+          confirmText: confirmText,
+          initialCalendarMode: initialDatePickerMode,
+          errorFormatText: errorFormatText,
+          errorInvalidText: errorInvalidText,
+          fieldHintText: fieldHintText,
+          fieldLabelText: fieldLabelText,
+          callback: () {
+            setModalState(() {});
+          },
+        );
+        Widget dialog = Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: const Radius.circular(20.0),
+              topRight: const Radius.circular(20.0),
+            ),
           ),
-          child: Row(
+          child: Column(
             children: [
-              Text(
-                'Select Time Period',
-                style: GoogleFonts.notoSerif(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: MyAutoPilotStyles.appColor,
+              Container(
+                margin: EdgeInsets.only(
+                  top: 30,
+                  left: 30,
+                ),
+                child: Row(
+                  children: [
+                    Text(
+                      'Select Time Period',
+                      style: GoogleFonts.notoSerif(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: MyAutoPilotStyles.appColor,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
-        ),
-        // Custom Date TabBar.
-        Container(
-          width: MediaQuery.of(context).size.width * 80 / 100,
-          margin: EdgeInsets.only(
-            top: 20,
-            bottom: 5,
-            left: 20,
-            right: 20,
-          ),
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(25)),
-                border:
-                    Border.all(width: 2, color: MyAutoPilotStyles.appColor)),
-            child: TabBar(
-              labelPadding: EdgeInsets.zero,
-              labelStyle: GoogleFonts.notoSans(
-                color: Colors.white,
-                fontWeight: FontWeight.normal,
-                fontSize: 14,
-              ),
-              controller: tabControllerCustomDate,
-              // give the indicator a decoration (color and border radius)
-              indicator: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  25.0,
+              // Custom Date TabBar.
+              Container(
+                width: MediaQuery.of(context).size.width * 80 / 100,
+                margin: EdgeInsets.only(
+                  top: 20,
+                  bottom: 5,
+                  left: 20,
+                  right: 20,
                 ),
-                color: MyAutoPilotStyles.appColor,
-              ),
-              /* unselectedLabelStyle: GoogleFonts.notoSans(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(25)),
+                      border: Border.all(
+                          width: 2, color: MyAutoPilotStyles.appColor)),
+                  child: TabBar(
+                    labelPadding: EdgeInsets.zero,
+                    labelStyle: GoogleFonts.notoSans(
+                      color: Colors.white,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 14,
+                    ),
+                    controller: tabControllerCustomDate,
+                    // give the indicator a decoration (color and border radius)
+                    indicator: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        25.0,
+                      ),
+                      color: MyAutoPilotStyles.appColor,
+                    ),
+                    /* unselectedLabelStyle: GoogleFonts.notoSans(
                 color: HexColor('#707070'),
                 fontWeight: FontWeight.normal,
                 fontSize: 14,
               ), */
 
-              unselectedLabelColor: HexColor('#707070'),
-              tabs: [
-                Container(
-                  //width: 65,
+                    unselectedLabelColor: HexColor('#707070'),
+                    tabs: [
+                      Container(
+                        //width: 65,
 
-                  child: Tab(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        SizedBox(
-                          height: 1,
+                        child: Tab(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              SizedBox(
+                                height: 1,
+                              ),
+                              Text('From'),
+                              Text(
+                                intl.DateFormat('dd MMM yyyy')
+                                    .format(fromDateSelected),
+                                //style: customFromDateStyle,
+                              ),
+                              SizedBox(
+                                height: 1,
+                              ),
+                            ],
+                          ),
                         ),
-                        Text('From'),
-                        Text(
-                          intl.DateFormat('dd MMM yyyy')
-                              .format(fromDateSelected),
-                          //style: customFromDateStyle,
+                      ),
+                      Container(
+                        //width: 65,
+
+                        child: Tab(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              SizedBox(
+                                height: 1,
+                              ),
+                              Text('To'),
+                              Text(
+                                intl.DateFormat('dd MMM yyyy')
+                                    .format(toDateSelected),
+                                //style: customToDateStyle,
+                              ),
+                              SizedBox(
+                                height: 1,
+                              ),
+                            ],
+                          ),
                         ),
-                        SizedBox(
-                          height: 1,
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-                Container(
-                  //width: 65,
-
-                  child: Tab(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        SizedBox(
-                          height: 1,
-                        ),
-                        Text('To'),
-                        Text(
-                          intl.DateFormat('dd MMM yyyy').format(toDateSelected),
-                          //style: customToDateStyle,
-                        ),
-                        SizedBox(
-                          height: 1,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+              Flexible(
+                child: TabBarView(
+                    controller: tabControllerCustomDate,
+                    physics: NeverScrollableScrollPhysics(),
+                    children: [
+                      fromDatePickerDialog,
+                      toDatePickerDialog,
+                    ]),
+              )
+            ],
           ),
-        ),
-        Flexible(
-          child: TabBarView(
-              controller: tabControllerCustomDate,
-              physics: NeverScrollableScrollPhysics(),
-              children: [
-                fromDatePickerDialog,
-                toDatePickerDialog,
-              ]),
-        )
-      ],
-    ),
-  );
+        );
 
-  /* DatePickerDialog(
+        /* DatePickerDialog(
     initialDate: initialDate,
     firstDate: firstDate,
     lastDate: lastDate,
@@ -286,28 +300,20 @@ Future<Map<String, DateTime>?> showDatePickerTimePeriod({
     fieldLabelText: fieldLabelText,
   ); */
 
-  if (textDirection != null) {
-    dialog = Directionality(
-      textDirection: textDirection,
-      child: dialog,
-    );
-  }
+        if (textDirection != null) {
+          dialog = Directionality(
+            textDirection: textDirection,
+            child: dialog,
+          );
+        }
 
-  if (locale != null) {
-    dialog = Localizations.override(
-      context: context,
-      locale: locale,
-      child: dialog,
-    );
-  }
-
-  return showModalBottomSheet<Map<String, DateTime>>(
-    backgroundColor: Colors.transparent,
-    context: context,
-    useRootNavigator: useRootNavigator,
-    routeSettings: routeSettings,
-    builder: (BuildContext context) {
-      return StatefulBuilder(builder: (context, setModalState) {
+        if (locale != null) {
+          dialog = Localizations.override(
+            context: context,
+            locale: locale,
+            child: dialog,
+          );
+        }
         return builder == null ? dialog : builder(context, dialog);
       });
     },
@@ -342,6 +348,7 @@ class DatePickerDialog extends StatefulWidget {
     this.fieldHintText,
     this.fieldLabelText,
     this.restorationId,
+    required this.callback,
     required this.calledFrom,
   })  : assert(initialDate != null),
         assert(firstDate != null),
@@ -444,6 +451,8 @@ class DatePickerDialog extends StatefulWidget {
 
   final String calledFrom;
 
+  Function callback;
+
   @override
   _DatePickerDialogState createState() => _DatePickerDialogState();
 }
@@ -522,6 +531,7 @@ class _DatePickerDialogState extends State<DatePickerDialog>
       } else if (widget.calledFrom == 'toDate') {
         toDateSelected = date;
       }
+      widget.callback();
     });
   }
 
