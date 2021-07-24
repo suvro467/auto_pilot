@@ -1,5 +1,7 @@
 import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:auto_pilot/shared/widgets/custom_date_picker_time_period/custom_date_picker_time_period.dart';
+import 'package:auto_pilot/shared/widgets/loading_dialog.dart';
+import 'package:auto_pilot/shared/widgets/show_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -276,12 +278,30 @@ class _AutoPilotScoreState extends State<AutoPilotScore>
                     fontSize: 18,
                   ),
                 ),
-                SvgPicture.asset(
-                  'assets/images/direct-download.svg',
-                  color: MyAutoPilotStyles.appColor,
-                  //semanticsLabel: 'Email Mobile',
-                  height: 30,
-                  width: 30,
+                InkWell(
+                  onTap: () async {
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context) {
+                        return LoadingDialog();
+                      },
+                    );
+
+                    await Future.delayed(new Duration(seconds: 3), () {})
+                        .then((value) {
+                      Navigator.pop(context); //pop dialog
+                      ShowMessage.showSnackBar(context,
+                          'The report download link is sent to your email id.');
+                    });
+                  },
+                  child: SvgPicture.asset(
+                    'assets/images/direct-download.svg',
+                    color: MyAutoPilotStyles.appColor,
+                    //semanticsLabel: 'Email Mobile',
+                    height: 30,
+                    width: 30,
+                  ),
                 ),
               ],
             ),

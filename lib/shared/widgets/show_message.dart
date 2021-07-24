@@ -1,5 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class ShowMessage {
   static showMessage(BuildContext context, String error,
@@ -142,7 +143,7 @@ class ShowMessage {
     ).show(context);
   }
 
-  static showSnackBar(BuildContext context, String message) {
+  /* static showSnackBar(BuildContext context, String message) {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         width: MediaQuery.of(context).size.width * 75 / 100,
@@ -161,6 +162,28 @@ class ShowMessage {
           ),
         ),
         backgroundColor: Colors.black.withOpacity(0.85)));
+  } */
+
+  static showSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        width: MediaQuery.of(context).size.width * 75 / 100,
+        duration: Duration(seconds: 2),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(4.0))),
+        //margin: EdgeInsets.only(bottom: 30.0),
+        elevation: 3,
+        behavior: SnackBarBehavior.floating,
+        content: Text(
+          message,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontFamily: 'Proxima',
+            fontSize: 14,
+            color: HexColor('#707070'),
+          ),
+        ),
+        backgroundColor: Colors.white));
   }
 
   static showSnackBarWithStatus(
