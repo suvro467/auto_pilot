@@ -5,6 +5,7 @@ import 'package:auto_pilot/screens/bottom_navigation_screens/auto_pilot_calendar
 import 'package:auto_pilot/screens/bottom_navigation_screens/auto_pilot_score.dart';
 import 'package:auto_pilot/screens/bottom_navigation_screens/auto_pilot_task_list.dart';
 import 'package:auto_pilot/screens/menu_screens/auto_pilot_dashboard.dart';
+import 'package:auto_pilot/screens/menu_screens/users/user_list1.dart';
 import 'package:auto_pilot/shared/drawer/auto_pilot_drawer.dart';
 import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +69,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                _pageController.jumpToPage(5);
+              },
               icon: SvgPicture.asset(
                 'assets/images/user outline.svg',
                 color: MyAutoPilotStyles.appColor,
@@ -289,6 +292,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 return Container(
                   // Calendar
                   child: SearchScreen(
+                    scaffoldKey: _scaffoldKey,
+                    pageController: _pageController,
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+        // Page 5
+        Container(
+          color: Colors.transparent,
+          child: Center(
+            child: FutureBuilder(
+              builder: (context, snapshot) {
+                return Container(
+                  // User List Screen 1
+                  child: UserListScreen1(
                     scaffoldKey: _scaffoldKey,
                     pageController: _pageController,
                   ),

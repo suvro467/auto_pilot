@@ -4,13 +4,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-class TaskList extends StatefulWidget {
+class UserListScreen1 extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final PageController pageController;
 
   /* final int tabMenuSelected;
   final int taskItemTapped; */
-  const TaskList(
+  const UserListScreen1(
       {required this.scaffoldKey,
       required this.pageController,
 
@@ -20,10 +20,10 @@ class TaskList extends StatefulWidget {
       : super(key: key);
 
   @override
-  _TaskListState createState() => _TaskListState();
+  _UserListScreen1State createState() => _UserListScreen1State();
 }
 
-class _TaskListState extends State<TaskList>
+class _UserListScreen1State extends State<UserListScreen1>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   bool isDelegatesExpanded = false;
@@ -34,26 +34,6 @@ class _TaskListState extends State<TaskList>
   Map<String, double> tasksCompleted = {'Flutter': 90, 'Kotlin': 10};
   Map<String, double> tasksOnTime = {'Flutter': 60, 'Kotlin': 40};
   Map<String, double> approvedBenchaMark = {'Flutter': 80, 'Kotlin': 20};
-
-  late int totalDelegatedTasks;
-  late int totalDelegatedTasksWeekly;
-  late int totalDelegatedTasksMonthly;
-  late int totalDelegatedTasksOverDue;
-
-  late int totalRepeatTasks;
-  late int totalRepeatTasksWeekly;
-  late int totalRepeatTasksMonthly;
-  late int totalRepeatTasksOverDue;
-
-  late int totalSupportTasks;
-  late int totalSupportTasksWeekly;
-  late int totalSupportTasksMonthly;
-  late int totalSupportTasksOverDue;
-
-  late int totalPersonalTasks;
-  late int totalPersonalTasksWeekly;
-  late int totalPersonalTasksMonthly;
-  late int totalPersonalTasksOverDue;
 
   late Icon trailingIconDelegatedTask;
   late Icon trailingIconDelegatedTaskWeekly;
@@ -80,26 +60,6 @@ class _TaskListState extends State<TaskList>
     super.initState();
 
     _tabController = TabController(length: 4, vsync: this);
-
-    totalDelegatedTasks = 11;
-    totalDelegatedTasksWeekly = 20;
-    totalDelegatedTasksMonthly = 56;
-    totalDelegatedTasksOverDue = 5;
-
-    totalRepeatTasks = 2;
-    totalRepeatTasksWeekly = 15;
-    totalRepeatTasksMonthly = 20;
-    totalRepeatTasksOverDue = 1;
-
-    totalSupportTasks = 7;
-    totalSupportTasksWeekly = 10;
-    totalSupportTasksMonthly = 16;
-    totalSupportTasksOverDue = 4;
-
-    totalPersonalTasks = 1;
-    totalPersonalTasksWeekly = 6;
-    totalPersonalTasksMonthly = 22;
-    totalPersonalTasksOverDue = 3;
 
     trailingIconDelegatedTask = Icon(
       Icons.arrow_drop_down,
@@ -214,15 +174,14 @@ class _TaskListState extends State<TaskList>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Your Tasks',
+                        'Your Users',
                         style: GoogleFonts.notoSerif(
                           color: HexColor('#707070'),
                           fontWeight: FontWeight.normal,
                           fontSize: 18,
                         ),
                       ),
-                      Text(
-                          '${_tabController.index == 0 ? (totalDelegatedTasks + totalRepeatTasks + totalSupportTasks).toString() : (_tabController.index == 1 ? (totalDelegatedTasksWeekly + totalRepeatTasksWeekly + totalSupportTasksWeekly).toString() : (_tabController.index == 2 ? (totalDelegatedTasksMonthly + totalRepeatTasksMonthly + totalSupportTasksMonthly).toString() : (totalDelegatedTasksOverDue + totalRepeatTasksOverDue + totalSupportTasksOverDue).toString()))}  tasks remaining',
+                      Text('15 users of 50 users remaining',
                           style: GoogleFonts.notoSerif(
                             color: MyAutoPilotStyles.appColor,
                             fontWeight: FontWeight.normal,
@@ -285,25 +244,25 @@ class _TaskListState extends State<TaskList>
                     Container(
                       width: 65,
                       child: Tab(
-                        text: 'Today',
+                        text: 'All',
                       ),
                     ),
                     Container(
                       width: 65,
                       child: Tab(
-                        text: 'Weekly',
+                        text: 'Active',
                       ),
                     ),
                     Container(
                       width: 65,
                       child: Tab(
-                        text: 'Monthly',
+                        text: 'Inactive',
                       ),
                     ),
                     Container(
                       //width: 65,
                       child: Tab(
-                        text: 'Over Due',
+                        text: 'Deleted',
                       ),
                     ),
                   ],
@@ -358,7 +317,7 @@ class _TaskListState extends State<TaskList>
                                           left: 20,
                                         ),
                                         child: Text(
-                                          totalDelegatedTasks.toString(),
+                                          'Test',
                                           style: GoogleFonts.notoSerif(
                                             color: HexColor('#707070'),
                                             fontWeight: FontWeight.bold,
@@ -382,28 +341,12 @@ class _TaskListState extends State<TaskList>
                                     ]),
                               ],
                             )),
-                        onExpansionChanged: (value) {
-                          if (value) {
-                            trailingIconDelegatedTask = Icon(
-                              Icons.arrow_right,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          } else {
-                            trailingIconDelegatedTask = Icon(
-                              Icons.arrow_drop_down,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          }
 
-                          setState(() {});
-                        },
                         trailing: Container(
                           color: Colors.white,
                           child: trailingIconDelegatedTask,
                         ),
-                        children: _getDelegatedTasks(0),
+                        //children: _getDelegatedTasks(0),
                       ),
                     ),
                     Card(
@@ -445,7 +388,7 @@ class _TaskListState extends State<TaskList>
                                           left: 20,
                                         ),
                                         child: Text(
-                                          totalRepeatTasks.toString(),
+                                          'Test',
                                           style: GoogleFonts.notoSerif(
                                             color: HexColor('#707070'),
                                             fontWeight: FontWeight.bold,
@@ -469,28 +412,12 @@ class _TaskListState extends State<TaskList>
                                     ]),
                               ],
                             )),
-                        onExpansionChanged: (value) {
-                          if (value) {
-                            trailingIconRepeatTask = Icon(
-                              Icons.arrow_right,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          } else {
-                            trailingIconRepeatTask = Icon(
-                              Icons.arrow_drop_down,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          }
 
-                          setState(() {});
-                        },
                         trailing: Container(
                           color: Colors.white,
                           child: trailingIconRepeatTask,
                         ),
-                        children: _getRepeatTasks(0),
+                        //children: _getRepeatTasks(0),
                       ),
                     ),
                     Card(
@@ -532,7 +459,7 @@ class _TaskListState extends State<TaskList>
                                           left: 20,
                                         ),
                                         child: Text(
-                                          totalSupportTasks.toString(),
+                                          'Test',
                                           style: GoogleFonts.notoSerif(
                                             color: HexColor('#707070'),
                                             fontWeight: FontWeight.bold,
@@ -556,28 +483,11 @@ class _TaskListState extends State<TaskList>
                                     ]),
                               ],
                             )),
-                        onExpansionChanged: (value) {
-                          if (value) {
-                            trailingIconSupportTask = Icon(
-                              Icons.arrow_right,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          } else {
-                            trailingIconSupportTask = Icon(
-                              Icons.arrow_drop_down,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          }
-
-                          setState(() {});
-                        },
                         trailing: Container(
                           color: Colors.white,
                           child: trailingIconSupportTask,
                         ),
-                        children: _getSupportTasks(0),
+                        //children: _getSupportTasks(0),
                       ),
                     ),
                     Card(
@@ -619,7 +529,7 @@ class _TaskListState extends State<TaskList>
                                           left: 20,
                                         ),
                                         child: Text(
-                                          totalPersonalTasks.toString(),
+                                          'Test',
                                           style: GoogleFonts.notoSerif(
                                             color: HexColor('#707070'),
                                             fontWeight: FontWeight.bold,
@@ -643,28 +553,11 @@ class _TaskListState extends State<TaskList>
                                     ]),
                               ],
                             )),
-                        onExpansionChanged: (value) {
-                          if (value) {
-                            trailingIconPersonalTask = Icon(
-                              Icons.arrow_right,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          } else {
-                            trailingIconPersonalTask = Icon(
-                              Icons.arrow_drop_down,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          }
-
-                          setState(() {});
-                        },
                         trailing: Container(
                           color: Colors.white,
                           child: trailingIconPersonalTask,
                         ),
-                        children: _getPersonalTasks(0),
+                        //children: _getPersonalTasks(0),
                       ),
                     ),
                   ]),
@@ -709,7 +602,7 @@ class _TaskListState extends State<TaskList>
                                           left: 20,
                                         ),
                                         child: Text(
-                                          totalDelegatedTasksWeekly.toString(),
+                                          'Test',
                                           style: GoogleFonts.notoSerif(
                                             color: HexColor('#707070'),
                                             fontWeight: FontWeight.bold,
@@ -733,28 +626,11 @@ class _TaskListState extends State<TaskList>
                                     ]),
                               ],
                             )),
-                        onExpansionChanged: (value) {
-                          if (value) {
-                            trailingIconDelegatedTask = Icon(
-                              Icons.arrow_right,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          } else {
-                            trailingIconDelegatedTask = Icon(
-                              Icons.arrow_drop_down,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          }
-
-                          setState(() {});
-                        },
                         trailing: Container(
                           color: Colors.white,
                           child: trailingIconDelegatedTask,
                         ),
-                        children: _getDelegatedTasks(1),
+                        //children: _getDelegatedTasks(1),
                       ),
                     ),
                     Card(
@@ -796,7 +672,7 @@ class _TaskListState extends State<TaskList>
                                           left: 20,
                                         ),
                                         child: Text(
-                                          totalRepeatTasksWeekly.toString(),
+                                          'Test',
                                           style: GoogleFonts.notoSerif(
                                             color: HexColor('#707070'),
                                             fontWeight: FontWeight.bold,
@@ -820,28 +696,11 @@ class _TaskListState extends State<TaskList>
                                     ]),
                               ],
                             )),
-                        onExpansionChanged: (value) {
-                          if (value) {
-                            trailingIconRepeatTask = Icon(
-                              Icons.arrow_right,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          } else {
-                            trailingIconRepeatTask = Icon(
-                              Icons.arrow_drop_down,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          }
-
-                          setState(() {});
-                        },
                         trailing: Container(
                           color: Colors.white,
                           child: trailingIconRepeatTask,
                         ),
-                        children: _getRepeatTasks(1),
+                        //children: _getRepeatTasks(1),
                       ),
                     ),
                     Card(
@@ -883,7 +742,7 @@ class _TaskListState extends State<TaskList>
                                           left: 20,
                                         ),
                                         child: Text(
-                                          totalSupportTasksWeekly.toString(),
+                                          'Test',
                                           style: GoogleFonts.notoSerif(
                                             color: HexColor('#707070'),
                                             fontWeight: FontWeight.bold,
@@ -907,28 +766,11 @@ class _TaskListState extends State<TaskList>
                                     ]),
                               ],
                             )),
-                        onExpansionChanged: (value) {
-                          if (value) {
-                            trailingIconSupportTask = Icon(
-                              Icons.arrow_right,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          } else {
-                            trailingIconSupportTask = Icon(
-                              Icons.arrow_drop_down,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          }
-
-                          setState(() {});
-                        },
                         trailing: Container(
                           color: Colors.white,
                           child: trailingIconSupportTask,
                         ),
-                        children: _getSupportTasks(1),
+                        //children: _getSupportTasks(1),
                       ),
                     ),
                     Card(
@@ -970,7 +812,7 @@ class _TaskListState extends State<TaskList>
                                           left: 20,
                                         ),
                                         child: Text(
-                                          totalPersonalTasksWeekly.toString(),
+                                          'Test',
                                           style: GoogleFonts.notoSerif(
                                             color: HexColor('#707070'),
                                             fontWeight: FontWeight.bold,
@@ -994,28 +836,11 @@ class _TaskListState extends State<TaskList>
                                     ]),
                               ],
                             )),
-                        onExpansionChanged: (value) {
-                          if (value) {
-                            trailingIconPersonalTask = Icon(
-                              Icons.arrow_right,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          } else {
-                            trailingIconPersonalTask = Icon(
-                              Icons.arrow_drop_down,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          }
-
-                          setState(() {});
-                        },
                         trailing: Container(
                           color: Colors.white,
                           child: trailingIconPersonalTask,
                         ),
-                        children: _getPersonalTasks(1),
+                        //children: _getPersonalTasks(1),
                       ),
                     ),
                   ]),
@@ -1061,7 +886,7 @@ class _TaskListState extends State<TaskList>
                                           left: 20,
                                         ),
                                         child: Text(
-                                          totalDelegatedTasksMonthly.toString(),
+                                          'Test',
                                           style: GoogleFonts.notoSerif(
                                             color: HexColor('#707070'),
                                             fontWeight: FontWeight.bold,
@@ -1085,28 +910,11 @@ class _TaskListState extends State<TaskList>
                                     ]),
                               ],
                             )),
-                        onExpansionChanged: (value) {
-                          if (value) {
-                            trailingIconDelegatedTask = Icon(
-                              Icons.arrow_right,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          } else {
-                            trailingIconDelegatedTask = Icon(
-                              Icons.arrow_drop_down,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          }
-
-                          setState(() {});
-                        },
                         trailing: Container(
                           color: Colors.white,
                           child: trailingIconDelegatedTask,
                         ),
-                        children: _getDelegatedTasks(2),
+                        //children: _getDelegatedTasks(2),
                       ),
                     ),
                     Card(
@@ -1148,7 +956,7 @@ class _TaskListState extends State<TaskList>
                                           left: 20,
                                         ),
                                         child: Text(
-                                          totalRepeatTasksMonthly.toString(),
+                                          'Test',
                                           style: GoogleFonts.notoSerif(
                                             color: HexColor('#707070'),
                                             fontWeight: FontWeight.bold,
@@ -1172,28 +980,11 @@ class _TaskListState extends State<TaskList>
                                     ]),
                               ],
                             )),
-                        onExpansionChanged: (value) {
-                          if (value) {
-                            trailingIconRepeatTask = Icon(
-                              Icons.arrow_right,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          } else {
-                            trailingIconRepeatTask = Icon(
-                              Icons.arrow_drop_down,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          }
-
-                          setState(() {});
-                        },
                         trailing: Container(
                           color: Colors.white,
                           child: trailingIconRepeatTask,
                         ),
-                        children: _getRepeatTasks(2),
+                        //children: _getRepeatTasks(2),
                       ),
                     ),
                     Card(
@@ -1235,7 +1026,7 @@ class _TaskListState extends State<TaskList>
                                           left: 20,
                                         ),
                                         child: Text(
-                                          totalSupportTasksMonthly.toString(),
+                                          'Test',
                                           style: GoogleFonts.notoSerif(
                                             color: HexColor('#707070'),
                                             fontWeight: FontWeight.bold,
@@ -1259,28 +1050,11 @@ class _TaskListState extends State<TaskList>
                                     ]),
                               ],
                             )),
-                        onExpansionChanged: (value) {
-                          if (value) {
-                            trailingIconSupportTask = Icon(
-                              Icons.arrow_right,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          } else {
-                            trailingIconSupportTask = Icon(
-                              Icons.arrow_drop_down,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          }
-
-                          setState(() {});
-                        },
                         trailing: Container(
                           color: Colors.white,
                           child: trailingIconSupportTask,
                         ),
-                        children: _getSupportTasks(2),
+                        //children: _getSupportTasks(2),
                       ),
                     ),
                     Card(
@@ -1322,7 +1096,7 @@ class _TaskListState extends State<TaskList>
                                           left: 20,
                                         ),
                                         child: Text(
-                                          totalPersonalTasksMonthly.toString(),
+                                          'Test',
                                           style: GoogleFonts.notoSerif(
                                             color: HexColor('#707070'),
                                             fontWeight: FontWeight.bold,
@@ -1346,28 +1120,11 @@ class _TaskListState extends State<TaskList>
                                     ]),
                               ],
                             )),
-                        onExpansionChanged: (value) {
-                          if (value) {
-                            trailingIconPersonalTask = Icon(
-                              Icons.arrow_right,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          } else {
-                            trailingIconPersonalTask = Icon(
-                              Icons.arrow_drop_down,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          }
-
-                          setState(() {});
-                        },
                         trailing: Container(
                           color: Colors.white,
                           child: trailingIconPersonalTask,
                         ),
-                        children: _getPersonalTasks(2),
+                        //children: _getPersonalTasks(2),
                       ),
                     ),
                   ]),
@@ -1413,7 +1170,7 @@ class _TaskListState extends State<TaskList>
                                           left: 20,
                                         ),
                                         child: Text(
-                                          totalDelegatedTasksOverDue.toString(),
+                                          'Test',
                                           style: GoogleFonts.notoSerif(
                                             color: HexColor('#707070'),
                                             fontWeight: FontWeight.bold,
@@ -1437,28 +1194,11 @@ class _TaskListState extends State<TaskList>
                                     ]),
                               ],
                             )),
-                        onExpansionChanged: (value) {
-                          if (value) {
-                            trailingIconDelegatedTask = Icon(
-                              Icons.arrow_right,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          } else {
-                            trailingIconDelegatedTask = Icon(
-                              Icons.arrow_drop_down,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          }
-
-                          setState(() {});
-                        },
                         trailing: Container(
                           color: Colors.white,
                           child: trailingIconDelegatedTask,
                         ),
-                        children: _getDelegatedTasks(3),
+                        //children: _getDelegatedTasks(3),
                       ),
                     ),
                     Card(
@@ -1500,7 +1240,7 @@ class _TaskListState extends State<TaskList>
                                           left: 20,
                                         ),
                                         child: Text(
-                                          totalRepeatTasksOverDue.toString(),
+                                          'Test',
                                           style: GoogleFonts.notoSerif(
                                             color: HexColor('#707070'),
                                             fontWeight: FontWeight.bold,
@@ -1524,28 +1264,12 @@ class _TaskListState extends State<TaskList>
                                     ]),
                               ],
                             )),
-                        onExpansionChanged: (value) {
-                          if (value) {
-                            trailingIconRepeatTask = Icon(
-                              Icons.arrow_right,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          } else {
-                            trailingIconRepeatTask = Icon(
-                              Icons.arrow_drop_down,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          }
 
-                          setState(() {});
-                        },
                         trailing: Container(
                           color: Colors.white,
                           child: trailingIconRepeatTask,
                         ),
-                        children: _getRepeatTasks(3),
+                        //children: _getRepeatTasks(3),
                       ),
                     ),
                     Card(
@@ -1587,7 +1311,7 @@ class _TaskListState extends State<TaskList>
                                           left: 20,
                                         ),
                                         child: Text(
-                                          totalSupportTasksOverDue.toString(),
+                                          'Test',
                                           style: GoogleFonts.notoSerif(
                                             color: HexColor('#707070'),
                                             fontWeight: FontWeight.bold,
@@ -1611,28 +1335,11 @@ class _TaskListState extends State<TaskList>
                                     ]),
                               ],
                             )),
-                        onExpansionChanged: (value) {
-                          if (value) {
-                            trailingIconSupportTask = Icon(
-                              Icons.arrow_right,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          } else {
-                            trailingIconSupportTask = Icon(
-                              Icons.arrow_drop_down,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          }
-
-                          setState(() {});
-                        },
                         trailing: Container(
                           color: Colors.white,
                           child: trailingIconSupportTask,
                         ),
-                        children: _getSupportTasks(3),
+                        //children: _getSupportTasks(3),
                       ),
                     ),
                     Card(
@@ -1674,7 +1381,7 @@ class _TaskListState extends State<TaskList>
                                           left: 20,
                                         ),
                                         child: Text(
-                                          totalPersonalTasksOverDue.toString(),
+                                          'Test',
                                           style: GoogleFonts.notoSerif(
                                             color: HexColor('#707070'),
                                             fontWeight: FontWeight.bold,
@@ -1698,28 +1405,11 @@ class _TaskListState extends State<TaskList>
                                     ]),
                               ],
                             )),
-                        onExpansionChanged: (value) {
-                          if (value) {
-                            trailingIconPersonalTask = Icon(
-                              Icons.arrow_right,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          } else {
-                            trailingIconPersonalTask = Icon(
-                              Icons.arrow_drop_down,
-                              color: MyAutoPilotStyles.appColor,
-                              size: 36,
-                            );
-                          }
-
-                          setState(() {});
-                        },
                         trailing: Container(
                           color: Colors.white,
                           child: trailingIconPersonalTask,
                         ),
-                        children: _getPersonalTasks(3),
+                        //children: _getPersonalTasks(3),
                       ),
                     ),
                   ]),
@@ -1730,397 +1420,5 @@ class _TaskListState extends State<TaskList>
         ),
       ),
     );
-  }
-
-  List<Widget> _getDelegatedTasks(int tabIndex) {
-    List<Card> returnedWidgets = [];
-
-    for (int i = 0;
-        i <
-            (tabIndex == 0
-                ? totalDelegatedTasks
-                : (tabIndex == 1
-                    ? totalDelegatedTasksWeekly
-                    : (tabIndex == 2
-                        ? totalDelegatedTasksMonthly
-                        : totalDelegatedTasksOverDue)));
-        i++) {
-      returnedWidgets.add(Card(
-        elevation: 5,
-        shadowColor: Colors.black,
-        //color: Colors.amber[100],
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topRight: Radius.elliptical(2, 2),
-            bottomRight: Radius.elliptical(2, 2),
-            topLeft: Radius.elliptical(2, 2),
-            bottomLeft: Radius.elliptical(2, 2),
-          ),
-        ),
-        clipBehavior: Clip.antiAlias,
-        child: Container(
-          height: 90,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 20.0,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'This is a small description of the ...',
-                      style: GoogleFonts.notoSerif(
-                          color: HexColor('#707070'),
-                          fontWeight: FontWeight.normal,
-                          fontSize: 14,
-                          decoration:
-                              i.isEven ? null : TextDecoration.lineThrough),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 10.0),
-                            child: Text(
-                              'By: Suvradip Roy',
-                              style: GoogleFonts.notoSerif(
-                                color: HexColor('#707070'),
-                                fontWeight: FontWeight.normal,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ),
-                          Text(
-                            'Due: 4 Jul 2021',
-                            style: GoogleFonts.notoSerif(
-                              color: HexColor('#707070'),
-                              fontWeight: FontWeight.normal,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 20.0),
-                child: SvgPicture.asset(
-                  i.isEven
-                      ? 'assets/images/check-mark.svg'
-                      : 'assets/images/x-mark.svg',
-                  color: HexColor('#C9C9C9'),
-                  //semanticsLabel: 'Email Mobile',
-                  height: 22,
-                  width: 22,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ));
-    }
-    return returnedWidgets;
-  }
-
-  List<Widget> _getRepeatTasks(int cupertinoTabBarIIIValue) {
-    List<Card> returnedWidgets = [];
-
-    for (int i = 0;
-        i <
-            (cupertinoTabBarIIIValue == 0
-                ? totalRepeatTasks
-                : (cupertinoTabBarIIIValue == 1
-                    ? totalRepeatTasksWeekly
-                    : (cupertinoTabBarIIIValue == 2
-                        ? totalRepeatTasksMonthly
-                        : totalRepeatTasksOverDue)));
-        i++) {
-      returnedWidgets.add(Card(
-        elevation: 5,
-        shadowColor: Colors.black,
-        //color: Colors.amber[100],
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topRight: Radius.elliptical(2, 2),
-            bottomRight: Radius.elliptical(2, 2),
-            topLeft: Radius.elliptical(2, 2),
-            bottomLeft: Radius.elliptical(2, 2),
-          ),
-        ),
-        clipBehavior: Clip.antiAlias,
-        child: Container(
-          height: 90,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 20.0,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'This is a small description of the ...',
-                      style: GoogleFonts.notoSerif(
-                          color: HexColor('#707070'),
-                          fontWeight: FontWeight.normal,
-                          fontSize: 14,
-                          decoration:
-                              i.isEven ? null : TextDecoration.lineThrough),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 10.0),
-                            child: Text(
-                              'By: Suvradip Roy',
-                              style: GoogleFonts.notoSerif(
-                                color: HexColor('#707070'),
-                                fontWeight: FontWeight.normal,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ),
-                          Text(
-                            'Due: 4 Jul 2021',
-                            style: GoogleFonts.notoSerif(
-                              color: HexColor('#707070'),
-                              fontWeight: FontWeight.normal,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 20.0),
-                child: SvgPicture.asset(
-                  i.isEven
-                      ? 'assets/images/check-mark.svg'
-                      : 'assets/images/x-mark.svg',
-                  color: HexColor('#C9C9C9'),
-                  //semanticsLabel: 'Email Mobile',
-                  height: 22,
-                  width: 22,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ));
-    }
-    return returnedWidgets;
-  }
-
-  List<Widget> _getSupportTasks(int cupertinoTabBarIIIValue) {
-    List<Card> returnedWidgets = [];
-
-    for (int i = 0;
-        i <
-            (cupertinoTabBarIIIValue == 0
-                ? totalSupportTasks
-                : (cupertinoTabBarIIIValue == 1
-                    ? totalSupportTasksWeekly
-                    : (cupertinoTabBarIIIValue == 2
-                        ? totalSupportTasksMonthly
-                        : totalSupportTasksOverDue)));
-        i++) {
-      returnedWidgets.add(Card(
-        elevation: 5,
-        shadowColor: Colors.black,
-        //color: Colors.amber[100],
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topRight: Radius.elliptical(2, 2),
-            bottomRight: Radius.elliptical(2, 2),
-            topLeft: Radius.elliptical(2, 2),
-            bottomLeft: Radius.elliptical(2, 2),
-          ),
-        ),
-        clipBehavior: Clip.antiAlias,
-        child: Container(
-          height: 90,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 20.0,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'This is a small description of the ...',
-                      style: GoogleFonts.notoSerif(
-                          color: HexColor('#707070'),
-                          fontWeight: FontWeight.normal,
-                          fontSize: 14,
-                          decoration:
-                              i.isEven ? null : TextDecoration.lineThrough),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 10.0),
-                            child: Text(
-                              'By: Suvradip Roy',
-                              style: GoogleFonts.notoSerif(
-                                color: HexColor('#707070'),
-                                fontWeight: FontWeight.normal,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ),
-                          Text(
-                            'Due: 4 Jul 2021',
-                            style: GoogleFonts.notoSerif(
-                              color: HexColor('#707070'),
-                              fontWeight: FontWeight.normal,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 20.0),
-                child: SvgPicture.asset(
-                  i.isEven
-                      ? 'assets/images/check-mark.svg'
-                      : 'assets/images/x-mark.svg',
-                  color: HexColor('#C9C9C9'),
-                  //semanticsLabel: 'Email Mobile',
-                  height: 22,
-                  width: 22,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ));
-    }
-    return returnedWidgets;
-  }
-
-  List<Widget> _getPersonalTasks(int cupertinoTabBarIIIValue) {
-    List<Card> returnedWidgets = [];
-
-    for (int i = 0;
-        i <
-            (cupertinoTabBarIIIValue == 0
-                ? totalPersonalTasks
-                : (cupertinoTabBarIIIValue == 1
-                    ? totalPersonalTasksWeekly
-                    : (cupertinoTabBarIIIValue == 2
-                        ? totalPersonalTasksMonthly
-                        : totalPersonalTasksOverDue)));
-        i++) {
-      returnedWidgets.add(Card(
-        elevation: 5,
-        shadowColor: Colors.black,
-        //color: Colors.amber[100],
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topRight: Radius.elliptical(2, 2),
-            bottomRight: Radius.elliptical(2, 2),
-            topLeft: Radius.elliptical(2, 2),
-            bottomLeft: Radius.elliptical(2, 2),
-          ),
-        ),
-        clipBehavior: Clip.antiAlias,
-        child: Container(
-          height: 90,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 20.0,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'This is a small description of the ...',
-                      style: GoogleFonts.notoSerif(
-                          color: HexColor('#707070'),
-                          fontWeight: FontWeight.normal,
-                          fontSize: 14,
-                          decoration:
-                              i.isEven ? null : TextDecoration.lineThrough),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 10.0),
-                            child: Text(
-                              'By: Suvradip Roy',
-                              style: GoogleFonts.notoSerif(
-                                color: HexColor('#707070'),
-                                fontWeight: FontWeight.normal,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ),
-                          Text(
-                            'Due: 4 Jul 2021',
-                            style: GoogleFonts.notoSerif(
-                              color: HexColor('#707070'),
-                              fontWeight: FontWeight.normal,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 20.0),
-                child: SvgPicture.asset(
-                  i.isEven
-                      ? 'assets/images/check-mark.svg'
-                      : 'assets/images/x-mark.svg',
-                  color: HexColor('#C9C9C9'),
-                  //semanticsLabel: 'Email Mobile',
-                  height: 22,
-                  width: 22,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ));
-    }
-    return returnedWidgets;
   }
 }
