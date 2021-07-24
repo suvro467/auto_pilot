@@ -259,6 +259,33 @@ class _AutoPilotScoreState extends State<AutoPilotScore>
         mainAxisAlignment: MainAxisAlignment.start,
         //mainAxisSize: MainAxisSize.min,
         children: [
+          Container(
+            padding: EdgeInsets.only(left: 20, right: 25),
+            margin: EdgeInsets.only(
+              top: 20,
+              bottom: 20,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Score Board',
+                  style: GoogleFonts.notoSerif(
+                    color: HexColor('#707070'),
+                    fontWeight: FontWeight.normal,
+                    fontSize: 18,
+                  ),
+                ),
+                SvgPicture.asset(
+                  'assets/images/direct-download.svg',
+                  color: MyAutoPilotStyles.appColor,
+                  //semanticsLabel: 'Email Mobile',
+                  height: 30,
+                  width: 30,
+                ),
+              ],
+            ),
+          ),
           // Custom Tab Bar
           Container(
             width: MediaQuery.of(context).size.width * 90 / 100,
