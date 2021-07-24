@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:auto_pilot/screens/app_bar_screens/search_screen.dart';
 import 'package:auto_pilot/screens/bottom_navigation_screens/auto_pilot_calendar.dart';
 import 'package:auto_pilot/screens/bottom_navigation_screens/auto_pilot_score.dart';
-import 'package:auto_pilot/screens/bottom_navigation_screens/auto_pilot_tasks.dart';
-import 'package:auto_pilot/screens/menu_screens/task_list/task_list.dart';
+import 'package:auto_pilot/screens/bottom_navigation_screens/auto_pilot_task_list.dart';
+import 'package:auto_pilot/screens/menu_screens/auto_pilot_dashboard.dart';
 import 'package:auto_pilot/shared/drawer/auto_pilot_drawer.dart';
 import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:flutter/material.dart';
@@ -139,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       curve: Curves.easeIn); */
                 _pageController.jumpToPage(value);
               } */
-          if (value == 0) _pageController.jumpToPage(0);
+          if (value == 0) _pageController.jumpToPage(1);
           if (value == 1) _pageController.jumpToPage(2);
           if (value == 2) _pageController.jumpToPage(3);
         }
@@ -217,8 +217,8 @@ class _HomeScreenState extends State<HomeScreen> {
           child: FutureBuilder(
             builder: (context, snapshot) {
               return Container(
-                // Task
-                child: AutoPilotTasks(
+                // Dashboard
+                child: Dashboard(
                   scaffoldKey: _scaffoldKey,
                   pageController: _pageController,
                   myAutoPilotAppBar: myAutoPilotAppBar,

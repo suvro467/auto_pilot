@@ -1,5 +1,3 @@
-import 'package:auto_pilot/screens/menu_screens/task_list/task_list.dart';
-import 'package:auto_pilot/shared/globals.dart';
 import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,12 +5,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pie_chart/pie_chart.dart';
 
-class AutoPilotTasks extends StatefulWidget {
+class Dashboard extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final PageController pageController;
   final AppBar myAutoPilotAppBar;
   final BottomNavigationBar myAutoPilotBottomNavigationAppBar;
-  AutoPilotTasks(
+  Dashboard(
       {required this.scaffoldKey,
       required this.pageController,
       required this.myAutoPilotAppBar,
@@ -21,10 +19,10 @@ class AutoPilotTasks extends StatefulWidget {
       : super(key: key);
 
   @override
-  _AutoPilotTasksState createState() => _AutoPilotTasksState();
+  _DashboardState createState() => _DashboardState();
 }
 
-class _AutoPilotTasksState extends State<AutoPilotTasks>
+class _DashboardState extends State<Dashboard>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   bool isDelegatesExpanded = false;

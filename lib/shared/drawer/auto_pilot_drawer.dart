@@ -249,7 +249,7 @@ class _MyAutoPilotDrawerState extends State<MyAutoPilotDrawer> {
                   onTap: () {
                     Navigator.pop(context);
                     setState(() {
-                      widget.pageController.jumpToPage(0);
+                      widget.pageController.jumpToPage(1);
                     });
                   },
                 ),
