@@ -35,25 +35,8 @@ class _UserListScreen1State extends State<UserListScreen1>
   Map<String, double> tasksOnTime = {'Flutter': 60, 'Kotlin': 40};
   Map<String, double> approvedBenchaMark = {'Flutter': 80, 'Kotlin': 20};
 
-  late Icon trailingIconDelegatedTask;
-  late Icon trailingIconDelegatedTaskWeekly;
-  late Icon trailingIconDelegatedTaskMonthly;
-  late Icon trailingIconDelegatedTaskOverDue;
-
-  late Icon trailingIconRepeatTask;
-  late Icon trailingIconRepeatTaskWeekly;
-  late Icon trailingIconRepeatTaskMonthly;
-  late Icon trailingIconRepeatTaskOverDue;
-
-  late Icon trailingIconSupportTask;
-  late Icon trailingIconSupportTaskWeekly;
-  late Icon trailingIconSupportTaskMonthly;
-  late Icon trailingIconSupportTaskOverDue;
-
-  late Icon trailingIconPersonalTask;
-  late Icon trailingIconPersonalTaskWeekly;
-  late Icon trailingIconPersonalTaskMonthly;
-  late Icon trailingIconPersonalTaskOverDue;
+  late Widget editIcon;
+  late Widget deleteIcon;
 
   @override
   void initState() {
@@ -61,88 +44,18 @@ class _UserListScreen1State extends State<UserListScreen1>
 
     _tabController = TabController(length: 4, vsync: this);
 
-    trailingIconDelegatedTask = Icon(
-      Icons.arrow_drop_down,
-      color: MyAutoPilotStyles.appColor,
-      size: 36,
-    );
-    trailingIconRepeatTask = Icon(
-      Icons.arrow_drop_down,
-      color: MyAutoPilotStyles.appColor,
-      size: 36,
-    );
-    trailingIconSupportTask = Icon(
-      Icons.arrow_drop_down,
-      color: MyAutoPilotStyles.appColor,
-      size: 36,
-    );
-    trailingIconPersonalTask = Icon(
-      Icons.arrow_drop_down,
-      color: MyAutoPilotStyles.appColor,
-      size: 36,
+    editIcon = SvgPicture.asset(
+      'assets/images/edit.svg',
+      color: HexColor('#C9C9C9'),
+      height: 40,
+      width: 40,
     );
 
-    trailingIconDelegatedTaskWeekly = Icon(
-      Icons.arrow_drop_down,
-      color: MyAutoPilotStyles.appColor,
-      size: 36,
-    );
-    trailingIconRepeatTaskWeekly = Icon(
-      Icons.arrow_drop_down,
-      color: MyAutoPilotStyles.appColor,
-      size: 36,
-    );
-    trailingIconSupportTaskWeekly = Icon(
-      Icons.arrow_drop_down,
-      color: MyAutoPilotStyles.appColor,
-      size: 36,
-    );
-    trailingIconPersonalTaskWeekly = Icon(
-      Icons.arrow_drop_down,
-      color: MyAutoPilotStyles.appColor,
-      size: 36,
-    );
-
-    trailingIconDelegatedTaskMonthly = Icon(
-      Icons.arrow_drop_down,
-      color: MyAutoPilotStyles.appColor,
-      size: 36,
-    );
-    trailingIconRepeatTaskMonthly = Icon(
-      Icons.arrow_drop_down,
-      color: MyAutoPilotStyles.appColor,
-      size: 36,
-    );
-    trailingIconSupportTaskMonthly = Icon(
-      Icons.arrow_drop_down,
-      color: MyAutoPilotStyles.appColor,
-      size: 36,
-    );
-    trailingIconPersonalTaskMonthly = Icon(
-      Icons.arrow_drop_down,
-      color: MyAutoPilotStyles.appColor,
-      size: 36,
-    );
-
-    trailingIconDelegatedTaskOverDue = Icon(
-      Icons.arrow_drop_down,
-      color: MyAutoPilotStyles.appColor,
-      size: 36,
-    );
-    trailingIconRepeatTaskOverDue = Icon(
-      Icons.arrow_drop_down,
-      color: MyAutoPilotStyles.appColor,
-      size: 36,
-    );
-    trailingIconSupportTaskOverDue = Icon(
-      Icons.arrow_drop_down,
-      color: MyAutoPilotStyles.appColor,
-      size: 36,
-    );
-    trailingIconPersonalTaskOverDue = Icon(
-      Icons.arrow_drop_down,
-      color: MyAutoPilotStyles.appColor,
-      size: 36,
+    deleteIcon = SvgPicture.asset(
+      'assets/images/delete.svg',
+      color: HexColor('#C9C9C9'),
+      height: 40,
+      width: 40,
     );
   }
 
@@ -291,273 +204,54 @@ class _UserListScreen1State extends State<UserListScreen1>
                         ),
                       ),
                       clipBehavior: Clip.antiAlias,
-                      child: ExpansionTile(
-                        maintainState: true,
-                        title: Container(
-                            height: 70,
-                            color: Colors.white,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Transform.scale(
-                                        scale: 2.5,
-                                        child: SvgPicture.asset(
-                                          'assets/images/delegate task.svg',
-                                          color: MyAutoPilotStyles.appColor,
-                                          //semanticsLabel: 'Email Mobile',
-                                          height: 10,
-                                          width: 10,
-                                        ),
+                      child: Container(
+                        height: 70,
+                        color: Colors.white,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Transform.scale(
+                                    scale: 2.5,
+                                    child: SvgPicture.asset(
+                                      'assets/images/delegate task.svg',
+                                      color: MyAutoPilotStyles.appColor,
+                                      //semanticsLabel: 'Email Mobile',
+                                      height: 10,
+                                      width: 10,
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 20,
+                                    ),
+                                    child: Text(
+                                      'Test',
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
                                       ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 20,
-                                        ),
-                                        child: Text(
-                                          'Test',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                          ),
-                                        ),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 10,
+                                    ),
+                                    child: Text(
+                                      'Delegated Tasks',
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 16,
                                       ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 10,
-                                        ),
-                                        child: Text(
-                                          'Delegated Tasks',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                              ],
-                            )),
-
-                        trailing: Container(
-                          color: Colors.white,
-                          child: trailingIconDelegatedTask,
+                                    ),
+                                  ),
+                                ]),
+                          ],
                         ),
-                        //children: _getDelegatedTasks(0),
-                      ),
-                    ),
-                    Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      //color: Colors.amber[100],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
-                        ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: ExpansionTile(
-                        maintainState: true,
-                        title: Container(
-                            height: 70,
-                            color: Colors.white,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Transform.scale(
-                                        scale: 2.5,
-                                        child: SvgPicture.asset(
-                                          'assets/images/repeat.svg',
-                                          color: MyAutoPilotStyles.appColor,
-                                          //semanticsLabel: 'Email Mobile',
-                                          height: 10,
-                                          width: 10,
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 20,
-                                        ),
-                                        child: Text(
-                                          'Test',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 10,
-                                        ),
-                                        child: Text(
-                                          'Repeat Tasks',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                              ],
-                            )),
-
-                        trailing: Container(
-                          color: Colors.white,
-                          child: trailingIconRepeatTask,
-                        ),
-                        //children: _getRepeatTasks(0),
-                      ),
-                    ),
-                    Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      //color: Colors.amber[100],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
-                        ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: ExpansionTile(
-                        maintainState: true,
-                        title: Container(
-                            height: 70,
-                            color: Colors.white,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Transform.scale(
-                                        scale: 2.5,
-                                        child: SvgPicture.asset(
-                                          'assets/images/support.svg',
-                                          color: MyAutoPilotStyles.appColor,
-                                          //semanticsLabel: 'Email Mobile',
-                                          height: 10,
-                                          width: 10,
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 20,
-                                        ),
-                                        child: Text(
-                                          'Test',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 10,
-                                        ),
-                                        child: Text(
-                                          'Support Tasks',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                              ],
-                            )),
-                        trailing: Container(
-                          color: Colors.white,
-                          child: trailingIconSupportTask,
-                        ),
-                        //children: _getSupportTasks(0),
-                      ),
-                    ),
-                    Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      //color: Colors.amber[100],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
-                        ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: ExpansionTile(
-                        maintainState: true,
-                        title: Container(
-                            height: 70,
-                            color: Colors.white,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Transform.scale(
-                                        scale: 2.5,
-                                        child: SvgPicture.asset(
-                                          'assets/images/personal tasks.svg',
-                                          color: MyAutoPilotStyles.appColor,
-                                          //semanticsLabel: 'Email Mobile',
-                                          height: 10,
-                                          width: 10,
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 20,
-                                        ),
-                                        child: Text(
-                                          'Test',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 10,
-                                        ),
-                                        child: Text(
-                                          'Personal Tasks',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                              ],
-                            )),
-                        trailing: Container(
-                          color: Colors.white,
-                          child: trailingIconPersonalTask,
-                        ),
-                        //children: _getPersonalTasks(0),
                       ),
                     ),
                   ]),
@@ -576,276 +270,59 @@ class _UserListScreen1State extends State<UserListScreen1>
                         ),
                       ),
                       clipBehavior: Clip.antiAlias,
-                      child: ExpansionTile(
-                        maintainState: true,
-                        title: Container(
-                            height: 70,
-                            color: Colors.white,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Transform.scale(
-                                        scale: 2.5,
-                                        child: SvgPicture.asset(
-                                          'assets/images/delegate task.svg',
-                                          color: MyAutoPilotStyles.appColor,
-                                          //semanticsLabel: 'Email Mobile',
-                                          height: 10,
-                                          width: 10,
-                                        ),
+                      child: Container(
+                        height: 70,
+                        color: Colors.white,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Transform.scale(
+                                    scale: 2.5,
+                                    child: SvgPicture.asset(
+                                      'assets/images/delegate task.svg',
+                                      color: MyAutoPilotStyles.appColor,
+                                      //semanticsLabel: 'Email Mobile',
+                                      height: 10,
+                                      width: 10,
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 20,
+                                    ),
+                                    child: Text(
+                                      'Test',
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
                                       ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 20,
-                                        ),
-                                        child: Text(
-                                          'Test',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                          ),
-                                        ),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 10,
+                                    ),
+                                    child: Text(
+                                      'Delegated Tasks',
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 16,
                                       ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 10,
-                                        ),
-                                        child: Text(
-                                          'Delegated Tasks',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                              ],
-                            )),
-                        trailing: Container(
-                          color: Colors.white,
-                          child: trailingIconDelegatedTask,
+                                    ),
+                                  ),
+                                ]),
+                          ],
                         ),
-                        //children: _getDelegatedTasks(1),
-                      ),
-                    ),
-                    Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      //color: Colors.amber[100],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
-                        ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: ExpansionTile(
-                        maintainState: true,
-                        title: Container(
-                            height: 70,
-                            color: Colors.white,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Transform.scale(
-                                        scale: 2.5,
-                                        child: SvgPicture.asset(
-                                          'assets/images/repeat.svg',
-                                          color: MyAutoPilotStyles.appColor,
-                                          //semanticsLabel: 'Email Mobile',
-                                          height: 10,
-                                          width: 10,
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 20,
-                                        ),
-                                        child: Text(
-                                          'Test',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 10,
-                                        ),
-                                        child: Text(
-                                          'Repeat Tasks',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                              ],
-                            )),
-                        trailing: Container(
-                          color: Colors.white,
-                          child: trailingIconRepeatTask,
-                        ),
-                        //children: _getRepeatTasks(1),
-                      ),
-                    ),
-                    Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      //color: Colors.amber[100],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
-                        ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: ExpansionTile(
-                        maintainState: true,
-                        title: Container(
-                            height: 70,
-                            color: Colors.white,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Transform.scale(
-                                        scale: 2.5,
-                                        child: SvgPicture.asset(
-                                          'assets/images/support.svg',
-                                          color: MyAutoPilotStyles.appColor,
-                                          //semanticsLabel: 'Email Mobile',
-                                          height: 10,
-                                          width: 10,
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 20,
-                                        ),
-                                        child: Text(
-                                          'Test',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 10,
-                                        ),
-                                        child: Text(
-                                          'Support Tasks',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                              ],
-                            )),
-                        trailing: Container(
-                          color: Colors.white,
-                          child: trailingIconSupportTask,
-                        ),
-                        //children: _getSupportTasks(1),
-                      ),
-                    ),
-                    Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      //color: Colors.amber[100],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
-                        ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: ExpansionTile(
-                        maintainState: true,
-                        title: Container(
-                            height: 70,
-                            color: Colors.white,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Transform.scale(
-                                        scale: 2.5,
-                                        child: SvgPicture.asset(
-                                          'assets/images/personal tasks.svg',
-                                          color: MyAutoPilotStyles.appColor,
-                                          //semanticsLabel: 'Email Mobile',
-                                          height: 10,
-                                          width: 10,
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 20,
-                                        ),
-                                        child: Text(
-                                          'Test',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 10,
-                                        ),
-                                        child: Text(
-                                          'Personal Tasks',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                              ],
-                            )),
-                        trailing: Container(
-                          color: Colors.white,
-                          child: trailingIconPersonalTask,
-                        ),
-                        //children: _getPersonalTasks(1),
                       ),
                     ),
                   ]),
 
-                  // Monthly
+                  // Inactive
                   ListView(children: [
                     Card(
                       elevation: 5,
@@ -860,276 +337,59 @@ class _UserListScreen1State extends State<UserListScreen1>
                         ),
                       ),
                       clipBehavior: Clip.antiAlias,
-                      child: ExpansionTile(
-                        maintainState: true,
-                        title: Container(
-                            height: 70,
-                            color: Colors.white,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Transform.scale(
-                                        scale: 2.5,
-                                        child: SvgPicture.asset(
-                                          'assets/images/delegate task.svg',
-                                          color: MyAutoPilotStyles.appColor,
-                                          //semanticsLabel: 'Email Mobile',
-                                          height: 10,
-                                          width: 10,
-                                        ),
+                      child: Container(
+                        height: 70,
+                        color: Colors.white,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Transform.scale(
+                                    scale: 2.5,
+                                    child: SvgPicture.asset(
+                                      'assets/images/delegate task.svg',
+                                      color: MyAutoPilotStyles.appColor,
+                                      //semanticsLabel: 'Email Mobile',
+                                      height: 10,
+                                      width: 10,
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 20,
+                                    ),
+                                    child: Text(
+                                      'Test',
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
                                       ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 20,
-                                        ),
-                                        child: Text(
-                                          'Test',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                          ),
-                                        ),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 10,
+                                    ),
+                                    child: Text(
+                                      'Delegated Tasks',
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 16,
                                       ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 10,
-                                        ),
-                                        child: Text(
-                                          'Delegated Tasks',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                              ],
-                            )),
-                        trailing: Container(
-                          color: Colors.white,
-                          child: trailingIconDelegatedTask,
+                                    ),
+                                  ),
+                                ]),
+                          ],
                         ),
-                        //children: _getDelegatedTasks(2),
-                      ),
-                    ),
-                    Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      //color: Colors.amber[100],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
-                        ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: ExpansionTile(
-                        maintainState: true,
-                        title: Container(
-                            height: 70,
-                            color: Colors.white,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Transform.scale(
-                                        scale: 2.5,
-                                        child: SvgPicture.asset(
-                                          'assets/images/repeat.svg',
-                                          color: MyAutoPilotStyles.appColor,
-                                          //semanticsLabel: 'Email Mobile',
-                                          height: 10,
-                                          width: 10,
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 20,
-                                        ),
-                                        child: Text(
-                                          'Test',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 10,
-                                        ),
-                                        child: Text(
-                                          'Repeat Tasks',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                              ],
-                            )),
-                        trailing: Container(
-                          color: Colors.white,
-                          child: trailingIconRepeatTask,
-                        ),
-                        //children: _getRepeatTasks(2),
-                      ),
-                    ),
-                    Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      //color: Colors.amber[100],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
-                        ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: ExpansionTile(
-                        maintainState: true,
-                        title: Container(
-                            height: 70,
-                            color: Colors.white,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Transform.scale(
-                                        scale: 2.5,
-                                        child: SvgPicture.asset(
-                                          'assets/images/support.svg',
-                                          color: MyAutoPilotStyles.appColor,
-                                          //semanticsLabel: 'Email Mobile',
-                                          height: 10,
-                                          width: 10,
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 20,
-                                        ),
-                                        child: Text(
-                                          'Test',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 10,
-                                        ),
-                                        child: Text(
-                                          'Support Tasks',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                              ],
-                            )),
-                        trailing: Container(
-                          color: Colors.white,
-                          child: trailingIconSupportTask,
-                        ),
-                        //children: _getSupportTasks(2),
-                      ),
-                    ),
-                    Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      //color: Colors.amber[100],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
-                        ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: ExpansionTile(
-                        maintainState: true,
-                        title: Container(
-                            height: 70,
-                            color: Colors.white,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Transform.scale(
-                                        scale: 2.5,
-                                        child: SvgPicture.asset(
-                                          'assets/images/personal tasks.svg',
-                                          color: MyAutoPilotStyles.appColor,
-                                          //semanticsLabel: 'Email Mobile',
-                                          height: 10,
-                                          width: 10,
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 20,
-                                        ),
-                                        child: Text(
-                                          'Test',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 10,
-                                        ),
-                                        child: Text(
-                                          'Personal Tasks',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                              ],
-                            )),
-                        trailing: Container(
-                          color: Colors.white,
-                          child: trailingIconPersonalTask,
-                        ),
-                        //children: _getPersonalTasks(2),
                       ),
                     ),
                   ]),
 
-                  // Over Due
+                  // Deleted
                   ListView(children: [
                     Card(
                       elevation: 5,
@@ -1144,272 +404,54 @@ class _UserListScreen1State extends State<UserListScreen1>
                         ),
                       ),
                       clipBehavior: Clip.antiAlias,
-                      child: ExpansionTile(
-                        maintainState: true,
-                        title: Container(
-                            height: 70,
-                            color: Colors.white,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Transform.scale(
-                                        scale: 2.5,
-                                        child: SvgPicture.asset(
-                                          'assets/images/delegate task.svg',
-                                          color: MyAutoPilotStyles.appColor,
-                                          //semanticsLabel: 'Email Mobile',
-                                          height: 10,
-                                          width: 10,
-                                        ),
+                      child: Container(
+                        height: 70,
+                        color: Colors.white,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Transform.scale(
+                                    scale: 2.5,
+                                    child: SvgPicture.asset(
+                                      'assets/images/delegate task.svg',
+                                      color: MyAutoPilotStyles.appColor,
+                                      //semanticsLabel: 'Email Mobile',
+                                      height: 10,
+                                      width: 10,
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 20,
+                                    ),
+                                    child: Text(
+                                      'Test',
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
                                       ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 20,
-                                        ),
-                                        child: Text(
-                                          'Test',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                          ),
-                                        ),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      left: 10,
+                                    ),
+                                    child: Text(
+                                      'Delegated Tasks',
+                                      style: GoogleFonts.notoSerif(
+                                        color: HexColor('#707070'),
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 16,
                                       ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 10,
-                                        ),
-                                        child: Text(
-                                          'Delegated Tasks',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                              ],
-                            )),
-                        trailing: Container(
-                          color: Colors.white,
-                          child: trailingIconDelegatedTask,
+                                    ),
+                                  ),
+                                ]),
+                          ],
                         ),
-                        //children: _getDelegatedTasks(3),
-                      ),
-                    ),
-                    Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      //color: Colors.amber[100],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
-                        ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: ExpansionTile(
-                        maintainState: true,
-                        title: Container(
-                            height: 70,
-                            color: Colors.white,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Transform.scale(
-                                        scale: 2.5,
-                                        child: SvgPicture.asset(
-                                          'assets/images/repeat.svg',
-                                          color: MyAutoPilotStyles.appColor,
-                                          //semanticsLabel: 'Email Mobile',
-                                          height: 10,
-                                          width: 10,
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 20,
-                                        ),
-                                        child: Text(
-                                          'Test',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 10,
-                                        ),
-                                        child: Text(
-                                          'Repeat Tasks',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                              ],
-                            )),
-
-                        trailing: Container(
-                          color: Colors.white,
-                          child: trailingIconRepeatTask,
-                        ),
-                        //children: _getRepeatTasks(3),
-                      ),
-                    ),
-                    Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      //color: Colors.amber[100],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
-                        ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: ExpansionTile(
-                        maintainState: true,
-                        title: Container(
-                            height: 70,
-                            color: Colors.white,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Transform.scale(
-                                        scale: 2.5,
-                                        child: SvgPicture.asset(
-                                          'assets/images/support.svg',
-                                          color: MyAutoPilotStyles.appColor,
-                                          //semanticsLabel: 'Email Mobile',
-                                          height: 10,
-                                          width: 10,
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 20,
-                                        ),
-                                        child: Text(
-                                          'Test',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 10,
-                                        ),
-                                        child: Text(
-                                          'Support Tasks',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                              ],
-                            )),
-                        trailing: Container(
-                          color: Colors.white,
-                          child: trailingIconSupportTask,
-                        ),
-                        //children: _getSupportTasks(3),
-                      ),
-                    ),
-                    Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      //color: Colors.amber[100],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
-                        ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: ExpansionTile(
-                        maintainState: true,
-                        title: Container(
-                            height: 70,
-                            color: Colors.white,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Transform.scale(
-                                        scale: 2.5,
-                                        child: SvgPicture.asset(
-                                          'assets/images/personal tasks.svg',
-                                          color: MyAutoPilotStyles.appColor,
-                                          //semanticsLabel: 'Email Mobile',
-                                          height: 10,
-                                          width: 10,
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 20,
-                                        ),
-                                        child: Text(
-                                          'Test',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(
-                                          left: 10,
-                                        ),
-                                        child: Text(
-                                          'Personal Tasks',
-                                          style: GoogleFonts.notoSerif(
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                              ],
-                            )),
-                        trailing: Container(
-                          color: Colors.white,
-                          child: trailingIconPersonalTask,
-                        ),
-                        //children: _getPersonalTasks(3),
                       ),
                     ),
                   ]),
