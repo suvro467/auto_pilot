@@ -7,6 +7,7 @@ import 'dart:math' as math;
 import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:auto_pilot/shared/widgets/custom_date_picker_time_period/custom_calendar_date_picker.dart';
 import 'package:auto_pilot/shared/widgets/custom_date_picker_time_period/custom_dialog.dart';
+import 'package:auto_pilot/shared/widgets/show_message.dart';
 import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -501,7 +502,9 @@ class _DatePickerDialogState extends State<DatePickerDialog>
         Navigator.pop(context, returnedDates);
       }
     } else {
-      // Date is not valid.
+      // Date range selection is not valid.
+      ShowMessage.showFlushBar(
+          context, 'To Date must be greater than or equal to From Date.');
     }
   }
 
