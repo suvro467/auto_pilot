@@ -27,6 +27,7 @@ const double _inputFormLandscapeHeight = 108.0;
 Map<String, DateTime>? returnedDates = {};
 DateTime fromDateSelected = DateTime.now();
 DateTime toDateSelected = DateTime.now();
+bool dateRangeValid = false;
 
 Future<Map<String, DateTime>?> showDatePickerTimePeriod({
   required BuildContext context,
@@ -479,24 +480,28 @@ class _DatePickerDialogState extends State<DatePickerDialog>
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   void _handleOk() {
-    if (_entryMode.value == DatePickerEntryMode.input ||
-        _entryMode.value == DatePickerEntryMode.inputOnly) {
-      final FormState form = _formKey.currentState!;
-      if (!form.validate()) {
-        setState(() => _autoValidate.value = true);
-        return;
+    if (dateRangeValid) {
+      if (_entryMode.value == DatePickerEntryMode.input ||
+          _entryMode.value == DatePickerEntryMode.inputOnly) {
+        final FormState form = _formKey.currentState!;
+        if (!form.validate()) {
+          setState(() => _autoValidate.value = true);
+          return;
+        }
+        form.save();
       }
-      form.save();
-    }
-    if (widget.calledFrom == 'fromDate') {
-      returnedDates!['fromDate'] = _selectedDate.value;
-      fromDateSelected = _selectedDate.value;
-    } else if (widget.calledFrom == 'toDate') {
-      returnedDates!['toDate'] = _selectedDate.value;
-      toDateSelected = _selectedDate.value;
-    }
-    if (returnedDates!.isNotEmpty) {
-      Navigator.pop(context, returnedDates);
+      if (widget.calledFrom == 'fromDate') {
+        returnedDates!['fromDate'] = _selectedDate.value;
+        fromDateSelected = _selectedDate.value;
+      } else if (widget.calledFrom == 'toDate') {
+        returnedDates!['toDate'] = _selectedDate.value;
+        toDateSelected = _selectedDate.value;
+      }
+      if (returnedDates!.isNotEmpty) {
+        Navigator.pop(context, returnedDates);
+      }
+    } else {
+      // Date is not valid.
     }
   }
 
@@ -524,13 +529,41 @@ class _DatePickerDialogState extends State<DatePickerDialog>
   }
 
   void _handleDateChanged(DateTime date) {
-    setState(() {
-      _selectedDate.value = date;
+    _selectedDate.value = date;
+
+    DateTime previousFromDate = fromDateSelected;
+    DateTime previousToDate = toDateSelected;
+    dateRangeValid = true;
+    if (widget.calledFrom == 'fromDate') {
+      fromDateSelected = date;
+    } else if (widget.calledFrom == 'toDate') {
+      toDateSelected = date;
+    }
+
+    if (fromDateSelected.year > toDateSelected.year) {
+      dateRangeValid = false;
+    } else if (fromDateSelected.year == toDateSelected.year &&
+        fromDateSelected.month > toDateSelected.month) {
+      dateRangeValid = false;
+    } else if (fromDateSelected.year == toDateSelected.year &&
+        fromDateSelected.month == toDateSelected.month &&
+        fromDateSelected.day > toDateSelected.day) {
+      dateRangeValid = false;
+    } else {
+      dateRangeValid = true;
+    }
+    if (!dateRangeValid) {
       if (widget.calledFrom == 'fromDate') {
-        fromDateSelected = date;
+        fromDateSelected = previousFromDate;
+        _selectedDate.value = previousFromDate;
       } else if (widget.calledFrom == 'toDate') {
-        toDateSelected = date;
+        toDateSelected = previousToDate;
+        _selectedDate.value = previousToDate;
       }
+    }
+
+    //if (dateRangeValid)
+    setState(() {
       widget.callback();
     });
   }
