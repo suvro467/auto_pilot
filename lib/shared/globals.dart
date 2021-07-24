@@ -48,4 +48,7 @@ class Globals {
   static String userLastName = '';
 
   static String designation = '';
+
+  // Base url of the APIs
+
 }
