@@ -216,377 +216,153 @@ class _UserListScreen1State extends State<UserListScreen1>
                                   child: FadeInAnimation(
                                     child: InkWell(
                                       splashColor: Colors.orange.withAlpha(30),
-                                      onTap: () {
-                                        /* setState(() {
-                                                          item_val = items[index];
-                                                        }); */
-
-                                        // On tapping the list item, the following bottom sheet will pop up
-                                        /* showModalBottomSheet(
-                                          clipBehavior: Clip.antiAlias,
-                                          context: context,
-                                          isScrollControlled: true,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(20.0),
-                                                topRight:
-                                                    Radius.circular(20.0)),
+                                      onTap: () {},
+                                      child: Card(
+                                        elevation: 5,
+                                        shadowColor: Colors.black,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.only(
+                                            topRight: Radius.elliptical(2, 2),
+                                            bottomRight:
+                                                Radius.elliptical(2, 2),
+                                            topLeft: Radius.elliptical(2, 2),
+                                            bottomLeft: Radius.elliptical(2, 2),
                                           ),
-                                          builder: (context) {
-                                            return SingleChildScrollView(
-                                              child: Column(
+                                        ),
+                                        clipBehavior: Clip.antiAlias,
+                                        child: Container(
+                                          height: 80,
+                                          color: Colors.white,
+                                          /* padding: const EdgeInsets.fromLTRB(
+                                              4.0, 5.0, 0, 5.0), */
+                                          padding: EdgeInsets.only(
+                                            right: 10,
+                                            left: 10,
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Row(
                                                 children: [
-                                                  SizedBox(
-                                                    height: 10.0,
-                                                  ),
-                                                  ListTile(
-                                                    leading: Container(
-                                                      decoration: BoxDecoration(
-                                                        color: Colors.white,
-                                                        border: Border.all(
-                                                          color: Colors.white,
+                                                  Container(
+                                                    height: 40.0,
+                                                    width: 40.0,
+                                                    margin: const EdgeInsets
+                                                            .only(
+                                                        bottom:
+                                                            6.0), //Same as `blurRadius` i guess
+                                                    decoration: BoxDecoration(
+                                                      image: DecorationImage(
+                                                        image: AssetImage(
+                                                          'assets/images/selfpic.jpg',
                                                         ),
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    20)),
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color: Colors
-                                                                .grey[300],
-                                                            //offset: Offset(0.0, 1.0), //(x,y)
-                                                            blurRadius: 6.0,
+                                                      ),
+                                                      shape: BoxShape.circle,
+                                                      color: Colors.white,
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.grey,
+                                                          offset: Offset(
+                                                              0.0, 1.0), //(x,y)
+                                                          blurRadius: 6.0,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    /* child: Image(
+                                                  image: AssetImage(
+                                                    'assets/images/selfpic.jpg',
+                                                  ),
+                                                ), */
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                      left: 20.0,
+                                                      top: 10,
+                                                      bottom: 10,
+                                                    ),
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          "${data['firstName']}",
+                                                          textAlign:
+                                                              TextAlign.left,
+                                                          style: GoogleFonts
+                                                              .notoSerif(
+                                                            color: HexColor(
+                                                                '#707070'),
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .normal,
+                                                            fontSize: 14,
                                                           ),
-                                                        ],
-                                                      ),
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsets.all(8.0),
-                                                        child: Icon(
-                                                          Icons.edit,
-                                                          color:
-                                                              Color(0xff132ba3),
-                                                          size: 15,
                                                         ),
-                                                      ),
-                                                    ),
-                                                    title: Text(
-                                                      'Edit',
-                                                      style: TextStyle(
-                                                        fontSize: 14.0,
-                                                      ),
-                                                    ),
-                                                    //subtitle: Text("subtitle Edit"),
-                                                    onTap: () async {
-                                                      var complementary =
-                                                          await getComplementaryInfo(data
-                                                                  .storeComplementaryId
-                                                                  .toString())
-                                                              .onError((error,
-                                                                  stackTrace) {
-                                                        print(error.toString());
-                                                        return null;
-                                                      });
-                                                      if (complementary !=
-                                                          null) {
-                                                        await Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder:
-                                                                  (context) {
-                                                            return AddComplementary(
-                                                              isEdit: true,
-                                                              complementaryId:
-                                                                  complementary[
-                                                                      'complementaryId'],
-                                                              complementaryName:
-                                                                  complementary[
-                                                                      'complementaryName'],
-                                                              printingName:
-                                                                  complementary[
-                                                                      'printingName'],
-                                                              details:
-                                                                  complementary[
-                                                                      'details'],
-                                                              minimumAmount:
-                                                                  complementary[
-                                                                      'minimumAmount'],
-                                                              collectionStatus:
-                                                                  complementary[
-                                                                              'collectionStatus'] ==
-                                                                          1
-                                                                      ? true
-                                                                      : false,
-                                                              waitingStatus:
-                                                                  complementary[
-                                                                              'waitingStatus'] ==
-                                                                          1
-                                                                      ? true
-                                                                      : false,
-                                                              restaurantStatus:
-                                                                  complementary[
-                                                                              'restaurantStatus'] ==
-                                                                          1
-                                                                      ? true
-                                                                      : false,
-                                                              deliveryStatus:
-                                                                  complementary[
-                                                                              'deliveryStatus'] ==
-                                                                          1
-                                                                      ? true
-                                                                      : false,
-                                                              websiteStatus:
-                                                                  complementary[
-                                                                              'websiteStatus'] ==
-                                                                          1
-                                                                      ? true
-                                                                      : false,
-                                                              systemStatus:
-                                                                  complementary[
-                                                                              'systemStatus'] ==
-                                                                          1
-                                                                      ? true
-                                                                      : false,
-                                                              dineOrderStatus:
-                                                                  complementary[
-                                                                              'dineOrderStatus'] ==
-                                                                          1
-                                                                      ? true
-                                                                      : false,
-                                                              storeId:
-                                                                  complementary[
-                                                                      'storeId'],
-                                                              storeComplementaryOrder:
-                                                                  complementary[
-                                                                      'storeComplementaryOrder'],
-                                                            );
-                                                          }),
-                                                        );
-                                                        Navigator.pop(context);
-                                                        setState(() {});
-                                                      } else {
-                                                        ShowMessage
-                                                            .showErrorMessage(
-                                                                context,
-                                                                'Could not fetch data, please try again later.');
-                                                      }
-                                                    },
-                                                  ),
-                                                  Divider(
-                                                    height: 0,
-                                                    thickness: 1.0,
-                                                    color: Colors.grey[300],
-                                                    indent: 20,
-                                                    endIndent: 20,
-                                                  ),
-                                                  ListTile(
-                                                    leading: Container(
-                                                      decoration: BoxDecoration(
-                                                        color: Colors.white,
-                                                        border: Border.all(
-                                                          color: Colors.white,
+                                                        SizedBox(
+                                                          height: 5,
                                                         ),
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    20)),
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color: Colors
-                                                                .grey[300],
-                                                            //offset: Offset(0.0, 1.0), //(x,y)
-                                                            blurRadius: 6.0,
+                                                        Text(
+                                                          "${data['teamName']}",
+                                                          textAlign:
+                                                              TextAlign.left,
+                                                          style: GoogleFonts
+                                                              .notoSans(
+                                                            color: HexColor(
+                                                                '#707070'),
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .normal,
+                                                            fontSize: 12,
                                                           ),
-                                                        ],
-                                                      ),
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsets.all(8.0),
-                                                        child: Icon(
-                                                          Icons.delete,
-                                                          color:
-                                                              Color(0xff132ba3),
-                                                          size: 15,
                                                         ),
-                                                      ),
+                                                      ],
                                                     ),
-                                                    title: Text(
-                                                      'Delete',
-                                                      style: TextStyle(
-                                                        fontSize: 14.0,
-                                                      ),
-                                                    ),
-                                                    //subtitle: Text("Delete contents"),
-                                                    onTap: () async {
-                                                      Navigator.pop(context);
-                                                      showDialog<void>(
-                                                        context: context,
-                                                        barrierDismissible:
-                                                            false, // user must tap button!
-                                                        builder: (BuildContext
-                                                            context) {
-                                                          return AlertDialog(
-                                                            title: Text(
-                                                                'Confirmation'),
-                                                            content:
-                                                                SingleChildScrollView(
-                                                              child: ListBody(
-                                                                children: <
-                                                                    Widget>[
-                                                                  Text(
-                                                                      'Are you sure?'),
-                                                                  /* Text(
-                                                                                                                              'Would you like to approve of this message?'), */
-                                                                ],
-                                                              ),
-                                                            ),
-                                                            actions: <Widget>[
-                                                              TextButton(
-                                                                child: Text(
-                                                                    'Confirm'),
-                                                                onPressed:
-                                                                    () async {
-                                                                  // Show the progress dialogue.
-                                                                  var responseResult =
-                                                                      {};
-                                                                  ProgressDialog
-                                                                      progressDialog =
-                                                                      ProgressDialog(
-                                                                          context,
-                                                                          message: Text(
-                                                                              "This is the message"),
-                                                                          title:
-                                                                              Text("This is the title"));
-
-                                                                  progressDialog
-                                                                      .setTitle(
-                                                                          Text(
-                                                                              "Updating"));
-                                                                  progressDialog
-                                                                      .setMessage(
-                                                                          Text(
-                                                                              "Please Wait, Updating data ..."));
-                                                                  // Show the progress dialogue here before calling the API.
-                                                                  progressDialog
-                                                                      .show();
-                                                                  await deleteComplementary(data
-                                                                          .storeComplementaryId
-                                                                          .toString())
-                                                                      .then(
-                                                                          (value) {
-                                                                        responseResult =
-                                                                            value;
-                                                                        progressDialog
-                                                                            .dismiss();
-                                                                      })
-                                                                      .timeout(
-                                                                          Duration(
-                                                                              seconds:
-                                                                                  10),
-                                                                          onTimeout:
-                                                                              (() {}))
-                                                                      .onError(
-                                                                          (error,
-                                                                              stackTrace) {});
-                                                                  print(
-                                                                      responseResult);
-                                                                  if (!Globals
-                                                                      .checkEmpty(
-                                                                          responseResult)) {
-                                                                    progressDialog
-                                                                        .dismiss();
-                                                                    if (!Globals.checkEmpty(responseResult[
-                                                                            'status']) &&
-                                                                        !Globals.checkEmpty(
-                                                                            responseResult['msg'])) {
-                                                                      ShowMessage
-                                                                          .showSnackBarWithStatus(
-                                                                        context,
-                                                                        responseResult[
-                                                                            'msg'],
-                                                                        responseResult[
-                                                                            'status'],
-                                                                      );
-                                                                    }
-                                                                  } else {
-                                                                    progressDialog
-                                                                        .dismiss();
-
-                                                                    ShowMessage
-                                                                        .showSnackBarWithStatus(
-                                                                      context,
-                                                                      'Error! please try again after some time',
-                                                                      'error',
-                                                                    );
-                                                                  }
-
-                                                                  Navigator.pop(
-                                                                      context);
-                                                                  setState(
-                                                                      () {});
-                                                                },
-                                                              ),
-                                                              TextButton(
-                                                                child: Text(
-                                                                  'Cancel',
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .black38),
-                                                                ),
-                                                                onPressed: () {
-                                                                  Navigator.of(
-                                                                          context)
-                                                                      .pop();
-                                                                },
-                                                              ),
-                                                            ],
-                                                          );
-                                                        },
-                                                      );
-                                                    },
                                                   ),
                                                 ],
                                               ),
-                                            );
-                                          },
-                                        );
-                                       */
-                                      },
-                                      child: Column(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                4.0, 5.0, 0, 5.0),
-                                            child: ListTile(
-                                              title: Text(
-                                                "${data['firstName']}",
-                                                textAlign: TextAlign.left,
-                                                style: TextStyle(
-                                                  fontSize: 14.0,
-                                                  /* color: DineOrderStyles
-                                                                          .departmentListItemColor, */
-                                                  fontFamily: 'Proxima',
+                                              Row(children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10.0),
+                                                  child: IconButton(
+                                                    icon: SvgPicture.asset(
+                                                      'assets/images/edit.svg',
+                                                      color:
+                                                          HexColor('#C9C9C9'),
+                                                      height: 30,
+                                                      width: 30,
+                                                    ),
+                                                    onPressed: () {},
+                                                  ),
                                                 ),
-                                              ),
-                                              trailing: Container(
-                                                height: 50.0,
-                                                width: 50.0,
-                                                decoration: BoxDecoration(
-                                                  color: Color.fromRGBO(
-                                                      228, 241, 255, 0.44),
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(5)),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10.0),
+                                                  child: IconButton(
+                                                    icon: SvgPicture.asset(
+                                                      'assets/images/delete.svg',
+                                                      color:
+                                                          HexColor('#C9C9C9'),
+                                                      height: 30,
+                                                      width: 30,
+                                                    ),
+                                                    onPressed: () {},
+                                                  ),
                                                 ),
-                                                child: Center(child: editIcon),
-                                              ),
-                                            ),
+                                              ]),
+                                            ],
                                           ),
-                                          Divider(
-                                            color: Colors.black26,
-                                            height: 0.0,
-                                          ),
-                                        ],
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -899,9 +675,9 @@ class _UserListScreen1State extends State<UserListScreen1>
     return {
       'users': [
         {'firstName': 'Suvradip Roy', 'teamName': 'Team 01'},
-        {'firstName': 'Suvradip Roy', 'teamName': 'Team 01'},
-        {'firstName': 'Suvradip Roy', 'teamName': 'Team 01'},
-        {'firstName': 'Suvradip Roy', 'teamName': 'Team 01'},
+        {'firstName': 'Suvradip Roy', 'teamName': 'Team 02'},
+        {'firstName': 'Suvradip Roy', 'teamName': 'Team 03'},
+        {'firstName': 'Suvradip Roy', 'teamName': 'Team 04'},
       ]
     };
   }
