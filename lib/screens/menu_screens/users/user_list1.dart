@@ -338,8 +338,8 @@ class _UserListScreen1State extends State<UserListScreen1>
                                                       'assets/images/edit.svg',
                                                       color:
                                                           HexColor('#C9C9C9'),
-                                                      height: 30,
-                                                      width: 30,
+                                                      height: 20,
+                                                      width: 20,
                                                     ),
                                                     onPressed: () {},
                                                   ),
@@ -353,8 +353,8 @@ class _UserListScreen1State extends State<UserListScreen1>
                                                       'assets/images/delete.svg',
                                                       color:
                                                           HexColor('#C9C9C9'),
-                                                      height: 30,
-                                                      width: 30,
+                                                      height: 20,
+                                                      width: 20,
                                                     ),
                                                     onPressed: () {},
                                                   ),
