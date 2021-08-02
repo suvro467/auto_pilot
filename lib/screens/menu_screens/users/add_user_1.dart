@@ -2,12 +2,10 @@ import 'dart:async';
 
 import 'package:auto_pilot/shared/globals.dart';
 import 'package:auto_pilot/shared/presentation/styles.dart';
-import 'package:auto_pilot/shared/widgets/loading_dialog.dart';
 import 'package:auto_pilot/shared/widgets/show_message.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -45,11 +43,14 @@ class _AddUser1State extends State<AddUser1>
   bool markHod = false;
 
   final TextEditingController _userNameController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
   late bool _isUserNameValid;
+  late bool _isPhoneValid;
 
   late String _validationText;
 
   late int _timesTappedUserName;
+  late int _timesTappedPhone;
 
   //String baseUrl = Globals.baseUrl;
 
@@ -61,7 +62,9 @@ class _AddUser1State extends State<AddUser1>
 
     _validationText = 'Please fill in this field';
     _isUserNameValid = true;
+    _isPhoneValid = true;
     _timesTappedUserName = 0;
+    _timesTappedPhone = 0;
 
     // Start listening to changes
     _userNameController.addListener(() {
@@ -72,6 +75,18 @@ class _AddUser1State extends State<AddUser1>
       } else {
         setState(() {
           _isUserNameValid = true;
+        });
+      }
+    });
+
+    _phoneNumberController.addListener(() {
+      if (_phoneNumberController.text.isEmpty && _timesTappedPhone > 0) {
+        setState(() {
+          _isPhoneValid = false;
+        });
+      } else {
+        setState(() {
+          _isPhoneValid = true;
         });
       }
     });
@@ -225,26 +240,154 @@ class _AddUser1State extends State<AddUser1>
                       )
                     : Container()
               ]),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 180,
+                      padding: const EdgeInsets.only(
+                        left: 50.0,
+                        //right: 50,
+                        top: 20,
+                      ),
+                      child: TextField(
+                        enabled: false,
+                        decoration: InputDecoration(
+                          disabledBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
+                          ),
+                          labelStyle: GoogleFonts.notoSerif(
+                            fontSize: 14,
+                            color: HexColor('#C9C9C9'),
+                            fontWeight: FontWeight.normal,
+                          ),
+                          prefixIcon: Transform.scale(
+                            scale: 0.6,
+                            child: SvgPicture.asset(
+                              'assets/images/phone.svg',
+                              color: MyAutoPilotStyles.appColor,
+                              //semanticsLabel: 'Email Mobile',
+                              height: 10,
+                              width: 10,
+                            ),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
+                          ),
+                          hintText: '+91 (IND)',
+                          hintStyle: GoogleFonts.notoSerif(
+                            fontSize: 14,
+                            color: HexColor('#C9C9C9'),
+                            fontWeight: FontWeight.normal,
+                            //decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Stack(children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 10.0,
+                    right: 50,
+                    top: 20,
+                  ),
+                  child: TextField(
+                    controller: _phoneNumberController,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(10)
+                    ],
+                    onChanged: (value) {
+                      _timesTappedPhone += 1;
+                    },
+                    decoration: InputDecoration(
+                      labelStyle: GoogleFonts.notoSerif(
+                        fontSize: 14,
+                        color: HexColor('#C9C9C9'),
+                        fontWeight: FontWeight.normal,
+                      ),
+                      /* prefixIcon: Transform.scale(
+                                    scale: 0.7,
+                                    child: SvgPicture.asset(
+                                      'assets/images/otp.svg',
+                                      color: MyAutoPilotStyles.appColor,
+                                      //semanticsLabel: 'Email Mobile',
+                                      height: 10,
+                                      width: 10,
+                                    ),
+                                  ), */
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide:
+                            BorderSide(color: MyAutoPilotStyles.appColor),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide:
+                            BorderSide(color: MyAutoPilotStyles.appColor),
+                      ),
+                      hintText: 'Contact Number',
+                      hintStyle: GoogleFonts.notoSerif(
+                        fontSize: 14,
+                        color: HexColor('#C9C9C9'),
+                        fontWeight: FontWeight.normal,
+                        //decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ),
+                ),
+                !_isPhoneValid
+                    ? Positioned(
+                        right: 50.0,
+                        top: 55.0,
+                        child: new Container(
+                          child: Text(
+                            '$_validationText',
+                            style: TextStyle(
+                              color: Globals.validationColor,
+                              fontSize: 10.0,
+                            ),
+                          ),
+                        ),
+                      )
+                    : Container()
+              ]),
               Padding(
                 padding: EdgeInsets.all(25),
                 child: ConstrainedBox(
                   constraints: BoxConstraints.tightFor(width: 130, height: 55),
                   child: ElevatedButton(
-                      onPressed: () async {
-                        if (!_isUserNameValid ||
-                            _userNameController.text.isEmpty) {
-                          if (_userNameController.text.isEmpty)
-                            _isUserNameValid = false;
+                    onPressed: () async {
+                      if (!_isUserNameValid ||
+                          _userNameController.text.isEmpty ||
+                          !_isPhoneValid ||
+                          _phoneNumberController.text.isEmpty) {
+                        if (_userNameController.text.isEmpty)
+                          _isUserNameValid = false;
+                        if (_phoneNumberController.text.isEmpty)
+                          _isPhoneValid = false;
 
-                          setState(() {});
-                          ShowMessage.showFlushBar(
-                              context, 'Please rectify the errors.');
-                        } else {
-                          setState(() {
-                            _isUserNameValid = true;
-                          });
+                        setState(() {});
+                        ShowMessage.showFlushBar(
+                            context, 'Please rectify the errors.');
+                      } else {
+                        setState(() {
+                          _isUserNameValid = true;
+                          _isPhoneValid = true;
+                        });
 
-                          /* showDialog(
+                        /* showDialog(
                             context: context,
                             barrierDismissible: false,
                             builder: (BuildContext context) {
@@ -252,9 +395,9 @@ class _AddUser1State extends State<AddUser1>
                             },
                           ); */
 
-                          // API call for Sign Up
+                        // API call for Sign Up
 
-                          /* await Future.delayed(new Duration(seconds: 3), () {
+                        /* await Future.delayed(new Duration(seconds: 3), () {
                             Navigator.pop(context); //pop dialog
                           }).then((value) {
                             // After successfull signup, show a dialog to return to the login screen.
@@ -449,22 +592,23 @@ class _AddUser1State extends State<AddUser1>
                               },
                             );
                           }); */
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                        primary: MyAutoPilotStyles.appColor,
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
                       ),
-                      child: Text(
-                        'SIGN UP',
-                        style: GoogleFonts.notoSerif(
-                          fontSize: 17,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )),
+                      primary: MyAutoPilotStyles.appColor,
+                    ),
+                    child: Text(
+                      'ADD USER',
+                      style: GoogleFonts.notoSerif(
+                        fontSize: 17,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ],
