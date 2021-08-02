@@ -91,7 +91,9 @@ class _UserListScreen1State extends State<UserListScreen1>
                   ),
                   InkWell(
                     borderRadius: BorderRadius.circular(40),
-                    onTap: () async {},
+                    onTap: () async {
+                      widget.pageController.jumpToPage(6);
+                    },
                     child: SvgPicture.asset(
                       'assets/images/plus.svg',
                       color: MyAutoPilotStyles.appColor,
