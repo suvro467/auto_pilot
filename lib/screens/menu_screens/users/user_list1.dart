@@ -92,7 +92,11 @@ class _UserListScreen1State extends State<UserListScreen1>
                   InkWell(
                     borderRadius: BorderRadius.circular(40),
                     onTap: () async {
-                      widget.pageController.jumpToPage(6);
+                      widget.pageController.animateToPage(
+                        6,
+                        duration: Duration(milliseconds: 500),
+                        curve: Curves.easeIn,
+                      );
                     },
                     child: SvgPicture.asset(
                       'assets/images/plus.svg',
