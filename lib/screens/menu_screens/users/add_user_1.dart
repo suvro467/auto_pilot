@@ -110,7 +110,7 @@ class _AddUser1State extends State<AddUser1>
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(right: 20.0),
+                      padding: EdgeInsets.only(right: 10.0),
                       child: Text(
                         'Mark HOD',
                         style: GoogleFonts.notoSerif(
