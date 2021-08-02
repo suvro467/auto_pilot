@@ -6,6 +6,7 @@ import 'package:auto_pilot/shared/widgets/loading_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -39,6 +40,8 @@ class _AddUser1State extends State<AddUser1>
   Map<String, double> tasksCompleted = {'Flutter': 90, 'Kotlin': 10};
   Map<String, double> tasksOnTime = {'Flutter': 60, 'Kotlin': 40};
   Map<String, double> approvedBenchaMark = {'Flutter': 80, 'Kotlin': 20};
+
+  bool markHod = false;
 
   //String baseUrl = Globals.baseUrl;
 
@@ -93,6 +96,44 @@ class _AddUser1State extends State<AddUser1>
                               fontSize: 12,
                             )),
                       ],
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 40.0,
+                  right: 40.0,
+                  top: 20,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(right: 20.0),
+                      child: Text(
+                        'Mark HOD',
+                        style: GoogleFonts.notoSerif(
+                          color: HexColor('#707070'),
+                          fontWeight: FontWeight.normal,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                    FlutterSwitch(
+                      //toggleColor: HexColor('#C9C9C9'),
+                      width: 60,
+                      height: 30,
+                      toggleSize: 30,
+                      activeColor: MyAutoPilotStyles.appColor,
+                      value: markHod,
+                      /* borderRadius: 30.0,
+                      padding: 8.0, */
+                      onToggle: (val) {
+                        setState(() {
+                          markHod = val;
+                        });
+                      },
                     ),
                   ],
                 ),
