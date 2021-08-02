@@ -120,20 +120,34 @@ class _AddUser1State extends State<AddUser1>
                         ),
                       ),
                     ),
-                    FlutterSwitch(
-                      //toggleColor: HexColor('#C9C9C9'),
-                      width: 60,
-                      height: 30,
-                      toggleSize: 30,
-                      activeColor: MyAutoPilotStyles.appColor,
+                    // FlutterSwitch(
+                    //   //toggleColor: HexColor('#C9C9C9'),
+                    //   width: 60,
+                    //   height: 30,
+                    //   //toggleSize: 30,
+                    //   activeColor: MyAutoPilotStyles.appColor,
+                    //   value: markHod,
+                    //   /* borderRadius: 30.0,
+                    //   padding: 8.0, */
+                    //   borderRadius: 30,
+                    //   onToggle: (val) {
+                    //     setState(() {
+                    //       markHod = val;
+                    //     });
+                    //   },
+                    // ),
+                    Switch(
                       value: markHod,
-                      /* borderRadius: 30.0,
-                      padding: 8.0, */
-                      onToggle: (val) {
+                      onChanged: (value) {
                         setState(() {
-                          markHod = val;
+                          markHod = value;
+                          print(markHod);
                         });
                       },
+                      activeTrackColor: MyAutoPilotStyles.appColor,
+                      activeColor: HexColor('#669db6'),
+                      inactiveThumbColor: HexColor('#C9C9C9'),
+                      inactiveTrackColor: HexColor('#707070'),
                     ),
                   ],
                 ),
