@@ -44,13 +44,18 @@ class _AddUser1State extends State<AddUser1>
 
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+
   late bool _isUserNameValid;
   late bool _isPhoneValid;
+  late bool _isEmailBlank; // This checks for blank email address
+  late bool _isValidEmail; // This checks for valid email address
 
   late String _validationText;
 
   late int _timesTappedUserName;
   late int _timesTappedPhone;
+  late int _timesTappedEmail;
 
   //String baseUrl = Globals.baseUrl;
 
@@ -63,8 +68,11 @@ class _AddUser1State extends State<AddUser1>
     _validationText = 'Please fill in this field';
     _isUserNameValid = true;
     _isPhoneValid = true;
+    _isEmailBlank = true;
+    _isValidEmail = true;
     _timesTappedUserName = 0;
     _timesTappedPhone = 0;
+    _timesTappedEmail = 0;
 
     // Start listening to changes
     _userNameController.addListener(() {
@@ -90,6 +98,18 @@ class _AddUser1State extends State<AddUser1>
         });
       }
     });
+
+    _emailController.addListener(() {
+      if (_emailController.text.isEmpty && _timesTappedEmail > 0) {
+        setState(() {
+          _isEmailBlank = false;
+        });
+      } else {
+        setState(() {
+          _isEmailBlank = true;
+        });
+      }
+    });
   }
 
   @override
@@ -97,6 +117,7 @@ class _AddUser1State extends State<AddUser1>
     super.dispose();
     _tabController.dispose();
     _userNameController.dispose();
+    _emailController.dispose();
   }
 
   @override
@@ -356,6 +377,83 @@ class _AddUser1State extends State<AddUser1>
                           )
                         : Container()
                   ]),
+                  Stack(children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 50.0,
+                        right: 50,
+                        top: 20,
+                      ),
+                      child: TextField(
+                        controller: _emailController,
+                        onChanged: (value) {
+                          _timesTappedEmail += 1;
+                        },
+                        decoration: InputDecoration(
+                          labelStyle: GoogleFonts.notoSerif(
+                            fontSize: 14,
+                            color: HexColor('#C9C9C9'),
+                            fontWeight: FontWeight.normal,
+                            //decoration: TextDecoration.underline,
+                          ),
+                          prefixIcon: Transform.scale(
+                            scale: 0.7,
+                            child: SvgPicture.asset(
+                              'assets/images/email.svg',
+                              color: MyAutoPilotStyles.appColor,
+                              //semanticsLabel: 'Email Mobile',
+                              height: 10,
+                              width: 10,
+                            ),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
+                          ),
+                          hintText: 'Email',
+                          hintStyle: GoogleFonts.notoSerif(
+                            fontSize: 14,
+                            color: HexColor('#C9C9C9'),
+                            fontWeight: FontWeight.normal,
+                            //decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ),
+                    !_isEmailBlank
+                        ? Positioned(
+                            right: 50.0,
+                            top: 55.0,
+                            child: new Container(
+                              child: Text(
+                                '$_validationText',
+                                style: TextStyle(
+                                  color: Globals.validationColor,
+                                  fontSize: 10.0,
+                                ),
+                              ),
+                            ),
+                          )
+                        : (!_isValidEmail
+                            ? Positioned(
+                                right: 50.0,
+                                top: 55.0,
+                                child: new Container(
+                                  child: Text(
+                                    'Please enter a valid email',
+                                    style: TextStyle(
+                                      color: Globals.validationColor,
+                                      fontSize: 10.0,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Container())
+                  ]),
                   Padding(
                     padding: EdgeInsets.all(25),
                     child: ConstrainedBox(
@@ -366,19 +464,32 @@ class _AddUser1State extends State<AddUser1>
                           if (!_isUserNameValid ||
                               _userNameController.text.isEmpty ||
                               !_isPhoneValid ||
-                              _phoneNumberController.text.isEmpty) {
+                              _phoneNumberController.text.isEmpty ||
+                              !_isEmailBlank ||
+                              _emailController.text.isEmpty) {
                             if (_userNameController.text.isEmpty)
                               _isUserNameValid = false;
                             if (_phoneNumberController.text.isEmpty)
                               _isPhoneValid = false;
+                            if (_emailController.text.isEmpty)
+                              _isEmailBlank = false;
 
                             setState(() {});
+                            ShowMessage.showFlushBar(
+                                context, 'Please rectify the errors.');
+                          } else if (!Globals.isEmail(
+                              _emailController.text.trim())) {
+                            setState(() {
+                              _isValidEmail = false;
+                            });
                             ShowMessage.showFlushBar(
                                 context, 'Please rectify the errors.');
                           } else {
                             setState(() {
                               _isUserNameValid = true;
                               _isPhoneValid = true;
+                              _isEmailBlank = true;
+                              _isValidEmail = true;
                             });
 
                             /* showDialog(

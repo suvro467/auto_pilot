@@ -32,7 +32,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   late String _validationText;
   late bool _isCustomerNameValid;
-  late bool _isEmailValid;
+  late bool _isEmailBlank;
   late bool _isPhoneValid;
   late bool _isPasswordValid;
   late bool _isValidEmail;
@@ -51,7 +51,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     _validationText = 'Please fill in this field';
     _isCustomerNameValid = true;
-    _isEmailValid = true;
+    _isEmailBlank = true;
     _isPhoneValid = true;
     _isPasswordValid = true;
     _isValidEmail = true;
@@ -81,11 +81,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _emailController.addListener(() {
       if (_emailController.text.isEmpty && _timesTappedEmail > 0) {
         setState(() {
-          _isEmailValid = false;
+          _isEmailBlank = false;
         });
       } else {
         setState(() {
-          _isEmailValid = true;
+          _isEmailBlank = true;
         });
       }
     });
@@ -337,7 +337,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                     ),
-                    !_isEmailValid
+                    !_isEmailBlank
                         ? Positioned(
                             right: 50.0,
                             top: 55.0,
@@ -773,7 +773,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           onPressed: () async {
                             if (!_isCustomerNameValid ||
                                 _customerNameController.text.isEmpty ||
-                                !_isEmailValid ||
+                                !_isEmailBlank ||
                                 _emailController.text.isEmpty ||
                                 !_isPhoneValid ||
                                 _phoneNumberController.text.isEmpty ||
@@ -786,7 +786,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               if (_customerNameController.text.isEmpty)
                                 _isCustomerNameValid = false;
                               if (_emailController.text.isEmpty)
-                                _isEmailValid = false;
+                                _isEmailBlank = false;
                               if (_phoneNumberController.text.isEmpty)
                                 _isPhoneValid = false;
                               if (_passwordController.text.isEmpty)
@@ -809,7 +809,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             } else {
                               setState(() {
                                 _isCustomerNameValid = true;
-                                _isEmailValid = true;
+                                _isEmailBlank = true;
                                 _isPhoneValid = true;
                                 _isPasswordValid = true;
                                 _isValidEmail = true;
