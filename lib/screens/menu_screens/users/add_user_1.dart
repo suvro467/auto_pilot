@@ -1,3 +1,4 @@
+import 'package:auto_pilot/shared/globals.dart';
 import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:auto_pilot/shared/widgets/loading_dialog.dart';
 import 'package:flutter/material.dart';
@@ -6,13 +7,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-class UserListScreen1 extends StatefulWidget {
+class AddUser1 extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final PageController pageController;
 
   /* final int tabMenuSelected;
   final int taskItemTapped; */
-  const UserListScreen1(
+  const AddUser1(
       {required this.scaffoldKey,
       required this.pageController,
 
@@ -22,10 +23,10 @@ class UserListScreen1 extends StatefulWidget {
       : super(key: key);
 
   @override
-  _UserListScreen1State createState() => _UserListScreen1State();
+  _AddUser1State createState() => _AddUser1State();
 }
 
-class _UserListScreen1State extends State<UserListScreen1>
+class _AddUser1State extends State<AddUser1>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   bool isDelegatesExpanded = false;
@@ -37,6 +38,9 @@ class _UserListScreen1State extends State<UserListScreen1>
   Map<String, double> tasksOnTime = {'Flutter': 60, 'Kotlin': 40};
   Map<String, double> approvedBenchaMark = {'Flutter': 80, 'Kotlin': 20};
 
+  late Widget editIcon;
+  late Widget deleteIcon;
+
   //String baseUrl = Globals.baseUrl;
 
   @override
@@ -44,6 +48,20 @@ class _UserListScreen1State extends State<UserListScreen1>
     super.initState();
 
     _tabController = TabController(length: 4, vsync: this);
+
+    editIcon = SvgPicture.asset(
+      'assets/images/edit.svg',
+      color: HexColor('#C9C9C9'),
+      height: 40,
+      width: 40,
+    );
+
+    deleteIcon = SvgPicture.asset(
+      'assets/images/delete.svg',
+      color: HexColor('#C9C9C9'),
+      height: 40,
+      width: 40,
+    );
   }
 
   @override
@@ -91,7 +109,7 @@ class _UserListScreen1State extends State<UserListScreen1>
                   ),
                   InkWell(
                     borderRadius: BorderRadius.circular(40),
-                    onTap: () async {},
+                    onTap: () {},
                     child: SvgPicture.asset(
                       'assets/images/plus.svg',
                       color: MyAutoPilotStyles.appColor,
