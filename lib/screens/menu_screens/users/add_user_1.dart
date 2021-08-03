@@ -554,22 +554,6 @@ class _AddUser1State extends State<AddUser1>
                                 width: 10,
                               ),
                             ),
-                            /* suffixIcon: DecoratedIcon(
-          Icons.arrow_drop_down,
-          size: 36,
-          color: MyAutoPilotStyles.appColor,
-          shadows: [
-            BoxShadow(
-              color: Colors.black54,
-              blurRadius: 12.0,
-              offset: Offset(2.0, 2.0),
-            ),
-            BoxShadow(
-              blurRadius: 12.0,
-              color: Colors.white,
-            ),
-          ],
-        ), */
                             enabledBorder: UnderlineInputBorder(
                               borderSide:
                                   BorderSide(color: MyAutoPilotStyles.appColor),
@@ -582,7 +566,6 @@ class _AddUser1State extends State<AddUser1>
                               fontSize: 14,
                               color: HexColor('#C9C9C9'),
                               fontWeight: FontWeight.normal,
-                              //decoration: TextDecoration.underline,
                             ),
                           ),
                           mode: Mode.DIALOG,
@@ -591,7 +574,6 @@ class _AddUser1State extends State<AddUser1>
                           maxHeight: (departments.length) <= 3
                               ? (departments.length).toDouble() * 55
                               : 160,
-                          //label: "No of Auto Print",
                           showClearButton: false,
                           onChanged: (value) async {
                             _departmentController.text = value ?? '';
@@ -746,22 +728,6 @@ class _AddUser1State extends State<AddUser1>
                                 width: 10,
                               ),
                             ),
-                            /* suffixIcon: DecoratedIcon(
-          Icons.arrow_drop_down,
-          size: 36,
-          color: MyAutoPilotStyles.appColor,
-          shadows: [
-            BoxShadow(
-              color: Colors.black54,
-              blurRadius: 12.0,
-              offset: Offset(2.0, 2.0),
-            ),
-            BoxShadow(
-              blurRadius: 12.0,
-              color: Colors.white,
-            ),
-          ],
-        ), */
                             enabledBorder: UnderlineInputBorder(
                               borderSide:
                                   BorderSide(color: MyAutoPilotStyles.appColor),
@@ -774,7 +740,6 @@ class _AddUser1State extends State<AddUser1>
                               fontSize: 14,
                               color: HexColor('#C9C9C9'),
                               fontWeight: FontWeight.normal,
-                              //decoration: TextDecoration.underline,
                             ),
                           ),
                           mode: Mode.DIALOG,
@@ -783,7 +748,6 @@ class _AddUser1State extends State<AddUser1>
                           maxHeight: (levels.length) <= 3
                               ? (levels.length).toDouble() * 55
                               : 160,
-                          //label: "No of Auto Print",
                           showClearButton: false,
                           onChanged: (value) async {
                             _levelController.text = value ?? '';
@@ -944,6 +908,7 @@ class _AddUser1State extends State<AddUser1>
                               _isEmailBlank = true;
                               _isValidEmail = true;
                               _isDesignationValid = true;
+                              _isSubordinateCountValid = true;
                             });
 
                             /* showDialog(
