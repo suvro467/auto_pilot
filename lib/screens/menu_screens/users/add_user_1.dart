@@ -467,71 +467,6 @@ class _AddUser1State extends State<AddUser1>
                               )
                             : Container())
                   ]),
-                  /* Padding(
-                    padding: const EdgeInsets.only(
-                      left: 50.0,
-                      right: 50,
-                      top: 20,
-                    ),
-                    child: TextField(
-                      onTap: () {
-                        //_dropDownBoxCreate();
-                      },
-                      enabled: false,
-                      controller: _departmentController,
-                      onChanged: (value) {
-                        /* _timesTappedEmail += 1; */
-                      },
-                      decoration: InputDecoration(
-                        labelStyle: GoogleFonts.notoSerif(
-                          fontSize: 14,
-                          color: HexColor('#C9C9C9'),
-                          fontWeight: FontWeight.normal,
-                          //decoration: TextDecoration.underline,
-                        ),
-                        prefixIcon: Transform.scale(
-                          scale: 0.7,
-                          child: SvgPicture.asset(
-                            'assets/images/department.svg',
-                            color: MyAutoPilotStyles.appColor,
-                            height: 10,
-                            width: 10,
-                          ),
-                        ),
-                        suffixIcon: DecoratedIcon(
-                          Icons.arrow_drop_down,
-                          size: 36,
-                          color: MyAutoPilotStyles.appColor,
-                          shadows: [
-                            BoxShadow(
-                              color: Colors.black54,
-                              blurRadius: 12.0,
-                              offset: Offset(2.0, 2.0),
-                            ),
-                            BoxShadow(
-                              blurRadius: 12.0,
-                              color: Colors.white,
-                            ),
-                          ],
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide:
-                              BorderSide(color: MyAutoPilotStyles.appColor),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide:
-                              BorderSide(color: MyAutoPilotStyles.appColor),
-                        ),
-                        hintText: 'Department',
-                        hintStyle: GoogleFonts.notoSerif(
-                          fontSize: 14,
-                          color: HexColor('#C9C9C9'),
-                          fontWeight: FontWeight.normal,
-                          //decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ),
-                  ), */
                   Padding(
                     padding: const EdgeInsets.only(
                       left: 50.0,
@@ -846,8 +781,8 @@ class _AddUser1State extends State<AddUser1>
         shadows: [
           BoxShadow(
             color: Colors.black54,
-            blurRadius: 12.0,
-            offset: Offset(2.0, 2.0),
+            blurRadius: 8.0,
+            offset: Offset(1.0, 2.0),
           ),
           BoxShadow(
             blurRadius: 12.0,
@@ -872,7 +807,7 @@ class _AddUser1State extends State<AddUser1>
             width: 10,
           ),
         ),
-        suffixIcon: DecoratedIcon(
+        /* suffixIcon: DecoratedIcon(
           Icons.arrow_drop_down,
           size: 36,
           color: MyAutoPilotStyles.appColor,
@@ -887,7 +822,7 @@ class _AddUser1State extends State<AddUser1>
               color: Colors.white,
             ),
           ],
-        ),
+        ), */
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: MyAutoPilotStyles.appColor),
         ),
