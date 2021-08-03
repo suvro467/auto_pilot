@@ -48,17 +48,25 @@ class _AddUser1State extends State<AddUser1>
   final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _departmentController = TextEditingController();
+  final TextEditingController _designationController = TextEditingController();
+  final TextEditingController _levelController = TextEditingController();
+  final TextEditingController _subordinateCountController =
+      TextEditingController();
 
   late bool _isUserNameValid;
   late bool _isPhoneValid;
   late bool _isEmailBlank; // This checks for blank email address
   late bool _isValidEmail; // This checks for valid email address
+  late bool _isDesignationValid;
+  late bool _isSubordinateCountValid;
 
   late String _validationText;
 
   late int _timesTappedUserName;
   late int _timesTappedPhone;
   late int _timesTappedEmail;
+  late int _timesTappedDesignation;
+  late int _timesTappedSubordinateCount;
 
   //String baseUrl = Globals.baseUrl;
 
@@ -67,6 +75,13 @@ class _AddUser1State extends State<AddUser1>
     "Department 2",
     "Department 3",
     "Department 4"
+  ];
+
+  List<String> levels = [
+    'Level 1',
+    'Level 2',
+    'Level 3',
+    'Level 4',
   ];
 
   @override
@@ -80,9 +95,13 @@ class _AddUser1State extends State<AddUser1>
     _isPhoneValid = true;
     _isEmailBlank = true;
     _isValidEmail = true;
+    _isDesignationValid = true;
+    _isSubordinateCountValid = true;
     _timesTappedUserName = 0;
     _timesTappedPhone = 0;
     _timesTappedEmail = 0;
+    _timesTappedDesignation = 0;
+    _timesTappedSubordinateCount = 0;
 
     // Start listening to changes
     _userNameController.addListener(() {
@@ -122,6 +141,33 @@ class _AddUser1State extends State<AddUser1>
     });
 
     _departmentController.text = '';
+
+    _designationController.addListener(() {
+      if (_designationController.text.isEmpty && _timesTappedDesignation > 0) {
+        setState(() {
+          _isDesignationValid = false;
+        });
+      } else {
+        setState(() {
+          _isDesignationValid = true;
+        });
+      }
+    });
+
+    _levelController.text = '';
+
+    _subordinateCountController.addListener(() {
+      if (_subordinateCountController.text.isEmpty &&
+          _timesTappedSubordinateCount > 0) {
+        setState(() {
+          _isSubordinateCountValid = false;
+        });
+      } else {
+        setState(() {
+          _isSubordinateCountValid = true;
+        });
+      }
+    });
   }
 
   @override
@@ -131,6 +177,9 @@ class _AddUser1State extends State<AddUser1>
     _userNameController.dispose();
     _emailController.dispose();
     _departmentController.dispose();
+    _designationController.dispose();
+    _levelController.dispose();
+    _subordinateCountController.dispose();
   }
 
   @override
@@ -238,7 +287,6 @@ class _AddUser1State extends State<AddUser1>
                             child: SvgPicture.asset(
                               'assets/images/user.svg',
                               color: MyAutoPilotStyles.appColor,
-                              //semanticsLabel: 'Email Mobile',
                               height: 10,
                               width: 10,
                             ),
@@ -300,7 +348,6 @@ class _AddUser1State extends State<AddUser1>
                           child: SvgPicture.asset(
                             'assets/images/phone.svg',
                             color: MyAutoPilotStyles.appColor,
-                            //semanticsLabel: 'Email Mobile',
                             height: 10,
                             width: 10,
                           ),
@@ -351,7 +398,6 @@ class _AddUser1State extends State<AddUser1>
                             child: SvgPicture.asset(
                               'assets/images/phone.svg',
                               color: MyAutoPilotStyles.appColor,
-                              //semanticsLabel: 'Email Mobile',
                               height: 10,
                               width: 10,
                             ),
@@ -414,7 +460,6 @@ class _AddUser1State extends State<AddUser1>
                             child: SvgPicture.asset(
                               'assets/images/email.svg',
                               color: MyAutoPilotStyles.appColor,
-                              //semanticsLabel: 'Email Mobile',
                               height: 10,
                               width: 10,
                             ),
@@ -475,7 +520,111 @@ class _AddUser1State extends State<AddUser1>
                     ),
                     child: Stack(
                       children: [
-                        _dropDownBoxCreate(),
+                        DropdownSearch<String>(
+                          dropDownButton: DecoratedIcon(
+                            Icons.arrow_drop_down,
+                            size: 36,
+                            color: MyAutoPilotStyles.appColor,
+                            shadows: [
+                              BoxShadow(
+                                color: Colors.black54,
+                                blurRadius: 8.0,
+                                offset: Offset(1.0, 2.0),
+                              ),
+                              BoxShadow(
+                                blurRadius: 12.0,
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
+                          showAsSuffixIcons: true,
+                          validator: (v) => v == null ? "required field" : null,
+                          dropdownSearchDecoration: InputDecoration(
+                            labelStyle: GoogleFonts.notoSerif(
+                              fontSize: 14,
+                              color: HexColor('#C9C9C9'),
+                              fontWeight: FontWeight.normal,
+                            ),
+                            prefixIcon: Transform.scale(
+                              scale: 0.7,
+                              child: SvgPicture.asset(
+                                'assets/images/department.svg',
+                                color: MyAutoPilotStyles.appColor,
+                                height: 10,
+                                width: 10,
+                              ),
+                            ),
+                            /* suffixIcon: DecoratedIcon(
+          Icons.arrow_drop_down,
+          size: 36,
+          color: MyAutoPilotStyles.appColor,
+          shadows: [
+            BoxShadow(
+              color: Colors.black54,
+              blurRadius: 12.0,
+              offset: Offset(2.0, 2.0),
+            ),
+            BoxShadow(
+              blurRadius: 12.0,
+              color: Colors.white,
+            ),
+          ],
+        ), */
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: MyAutoPilotStyles.appColor),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: MyAutoPilotStyles.appColor),
+                            ),
+                            hintStyle: GoogleFonts.notoSerif(
+                              fontSize: 14,
+                              color: HexColor('#C9C9C9'),
+                              fontWeight: FontWeight.normal,
+                              //decoration: TextDecoration.underline,
+                            ),
+                          ),
+                          mode: Mode.DIALOG,
+                          showSelectedItem: false,
+                          items: departments,
+                          maxHeight: (departments.length) <= 3
+                              ? (departments.length).toDouble() * 55
+                              : 160,
+                          //label: "No of Auto Print",
+                          showClearButton: false,
+                          onChanged: (value) async {
+                            _departmentController.text = value ?? '';
+                            /* ChefPrintFormData chefPrintFormData = ChefPrintFormData(
+            fieldName: 'store_Number_Of_Auto_Print_Chef', value: value);
+
+        var result = {};
+        await updateSettings(chefPrintFormData).then((value) {
+          result = value;
+          ShowMessage.showSnackBarWithStatus(
+              context, result['msg'], 'success');
+          setState(() {});
+        }).onError((error, stackTrace) {
+          ShowMessage.showSnackBarWithStatus(context,
+              'Could not update data, please try again later.', 'error');
+
+          setState(() {});
+        }).timeout(
+          Duration(seconds: 5),
+          onTimeout: () {
+            ShowMessage.showSnackBarWithStatus(context,
+                'Could not update data, please try again later.', 'error');
+
+            setState(() {});
+          },
+        ); */
+                          },
+                          //popupItemDisabled: (String s) => s.startsWith('I'),
+                          /* selectedItem: chefPrintDataModel
+          .chefPrint.setting.storeNumberOfAutoPrintChef
+          .toString(), */
+                          selectedItem: _departmentController.text,
+                        ),
                         Positioned(
                           left: 50,
                           top: 10,
@@ -493,6 +642,263 @@ class _AddUser1State extends State<AddUser1>
                       ],
                     ),
                   ),
+                  Stack(children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 50.0,
+                        right: 50,
+                        top: 20,
+                      ),
+                      child: TextField(
+                        controller: _designationController,
+                        onChanged: (value) {
+                          _timesTappedDesignation += 1;
+                        },
+                        decoration: InputDecoration(
+                          labelStyle: GoogleFonts.notoSerif(
+                            fontSize: 14,
+                            color: HexColor('#C9C9C9'),
+                            fontWeight: FontWeight.normal,
+                            //decoration: TextDecoration.underline,
+                          ),
+                          prefixIcon: Transform.scale(
+                            scale: 0.7,
+                            child: SvgPicture.asset(
+                              'assets/images/designation.svg',
+                              color: MyAutoPilotStyles.appColor,
+                              height: 10,
+                              width: 10,
+                            ),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
+                          ),
+                          hintText: 'Designation',
+                          hintStyle: GoogleFonts.notoSerif(
+                            fontSize: 14,
+                            color: HexColor('#C9C9C9'),
+                            fontWeight: FontWeight.normal,
+                            //decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ),
+                    !_isDesignationValid
+                        ? Positioned(
+                            right: 50.0,
+                            top: 55.0,
+                            child: new Container(
+                              child: Text(
+                                '$_validationText',
+                                style: TextStyle(
+                                  color: Globals.validationColor,
+                                  fontSize: 10.0,
+                                ),
+                              ),
+                            ),
+                          )
+                        : Container()
+                  ]),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 50.0,
+                      right: 50,
+                      top: 20,
+                    ),
+                    child: Stack(
+                      children: [
+                        DropdownSearch<String>(
+                          dropDownButton: DecoratedIcon(
+                            Icons.arrow_drop_down,
+                            size: 36,
+                            color: MyAutoPilotStyles.appColor,
+                            shadows: [
+                              BoxShadow(
+                                color: Colors.black54,
+                                blurRadius: 8.0,
+                                offset: Offset(1.0, 2.0),
+                              ),
+                              BoxShadow(
+                                blurRadius: 12.0,
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
+                          showAsSuffixIcons: true,
+                          validator: (v) => v == null ? "required field" : null,
+                          dropdownSearchDecoration: InputDecoration(
+                            labelStyle: GoogleFonts.notoSerif(
+                              fontSize: 14,
+                              color: HexColor('#C9C9C9'),
+                              fontWeight: FontWeight.normal,
+                            ),
+                            prefixIcon: Transform.scale(
+                              scale: 0.7,
+                              child: SvgPicture.asset(
+                                'assets/images/level.svg',
+                                color: MyAutoPilotStyles.appColor,
+                                height: 10,
+                                width: 10,
+                              ),
+                            ),
+                            /* suffixIcon: DecoratedIcon(
+          Icons.arrow_drop_down,
+          size: 36,
+          color: MyAutoPilotStyles.appColor,
+          shadows: [
+            BoxShadow(
+              color: Colors.black54,
+              blurRadius: 12.0,
+              offset: Offset(2.0, 2.0),
+            ),
+            BoxShadow(
+              blurRadius: 12.0,
+              color: Colors.white,
+            ),
+          ],
+        ), */
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: MyAutoPilotStyles.appColor),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: MyAutoPilotStyles.appColor),
+                            ),
+                            hintStyle: GoogleFonts.notoSerif(
+                              fontSize: 14,
+                              color: HexColor('#C9C9C9'),
+                              fontWeight: FontWeight.normal,
+                              //decoration: TextDecoration.underline,
+                            ),
+                          ),
+                          mode: Mode.DIALOG,
+                          showSelectedItem: false,
+                          items: levels,
+                          maxHeight: (levels.length) <= 3
+                              ? (levels.length).toDouble() * 55
+                              : 160,
+                          //label: "No of Auto Print",
+                          showClearButton: false,
+                          onChanged: (value) async {
+                            _levelController.text = value ?? '';
+                            /* ChefPrintFormData chefPrintFormData = ChefPrintFormData(
+            fieldName: 'store_Number_Of_Auto_Print_Chef', value: value);
+
+        var result = {};
+        await updateSettings(chefPrintFormData).then((value) {
+          result = value;
+          ShowMessage.showSnackBarWithStatus(
+              context, result['msg'], 'success');
+          setState(() {});
+        }).onError((error, stackTrace) {
+          ShowMessage.showSnackBarWithStatus(context,
+              'Could not update data, please try again later.', 'error');
+
+          setState(() {});
+        }).timeout(
+          Duration(seconds: 5),
+          onTimeout: () {
+            ShowMessage.showSnackBarWithStatus(context,
+                'Could not update data, please try again later.', 'error');
+
+            setState(() {});
+          },
+        ); */
+                          },
+                          //popupItemDisabled: (String s) => s.startsWith('I'),
+                          /* selectedItem: chefPrintDataModel
+          .chefPrint.setting.storeNumberOfAutoPrintChef
+          .toString(), */
+                          selectedItem: _levelController.text,
+                        ),
+                        Positioned(
+                          left: 50,
+                          top: 10,
+                          child:
+                              Text(_levelController.text.isEmpty ? 'Level' : '',
+                                  style: GoogleFonts.notoSerif(
+                                    fontSize: 14,
+                                    color: HexColor('#C9C9C9'),
+                                    fontWeight: FontWeight.normal,
+                                    //decoration: TextDecoration.underline,
+                                  )),
+                        )
+                      ],
+                    ),
+                  ),
+                  Stack(children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 50.0,
+                        right: 50,
+                        top: 20,
+                      ),
+                      child: TextField(
+                        controller: _subordinateCountController,
+                        onChanged: (value) {
+                          _timesTappedSubordinateCount += 1;
+                        },
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          LengthLimitingTextInputFormatter(10)
+                        ],
+                        decoration: InputDecoration(
+                          labelStyle: GoogleFonts.notoSerif(
+                            fontSize: 14,
+                            color: HexColor('#C9C9C9'),
+                            fontWeight: FontWeight.normal,
+                            //decoration: TextDecoration.underline,
+                          ),
+                          prefixIcon: Transform.scale(
+                            scale: 0.7,
+                            child: SvgPicture.asset(
+                              'assets/images/subourdiante.svg',
+                              color: MyAutoPilotStyles.appColor,
+                              height: 10,
+                              width: 10,
+                            ),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
+                          ),
+                          hintText: 'Subordinate Count',
+                          hintStyle: GoogleFonts.notoSerif(
+                            fontSize: 14,
+                            color: HexColor('#C9C9C9'),
+                            fontWeight: FontWeight.normal,
+                            //decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ),
+                    !_isSubordinateCountValid
+                        ? Positioned(
+                            right: 50.0,
+                            top: 55.0,
+                            child: new Container(
+                              child: Text(
+                                '$_validationText',
+                                style: TextStyle(
+                                  color: Globals.validationColor,
+                                  fontSize: 10.0,
+                                ),
+                              ),
+                            ),
+                          )
+                        : Container()
+                  ]),
                   Padding(
                     padding: EdgeInsets.all(25),
                     child: ConstrainedBox(
@@ -505,13 +911,21 @@ class _AddUser1State extends State<AddUser1>
                               !_isPhoneValid ||
                               _phoneNumberController.text.isEmpty ||
                               !_isEmailBlank ||
-                              _emailController.text.isEmpty) {
+                              _emailController.text.isEmpty ||
+                              !_isDesignationValid ||
+                              _designationController.text.isEmpty ||
+                              !_isSubordinateCountValid ||
+                              _subordinateCountController.text.isEmpty) {
                             if (_userNameController.text.isEmpty)
                               _isUserNameValid = false;
                             if (_phoneNumberController.text.isEmpty)
                               _isPhoneValid = false;
                             if (_emailController.text.isEmpty)
                               _isEmailBlank = false;
+                            if (_designationController.text.isEmpty)
+                              _isDesignationValid = false;
+                            if (_subordinateCountController.text.isEmpty)
+                              _isSubordinateCountValid = false;
 
                             setState(() {});
                             ShowMessage.showFlushBar(
@@ -529,6 +943,7 @@ class _AddUser1State extends State<AddUser1>
                               _isPhoneValid = true;
                               _isEmailBlank = true;
                               _isValidEmail = true;
+                              _isDesignationValid = true;
                             });
 
                             /* showDialog(
@@ -770,135 +1185,5 @@ class _AddUser1State extends State<AddUser1>
       curve: Curves.easeOut,
     );
     return false;
-  }
-
-  Widget _dropDownBoxCreate() {
-    return DropdownSearch<String>(
-      dropDownButton: DecoratedIcon(
-        Icons.arrow_drop_down,
-        size: 36,
-        color: MyAutoPilotStyles.appColor,
-        shadows: [
-          BoxShadow(
-            color: Colors.black54,
-            blurRadius: 8.0,
-            offset: Offset(1.0, 2.0),
-          ),
-          BoxShadow(
-            blurRadius: 12.0,
-            color: Colors.white,
-          ),
-        ],
-      ),
-      showAsSuffixIcons: true,
-      validator: (v) => v == null ? "required field" : null,
-      dropdownSearchDecoration: InputDecoration(
-        labelStyle: GoogleFonts.notoSerif(
-          fontSize: 14,
-          color: HexColor('#C9C9C9'),
-          fontWeight: FontWeight.normal,
-        ),
-        prefixIcon: Transform.scale(
-          scale: 0.7,
-          child: SvgPicture.asset(
-            'assets/images/department.svg',
-            color: MyAutoPilotStyles.appColor,
-            height: 10,
-            width: 10,
-          ),
-        ),
-        /* suffixIcon: DecoratedIcon(
-          Icons.arrow_drop_down,
-          size: 36,
-          color: MyAutoPilotStyles.appColor,
-          shadows: [
-            BoxShadow(
-              color: Colors.black54,
-              blurRadius: 12.0,
-              offset: Offset(2.0, 2.0),
-            ),
-            BoxShadow(
-              blurRadius: 12.0,
-              color: Colors.white,
-            ),
-          ],
-        ), */
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: MyAutoPilotStyles.appColor),
-        ),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: MyAutoPilotStyles.appColor),
-        ),
-        hintStyle: GoogleFonts.notoSerif(
-          fontSize: 14,
-          color: HexColor('#C9C9C9'),
-          fontWeight: FontWeight.normal,
-          //decoration: TextDecoration.underline,
-        ),
-      ),
-      mode: Mode.DIALOG,
-      showSelectedItem: false,
-      items: departments,
-      maxHeight: (departments.length) <= 3
-          ? (departments.length).toDouble() * 55
-          : 160,
-      //label: "No of Auto Print",
-      showClearButton: false,
-      onChanged: (value) async {
-        _departmentController.text = value ?? '';
-        /* ChefPrintFormData chefPrintFormData = ChefPrintFormData(
-            fieldName: 'store_Number_Of_Auto_Print_Chef', value: value);
-
-        var result = {};
-        await updateSettings(chefPrintFormData).then((value) {
-          result = value;
-          ShowMessage.showSnackBarWithStatus(
-              context, result['msg'], 'success');
-          setState(() {});
-        }).onError((error, stackTrace) {
-          ShowMessage.showSnackBarWithStatus(context,
-              'Could not update data, please try again later.', 'error');
-
-          setState(() {});
-        }).timeout(
-          Duration(seconds: 5),
-          onTimeout: () {
-            ShowMessage.showSnackBarWithStatus(context,
-                'Could not update data, please try again later.', 'error');
-
-            setState(() {});
-          },
-        ); */
-      },
-      //popupItemDisabled: (String s) => s.startsWith('I'),
-      /* selectedItem: chefPrintDataModel
-          .chefPrint.setting.storeNumberOfAutoPrintChef
-          .toString(), */
-      selectedItem: _departmentController.text,
-    );
-  }
-
-  buildDropDownButton(context) {
-    /* return DecoratedIcon(
-      Icons.arrow_drop_down,
-      size: 36,
-      color: MyAutoPilotStyles.appColor,
-      shadows: [
-        BoxShadow(
-          color: Colors.black54,
-          blurRadius: 12.0,
-          offset: Offset(2.0, 2.0),
-        ),
-        BoxShadow(
-          blurRadius: 12.0,
-          color: Colors.white,
-        ),
-      ],
-    ); */
-    /* return Container(
-      height: 20,
-      width: 20,
-      decoration: BoxDecoration(),
-    ); */
   }
 }
