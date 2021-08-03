@@ -61,6 +61,8 @@ class _AddUser1State extends State<AddUser1>
   late bool _isSubordinateCountValid;
 
   late String _validationText;
+  late String _departmentText;
+  late String _levelText;
 
   late int _timesTappedUserName;
   late int _timesTappedPhone;
@@ -141,6 +143,19 @@ class _AddUser1State extends State<AddUser1>
     });
 
     _departmentController.text = '';
+    _departmentText = 'Department';
+
+    _departmentController.addListener(() {
+      if (_departmentController.text.isEmpty) {
+        setState(() {
+          _departmentText = 'Department';
+        });
+      } else {
+        setState(() {
+          _departmentText = '';
+        });
+      }
+    });
 
     _designationController.addListener(() {
       if (_designationController.text.isEmpty && _timesTappedDesignation > 0) {
@@ -155,6 +170,19 @@ class _AddUser1State extends State<AddUser1>
     });
 
     _levelController.text = '';
+    _levelText = 'Level';
+
+    _levelController.addListener(() {
+      if (_levelController.text.isEmpty) {
+        setState(() {
+          _levelText = 'Level';
+        });
+      } else {
+        setState(() {
+          _levelText = '';
+        });
+      }
+    });
 
     _subordinateCountController.addListener(() {
       if (_subordinateCountController.text.isEmpty &&
@@ -610,10 +638,7 @@ class _AddUser1State extends State<AddUser1>
                         Positioned(
                           left: 50,
                           top: 10,
-                          child: Text(
-                              _departmentController.text.isEmpty
-                                  ? 'Department'
-                                  : '',
+                          child: Text(_departmentText,
                               style: GoogleFonts.notoSerif(
                                 fontSize: 14,
                                 color: HexColor('#C9C9C9'),
@@ -784,14 +809,13 @@ class _AddUser1State extends State<AddUser1>
                         Positioned(
                           left: 50,
                           top: 10,
-                          child:
-                              Text(_levelController.text.isEmpty ? 'Level' : '',
-                                  style: GoogleFonts.notoSerif(
-                                    fontSize: 14,
-                                    color: HexColor('#C9C9C9'),
-                                    fontWeight: FontWeight.normal,
-                                    //decoration: TextDecoration.underline,
-                                  )),
+                          child: Text(_levelText,
+                              style: GoogleFonts.notoSerif(
+                                fontSize: 14,
+                                color: HexColor('#C9C9C9'),
+                                fontWeight: FontWeight.normal,
+                                //decoration: TextDecoration.underline,
+                              )),
                         )
                       ],
                     ),
