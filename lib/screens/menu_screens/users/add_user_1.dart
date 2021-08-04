@@ -1219,7 +1219,7 @@ class _AddUser1State extends State<AddUser1>
                             isFileUploaded = false;
                           },
                           child: Text(
-                            'Bulk Upload (Download Format)',
+                            'Bulk Upload',
                             style: GoogleFonts.notoSerif(
                               color: MyAutoPilotStyles.appColor,
                               fontWeight: FontWeight.normal,
@@ -1227,6 +1227,18 @@ class _AddUser1State extends State<AddUser1>
                             ),
                           ),
                         ),
+                        InkWell(
+                          onTap: () {},
+                          child: Text(
+                            '(Download Format)',
+                            style: GoogleFonts.notoSerif(
+                              color: MyAutoPilotStyles.appColor,
+                              fontWeight: FontWeight.normal,
+                              fontSize: 14,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   ),
