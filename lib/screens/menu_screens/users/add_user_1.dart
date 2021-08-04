@@ -259,7 +259,7 @@ class _AddUser1State extends State<AddUser1>
                     padding: const EdgeInsets.only(
                       left: 40.0,
                       right: 40.0,
-                      top: 20,
+                      top: 5,
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -294,9 +294,9 @@ class _AddUser1State extends State<AddUser1>
                   Stack(children: [
                     Padding(
                       padding: const EdgeInsets.only(
-                        left: 50.0,
-                        right: 50,
-                        top: 20,
+                        left: 40.0,
+                        right: 40.0,
+                        top: 5,
                       ),
                       child: TextField(
                         controller: _userNameController,
@@ -355,8 +355,8 @@ class _AddUser1State extends State<AddUser1>
                   ]),
                   Padding(
                     padding: const EdgeInsets.only(
-                      left: 50.0,
-                      right: 50,
+                      left: 40.0,
+                      right: 40.0,
                       top: 20,
                     ),
                     child: TextField(
@@ -401,8 +401,8 @@ class _AddUser1State extends State<AddUser1>
                   Stack(children: [
                     Padding(
                       padding: const EdgeInsets.only(
-                        left: 50.0,
-                        right: 50,
+                        left: 40.0,
+                        right: 40.0,
                         top: 20,
                       ),
                       child: TextField(
@@ -467,8 +467,8 @@ class _AddUser1State extends State<AddUser1>
                   Stack(children: [
                     Padding(
                       padding: const EdgeInsets.only(
-                        left: 50.0,
-                        right: 50,
+                        left: 40.0,
+                        right: 40.0,
                         top: 20,
                       ),
                       child: TextField(
@@ -542,8 +542,8 @@ class _AddUser1State extends State<AddUser1>
                   ]),
                   Padding(
                     padding: const EdgeInsets.only(
-                      left: 50.0,
-                      right: 50,
+                      left: 40.0,
+                      right: 40.0,
                       top: 20,
                     ),
                     child: Stack(
@@ -652,8 +652,8 @@ class _AddUser1State extends State<AddUser1>
                   Stack(children: [
                     Padding(
                       padding: const EdgeInsets.only(
-                        left: 50.0,
-                        right: 50,
+                        left: 40.0,
+                        right: 40.0,
                         top: 20,
                       ),
                       child: TextField(
@@ -713,8 +713,8 @@ class _AddUser1State extends State<AddUser1>
                   ]),
                   Padding(
                     padding: const EdgeInsets.only(
-                      left: 50.0,
-                      right: 50,
+                      left: 40.0,
+                      right: 40.0,
                       top: 20,
                     ),
                     child: Stack(
@@ -823,8 +823,8 @@ class _AddUser1State extends State<AddUser1>
                   Stack(children: [
                     Padding(
                       padding: const EdgeInsets.only(
-                        left: 50.0,
-                        right: 50,
+                        left: 40.0,
+                        right: 40.0,
                         top: 20,
                       ),
                       child: TextField(
@@ -887,6 +887,29 @@ class _AddUser1State extends State<AddUser1>
                           )
                         : Container()
                   ]),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 40.0,
+                      right: 40.0,
+                      top: 20,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        InkWell(
+                          onTap: () {},
+                          child: Text(
+                            'Bulk Upload (Download Format)',
+                            style: GoogleFonts.notoSerif(
+                              color: MyAutoPilotStyles.appColor,
+                              fontWeight: FontWeight.normal,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   Padding(
                     padding: EdgeInsets.all(25),
                     child: ConstrainedBox(
