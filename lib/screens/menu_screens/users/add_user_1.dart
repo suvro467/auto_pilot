@@ -88,6 +88,9 @@ class _AddUser1State extends State<AddUser1>
     'Level 4',
   ];
 
+  String uploadedFile = '';
+  bool isFileUploaded = false;
+
   @override
   void initState() {
     super.initState();
@@ -904,192 +907,290 @@ class _AddUser1State extends State<AddUser1>
                                 context: context,
                                 backgroundColor: Colors.transparent,
                                 builder: (builder) {
-                                  return Align(
-                                    alignment: Alignment.bottomCenter,
-                                    child: ConstrainedBox(
-                                      constraints: BoxConstraints.tight(
-                                        Size(
-                                            MediaQuery.of(context).size.width *
-                                                90 /
-                                                100,
-                                            430),
-                                      ),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.only(
-                                            topLeft:
-                                                const Radius.circular(20.0),
-                                            topRight:
-                                                const Radius.circular(20.0),
-                                          ),
-                                        ),
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              margin: EdgeInsets.only(
-                                                top: 30,
-                                                left: 30,
-                                              ),
-                                              child: Row(
-                                                children: [
-                                                  Text(
-                                                    'Bulk upload users',
-                                                    style:
-                                                        GoogleFonts.notoSerif(
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: MyAutoPilotStyles
-                                                          .appColor,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Container(
-                                              margin: EdgeInsets.only(
-                                                top: 20,
-                                                //left: 30,
-                                              ),
-                                              width: MediaQuery.of(context)
+                                  return StatefulBuilder(builder:
+                                      (BuildContext context,
+                                          StateSetter setModalState) {
+                                    return Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: ConstrainedBox(
+                                        constraints: BoxConstraints.tight(
+                                          Size(
+                                              MediaQuery.of(context)
                                                       .size
                                                       .width *
-                                                  75 /
+                                                  90 /
                                                   100,
-                                              child: Text(
-                                                'Make sure that you have maintained the format structure provided to upload your users.',
-                                                style: GoogleFonts.notoSans(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.normal,
-                                                  color: HexColor('#707070'),
+                                              450),
+                                        ),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.only(
+                                              topLeft:
+                                                  const Radius.circular(20.0),
+                                              topRight:
+                                                  const Radius.circular(20.0),
+                                            ),
+                                          ),
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                margin: EdgeInsets.only(
+                                                  top: 30,
+                                                  left: 30,
+                                                ),
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      'Bulk upload users',
+                                                      style:
+                                                          GoogleFonts.notoSerif(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: MyAutoPilotStyles
+                                                            .appColor,
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
-                                            ),
-                                            Container(
-                                              margin: EdgeInsets.only(
-                                                top: 10,
-                                                //left: 30,
+                                              Container(
+                                                margin: EdgeInsets.only(
+                                                  top: 20,
+                                                  //left: 30,
+                                                ),
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    75 /
+                                                    100,
+                                                child: Text(
+                                                  'Make sure that you have maintained the format structure provided to upload your users.',
+                                                  style: GoogleFonts.notoSans(
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    color: HexColor('#707070'),
+                                                  ),
+                                                ),
                                               ),
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  75 /
-                                                  100,
-                                              child: Row(
+                                              Container(
+                                                margin: EdgeInsets.only(
+                                                  top: 10,
+                                                  //left: 30,
+                                                ),
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    75 /
+                                                    100,
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      'Upload the file and create your users.',
+                                                      style:
+                                                          GoogleFonts.notoSans(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color:
+                                                            HexColor('#707070'),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              // Upload File Button
+                                              Row(
                                                 children: [
-                                                  Text(
-                                                    'Upload the file and create your users.',
-                                                    style: GoogleFonts.notoSans(
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                      color:
-                                                          HexColor('#707070'),
+                                                  Container(
+                                                    padding: EdgeInsets.only(
+                                                      top: 20,
+                                                      left: 35,
+                                                    ),
+                                                    child: ConstrainedBox(
+                                                      constraints:
+                                                          BoxConstraints
+                                                              .tightFor(
+                                                                  width: 200,
+                                                                  height: 55),
+                                                      child: ElevatedButton(
+                                                        onPressed: () async {
+                                                          FilePickerResult?
+                                                              result =
+                                                              await FilePicker
+                                                                  .platform
+                                                                  .pickFiles(
+                                                                      /*
+                                                                    type: FileType.custom,
+                                                                    allowedExtensions: ['csv','jpg', 'pdf', 'doc'],
+                                                                    */
+                                                                      );
+
+                                                          if (result != null) {
+                                                            File file = File(
+                                                                result
+                                                                    .files
+                                                                    .single
+                                                                    .path!);
+                                                            PlatformFile
+                                                                fileDetails =
+                                                                result.files
+                                                                    .first;
+
+                                                            print(
+                                                                '***************${fileDetails.name}');
+                                                            print(
+                                                                '***************${fileDetails.extension}');
+                                                            print(
+                                                                '***************${fileDetails.path}');
+                                                            print(
+                                                                '####################${file.path}');
+                                                            setModalState(() {
+                                                              isFileUploaded =
+                                                                  true;
+                                                              uploadedFile =
+                                                                  fileDetails
+                                                                      .name;
+                                                            });
+                                                          } else {
+                                                            // User canceled the picker
+                                                            setModalState(() {
+                                                              isFileUploaded =
+                                                                  false;
+                                                            });
+                                                          }
+                                                        },
+                                                        style: ElevatedButton
+                                                            .styleFrom(
+                                                          shape:
+                                                              RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0),
+                                                          ),
+                                                          primary:
+                                                              MyAutoPilotStyles
+                                                                  .appColor,
+                                                        ),
+                                                        child: Text(
+                                                          'Upload File',
+                                                          style: GoogleFonts
+                                                              .notoSans(
+                                                            fontSize: 16,
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .normal,
+                                                          ),
+                                                        ),
+                                                      ),
                                                     ),
                                                   ),
                                                 ],
                                               ),
-                                            ),
-                                            // Upload File Button
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  padding: EdgeInsets.only(
-                                                    top: 20,
-                                                    left: 35,
+                                              // This is the widget where the uploaded file name can be seen
+                                              // and also can be cancelled.
+                                              Opacity(
+                                                opacity: isFileUploaded ? 1 : 0,
+                                                child: Stack(children: [
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                      top: 30,
+                                                      left: 30,
+                                                    ),
+                                                    //height: 100,
+                                                    child: Row(
+                                                      children: [
+                                                        Text(
+                                                          uploadedFile,
+                                                          style: GoogleFonts
+                                                              .notoSerif(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color:
+                                                                MyAutoPilotStyles
+                                                                    .appColor,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
-                                                  child: ConstrainedBox(
-                                                    constraints:
-                                                        BoxConstraints.tightFor(
-                                                            width: 200,
-                                                            height: 55),
+                                                  Positioned(
+                                                    right: 20,
+                                                    top: 10,
                                                     child: ElevatedButton(
-                                                      onPressed: () async {
-                                                        FilePickerResult?
-                                                            result =
-                                                            await FilePicker
-                                                                .platform
-                                                                .pickFiles();
-
-                                                        if (result != null) {
-                                                          File file = File(
-                                                              result
-                                                                  .files
-                                                                  .single
-                                                                  .path!);
-                                                        } else {
-                                                          // User canceled the picker
-                                                        }
+                                                      onPressed: () {
+                                                        setModalState(() {
+                                                          isFileUploaded =
+                                                              false;
+                                                        });
                                                       },
+                                                      child: Icon(
+                                                        Icons.close,
+                                                        color: Colors.white,
+                                                        size: 16,
+                                                      ),
                                                       style: ElevatedButton
                                                           .styleFrom(
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      5.0),
-                                                        ),
-                                                        primary:
-                                                            MyAutoPilotStyles
-                                                                .appColor,
-                                                      ),
-                                                      child: Text(
-                                                        'Upload File',
-                                                        style: GoogleFonts
-                                                            .notoSans(
-                                                          fontSize: 16,
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                        ),
+                                                        shape: CircleBorder(),
+                                                        padding:
+                                                            EdgeInsets.all(10),
+                                                        primary: Colors
+                                                            .blue, // <-- Button color
+                                                        onPrimary: Colors
+                                                            .red, // <-- Splash color
                                                       ),
                                                     ),
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                            // This is the widget where the uploaded file name can be seen
-                                            // and also can be cancelled.
-                                            Container(
-                                              padding: EdgeInsets.only(top: 20),
-                                              child: ConstrainedBox(
-                                                constraints:
-                                                    BoxConstraints.tightFor(
-                                                        width: 150, height: 55),
-                                                child: ElevatedButton(
-                                                  onPressed: () async {},
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              30.0),
+                                                ]),
+                                              ),
+
+                                              Container(
+                                                padding:
+                                                    EdgeInsets.only(top: 20),
+                                                child: ConstrainedBox(
+                                                  constraints:
+                                                      BoxConstraints.tightFor(
+                                                          width: 150,
+                                                          height: 55),
+                                                  child: ElevatedButton(
+                                                    onPressed: () async {},
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(30.0),
+                                                      ),
+                                                      primary: MyAutoPilotStyles
+                                                          .appColor,
                                                     ),
-                                                    primary: MyAutoPilotStyles
-                                                        .appColor,
-                                                  ),
-                                                  child: Text(
-                                                    'ADD USERS',
-                                                    style:
-                                                        GoogleFonts.notoSerif(
-                                                      fontSize: 17,
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.bold,
+                                                    child: Text(
+                                                      'ADD USERS',
+                                                      style:
+                                                          GoogleFonts.notoSerif(
+                                                        fontSize: 17,
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  );
+                                    );
+                                  });
                                 });
+                            isFileUploaded = false;
                           },
                           child: Text(
                             'Bulk Upload (Download Format)',
