@@ -65,6 +65,7 @@ class _AddUser1State extends State<AddUser1>
   late String _validationText;
   late String _departmentText;
   late String _levelText;
+  late String _countryISDCode;
 
   late int _timesTappedUserName;
   late int _timesTappedPhone;
@@ -87,6 +88,11 @@ class _AddUser1State extends State<AddUser1>
     'Level 3',
     'Level 4',
   ];
+
+  /* Map<String, dynamic> selectedCountryISDCode =
+      Globals.countryISDCodes.where((element) => false); */
+
+  Map<String, dynamic> selectedCountryISDCode = {};
 
   String uploadedFile = '';
   bool isFileUploaded = false;
@@ -122,6 +128,11 @@ class _AddUser1State extends State<AddUser1>
         });
       }
     });
+
+    _countryISDCode = 'ISD Code';
+    selectedCountryISDCode = Globals.countryISDCodes
+        .where((element) => element['name'] == 'India')
+        .first;
 
     _phoneNumberController.addListener(() {
       if (_phoneNumberController.text.isEmpty && _timesTappedPhone > 0) {
@@ -358,49 +369,94 @@ class _AddUser1State extends State<AddUser1>
                           )
                         : Container()
                   ]),
+
+                  // ISD Codes and Country Codes
                   Padding(
                     padding: const EdgeInsets.only(
                       left: 40.0,
                       right: 40.0,
                       top: 20,
                     ),
-                    child: TextField(
-                      enabled: false,
-                      decoration: InputDecoration(
-                        disabledBorder: UnderlineInputBorder(
-                          borderSide:
-                              BorderSide(color: MyAutoPilotStyles.appColor),
-                        ),
-                        labelStyle: GoogleFonts.notoSerif(
-                          fontSize: 14,
-                          color: HexColor('#C9C9C9'),
-                          fontWeight: FontWeight.normal,
-                        ),
-                        prefixIcon: Transform.scale(
-                          scale: 0.6,
-                          child: SvgPicture.asset(
-                            'assets/images/phone.svg',
+                    child: Stack(
+                      children: [
+                        DropdownSearch<Map<String, dynamic>>(
+                          showSelectedItem: false,
+                          itemAsString: (item) {
+                            return item['ISD'] +
+                                ' (' +
+                                (item['countryCode']) +
+                                ')';
+                          },
+                          dropDownButton: DecoratedIcon(
+                            Icons.arrow_drop_down,
+                            size: 36,
                             color: MyAutoPilotStyles.appColor,
-                            height: 10,
-                            width: 10,
+                            shadows: [
+                              BoxShadow(
+                                color: Colors.black54,
+                                blurRadius: 8.0,
+                                offset: Offset(1.0, 2.0),
+                              ),
+                              BoxShadow(
+                                blurRadius: 12.0,
+                                color: Colors.white,
+                              ),
+                            ],
                           ),
+                          showAsSuffixIcons: true,
+                          validator: (v) => v == null ? "required field" : null,
+                          dropdownSearchDecoration: InputDecoration(
+                            labelStyle: GoogleFonts.notoSerif(
+                              fontSize: 14,
+                              color: HexColor('#C9C9C9'),
+                              fontWeight: FontWeight.normal,
+                            ),
+                            prefixIcon: Transform.scale(
+                              scale: 0.7,
+                              child: SvgPicture.asset(
+                                'assets/images/phone.svg',
+                                color: MyAutoPilotStyles.appColor,
+                                height: 10,
+                                width: 10,
+                              ),
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: MyAutoPilotStyles.appColor),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: MyAutoPilotStyles.appColor),
+                            ),
+                            hintStyle: GoogleFonts.notoSerif(
+                              fontSize: 14,
+                              color: HexColor('#C9C9C9'),
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                          mode: Mode.DIALOG,
+                          items: Globals.countryISDCodes,
+                          maxHeight:
+                              (Globals.countryISDCodes.length).toDouble() * 55,
+                          showClearButton: false,
+                          selectedItem: selectedCountryISDCode,
+                          onChanged: (value) async {
+                            selectedCountryISDCode = value!;
+                            _countryISDCode = '';
+                          },
                         ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide:
-                              BorderSide(color: MyAutoPilotStyles.appColor),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide:
-                              BorderSide(color: MyAutoPilotStyles.appColor),
-                        ),
-                        hintText: '+91 (IND)',
-                        hintStyle: GoogleFonts.notoSerif(
-                          fontSize: 14,
-                          color: HexColor('#C9C9C9'),
-                          fontWeight: FontWeight.normal,
-                          //decoration: TextDecoration.underline,
-                        ),
-                      ),
+                        /* Positioned(
+                          left: 50,
+                          top: 10,
+                          child: Text(_countryISDCode,
+                              style: GoogleFonts.notoSerif(
+                                fontSize: 14,
+                                color: HexColor('#C9C9C9'),
+                                fontWeight: FontWeight.normal,
+                                //decoration: TextDecoration.underline,
+                              )),
+                        ) */
+                      ],
                     ),
                   ),
                   Stack(children: [
@@ -1241,7 +1297,7 @@ class _AddUser1State extends State<AddUser1>
                                 ),
                               ),
                               Text(
-                                '(Download Format)',
+                                'Download Format',
                                 style: GoogleFonts.notoSerif(
                                   color: MyAutoPilotStyles.appColor,
                                   fontWeight: FontWeight.normal,

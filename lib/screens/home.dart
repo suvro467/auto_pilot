@@ -40,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
 
     _pageController = PageController(
+      keepPage: false,
       initialPage: 0,
     );
 
