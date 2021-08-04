@@ -1128,29 +1128,46 @@ class _AddUser1State extends State<AddUser1>
                                                               .tightFor(
                                                                   width: 35,
                                                                   height: 35),
-                                                      child: ElevatedButton(
-                                                        onPressed: () {
-                                                          setModalState(() {
-                                                            isFileUploaded =
-                                                                false;
-                                                          });
-                                                        },
-                                                        child: Icon(
-                                                          Icons.close,
-                                                          color: HexColor(
-                                                              '#C9C9C9'),
-                                                          size: 16,
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                            Radius.circular(
+                                                                50.0),
+                                                          ),
+                                                          border: Border.all(
+                                                            color: HexColor(
+                                                                '#C9C9C9'),
+                                                            width: 1.0,
+                                                          ),
                                                         ),
-                                                        style: ElevatedButton
-                                                            .styleFrom(
-                                                          shape: CircleBorder(),
-                                                          padding:
-                                                              EdgeInsets.all(
-                                                                  10),
-                                                          primary: Colors
-                                                              .white, // <-- Button color
-                                                          onPrimary: Colors
-                                                              .red, // <-- Splash color
+                                                        child: ClipOval(
+                                                          child: Material(
+                                                            color: Colors
+                                                                .white, // Button color
+                                                            child: InkWell(
+                                                              splashColor: Colors
+                                                                  .red, // Splash color
+                                                              onTap: () {
+                                                                setModalState(
+                                                                    () {
+                                                                  isFileUploaded =
+                                                                      false;
+                                                                });
+                                                              },
+                                                              child: SizedBox(
+                                                                width: 56,
+                                                                height: 56,
+                                                                child: Icon(
+                                                                  Icons.close,
+                                                                  color: HexColor(
+                                                                      '#C9C9C9'),
+                                                                  size: 16,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
