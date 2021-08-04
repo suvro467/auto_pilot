@@ -1227,16 +1227,37 @@ class _AddUser1State extends State<AddUser1>
                             ),
                           ),
                         ),
+                        SizedBox(width: 10),
                         InkWell(
                           onTap: () {},
-                          child: Text(
-                            '(Download Format)',
-                            style: GoogleFonts.notoSerif(
-                              color: MyAutoPilotStyles.appColor,
-                              fontWeight: FontWeight.normal,
-                              fontSize: 14,
-                              decoration: TextDecoration.underline,
-                            ),
+                          child: Row(
+                            children: [
+                              Text(
+                                '(',
+                                style: GoogleFonts.notoSerif(
+                                  color: MyAutoPilotStyles.appColor,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              Text(
+                                '(Download Format)',
+                                style: GoogleFonts.notoSerif(
+                                  color: MyAutoPilotStyles.appColor,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 14,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                              Text(
+                                ')',
+                                style: GoogleFonts.notoSerif(
+                                  color: MyAutoPilotStyles.appColor,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
                           ),
                         )
                       ],
