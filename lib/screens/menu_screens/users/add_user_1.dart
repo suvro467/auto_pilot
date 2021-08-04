@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:auto_pilot/shared/globals.dart';
 import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:auto_pilot/shared/widgets/show_message.dart';
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -989,6 +991,67 @@ class _AddUser1State extends State<AddUser1>
                                                 ],
                                               ),
                                             ),
+                                            // Upload File Button
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  padding: EdgeInsets.only(
+                                                    top: 20,
+                                                    left: 35,
+                                                  ),
+                                                  child: ConstrainedBox(
+                                                    constraints:
+                                                        BoxConstraints.tightFor(
+                                                            width: 200,
+                                                            height: 55),
+                                                    child: ElevatedButton(
+                                                      onPressed: () async {
+                                                        FilePickerResult?
+                                                            result =
+                                                            await FilePicker
+                                                                .platform
+                                                                .pickFiles();
+
+                                                        if (result != null) {
+                                                          File file = File(
+                                                              result
+                                                                  .files
+                                                                  .single
+                                                                  .path!);
+                                                        } else {
+                                                          // User canceled the picker
+                                                        }
+                                                      },
+                                                      style: ElevatedButton
+                                                          .styleFrom(
+                                                        shape:
+                                                            RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      5.0),
+                                                        ),
+                                                        primary:
+                                                            MyAutoPilotStyles
+                                                                .appColor,
+                                                      ),
+                                                      child: Text(
+                                                        'Upload File',
+                                                        style: GoogleFonts
+                                                            .notoSans(
+                                                          fontSize: 16,
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            // This is the widget where the uploaded file name can be seen
+                                            // and also can be cancelled.
                                             Container(
                                               padding: EdgeInsets.only(top: 20),
                                               child: ConstrainedBox(
