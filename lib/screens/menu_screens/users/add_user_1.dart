@@ -897,7 +897,137 @@ class _AddUser1State extends State<AddUser1>
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         InkWell(
-                          onTap: () {},
+                          onTap: () async {
+                            await showModalBottomSheet(
+                                context: context,
+                                backgroundColor: Colors.transparent,
+                                builder: (builder) {
+                                  return Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: ConstrainedBox(
+                                      constraints: BoxConstraints.tight(
+                                        Size(
+                                            MediaQuery.of(context).size.width *
+                                                90 /
+                                                100,
+                                            430),
+                                      ),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.only(
+                                            topLeft:
+                                                const Radius.circular(20.0),
+                                            topRight:
+                                                const Radius.circular(20.0),
+                                          ),
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                top: 30,
+                                                left: 30,
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    'Bulk upload users',
+                                                    style:
+                                                        GoogleFonts.notoSerif(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: MyAutoPilotStyles
+                                                          .appColor,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                top: 20,
+                                                //left: 30,
+                                              ),
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  75 /
+                                                  100,
+                                              child: Text(
+                                                'Make sure that you have maintained the format structure provided to upload your users.',
+                                                style: GoogleFonts.notoSans(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.normal,
+                                                  color: HexColor('#707070'),
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                top: 10,
+                                                //left: 30,
+                                              ),
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  75 /
+                                                  100,
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    'Upload the file and create your users.',
+                                                    style: GoogleFonts.notoSans(
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                      color:
+                                                          HexColor('#707070'),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Container(
+                                              padding: EdgeInsets.only(top: 20),
+                                              child: ConstrainedBox(
+                                                constraints:
+                                                    BoxConstraints.tightFor(
+                                                        width: 150, height: 55),
+                                                child: ElevatedButton(
+                                                  onPressed: () async {},
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              30.0),
+                                                    ),
+                                                    primary: MyAutoPilotStyles
+                                                        .appColor,
+                                                  ),
+                                                  child: Text(
+                                                    'ADD USERS',
+                                                    style:
+                                                        GoogleFonts.notoSerif(
+                                                      fontSize: 17,
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                });
+                          },
                           child: Text(
                             'Bulk Upload (Download Format)',
                             style: GoogleFonts.notoSerif(
