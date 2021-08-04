@@ -1107,13 +1107,13 @@ class _AddUser1State extends State<AddUser1>
                                                         Text(
                                                           uploadedFile,
                                                           style: GoogleFonts
-                                                              .notoSerif(
-                                                            fontSize: 16,
+                                                              .notoSans(
+                                                            fontSize: 14,
                                                             fontWeight:
-                                                                FontWeight.bold,
-                                                            color:
-                                                                MyAutoPilotStyles
-                                                                    .appColor,
+                                                                FontWeight
+                                                                    .normal,
+                                                            color: HexColor(
+                                                                '#707070'),
                                                           ),
                                                         ),
                                                       ],
@@ -1122,27 +1122,36 @@ class _AddUser1State extends State<AddUser1>
                                                   Positioned(
                                                     right: 20,
                                                     top: 10,
-                                                    child: ElevatedButton(
-                                                      onPressed: () {
-                                                        setModalState(() {
-                                                          isFileUploaded =
-                                                              false;
-                                                        });
-                                                      },
-                                                      child: Icon(
-                                                        Icons.close,
-                                                        color: Colors.white,
-                                                        size: 16,
-                                                      ),
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                        shape: CircleBorder(),
-                                                        padding:
-                                                            EdgeInsets.all(10),
-                                                        primary: Colors
-                                                            .blue, // <-- Button color
-                                                        onPrimary: Colors
-                                                            .red, // <-- Splash color
+                                                    child: ConstrainedBox(
+                                                      constraints:
+                                                          BoxConstraints
+                                                              .tightFor(
+                                                                  width: 35,
+                                                                  height: 35),
+                                                      child: ElevatedButton(
+                                                        onPressed: () {
+                                                          setModalState(() {
+                                                            isFileUploaded =
+                                                                false;
+                                                          });
+                                                        },
+                                                        child: Icon(
+                                                          Icons.close,
+                                                          color: HexColor(
+                                                              '#C9C9C9'),
+                                                          size: 16,
+                                                        ),
+                                                        style: ElevatedButton
+                                                            .styleFrom(
+                                                          shape: CircleBorder(),
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  10),
+                                                          primary: Colors
+                                                              .white, // <-- Button color
+                                                          onPrimary: Colors
+                                                              .red, // <-- Splash color
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
