@@ -1600,8 +1600,9 @@ class _AddUser1State extends State<AddUser1>
     );
   }
 
-  FutureOr<bool> onWillPop() {
-    widget.pageController.previousPage(
+  FutureOr<bool> onWillPop() async {
+    await widget.pageController.animateToPage(
+      5,
       duration: Duration(milliseconds: 500),
       curve: Curves.easeOut,
     );

@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class Globals {
@@ -361,4 +365,68 @@ class Globals {
     {"name": "Zambia", "ISD": "+260", "countryCode": "ZM"},
     {"name": "Zimbabwe", "ISD": "+263", "countryCode": "ZW"}
   ];
+
+  static Future<bool> onBackPressed(BuildContext context) async {
+    var result = await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(
+          'Exit MyAutoPilot',
+          style: TextStyle(
+            fontFamily: 'Proxima',
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+            color: Colors.black,
+          ),
+        ),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text(
+                'Are you sure?',
+                style: TextStyle(
+                  fontFamily: 'Proxima',
+                  fontSize: 15,
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: Text(
+              ' Yes ',
+              style: TextStyle(
+                fontFamily: 'Proxima',
+                fontSize: 16,
+                color: Colors.red,
+              ),
+            ),
+            onPressed: () async {
+              // Show the progress dialogue.
+
+              if (Platform.isAndroid)
+                SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+            },
+          ),
+          TextButton(
+            child: Text(
+              ' No ',
+              style: TextStyle(
+                fontFamily: 'Proxima',
+                fontSize: 16,
+                color: MyAutoPilotStyles.appColor,
+              ),
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      ),
+    );
+
+    return result;
+  }
 }
