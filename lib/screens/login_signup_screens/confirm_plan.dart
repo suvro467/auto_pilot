@@ -5,6 +5,7 @@ import 'package:auto_pilot/screens/login_signup_screens/signup_screen.dart';
 import 'package:auto_pilot/shared/globals.dart';
 import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:auto_pilot/shared/widgets/loading_dialog.dart';
+import 'package:auto_pilot/shared/widgets/rounded_rectangular_shadow.dart';
 import 'package:auto_pilot/shared/widgets/show_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -81,8 +82,7 @@ class _ConfirmPlanScreenState extends State<ConfirmPlanScreen> {
                         children: [
                           Container(
                             padding: EdgeInsets.only(
-                              left: 50,
-                              right: 50,
+                              left: 20,
                               top: 10,
                             ),
                             child: Text(
@@ -97,32 +97,487 @@ class _ConfirmPlanScreenState extends State<ConfirmPlanScreen> {
                           ),
                         ],
                       ),
+                      SizedBox(height: 30),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 10,
+                          right: 10,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: InkWell(
+                                onTap: () {},
+                                child: Container(
+                                  child: CustomPaint(
+                                    painter: RoundedRectangularShadowPainter(
+                                        borderColor: MyAutoPilotStyles.appColor,
+                                        shadowColor: Colors.black,
+                                        borderWidth: 1,
+                                        radius: 5,
+                                        shadowWidth: 0.3),
+                                    child: Container(
+                                      //padding: EdgeInsets.all(20),
+
+                                      height: 160,
+                                      child: Padding(
+                                        padding: EdgeInsets.only(left: 10.0),
+                                        child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              Text(
+                                                'Single User',
+                                                style: GoogleFonts.notoSerif(
+                                                  fontSize: 16,
+                                                  color: MyAutoPilotStyles
+                                                      .appColor,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              Text(
+                                                'Rs. 4000',
+                                                style: GoogleFonts.notoSans(
+                                                  fontSize: 14,
+                                                  color: HexColor('#707070'),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Text(
+                                                'billed annually',
+                                                style: GoogleFonts.notoSans(
+                                                  fontSize: 14,
+                                                  color: HexColor('#707070'),
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    40 /
+                                                    100,
+                                                child: Text(
+                                                  'This is the best plan for self-employed and freelancer',
+                                                  overflow:
+                                                      TextOverflow.visible,
+                                                  style: GoogleFonts.notoSans(
+                                                    fontSize: 12,
+                                                    color: HexColor('#707070'),
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                                ),
+                                              ),
+                                            ]),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 5),
+                            Expanded(
+                              child: InkWell(
+                                onTap: () {},
+                                child: Container(
+                                  child: CustomPaint(
+                                    painter: RoundedRectangularShadowPainter(
+                                        borderColor: MyAutoPilotStyles.appColor,
+                                        shadowColor: Colors.black,
+                                        borderWidth: 1,
+                                        radius: 5,
+                                        shadowWidth: 0.3),
+                                    child: Container(
+                                      //padding: EdgeInsets.all(20),
+
+                                      height: 160,
+                                      child: Padding(
+                                        padding: EdgeInsets.only(left: 10.0),
+                                        child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              Text(
+                                                'Upto 10 Users',
+                                                style: GoogleFonts.notoSerif(
+                                                  fontSize: 16,
+                                                  color: MyAutoPilotStyles
+                                                      .appColor,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              Text(
+                                                'Rs. 500 / user / month',
+                                                style: GoogleFonts.notoSans(
+                                                  fontSize: 14,
+                                                  color: HexColor('#707070'),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Text(
+                                                'billed annually',
+                                                style: GoogleFonts.notoSans(
+                                                  fontSize: 14,
+                                                  color: HexColor('#707070'),
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    40 /
+                                                    100,
+                                                child: Text(
+                                                  'This is the best plan for small organisations on the path to growth',
+                                                  overflow:
+                                                      TextOverflow.visible,
+                                                  style: GoogleFonts.notoSans(
+                                                    fontSize: 12,
+                                                    color: HexColor('#707070'),
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                                ),
+                                              ),
+                                            ]),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 10,
+                          right: 10,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: InkWell(
+                                onTap: () {},
+                                child: Container(
+                                  child: CustomPaint(
+                                    painter: RoundedRectangularShadowPainter(
+                                        borderColor: MyAutoPilotStyles.appColor,
+                                        shadowColor: Colors.black,
+                                        borderWidth: 1,
+                                        radius: 5,
+                                        shadowWidth: 0.3),
+                                    child: Container(
+                                      //padding: EdgeInsets.all(20),
+
+                                      height: 160,
+                                      child: Padding(
+                                        padding: EdgeInsets.only(left: 10.0),
+                                        child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              Text(
+                                                'Upto 50 Users',
+                                                style: GoogleFonts.notoSerif(
+                                                  fontSize: 16,
+                                                  color: MyAutoPilotStyles
+                                                      .appColor,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              Text(
+                                                'Rs. 400 / user /month',
+                                                style: GoogleFonts.notoSans(
+                                                  fontSize: 14,
+                                                  color: HexColor('#707070'),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Text(
+                                                'billed annually',
+                                                style: GoogleFonts.notoSans(
+                                                  fontSize: 14,
+                                                  color: HexColor('#707070'),
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    40 /
+                                                    100,
+                                                child: Text(
+                                                  'Best plan for mid size companies working on business processes',
+                                                  overflow:
+                                                      TextOverflow.visible,
+                                                  style: GoogleFonts.notoSans(
+                                                    fontSize: 12,
+                                                    color: HexColor('#707070'),
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                                ),
+                                              ),
+                                            ]),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 5),
+                            Expanded(
+                              child: InkWell(
+                                onTap: () {},
+                                child: Container(
+                                  child: CustomPaint(
+                                    painter: RoundedRectangularShadowPainter(
+                                        borderColor: MyAutoPilotStyles.appColor,
+                                        shadowColor: Colors.black,
+                                        borderWidth: 1,
+                                        radius: 5,
+                                        shadowWidth: 0.3),
+                                    child: Container(
+                                      //padding: EdgeInsets.all(20),
+
+                                      height: 160,
+                                      child: Padding(
+                                        padding: EdgeInsets.only(left: 10.0),
+                                        child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              Text(
+                                                'More than 50 Users',
+                                                style: GoogleFonts.notoSerif(
+                                                  fontSize: 16,
+                                                  color: MyAutoPilotStyles
+                                                      .appColor,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              Text(
+                                                'Rs. 300 / user / month',
+                                                style: GoogleFonts.notoSans(
+                                                  fontSize: 14,
+                                                  color: HexColor('#707070'),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Text(
+                                                'billed annually',
+                                                style: GoogleFonts.notoSans(
+                                                  fontSize: 14,
+                                                  color: HexColor('#707070'),
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    40 /
+                                                    100,
+                                                child: Text(
+                                                  'Best plan for large organization working on streamlining their business processes',
+                                                  overflow:
+                                                      TextOverflow.visible,
+                                                  style: GoogleFonts.notoSans(
+                                                    fontSize: 12,
+                                                    color: HexColor('#707070'),
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                                ),
+                                              ),
+                                            ]),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 10,
+                          right: 10,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: InkWell(
+                                onTap: () {},
+                                child: Container(
+                                  child: CustomPaint(
+                                    painter: RoundedRectangularShadowPainter(
+                                        borderColor: MyAutoPilotStyles.appColor,
+                                        shadowColor: Colors.black,
+                                        borderWidth: 1,
+                                        radius: 5,
+                                        shadowWidth: 0.3),
+                                    child: Container(
+                                      //padding: EdgeInsets.all(20),
+
+                                      height: 160,
+                                      child: Padding(
+                                        padding: EdgeInsets.only(left: 10.0),
+                                        child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              Text(
+                                                '7 Days Trial',
+                                                style: GoogleFonts.notoSerif(
+                                                  fontSize: 16,
+                                                  color: MyAutoPilotStyles
+                                                      .appColor,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              Text(
+                                                'Rs. 500',
+                                                style: GoogleFonts.notoSans(
+                                                  fontSize: 14,
+                                                  color: HexColor('#707070'),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Text(
+                                                'billed One-time',
+                                                style: GoogleFonts.notoSans(
+                                                  fontSize: 14,
+                                                  color: HexColor('#707070'),
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    40 /
+                                                    100,
+                                                child: Text(
+                                                  'Try out the application with upto 50 users before subscribing to any plan',
+                                                  overflow:
+                                                      TextOverflow.visible,
+                                                  style: GoogleFonts.notoSans(
+                                                    fontSize: 12,
+                                                    color: HexColor('#707070'),
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                                ),
+                                              ),
+                                            ]),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 5),
+                            // This is just a blank container to fit the remaining space.
+                            Expanded(
+                              child: Container(),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 10,
+                          right: 10,
+                          top: 15,
+                        ),
+                        child: Row(
+                          children: [
+                            InkWell(
+                              onTap: () {},
+                              child: Text(
+                                'Compare Plan',
+                                style: GoogleFonts.notoSerif(
+                                  fontSize: 14,
+                                  color: MyAutoPilotStyles.appColor,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
                     ],
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.fromLTRB(0, 0, 25, 25),
+                  padding: EdgeInsets.fromLTRB(0, 0, 10, 25),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      ConstrainedBox(
-                        constraints:
-                            BoxConstraints.tightFor(width: 100, height: 35),
-                        child: ElevatedButton(
-                          onPressed: () async {},
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                            primary: MyAutoPilotStyles.appColor,
-                          ),
-                          child: Text(
-                            'Back',
-                            style: GoogleFonts.notoSerif(
-                              fontSize: 13,
-                              color: Colors.white,
-                              fontWeight: FontWeight.normal,
-                            ),
+                      InkWell(
+                        onTap: () {},
+                        child: Text(
+                          'Refund Policy',
+                          style: GoogleFonts.notoSerif(
+                            fontSize: 14,
+                            color: MyAutoPilotStyles.appColor,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                       ),
