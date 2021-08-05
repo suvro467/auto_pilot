@@ -128,1199 +128,1130 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        //height: MediaQuery.of(context).size.height,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          //mainAxisSize: MainAxisSize.min,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 20.0,
-                right: 20.0,
-                top: 20,
-              ),
-              child: TextField(
-                controller: _searchController,
-                onChanged: (value) {},
-                decoration: InputDecoration(
-                  labelStyle: GoogleFonts.notoSerif(
-                    fontSize: 14,
+    return Container(
+      //height: MediaQuery.of(context).size.height,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        //mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 20.0,
+              right: 20.0,
+              top: 20,
+            ),
+            child: TextField(
+              controller: _searchController,
+              onChanged: (value) {},
+              decoration: InputDecoration(
+                labelStyle: GoogleFonts.notoSerif(
+                  fontSize: 14,
+                  color: HexColor('#C9C9C9'),
+                  fontWeight: FontWeight.normal,
+                  //decoration: TextDecoration.underline,
+                ),
+                prefixIcon: Transform.scale(
+                  scale: 0.7,
+                  child: SvgPicture.asset(
+                    'assets/images/search.svg',
                     color: HexColor('#C9C9C9'),
-                    fontWeight: FontWeight.normal,
-                    //decoration: TextDecoration.underline,
+                    //semanticsLabel: 'Email Mobile',
+                    height: 10,
+                    width: 10,
                   ),
-                  prefixIcon: Transform.scale(
-                    scale: 0.7,
-                    child: SvgPicture.asset(
-                      'assets/images/search.svg',
-                      color: HexColor('#C9C9C9'),
-                      //semanticsLabel: 'Email Mobile',
-                      height: 10,
-                      width: 10,
-                    ),
+                ),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: HexColor('#C9C9C9'),
                   ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: HexColor('#C9C9C9'),
-                    ),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: MyAutoPilotStyles.appColor),
-                  ),
-                  hintText: 'Search',
-                  hintStyle: GoogleFonts.notoSans(
-                    fontSize: 14,
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: MyAutoPilotStyles.appColor),
+                ),
+                hintText: 'Search',
+                hintStyle: GoogleFonts.notoSans(
+                  fontSize: 14,
+                  color: HexColor('#707070'),
+                  fontWeight: FontWeight.normal,
+                  //decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 20.0,
+              right: 20.0,
+              top: 10,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  'Filter By',
+                  style: GoogleFonts.notoSans(
+                    fontSize: 12,
                     color: HexColor('#707070'),
                     fontWeight: FontWeight.normal,
                     //decoration: TextDecoration.underline,
                   ),
-                ),
-              ),
+                )
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 20.0,
-                right: 20.0,
-                top: 10,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    'Filter By',
-                    style: GoogleFonts.notoSans(
-                      fontSize: 12,
-                      color: HexColor('#707070'),
-                      fontWeight: FontWeight.normal,
-                      //decoration: TextDecoration.underline,
-                    ),
-                  )
-                ],
-              ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 20.0,
+              right: 20.0,
+              top: 20,
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 20.0,
-                right: 20.0,
-                top: 20,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ElevatedButton(
-                    onPressed: () async {
-                      await showModalBottomSheet(
-                          context: context,
-                          backgroundColor: Colors.transparent,
-                          builder: (builder) {
-                            return Align(
-                              alignment: Alignment.bottomCenter,
-                              child: ConstrainedBox(
-                                constraints: BoxConstraints.tight(
-                                  Size(
-                                      MediaQuery.of(context).size.width *
-                                          90 /
-                                          100,
-                                      430),
-                                ),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: const Radius.circular(20.0),
-                                      topRight: const Radius.circular(20.0),
-                                    ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  onPressed: () async {
+                    await showModalBottomSheet(
+                        context: context,
+                        backgroundColor: Colors.transparent,
+                        builder: (builder) {
+                          return Align(
+                            alignment: Alignment.bottomCenter,
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints.tight(
+                                Size(
+                                    MediaQuery.of(context).size.width *
+                                        90 /
+                                        100,
+                                    430),
+                              ),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: const Radius.circular(20.0),
+                                    topRight: const Radius.circular(20.0),
                                   ),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                          top: 30,
-                                          left: 30,
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              'Add Date Filter',
-                                              style: GoogleFonts.notoSerif(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold,
+                                ),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                        top: 30,
+                                        left: 30,
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            'Add Date Filter',
+                                            style: GoogleFonts.notoSerif(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: MyAutoPilotStyles.appColor,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    // Start Date
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                        top: 40,
+                                        left: 30,
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            'Start Date',
+                                            style: GoogleFonts.notoSans(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.normal,
+                                              color: HexColor('#707070'),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      alignment: Alignment.centerLeft,
+                                      margin: EdgeInsets.only(
+                                        top: 10,
+                                        left: 30,
+                                        right: 40,
+                                      ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Stack(children: [
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  35 /
+                                                  100,
+                                              child: GestureDetector(
+                                                onTap: () async {
+                                                  DateTime? newDateTime =
+                                                      await showCustomDatePicker(
+                                                    initialDatePickerMode:
+                                                        DatePickerMode.day,
+                                                    initialDate: startFromDate,
+                                                    firstDate: DateTime(
+                                                        startFromDate.year -
+                                                            100),
+                                                    lastDate: DateTime(
+                                                        startFromDate.year +
+                                                            100),
+                                                    context: context,
+                                                    height: 300,
+                                                    theme: ThemeData(
+                                                      primaryColor:
+                                                          MyAutoPilotStyles
+                                                              .appColor,
+                                                    ),
+                                                    styleYearPicker:
+                                                        MaterialRoundedYearPickerStyle(
+                                                      textStyleYear:
+                                                          GoogleFonts.notoSerif(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color:
+                                                            HexColor('#707070'),
+                                                      ),
+                                                      textStyleYearSelected:
+                                                          GoogleFonts.notoSerif(
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color:
+                                                            HexColor('#707070'),
+                                                      ),
+                                                      heightYearRow: 50,
+                                                      //backgroundPicker: Colors
+                                                      //.deepPurple[400],
+                                                    ),
+                                                    styleDatePicker:
+                                                        MaterialRoundedDatePickerStyle(
+                                                      textStyleYearButton:
+                                                          GoogleFonts.notoSans(
+                                                        fontSize: 33,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.white,
+                                                      ),
+                                                      // This property is not working
+                                                      textStyleDayButton:
+                                                          GoogleFonts.notoSans(
+                                                        fontSize: 24,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.white,
+                                                      ),
+                                                      textStyleDayHeader:
+                                                          GoogleFonts.notoSans(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.grey[800],
+                                                      ),
+                                                      paddingMonthHeader:
+                                                          EdgeInsets.only(
+                                                              top: 12),
+                                                      sizeArrow: 35,
+                                                      colorArrowNext:
+                                                          MyAutoPilotStyles
+                                                              .appColor,
+                                                      colorArrowPrevious:
+                                                          MyAutoPilotStyles
+                                                              .appColor,
+                                                      textStyleDayOnCalendar:
+                                                          GoogleFonts.notoSerif(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color:
+                                                            HexColor('#707070'),
+                                                      ),
+                                                      textStyleDayOnCalendarSelected:
+                                                          GoogleFonts.notoSerif(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.white,
+                                                      ),
+                                                      decorationDateSelected:
+                                                          BoxDecoration(
+                                                              color:
+                                                                  MyAutoPilotStyles
+                                                                      .appColor,
+                                                              shape: BoxShape
+                                                                  .circle),
+                                                      textStyleCurrentDayOnCalendar:
+                                                          GoogleFonts.notoSerif(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color:
+                                                            Colors.greenAccent,
+                                                      ),
+                                                      textStyleDayOnCalendarDisabled:
+                                                          GoogleFonts.notoSerif(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.white
+                                                            .withOpacity(0.1),
+                                                      ),
+                                                      backgroundActionBar:
+                                                          MyAutoPilotStyles
+                                                              .appColor,
+                                                      textStyleButtonPositive:
+                                                          GoogleFonts.notoSans(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.white,
+                                                      ),
+                                                      textStyleButtonNegative:
+                                                          GoogleFonts.notoSans(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.white
+                                                            .withOpacity(0.5),
+                                                      ),
+                                                      paddingActionBar:
+                                                          EdgeInsets.all(0),
+                                                      textStyleMonthYearHeader:
+                                                          GoogleFonts.notoSans(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color:
+                                                            HexColor('#707070'),
+                                                      ),
+                                                    ),
+                                                  );
+                                                  print(newDateTime);
+                                                  if (newDateTime != null) {
+                                                    setState(() {
+                                                      startFromDate =
+                                                          newDateTime;
+                                                      _startFromDateController
+                                                          .text = DateFormat(
+                                                              'dd MMM yyyy')
+                                                          .format(
+                                                              startFromDate);
+                                                    });
+                                                  }
+                                                },
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 0),
+                                                  child: TextField(
+                                                    style:
+                                                        GoogleFonts.notoSerif(
+                                                      fontSize: 14,
+                                                      color:
+                                                          HexColor('#707070'),
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                    ),
+                                                    controller:
+                                                        _startFromDateController,
+                                                    textAlign: TextAlign.right,
+                                                    minLines: 1,
+                                                    maxLines: 1,
+                                                    enabled: false,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Positioned(
+                                              top: 15,
+                                              child: SvgPicture.asset(
+                                                'assets/images/calendar.svg',
                                                 color:
                                                     MyAutoPilotStyles.appColor,
+                                                width: 25,
+                                                height: 25,
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      // Start Date
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                          top: 40,
-                                          left: 30,
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              'Start Date',
-                                              style: GoogleFonts.notoSans(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.normal,
-                                                color: HexColor('#707070'),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        alignment: Alignment.centerLeft,
-                                        margin: EdgeInsets.only(
-                                          top: 10,
-                                          left: 30,
-                                          right: 40,
-                                        ),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Stack(children: [
-                                              Container(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    35 /
-                                                    100,
-                                                child: GestureDetector(
-                                                  onTap: () async {
-                                                    DateTime? newDateTime =
-                                                        await showCustomDatePicker(
-                                                      initialDatePickerMode:
-                                                          DatePickerMode.day,
-                                                      initialDate:
-                                                          startFromDate,
-                                                      firstDate: DateTime(
-                                                          startFromDate.year -
-                                                              100),
-                                                      lastDate: DateTime(
-                                                          startFromDate.year +
-                                                              100),
-                                                      context: context,
-                                                      height: 300,
-                                                      theme: ThemeData(
-                                                        primaryColor:
-                                                            MyAutoPilotStyles
-                                                                .appColor,
-                                                      ),
-                                                      styleYearPicker:
-                                                          MaterialRoundedYearPickerStyle(
-                                                        textStyleYear:
-                                                            GoogleFonts
-                                                                .notoSerif(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: HexColor(
-                                                              '#707070'),
-                                                        ),
-                                                        textStyleYearSelected:
-                                                            GoogleFonts
-                                                                .notoSerif(
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: HexColor(
-                                                              '#707070'),
-                                                        ),
-                                                        heightYearRow: 50,
-                                                        //backgroundPicker: Colors
-                                                        //.deepPurple[400],
-                                                      ),
-                                                      styleDatePicker:
-                                                          MaterialRoundedDatePickerStyle(
-                                                        textStyleYearButton:
-                                                            GoogleFonts
-                                                                .notoSans(
-                                                          fontSize: 33,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors.white,
-                                                        ),
-                                                        // This property is not working
-                                                        textStyleDayButton:
-                                                            GoogleFonts
-                                                                .notoSans(
-                                                          fontSize: 24,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors.white,
-                                                        ),
-                                                        textStyleDayHeader:
-                                                            GoogleFonts
-                                                                .notoSans(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color:
-                                                              Colors.grey[800],
-                                                        ),
-                                                        paddingMonthHeader:
-                                                            EdgeInsets.only(
-                                                                top: 12),
-                                                        sizeArrow: 35,
-                                                        colorArrowNext:
-                                                            MyAutoPilotStyles
-                                                                .appColor,
-                                                        colorArrowPrevious:
-                                                            MyAutoPilotStyles
-                                                                .appColor,
-                                                        textStyleDayOnCalendar:
-                                                            GoogleFonts
-                                                                .notoSerif(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: HexColor(
-                                                              '#707070'),
-                                                        ),
-                                                        textStyleDayOnCalendarSelected:
-                                                            GoogleFonts
-                                                                .notoSerif(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors.white,
-                                                        ),
-                                                        decorationDateSelected:
-                                                            BoxDecoration(
-                                                                color:
-                                                                    MyAutoPilotStyles
-                                                                        .appColor,
-                                                                shape: BoxShape
-                                                                    .circle),
-                                                        textStyleCurrentDayOnCalendar:
-                                                            GoogleFonts
-                                                                .notoSerif(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors
-                                                              .greenAccent,
-                                                        ),
-                                                        textStyleDayOnCalendarDisabled:
-                                                            GoogleFonts
-                                                                .notoSerif(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors.white
-                                                              .withOpacity(0.1),
-                                                        ),
-                                                        backgroundActionBar:
-                                                            MyAutoPilotStyles
-                                                                .appColor,
-                                                        textStyleButtonPositive:
-                                                            GoogleFonts
-                                                                .notoSans(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors.white,
-                                                        ),
-                                                        textStyleButtonNegative:
-                                                            GoogleFonts
-                                                                .notoSans(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors.white
-                                                              .withOpacity(0.5),
-                                                        ),
-                                                        paddingActionBar:
-                                                            EdgeInsets.all(0),
-                                                        textStyleMonthYearHeader:
-                                                            GoogleFonts
-                                                                .notoSans(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: HexColor(
-                                                              '#707070'),
-                                                        ),
-                                                      ),
-                                                    );
-                                                    print(newDateTime);
-                                                    if (newDateTime != null) {
-                                                      setState(() {
-                                                        startFromDate =
-                                                            newDateTime;
-                                                        _startFromDateController
-                                                            .text = DateFormat(
-                                                                'dd MMM yyyy')
-                                                            .format(
-                                                                startFromDate);
-                                                      });
-                                                    }
-                                                  },
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 0),
-                                                    child: TextField(
-                                                      style:
-                                                          GoogleFonts.notoSerif(
-                                                        fontSize: 14,
-                                                        color:
-                                                            HexColor('#707070'),
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                      ),
-                                                      controller:
-                                                          _startFromDateController,
-                                                      textAlign:
-                                                          TextAlign.right,
-                                                      minLines: 1,
-                                                      maxLines: 1,
-                                                      enabled: false,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Positioned(
-                                                top: 15,
-                                                child: SvgPicture.asset(
-                                                  'assets/images/calendar.svg',
-                                                  color: MyAutoPilotStyles
-                                                      .appColor,
-                                                  width: 25,
-                                                  height: 25,
-                                                ),
-                                              )
-                                            ]),
-                                            Stack(children: [
-                                              Container(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    35 /
-                                                    100,
-                                                child: GestureDetector(
-                                                  onTap: () async {
-                                                    DateTime? newDateTime =
-                                                        await showCustomDatePicker(
-                                                      initialDatePickerMode:
-                                                          DatePickerMode.day,
-                                                      initialDate: startToDate,
-                                                      firstDate: DateTime(
-                                                          startToDate.year -
-                                                              100),
-                                                      lastDate: DateTime(
-                                                          startToDate.year +
-                                                              100),
-                                                      context: context,
-                                                      height: 300,
-                                                      theme: ThemeData(
-                                                        primaryColor:
-                                                            MyAutoPilotStyles
-                                                                .appColor,
-                                                      ),
-                                                      styleYearPicker:
-                                                          MaterialRoundedYearPickerStyle(
-                                                        textStyleYear:
-                                                            GoogleFonts
-                                                                .notoSerif(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: HexColor(
-                                                              '#707070'),
-                                                        ),
-                                                        textStyleYearSelected:
-                                                            GoogleFonts
-                                                                .notoSerif(
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: HexColor(
-                                                              '#707070'),
-                                                        ),
-                                                        heightYearRow: 50,
-                                                        //backgroundPicker: Colors
-                                                        //.deepPurple[400],
-                                                      ),
-                                                      styleDatePicker:
-                                                          MaterialRoundedDatePickerStyle(
-                                                        textStyleYearButton:
-                                                            GoogleFonts
-                                                                .notoSans(
-                                                          fontSize: 33,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors.white,
-                                                        ),
-                                                        // This property is not working
-                                                        textStyleDayButton:
-                                                            GoogleFonts
-                                                                .notoSans(
-                                                          fontSize: 24,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors.white,
-                                                        ),
-                                                        textStyleDayHeader:
-                                                            GoogleFonts
-                                                                .notoSans(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color:
-                                                              Colors.grey[800],
-                                                        ),
-                                                        paddingMonthHeader:
-                                                            EdgeInsets.only(
-                                                                top: 12),
-                                                        sizeArrow: 35,
-                                                        colorArrowNext:
-                                                            MyAutoPilotStyles
-                                                                .appColor,
-                                                        colorArrowPrevious:
-                                                            MyAutoPilotStyles
-                                                                .appColor,
-                                                        textStyleDayOnCalendar:
-                                                            GoogleFonts
-                                                                .notoSerif(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: HexColor(
-                                                              '#707070'),
-                                                        ),
-                                                        textStyleDayOnCalendarSelected:
-                                                            GoogleFonts
-                                                                .notoSerif(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors.white,
-                                                        ),
-                                                        decorationDateSelected:
-                                                            BoxDecoration(
-                                                                color:
-                                                                    MyAutoPilotStyles
-                                                                        .appColor,
-                                                                shape: BoxShape
-                                                                    .circle),
-                                                        textStyleCurrentDayOnCalendar:
-                                                            GoogleFonts
-                                                                .notoSerif(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors
-                                                              .greenAccent,
-                                                        ),
-                                                        textStyleDayOnCalendarDisabled:
-                                                            GoogleFonts
-                                                                .notoSerif(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors.white
-                                                              .withOpacity(0.1),
-                                                        ),
-                                                        backgroundActionBar:
-                                                            MyAutoPilotStyles
-                                                                .appColor,
-                                                        textStyleButtonPositive:
-                                                            GoogleFonts
-                                                                .notoSans(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors.white,
-                                                        ),
-                                                        textStyleButtonNegative:
-                                                            GoogleFonts
-                                                                .notoSans(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors.white
-                                                              .withOpacity(0.5),
-                                                        ),
-                                                        paddingActionBar:
-                                                            EdgeInsets.all(0),
-                                                        textStyleMonthYearHeader:
-                                                            GoogleFonts
-                                                                .notoSans(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: HexColor(
-                                                              '#707070'),
-                                                        ),
-                                                      ),
-                                                    );
-                                                    print(newDateTime);
-                                                    if (newDateTime != null) {
-                                                      setState(() {
-                                                        startToDate =
-                                                            newDateTime;
-                                                        _startToDateController
-                                                            .text = DateFormat(
-                                                                'dd MMM yyyy')
-                                                            .format(
-                                                                startToDate);
-                                                      });
-                                                    }
-                                                  },
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 0),
-                                                    child: TextField(
-                                                      style:
-                                                          GoogleFonts.notoSerif(
-                                                        fontSize: 14,
-                                                        color:
-                                                            HexColor('#707070'),
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                      ),
-                                                      controller:
-                                                          _startToDateController,
-                                                      textAlign:
-                                                          TextAlign.right,
-                                                      minLines: 1,
-                                                      maxLines: 1,
-                                                      enabled: false,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Positioned(
-                                                top: 15,
-                                                child: SvgPicture.asset(
-                                                  'assets/images/calendar.svg',
-                                                  color: MyAutoPilotStyles
-                                                      .appColor,
-                                                  width: 25,
-                                                  height: 25,
-                                                ),
-                                              )
-                                            ]),
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                          top: 5,
-                                          left: 30,
-                                          right: 40,
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
+                                            )
+                                          ]),
+                                          Stack(children: [
                                             Container(
                                               width: MediaQuery.of(context)
                                                       .size
                                                       .width *
                                                   35 /
                                                   100,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: [
-                                                  Container(),
-                                                  Text(
-                                                    'From',
-                                                    style: GoogleFonts.notoSans(
-                                                      fontSize: 10,
-                                                      color:
-                                                          HexColor('#707070'),
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                              child: GestureDetector(
+                                                onTap: () async {
+                                                  DateTime? newDateTime =
+                                                      await showCustomDatePicker(
+                                                    initialDatePickerMode:
+                                                        DatePickerMode.day,
+                                                    initialDate: startToDate,
+                                                    firstDate: DateTime(
+                                                        startToDate.year - 100),
+                                                    lastDate: DateTime(
+                                                        startToDate.year + 100),
+                                                    context: context,
+                                                    height: 300,
+                                                    theme: ThemeData(
+                                                      primaryColor:
+                                                          MyAutoPilotStyles
+                                                              .appColor,
                                                     ),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  35 /
-                                                  100,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: [
-                                                  Text(
-                                                    'To',
-                                                    style: GoogleFonts.notoSans(
-                                                      fontSize: 10,
-                                                      color:
-                                                          HexColor('#707070'),
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ), // Target Date
-                                      // Target Date
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                          top: 40,
-                                          left: 30,
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              'Target Date',
-                                              style: GoogleFonts.notoSans(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.normal,
-                                                color: HexColor('#707070'),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        alignment: Alignment.centerLeft,
-                                        margin: EdgeInsets.only(
-                                          top: 10,
-                                          left: 30,
-                                          right: 40,
-                                        ),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Stack(children: [
-                                              Container(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    35 /
-                                                    100,
-                                                child: GestureDetector(
-                                                  onTap: () async {
-                                                    DateTime? newDateTime =
-                                                        await showCustomDatePicker(
-                                                      initialDatePickerMode:
-                                                          DatePickerMode.day,
-                                                      initialDate:
-                                                          targetFromDate,
-                                                      firstDate: DateTime(
-                                                          targetFromDate.year -
-                                                              100),
-                                                      lastDate: DateTime(
-                                                          targetFromDate.year +
-                                                              100),
-                                                      context: context,
-                                                      height: 300,
-                                                      theme: ThemeData(
-                                                        primaryColor:
-                                                            MyAutoPilotStyles
-                                                                .appColor,
-                                                      ),
-                                                      styleYearPicker:
-                                                          MaterialRoundedYearPickerStyle(
-                                                        textStyleYear:
-                                                            GoogleFonts
-                                                                .notoSerif(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: HexColor(
-                                                              '#707070'),
-                                                        ),
-                                                        textStyleYearSelected:
-                                                            GoogleFonts
-                                                                .notoSerif(
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: HexColor(
-                                                              '#707070'),
-                                                        ),
-                                                        heightYearRow: 50,
-                                                        //backgroundPicker: Colors
-                                                        //.deepPurple[400],
-                                                      ),
-                                                      styleDatePicker:
-                                                          MaterialRoundedDatePickerStyle(
-                                                        textStyleYearButton:
-                                                            GoogleFonts
-                                                                .notoSans(
-                                                          fontSize: 33,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors.white,
-                                                        ),
-                                                        // This property is not working
-                                                        textStyleDayButton:
-                                                            GoogleFonts
-                                                                .notoSans(
-                                                          fontSize: 24,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors.white,
-                                                        ),
-                                                        textStyleDayHeader:
-                                                            GoogleFonts
-                                                                .notoSans(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color:
-                                                              Colors.grey[800],
-                                                        ),
-                                                        paddingMonthHeader:
-                                                            EdgeInsets.only(
-                                                                top: 12),
-                                                        sizeArrow: 35,
-                                                        colorArrowNext:
-                                                            MyAutoPilotStyles
-                                                                .appColor,
-                                                        colorArrowPrevious:
-                                                            MyAutoPilotStyles
-                                                                .appColor,
-                                                        textStyleDayOnCalendar:
-                                                            GoogleFonts
-                                                                .notoSerif(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: HexColor(
-                                                              '#707070'),
-                                                        ),
-                                                        textStyleDayOnCalendarSelected:
-                                                            GoogleFonts
-                                                                .notoSerif(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors.white,
-                                                        ),
-                                                        decorationDateSelected:
-                                                            BoxDecoration(
-                                                                color:
-                                                                    MyAutoPilotStyles
-                                                                        .appColor,
-                                                                shape: BoxShape
-                                                                    .circle),
-                                                        textStyleCurrentDayOnCalendar:
-                                                            GoogleFonts
-                                                                .notoSerif(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors
-                                                              .greenAccent,
-                                                        ),
-                                                        textStyleDayOnCalendarDisabled:
-                                                            GoogleFonts
-                                                                .notoSerif(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors.white
-                                                              .withOpacity(0.1),
-                                                        ),
-                                                        backgroundActionBar:
-                                                            MyAutoPilotStyles
-                                                                .appColor,
-                                                        textStyleButtonPositive:
-                                                            GoogleFonts
-                                                                .notoSans(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors.white,
-                                                        ),
-                                                        textStyleButtonNegative:
-                                                            GoogleFonts
-                                                                .notoSans(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors.white
-                                                              .withOpacity(0.5),
-                                                        ),
-                                                        paddingActionBar:
-                                                            EdgeInsets.all(0),
-                                                        textStyleMonthYearHeader:
-                                                            GoogleFonts
-                                                                .notoSans(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: HexColor(
-                                                              '#707070'),
-                                                        ),
-                                                      ),
-                                                    );
-                                                    print(newDateTime);
-                                                    if (newDateTime != null) {
-                                                      setState(() {
-                                                        targetFromDate =
-                                                            newDateTime;
-                                                        _targetFromDateController
-                                                            .text = DateFormat(
-                                                                'dd MMM yyyy')
-                                                            .format(
-                                                                targetFromDate);
-                                                      });
-                                                    }
-                                                  },
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 0),
-                                                    child: TextField(
-                                                      style:
+                                                    styleYearPicker:
+                                                        MaterialRoundedYearPickerStyle(
+                                                      textStyleYear:
                                                           GoogleFonts.notoSerif(
                                                         fontSize: 14,
-                                                        color:
-                                                            HexColor('#707070'),
                                                         fontWeight:
                                                             FontWeight.normal,
+                                                        color:
+                                                            HexColor('#707070'),
                                                       ),
-                                                      controller:
-                                                          _targetFromDateController,
-                                                      textAlign:
-                                                          TextAlign.right,
-                                                      minLines: 1,
-                                                      maxLines: 1,
-                                                      enabled: false,
+                                                      textStyleYearSelected:
+                                                          GoogleFonts.notoSerif(
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color:
+                                                            HexColor('#707070'),
+                                                      ),
+                                                      heightYearRow: 50,
+                                                      //backgroundPicker: Colors
+                                                      //.deepPurple[400],
                                                     ),
+                                                    styleDatePicker:
+                                                        MaterialRoundedDatePickerStyle(
+                                                      textStyleYearButton:
+                                                          GoogleFonts.notoSans(
+                                                        fontSize: 33,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.white,
+                                                      ),
+                                                      // This property is not working
+                                                      textStyleDayButton:
+                                                          GoogleFonts.notoSans(
+                                                        fontSize: 24,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.white,
+                                                      ),
+                                                      textStyleDayHeader:
+                                                          GoogleFonts.notoSans(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.grey[800],
+                                                      ),
+                                                      paddingMonthHeader:
+                                                          EdgeInsets.only(
+                                                              top: 12),
+                                                      sizeArrow: 35,
+                                                      colorArrowNext:
+                                                          MyAutoPilotStyles
+                                                              .appColor,
+                                                      colorArrowPrevious:
+                                                          MyAutoPilotStyles
+                                                              .appColor,
+                                                      textStyleDayOnCalendar:
+                                                          GoogleFonts.notoSerif(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color:
+                                                            HexColor('#707070'),
+                                                      ),
+                                                      textStyleDayOnCalendarSelected:
+                                                          GoogleFonts.notoSerif(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.white,
+                                                      ),
+                                                      decorationDateSelected:
+                                                          BoxDecoration(
+                                                              color:
+                                                                  MyAutoPilotStyles
+                                                                      .appColor,
+                                                              shape: BoxShape
+                                                                  .circle),
+                                                      textStyleCurrentDayOnCalendar:
+                                                          GoogleFonts.notoSerif(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color:
+                                                            Colors.greenAccent,
+                                                      ),
+                                                      textStyleDayOnCalendarDisabled:
+                                                          GoogleFonts.notoSerif(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.white
+                                                            .withOpacity(0.1),
+                                                      ),
+                                                      backgroundActionBar:
+                                                          MyAutoPilotStyles
+                                                              .appColor,
+                                                      textStyleButtonPositive:
+                                                          GoogleFonts.notoSans(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.white,
+                                                      ),
+                                                      textStyleButtonNegative:
+                                                          GoogleFonts.notoSans(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.white
+                                                            .withOpacity(0.5),
+                                                      ),
+                                                      paddingActionBar:
+                                                          EdgeInsets.all(0),
+                                                      textStyleMonthYearHeader:
+                                                          GoogleFonts.notoSans(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color:
+                                                            HexColor('#707070'),
+                                                      ),
+                                                    ),
+                                                  );
+                                                  print(newDateTime);
+                                                  if (newDateTime != null) {
+                                                    setState(() {
+                                                      startToDate = newDateTime;
+                                                      _startToDateController
+                                                          .text = DateFormat(
+                                                              'dd MMM yyyy')
+                                                          .format(startToDate);
+                                                    });
+                                                  }
+                                                },
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 0),
+                                                  child: TextField(
+                                                    style:
+                                                        GoogleFonts.notoSerif(
+                                                      fontSize: 14,
+                                                      color:
+                                                          HexColor('#707070'),
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                    ),
+                                                    controller:
+                                                        _startToDateController,
+                                                    textAlign: TextAlign.right,
+                                                    minLines: 1,
+                                                    maxLines: 1,
+                                                    enabled: false,
                                                   ),
                                                 ),
                                               ),
-                                              Positioned(
-                                                top: 15,
-                                                child: SvgPicture.asset(
-                                                  'assets/images/calendar.svg',
-                                                  color: MyAutoPilotStyles
-                                                      .appColor,
-                                                  width: 25,
-                                                  height: 25,
-                                                ),
-                                              )
-                                            ]),
-                                            Stack(children: [
-                                              Container(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    35 /
-                                                    100,
-                                                child: GestureDetector(
-                                                  onTap: () async {
-                                                    DateTime? newDateTime =
-                                                        await showCustomDatePicker(
-                                                      initialDatePickerMode:
-                                                          DatePickerMode.day,
-                                                      initialDate: targetToDate,
-                                                      firstDate: DateTime(
-                                                          targetToDate.year -
-                                                              100),
-                                                      lastDate: DateTime(
-                                                          targetToDate.year +
-                                                              100),
-                                                      context: context,
-                                                      height: 300,
-                                                      theme: ThemeData(
-                                                        primaryColor:
-                                                            MyAutoPilotStyles
-                                                                .appColor,
-                                                      ),
-                                                      styleYearPicker:
-                                                          MaterialRoundedYearPickerStyle(
-                                                        textStyleYear:
-                                                            GoogleFonts
-                                                                .notoSerif(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: HexColor(
-                                                              '#707070'),
-                                                        ),
-                                                        textStyleYearSelected:
-                                                            GoogleFonts
-                                                                .notoSerif(
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: HexColor(
-                                                              '#707070'),
-                                                        ),
-                                                        heightYearRow: 50,
-                                                        //backgroundPicker: Colors
-                                                        //.deepPurple[400],
-                                                      ),
-                                                      styleDatePicker:
-                                                          MaterialRoundedDatePickerStyle(
-                                                        textStyleYearButton:
-                                                            GoogleFonts
-                                                                .notoSans(
-                                                          fontSize: 33,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors.white,
-                                                        ),
-                                                        // This property is not working
-                                                        textStyleDayButton:
-                                                            GoogleFonts
-                                                                .notoSans(
-                                                          fontSize: 24,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors.white,
-                                                        ),
-                                                        textStyleDayHeader:
-                                                            GoogleFonts
-                                                                .notoSans(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color:
-                                                              Colors.grey[800],
-                                                        ),
-                                                        paddingMonthHeader:
-                                                            EdgeInsets.only(
-                                                                top: 12),
-                                                        sizeArrow: 35,
-                                                        colorArrowNext:
-                                                            MyAutoPilotStyles
-                                                                .appColor,
-                                                        colorArrowPrevious:
-                                                            MyAutoPilotStyles
-                                                                .appColor,
-                                                        textStyleDayOnCalendar:
-                                                            GoogleFonts
-                                                                .notoSerif(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: HexColor(
-                                                              '#707070'),
-                                                        ),
-                                                        textStyleDayOnCalendarSelected:
-                                                            GoogleFonts
-                                                                .notoSerif(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors.white,
-                                                        ),
-                                                        decorationDateSelected:
-                                                            BoxDecoration(
-                                                                color:
-                                                                    MyAutoPilotStyles
-                                                                        .appColor,
-                                                                shape: BoxShape
-                                                                    .circle),
-                                                        textStyleCurrentDayOnCalendar:
-                                                            GoogleFonts
-                                                                .notoSerif(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors
-                                                              .greenAccent,
-                                                        ),
-                                                        textStyleDayOnCalendarDisabled:
-                                                            GoogleFonts
-                                                                .notoSerif(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors.white
-                                                              .withOpacity(0.1),
-                                                        ),
-                                                        backgroundActionBar:
-                                                            MyAutoPilotStyles
-                                                                .appColor,
-                                                        textStyleButtonPositive:
-                                                            GoogleFonts
-                                                                .notoSans(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors.white,
-                                                        ),
-                                                        textStyleButtonNegative:
-                                                            GoogleFonts
-                                                                .notoSans(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: Colors.white
-                                                              .withOpacity(0.5),
-                                                        ),
-                                                        paddingActionBar:
-                                                            EdgeInsets.all(0),
-                                                        textStyleMonthYearHeader:
-                                                            GoogleFonts
-                                                                .notoSans(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: HexColor(
-                                                              '#707070'),
-                                                        ),
-                                                      ),
-                                                    );
-                                                    print(newDateTime);
-                                                    if (newDateTime != null) {
-                                                      setState(() {
-                                                        targetToDate =
-                                                            newDateTime;
-                                                        _targetToDateController
-                                                            .text = DateFormat(
-                                                                'dd MMM yyyy')
-                                                            .format(
-                                                                targetToDate);
-                                                      });
-                                                    }
-                                                  },
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 0),
-                                                    child: TextField(
-                                                      style:
+                                            ),
+                                            Positioned(
+                                              top: 15,
+                                              child: SvgPicture.asset(
+                                                'assets/images/calendar.svg',
+                                                color:
+                                                    MyAutoPilotStyles.appColor,
+                                                width: 25,
+                                                height: 25,
+                                              ),
+                                            )
+                                          ]),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                        top: 5,
+                                        left: 30,
+                                        right: 40,
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                35 /
+                                                100,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                Container(),
+                                                Text(
+                                                  'From',
+                                                  style: GoogleFonts.notoSans(
+                                                    fontSize: 10,
+                                                    color: HexColor('#707070'),
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                35 /
+                                                100,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                Text(
+                                                  'To',
+                                                  style: GoogleFonts.notoSans(
+                                                    fontSize: 10,
+                                                    color: HexColor('#707070'),
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ), // Target Date
+                                    // Target Date
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                        top: 40,
+                                        left: 30,
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            'Target Date',
+                                            style: GoogleFonts.notoSans(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.normal,
+                                              color: HexColor('#707070'),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      alignment: Alignment.centerLeft,
+                                      margin: EdgeInsets.only(
+                                        top: 10,
+                                        left: 30,
+                                        right: 40,
+                                      ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Stack(children: [
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  35 /
+                                                  100,
+                                              child: GestureDetector(
+                                                onTap: () async {
+                                                  DateTime? newDateTime =
+                                                      await showCustomDatePicker(
+                                                    initialDatePickerMode:
+                                                        DatePickerMode.day,
+                                                    initialDate: targetFromDate,
+                                                    firstDate: DateTime(
+                                                        targetFromDate.year -
+                                                            100),
+                                                    lastDate: DateTime(
+                                                        targetFromDate.year +
+                                                            100),
+                                                    context: context,
+                                                    height: 300,
+                                                    theme: ThemeData(
+                                                      primaryColor:
+                                                          MyAutoPilotStyles
+                                                              .appColor,
+                                                    ),
+                                                    styleYearPicker:
+                                                        MaterialRoundedYearPickerStyle(
+                                                      textStyleYear:
                                                           GoogleFonts.notoSerif(
                                                         fontSize: 14,
-                                                        color:
-                                                            HexColor('#707070'),
                                                         fontWeight:
                                                             FontWeight.normal,
+                                                        color:
+                                                            HexColor('#707070'),
                                                       ),
-                                                      controller:
-                                                          _targetToDateController,
-                                                      textAlign:
-                                                          TextAlign.right,
-                                                      minLines: 1,
-                                                      maxLines: 1,
-                                                      enabled: false,
+                                                      textStyleYearSelected:
+                                                          GoogleFonts.notoSerif(
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color:
+                                                            HexColor('#707070'),
+                                                      ),
+                                                      heightYearRow: 50,
+                                                      //backgroundPicker: Colors
+                                                      //.deepPurple[400],
                                                     ),
+                                                    styleDatePicker:
+                                                        MaterialRoundedDatePickerStyle(
+                                                      textStyleYearButton:
+                                                          GoogleFonts.notoSans(
+                                                        fontSize: 33,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.white,
+                                                      ),
+                                                      // This property is not working
+                                                      textStyleDayButton:
+                                                          GoogleFonts.notoSans(
+                                                        fontSize: 24,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.white,
+                                                      ),
+                                                      textStyleDayHeader:
+                                                          GoogleFonts.notoSans(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.grey[800],
+                                                      ),
+                                                      paddingMonthHeader:
+                                                          EdgeInsets.only(
+                                                              top: 12),
+                                                      sizeArrow: 35,
+                                                      colorArrowNext:
+                                                          MyAutoPilotStyles
+                                                              .appColor,
+                                                      colorArrowPrevious:
+                                                          MyAutoPilotStyles
+                                                              .appColor,
+                                                      textStyleDayOnCalendar:
+                                                          GoogleFonts.notoSerif(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color:
+                                                            HexColor('#707070'),
+                                                      ),
+                                                      textStyleDayOnCalendarSelected:
+                                                          GoogleFonts.notoSerif(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.white,
+                                                      ),
+                                                      decorationDateSelected:
+                                                          BoxDecoration(
+                                                              color:
+                                                                  MyAutoPilotStyles
+                                                                      .appColor,
+                                                              shape: BoxShape
+                                                                  .circle),
+                                                      textStyleCurrentDayOnCalendar:
+                                                          GoogleFonts.notoSerif(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color:
+                                                            Colors.greenAccent,
+                                                      ),
+                                                      textStyleDayOnCalendarDisabled:
+                                                          GoogleFonts.notoSerif(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.white
+                                                            .withOpacity(0.1),
+                                                      ),
+                                                      backgroundActionBar:
+                                                          MyAutoPilotStyles
+                                                              .appColor,
+                                                      textStyleButtonPositive:
+                                                          GoogleFonts.notoSans(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.white,
+                                                      ),
+                                                      textStyleButtonNegative:
+                                                          GoogleFonts.notoSans(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.white
+                                                            .withOpacity(0.5),
+                                                      ),
+                                                      paddingActionBar:
+                                                          EdgeInsets.all(0),
+                                                      textStyleMonthYearHeader:
+                                                          GoogleFonts.notoSans(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color:
+                                                            HexColor('#707070'),
+                                                      ),
+                                                    ),
+                                                  );
+                                                  print(newDateTime);
+                                                  if (newDateTime != null) {
+                                                    setState(() {
+                                                      targetFromDate =
+                                                          newDateTime;
+                                                      _targetFromDateController
+                                                          .text = DateFormat(
+                                                              'dd MMM yyyy')
+                                                          .format(
+                                                              targetFromDate);
+                                                    });
+                                                  }
+                                                },
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 0),
+                                                  child: TextField(
+                                                    style:
+                                                        GoogleFonts.notoSerif(
+                                                      fontSize: 14,
+                                                      color:
+                                                          HexColor('#707070'),
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                    ),
+                                                    controller:
+                                                        _targetFromDateController,
+                                                    textAlign: TextAlign.right,
+                                                    minLines: 1,
+                                                    maxLines: 1,
+                                                    enabled: false,
                                                   ),
                                                 ),
                                               ),
-                                              Positioned(
-                                                top: 15,
-                                                child: SvgPicture.asset(
-                                                  'assets/images/calendar.svg',
-                                                  color: MyAutoPilotStyles
-                                                      .appColor,
-                                                  width: 25,
-                                                  height: 25,
+                                            ),
+                                            Positioned(
+                                              top: 15,
+                                              child: SvgPicture.asset(
+                                                'assets/images/calendar.svg',
+                                                color:
+                                                    MyAutoPilotStyles.appColor,
+                                                width: 25,
+                                                height: 25,
+                                              ),
+                                            )
+                                          ]),
+                                          Stack(children: [
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  35 /
+                                                  100,
+                                              child: GestureDetector(
+                                                onTap: () async {
+                                                  DateTime? newDateTime =
+                                                      await showCustomDatePicker(
+                                                    initialDatePickerMode:
+                                                        DatePickerMode.day,
+                                                    initialDate: targetToDate,
+                                                    firstDate: DateTime(
+                                                        targetToDate.year -
+                                                            100),
+                                                    lastDate: DateTime(
+                                                        targetToDate.year +
+                                                            100),
+                                                    context: context,
+                                                    height: 300,
+                                                    theme: ThemeData(
+                                                      primaryColor:
+                                                          MyAutoPilotStyles
+                                                              .appColor,
+                                                    ),
+                                                    styleYearPicker:
+                                                        MaterialRoundedYearPickerStyle(
+                                                      textStyleYear:
+                                                          GoogleFonts.notoSerif(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color:
+                                                            HexColor('#707070'),
+                                                      ),
+                                                      textStyleYearSelected:
+                                                          GoogleFonts.notoSerif(
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color:
+                                                            HexColor('#707070'),
+                                                      ),
+                                                      heightYearRow: 50,
+                                                      //backgroundPicker: Colors
+                                                      //.deepPurple[400],
+                                                    ),
+                                                    styleDatePicker:
+                                                        MaterialRoundedDatePickerStyle(
+                                                      textStyleYearButton:
+                                                          GoogleFonts.notoSans(
+                                                        fontSize: 33,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.white,
+                                                      ),
+                                                      // This property is not working
+                                                      textStyleDayButton:
+                                                          GoogleFonts.notoSans(
+                                                        fontSize: 24,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.white,
+                                                      ),
+                                                      textStyleDayHeader:
+                                                          GoogleFonts.notoSans(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.grey[800],
+                                                      ),
+                                                      paddingMonthHeader:
+                                                          EdgeInsets.only(
+                                                              top: 12),
+                                                      sizeArrow: 35,
+                                                      colorArrowNext:
+                                                          MyAutoPilotStyles
+                                                              .appColor,
+                                                      colorArrowPrevious:
+                                                          MyAutoPilotStyles
+                                                              .appColor,
+                                                      textStyleDayOnCalendar:
+                                                          GoogleFonts.notoSerif(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color:
+                                                            HexColor('#707070'),
+                                                      ),
+                                                      textStyleDayOnCalendarSelected:
+                                                          GoogleFonts.notoSerif(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.white,
+                                                      ),
+                                                      decorationDateSelected:
+                                                          BoxDecoration(
+                                                              color:
+                                                                  MyAutoPilotStyles
+                                                                      .appColor,
+                                                              shape: BoxShape
+                                                                  .circle),
+                                                      textStyleCurrentDayOnCalendar:
+                                                          GoogleFonts.notoSerif(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color:
+                                                            Colors.greenAccent,
+                                                      ),
+                                                      textStyleDayOnCalendarDisabled:
+                                                          GoogleFonts.notoSerif(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.white
+                                                            .withOpacity(0.1),
+                                                      ),
+                                                      backgroundActionBar:
+                                                          MyAutoPilotStyles
+                                                              .appColor,
+                                                      textStyleButtonPositive:
+                                                          GoogleFonts.notoSans(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.white,
+                                                      ),
+                                                      textStyleButtonNegative:
+                                                          GoogleFonts.notoSans(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.white
+                                                            .withOpacity(0.5),
+                                                      ),
+                                                      paddingActionBar:
+                                                          EdgeInsets.all(0),
+                                                      textStyleMonthYearHeader:
+                                                          GoogleFonts.notoSans(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color:
+                                                            HexColor('#707070'),
+                                                      ),
+                                                    ),
+                                                  );
+                                                  print(newDateTime);
+                                                  if (newDateTime != null) {
+                                                    setState(() {
+                                                      targetToDate =
+                                                          newDateTime;
+                                                      _targetToDateController
+                                                          .text = DateFormat(
+                                                              'dd MMM yyyy')
+                                                          .format(targetToDate);
+                                                    });
+                                                  }
+                                                },
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 0),
+                                                  child: TextField(
+                                                    style:
+                                                        GoogleFonts.notoSerif(
+                                                      fontSize: 14,
+                                                      color:
+                                                          HexColor('#707070'),
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                    ),
+                                                    controller:
+                                                        _targetToDateController,
+                                                    textAlign: TextAlign.right,
+                                                    minLines: 1,
+                                                    maxLines: 1,
+                                                    enabled: false,
+                                                  ),
                                                 ),
-                                              )
-                                            ]),
-                                          ],
-                                        ),
+                                              ),
+                                            ),
+                                            Positioned(
+                                              top: 15,
+                                              child: SvgPicture.asset(
+                                                'assets/images/calendar.svg',
+                                                color:
+                                                    MyAutoPilotStyles.appColor,
+                                                width: 25,
+                                                height: 25,
+                                              ),
+                                            )
+                                          ]),
+                                        ],
                                       ),
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                          top: 5,
-                                          left: 30,
-                                          right: 40,
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  35 /
-                                                  100,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: [
-                                                  Container(),
-                                                  Text(
-                                                    'From',
-                                                    style: GoogleFonts.notoSans(
-                                                      fontSize: 10,
-                                                      color:
-                                                          HexColor('#707070'),
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                        top: 5,
+                                        left: 30,
+                                        right: 40,
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                35 /
+                                                100,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                Container(),
+                                                Text(
+                                                  'From',
+                                                  style: GoogleFonts.notoSans(
+                                                    fontSize: 10,
+                                                    color: HexColor('#707070'),
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                                )
+                                              ],
                                             ),
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  35 /
-                                                  100,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: [
-                                                  Text(
-                                                    'To',
-                                                    style: GoogleFonts.notoSans(
-                                                      fontSize: 10,
-                                                      color:
-                                                          HexColor('#707070'),
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
+                                          ),
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                35 /
+                                                100,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                Text(
+                                                  'To',
+                                                  style: GoogleFonts.notoSans(
+                                                    fontSize: 10,
+                                                    color: HexColor('#707070'),
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                                )
+                                              ],
                                             ),
-                                          ],
-                                        ),
-                                      ), // Set Filter Button
-                                      Container(
-                                        padding: EdgeInsets.only(top: 20),
-                                        child: ConstrainedBox(
-                                          constraints: BoxConstraints.tightFor(
-                                              width: 150, height: 55),
-                                          child: ElevatedButton(
-                                            onPressed: () async {
-                                              if (_startFromDateController
-                                                      .text.isEmpty &&
-                                                  _startToDateController
-                                                      .text.isEmpty &&
-                                                  _targetFromDateController
-                                                      .text.isEmpty &&
-                                                  _targetToDateController
-                                                      .text.isEmpty) {
-                                                setState(() {
-                                                  isSelectedDates = false;
-                                                });
-                                                /* ShowMessage.showFlushBar(
+                                          ),
+                                        ],
+                                      ),
+                                    ), // Set Filter Button
+                                    Container(
+                                      padding: EdgeInsets.only(top: 20),
+                                      child: ConstrainedBox(
+                                        constraints: BoxConstraints.tightFor(
+                                            width: 150, height: 55),
+                                        child: ElevatedButton(
+                                          onPressed: () async {
+                                            if (_startFromDateController
+                                                    .text.isEmpty &&
+                                                _startToDateController
+                                                    .text.isEmpty &&
+                                                _targetFromDateController
+                                                    .text.isEmpty &&
+                                                _targetToDateController
+                                                    .text.isEmpty) {
+                                              setState(() {
+                                                isSelectedDates = false;
+                                              });
+                                              /* ShowMessage.showFlushBar(
                                                     context,
                                                     'Please select all the dates.'); */
-                                              } else {
-                                                setState(() {
-                                                  isSelectedDates = true;
-                                                });
-                                              }
+                                            } else {
+                                              setState(() {
+                                                isSelectedDates = true;
+                                              });
+                                            }
 
-                                              Navigator.pop(context);
-                                              /* if (!_isSmsOTPValid ||
+                                            Navigator.pop(context);
+                                            /* if (!_isSmsOTPValid ||
                                   _smsOTPController.text.isEmpty ||
                                   !_isEmailOTPValid ||
                                   _emailOTPController.text.isEmpty ||
@@ -1407,6 +1338,260 @@ class _SearchScreenState extends State<SearchScreen> {
                                   );
                                 });
                               } */
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(30.0),
+                                            ),
+                                            primary: MyAutoPilotStyles.appColor,
+                                          ),
+                                          child: Text(
+                                            'SET FILTER',
+                                            style: GoogleFonts.notoSerif(
+                                              fontSize: 17,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        });
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.only(
+                      left: 10,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    primary: isSelectedDates
+                        ? selectedBackgroundColour
+                        : unselectedBackgroundColour,
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Dates',
+                        style: GoogleFonts.notoSerif(
+                          fontSize: 12,
+                          color: isSelectedDates
+                              ? selectedTextColour
+                              : unselectedTextColour,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Icon(
+                        Icons.arrow_drop_down,
+                        color: isSelectedDates
+                            ? selectedDropDownColour
+                            : unselectedDropDownColour,
+                        size: 36,
+                      ),
+                    ],
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    await showModalBottomSheet(
+                        context: context,
+                        backgroundColor: Colors.transparent,
+                        isScrollControlled: true,
+                        builder: (builder) {
+                          return StatefulBuilder(builder: (BuildContext context,
+                              StateSetter setModalState) {
+                            return Align(
+                              alignment: Alignment.bottomCenter,
+                              child: ConstrainedBox(
+                                constraints: BoxConstraints.tight(
+                                  Size(
+                                      MediaQuery.of(context).size.width *
+                                          90 /
+                                          100,
+                                      585),
+                                ),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: const Radius.circular(20.0),
+                                      topRight: const Radius.circular(20.0),
+                                    ),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                          top: 30,
+                                          left: 30,
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              'Add Task Assignment Filter',
+                                              style: GoogleFonts.notoSerif(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold,
+                                                color:
+                                                    MyAutoPilotStyles.appColor,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      // CheckBox
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                          top: 20,
+                                          left: 0,
+                                          bottom: 0,
+                                        ),
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        //height: 100,
+                                        child: CheckboxListTile(
+                                          activeColor: HexColor('#707070'),
+                                          title: Text(
+                                            'Tasks assigned to me',
+                                            style: GoogleFonts.notoSans(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.normal,
+                                              color: HexColor('#707070'),
+                                            ),
+                                          ),
+                                          dense: true,
+                                          checkColor: Colors.white,
+                                          value: isSelectedTasksAssignedTo,
+                                          onChanged: (newValue) {
+                                            setModalState(() {
+                                              isSelectedTasksAssignedTo =
+                                                  !isSelectedTasksAssignedTo;
+                                            });
+                                          },
+                                          controlAffinity: ListTileControlAffinity
+                                              .leading, //  <-- leading Checkbox
+                                        ),
+                                      ),
+                                      Card(
+                                        margin: EdgeInsets.only(
+                                          left: 30,
+                                          right: 30,
+                                        ),
+                                        elevation: 2,
+                                        shadowColor: Colors.black,
+                                        color: Colors.amber[100],
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.only(
+                                            topRight: Radius.elliptical(15, 15),
+                                            bottomRight:
+                                                Radius.elliptical(15, 15),
+                                            topLeft: Radius.elliptical(15, 15),
+                                            bottomLeft:
+                                                Radius.elliptical(15, 15),
+                                          ),
+                                        ),
+                                        clipBehavior: Clip.antiAlias,
+                                        child: Container(
+                                          padding: EdgeInsets.only(
+                                            left: 10,
+                                            right: 10,
+                                            top: 10,
+                                            bottom: 10,
+                                          ),
+                                          height: 150,
+                                          color: Colors.white,
+                                          child: SingleChildScrollView(
+                                            child: columnGetTasksAssignedToMe(
+                                                setModalState),
+                                          ),
+                                        ),
+                                      ),
+                                      // CheckBox
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                          top: 20,
+                                          left: 0,
+                                          bottom: 0,
+                                        ),
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        //height: 100,
+                                        child: CheckboxListTile(
+                                          activeColor: HexColor('#707070'),
+                                          title: Text(
+                                            'Tasks assigned by me',
+                                            style: GoogleFonts.notoSans(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.normal,
+                                              color: HexColor('#707070'),
+                                            ),
+                                          ),
+                                          dense: true,
+                                          checkColor: Colors.white,
+                                          value: isSelectedTasksAssignedBy,
+                                          onChanged: (newValue) {
+                                            setModalState(() {
+                                              isSelectedTasksAssignedBy =
+                                                  !isSelectedTasksAssignedBy;
+                                            });
+                                          },
+                                          controlAffinity: ListTileControlAffinity
+                                              .leading, //  <-- leading Checkbox
+                                        ),
+                                      ),
+                                      Card(
+                                        margin: EdgeInsets.only(
+                                          left: 30,
+                                          right: 30,
+                                        ),
+                                        elevation: 2,
+                                        shadowColor: Colors.black,
+                                        color: Colors.amber[100],
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.only(
+                                            topRight: Radius.elliptical(15, 15),
+                                            bottomRight:
+                                                Radius.elliptical(15, 15),
+                                            topLeft: Radius.elliptical(15, 15),
+                                            bottomLeft:
+                                                Radius.elliptical(15, 15),
+                                          ),
+                                        ),
+                                        clipBehavior: Clip.antiAlias,
+                                        child: Container(
+                                          padding: EdgeInsets.only(
+                                            left: 10,
+                                            right: 10,
+                                            top: 10,
+                                            bottom: 10,
+                                          ),
+                                          height: 150,
+                                          color: Colors.white,
+                                          child: SingleChildScrollView(
+                                            child: columnGetTasksAssignedByMe(
+                                                setModalState),
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.only(top: 20),
+                                        child: ConstrainedBox(
+                                          constraints: BoxConstraints.tightFor(
+                                              width: 150, height: 55),
+                                          child: ElevatedButton(
+                                            onPressed: () async {
+                                              Navigator.pop(context);
                                             },
                                             style: ElevatedButton.styleFrom(
                                               shape: RoundedRectangleBorder(
@@ -1433,641 +1618,369 @@ class _SearchScreenState extends State<SearchScreen> {
                               ),
                             );
                           });
-                    },
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.only(
-                        left: 10,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      primary: isSelectedDates
-                          ? selectedBackgroundColour
-                          : unselectedBackgroundColour,
+                        });
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.only(
+                      left: 10,
                     ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Dates',
-                          style: GoogleFonts.notoSerif(
-                            fontSize: 12,
-                            color: isSelectedDates
-                                ? selectedTextColour
-                                : unselectedTextColour,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Icon(
-                          Icons.arrow_drop_down,
-                          color: isSelectedDates
-                              ? selectedDropDownColour
-                              : unselectedDropDownColour,
-                          size: 36,
-                        ),
-                      ],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
                     ),
+                    primary: isSelectedAssignment
+                        ? selectedBackgroundColour
+                        : unselectedBackgroundColour,
                   ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      await showModalBottomSheet(
-                          context: context,
-                          backgroundColor: Colors.transparent,
-                          isScrollControlled: true,
-                          builder: (builder) {
-                            return StatefulBuilder(builder:
-                                (BuildContext context,
-                                    StateSetter setModalState) {
-                              return Align(
-                                alignment: Alignment.bottomCenter,
-                                child: ConstrainedBox(
-                                  constraints: BoxConstraints.tight(
-                                    Size(
-                                        MediaQuery.of(context).size.width *
-                                            90 /
-                                            100,
-                                        585),
-                                  ),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: const Radius.circular(20.0),
-                                        topRight: const Radius.circular(20.0),
-                                      ),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                            top: 30,
-                                            left: 30,
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              Text(
-                                                'Add Task Assignment Filter',
-                                                style: GoogleFonts.notoSerif(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: MyAutoPilotStyles
-                                                      .appColor,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        // CheckBox
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                            top: 20,
-                                            left: 0,
-                                            bottom: 0,
-                                          ),
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          //height: 100,
-                                          child: CheckboxListTile(
-                                            activeColor: HexColor('#707070'),
-                                            title: Text(
-                                              'Tasks assigned to me',
-                                              style: GoogleFonts.notoSans(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.normal,
-                                                color: HexColor('#707070'),
-                                              ),
-                                            ),
-                                            dense: true,
-                                            checkColor: Colors.white,
-                                            value: isSelectedTasksAssignedTo,
-                                            onChanged: (newValue) {
-                                              setModalState(() {
-                                                isSelectedTasksAssignedTo =
-                                                    !isSelectedTasksAssignedTo;
-                                              });
-                                            },
-                                            controlAffinity: ListTileControlAffinity
-                                                .leading, //  <-- leading Checkbox
-                                          ),
-                                        ),
-                                        Card(
-                                          margin: EdgeInsets.only(
-                                            left: 30,
-                                            right: 30,
-                                          ),
-                                          elevation: 2,
-                                          shadowColor: Colors.black,
-                                          color: Colors.amber[100],
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.only(
-                                              topRight:
-                                                  Radius.elliptical(15, 15),
-                                              bottomRight:
-                                                  Radius.elliptical(15, 15),
-                                              topLeft:
-                                                  Radius.elliptical(15, 15),
-                                              bottomLeft:
-                                                  Radius.elliptical(15, 15),
-                                            ),
-                                          ),
-                                          clipBehavior: Clip.antiAlias,
-                                          child: Container(
-                                            padding: EdgeInsets.only(
-                                              left: 10,
-                                              right: 10,
-                                              top: 10,
-                                              bottom: 10,
-                                            ),
-                                            height: 150,
-                                            color: Colors.white,
-                                            child: SingleChildScrollView(
-                                              child: columnGetTasksAssignedToMe(
-                                                  setModalState),
-                                            ),
-                                          ),
-                                        ),
-                                        // CheckBox
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                            top: 20,
-                                            left: 0,
-                                            bottom: 0,
-                                          ),
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          //height: 100,
-                                          child: CheckboxListTile(
-                                            activeColor: HexColor('#707070'),
-                                            title: Text(
-                                              'Tasks assigned by me',
-                                              style: GoogleFonts.notoSans(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.normal,
-                                                color: HexColor('#707070'),
-                                              ),
-                                            ),
-                                            dense: true,
-                                            checkColor: Colors.white,
-                                            value: isSelectedTasksAssignedBy,
-                                            onChanged: (newValue) {
-                                              setModalState(() {
-                                                isSelectedTasksAssignedBy =
-                                                    !isSelectedTasksAssignedBy;
-                                              });
-                                            },
-                                            controlAffinity: ListTileControlAffinity
-                                                .leading, //  <-- leading Checkbox
-                                          ),
-                                        ),
-                                        Card(
-                                          margin: EdgeInsets.only(
-                                            left: 30,
-                                            right: 30,
-                                          ),
-                                          elevation: 2,
-                                          shadowColor: Colors.black,
-                                          color: Colors.amber[100],
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.only(
-                                              topRight:
-                                                  Radius.elliptical(15, 15),
-                                              bottomRight:
-                                                  Radius.elliptical(15, 15),
-                                              topLeft:
-                                                  Radius.elliptical(15, 15),
-                                              bottomLeft:
-                                                  Radius.elliptical(15, 15),
-                                            ),
-                                          ),
-                                          clipBehavior: Clip.antiAlias,
-                                          child: Container(
-                                            padding: EdgeInsets.only(
-                                              left: 10,
-                                              right: 10,
-                                              top: 10,
-                                              bottom: 10,
-                                            ),
-                                            height: 150,
-                                            color: Colors.white,
-                                            child: SingleChildScrollView(
-                                              child: columnGetTasksAssignedByMe(
-                                                  setModalState),
-                                            ),
-                                          ),
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.only(top: 20),
-                                          child: ConstrainedBox(
-                                            constraints:
-                                                BoxConstraints.tightFor(
-                                                    width: 150, height: 55),
-                                            child: ElevatedButton(
-                                              onPressed: () async {
-                                                Navigator.pop(context);
-                                              },
-                                              style: ElevatedButton.styleFrom(
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          30.0),
-                                                ),
-                                                primary:
-                                                    MyAutoPilotStyles.appColor,
-                                              ),
-                                              child: Text(
-                                                'SET FILTER',
-                                                style: GoogleFonts.notoSerif(
-                                                  fontSize: 17,
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              );
-                            });
-                          });
-                    },
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.only(
-                        left: 10,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      primary: isSelectedAssignment
-                          ? selectedBackgroundColour
-                          : unselectedBackgroundColour,
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Assignment',
-                          style: GoogleFonts.notoSerif(
-                            fontSize: 12,
-                            color: isSelectedAssignment
-                                ? selectedTextColour
-                                : unselectedTextColour,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                        /* SizedBox(
-                                                                                                                                                                    width: 10,
-                                                                                                                                                                  ), */
-                        Icon(
-                          Icons.arrow_drop_down,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Assignment',
+                        style: GoogleFonts.notoSerif(
+                          fontSize: 12,
                           color: isSelectedAssignment
-                              ? selectedDropDownColour
-                              : unselectedDropDownColour,
-                          size: 36,
+                              ? selectedTextColour
+                              : unselectedTextColour,
+                          fontWeight: FontWeight.normal,
                         ),
-                      ],
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      await showModalBottomSheet(
-                          context: context,
-                          backgroundColor: Colors.transparent,
-                          isScrollControlled: true,
-                          builder: (builder) {
-                            return StatefulBuilder(builder:
-                                (BuildContext context,
-                                    StateSetter setModalState) {
-                              return Align(
-                                alignment: Alignment.bottomCenter,
-                                child: ConstrainedBox(
-                                  constraints: BoxConstraints.tight(
-                                    Size(
-                                        MediaQuery.of(context).size.width *
-                                            90 /
-                                            100,
-                                        370),
-                                  ),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: const Radius.circular(20.0),
-                                        topRight: const Radius.circular(20.0),
-                                      ),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                            top: 30,
-                                            left: 30,
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              Text(
-                                                'Add Task Type Filter',
-                                                style: GoogleFonts.notoSerif(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: MyAutoPilotStyles
-                                                      .appColor,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.only(
-                                            left: 30,
-                                            top: 30,
-                                          ),
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          child: Text(
-                                            'Select Task Type',
-                                            textAlign: TextAlign.left,
-                                            style: GoogleFonts.notoSans(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.normal,
-                                              color: HexColor('#707070'),
-                                            ),
-                                          ),
-                                        ),
-                                        Container(
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          margin: EdgeInsets.only(
-                                            top: 10,
-                                            left: 15,
-                                            bottom: 0,
-                                          ),
-                                          //padding: EdgeInsets.only(left: 30),
-                                          child: Row(
-                                            /* mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween, */
-                                            children: [
-                                              Expanded(
-                                                child: LabeledCheckbox(
-                                                  checkColor: Colors.white,
-                                                  activeColor:
-                                                      HexColor('#707070'),
-                                                  label: 'DTL',
-                                                  onChanged: (newValue) {
-                                                    setModalState(() {
-                                                      isSelectedDTL =
-                                                          !isSelectedDTL;
-                                                    });
-                                                  },
-                                                  padding: EdgeInsets.zero,
-                                                  value: isSelectedDTL,
-                                                  style: GoogleFonts.notoSans(
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                    color: HexColor('#707070'),
-                                                  ),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: LabeledCheckbox(
-                                                  checkColor: Colors.white,
-                                                  activeColor:
-                                                      HexColor('#707070'),
-                                                  label: 'RTL',
-                                                  onChanged: (newValue) {
-                                                    setModalState(() {
-                                                      isSelectedRTL =
-                                                          !isSelectedRTL;
-                                                    });
-                                                  },
-                                                  padding: EdgeInsets.zero,
-                                                  value: isSelectedRTL,
-                                                  style: GoogleFonts.notoSans(
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                    color: HexColor('#707070'),
-                                                  ),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: LabeledCheckbox(
-                                                  checkColor: Colors.white,
-                                                  activeColor:
-                                                      HexColor('#707070'),
-                                                  label: 'STL',
-                                                  onChanged: (newValue) {
-                                                    setModalState(() {
-                                                      isSelectedSTL =
-                                                          !isSelectedSTL;
-                                                    });
-                                                  },
-                                                  padding: EdgeInsets.zero,
-                                                  value: isSelectedSTL,
-                                                  style: GoogleFonts.notoSans(
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                    color: HexColor('#707070'),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.only(
-                                            left: 30,
-                                            top: 30,
-                                          ),
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          child: Text(
-                                            'Select Priority',
-                                            textAlign: TextAlign.left,
-                                            style: GoogleFonts.notoSans(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.normal,
-                                              color: HexColor('#707070'),
-                                            ),
-                                          ),
-                                        ),
-                                        Container(
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          margin: EdgeInsets.only(
-                                            top: 10,
-                                            left: 15,
-                                            bottom: 0,
-                                          ),
-                                          //padding: EdgeInsets.only(left: 30),
-                                          child: Row(
-                                            /* mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween, */
-                                            children: [
-                                              Expanded(
-                                                child: LabeledCheckbox(
-                                                  checkColor: Colors.white,
-                                                  activeColor:
-                                                      HexColor('#707070'),
-                                                  label: 'High',
-                                                  onChanged: (newValue) {
-                                                    setModalState(() {
-                                                      isSelectedHigh =
-                                                          !isSelectedHigh;
-                                                    });
-                                                  },
-                                                  padding: EdgeInsets.zero,
-                                                  value: isSelectedHigh,
-                                                  style: GoogleFonts.notoSans(
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                    color: HexColor('#707070'),
-                                                  ),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: LabeledCheckbox(
-                                                  checkColor: Colors.white,
-                                                  activeColor:
-                                                      HexColor('#707070'),
-                                                  label: 'Normal',
-                                                  onChanged: (newValue) {
-                                                    setModalState(() {
-                                                      isSelectedNormal =
-                                                          !isSelectedNormal;
-                                                    });
-                                                  },
-                                                  padding: EdgeInsets.zero,
-                                                  value: isSelectedNormal,
-                                                  style: GoogleFonts.notoSans(
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                    color: HexColor('#707070'),
-                                                  ),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: LabeledCheckbox(
-                                                  checkColor: Colors.white,
-                                                  activeColor:
-                                                      HexColor('#707070'),
-                                                  label: 'Low',
-                                                  onChanged: (newValue) {
-                                                    setModalState(() {
-                                                      isSelectedLow =
-                                                          !isSelectedLow;
-                                                    });
-                                                  },
-                                                  padding: EdgeInsets.zero,
-                                                  value: isSelectedLow,
-                                                  style: GoogleFonts.notoSans(
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                    color: HexColor('#707070'),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.only(top: 20),
-                                          child: ConstrainedBox(
-                                            constraints:
-                                                BoxConstraints.tightFor(
-                                                    width: 150, height: 55),
-                                            child: ElevatedButton(
-                                              onPressed: () async {
-                                                Navigator.pop(context);
-                                              },
-                                              style: ElevatedButton.styleFrom(
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          30.0),
-                                                ),
-                                                primary:
-                                                    MyAutoPilotStyles.appColor,
-                                              ),
-                                              child: Text(
-                                                'SET FILTER',
-                                                style: GoogleFonts.notoSerif(
-                                                  fontSize: 17,
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              );
-                            });
-                          });
-                    },
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.only(
-                        left: 10,
                       ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      primary: isSelectedTaskType
-                          ? selectedBackgroundColour
-                          : unselectedBackgroundColour,
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Task Type',
-                          style: GoogleFonts.notoSerif(
-                            fontSize: 12,
-                            color: isSelectedTaskType
-                                ? selectedTextColour
-                                : unselectedTextColour,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                        /* SizedBox(
+                      /* SizedBox(
                                                                                                                                                                     width: 10,
                                                                                                                                                                   ), */
-                        Icon(
-                          Icons.arrow_drop_down,
-                          color: isSelectedTaskType
-                              ? selectedDropDownColour
-                              : unselectedDropDownColour,
-                          size: 36,
-                        ),
-                      ],
-                    ),
+                      Icon(
+                        Icons.arrow_drop_down,
+                        color: isSelectedAssignment
+                            ? selectedDropDownColour
+                            : unselectedDropDownColour,
+                        size: 36,
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    await showModalBottomSheet(
+                        context: context,
+                        backgroundColor: Colors.transparent,
+                        isScrollControlled: true,
+                        builder: (builder) {
+                          return StatefulBuilder(builder: (BuildContext context,
+                              StateSetter setModalState) {
+                            return Align(
+                              alignment: Alignment.bottomCenter,
+                              child: ConstrainedBox(
+                                constraints: BoxConstraints.tight(
+                                  Size(
+                                      MediaQuery.of(context).size.width *
+                                          90 /
+                                          100,
+                                      370),
+                                ),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: const Radius.circular(20.0),
+                                      topRight: const Radius.circular(20.0),
+                                    ),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                          top: 30,
+                                          left: 30,
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              'Add Task Type Filter',
+                                              style: GoogleFonts.notoSerif(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold,
+                                                color:
+                                                    MyAutoPilotStyles.appColor,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.only(
+                                          left: 30,
+                                          top: 30,
+                                        ),
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: Text(
+                                          'Select Task Type',
+                                          textAlign: TextAlign.left,
+                                          style: GoogleFonts.notoSans(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.normal,
+                                            color: HexColor('#707070'),
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        margin: EdgeInsets.only(
+                                          top: 10,
+                                          left: 15,
+                                          bottom: 0,
+                                        ),
+                                        //padding: EdgeInsets.only(left: 30),
+                                        child: Row(
+                                          /* mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween, */
+                                          children: [
+                                            Expanded(
+                                              child: LabeledCheckbox(
+                                                checkColor: Colors.white,
+                                                activeColor:
+                                                    HexColor('#707070'),
+                                                label: 'DTL',
+                                                onChanged: (newValue) {
+                                                  setModalState(() {
+                                                    isSelectedDTL =
+                                                        !isSelectedDTL;
+                                                  });
+                                                },
+                                                padding: EdgeInsets.zero,
+                                                value: isSelectedDTL,
+                                                style: GoogleFonts.notoSans(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.normal,
+                                                  color: HexColor('#707070'),
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: LabeledCheckbox(
+                                                checkColor: Colors.white,
+                                                activeColor:
+                                                    HexColor('#707070'),
+                                                label: 'RTL',
+                                                onChanged: (newValue) {
+                                                  setModalState(() {
+                                                    isSelectedRTL =
+                                                        !isSelectedRTL;
+                                                  });
+                                                },
+                                                padding: EdgeInsets.zero,
+                                                value: isSelectedRTL,
+                                                style: GoogleFonts.notoSans(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.normal,
+                                                  color: HexColor('#707070'),
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: LabeledCheckbox(
+                                                checkColor: Colors.white,
+                                                activeColor:
+                                                    HexColor('#707070'),
+                                                label: 'STL',
+                                                onChanged: (newValue) {
+                                                  setModalState(() {
+                                                    isSelectedSTL =
+                                                        !isSelectedSTL;
+                                                  });
+                                                },
+                                                padding: EdgeInsets.zero,
+                                                value: isSelectedSTL,
+                                                style: GoogleFonts.notoSans(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.normal,
+                                                  color: HexColor('#707070'),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.only(
+                                          left: 30,
+                                          top: 30,
+                                        ),
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: Text(
+                                          'Select Priority',
+                                          textAlign: TextAlign.left,
+                                          style: GoogleFonts.notoSans(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.normal,
+                                            color: HexColor('#707070'),
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        margin: EdgeInsets.only(
+                                          top: 10,
+                                          left: 15,
+                                          bottom: 0,
+                                        ),
+                                        //padding: EdgeInsets.only(left: 30),
+                                        child: Row(
+                                          /* mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween, */
+                                          children: [
+                                            Expanded(
+                                              child: LabeledCheckbox(
+                                                checkColor: Colors.white,
+                                                activeColor:
+                                                    HexColor('#707070'),
+                                                label: 'High',
+                                                onChanged: (newValue) {
+                                                  setModalState(() {
+                                                    isSelectedHigh =
+                                                        !isSelectedHigh;
+                                                  });
+                                                },
+                                                padding: EdgeInsets.zero,
+                                                value: isSelectedHigh,
+                                                style: GoogleFonts.notoSans(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.normal,
+                                                  color: HexColor('#707070'),
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: LabeledCheckbox(
+                                                checkColor: Colors.white,
+                                                activeColor:
+                                                    HexColor('#707070'),
+                                                label: 'Normal',
+                                                onChanged: (newValue) {
+                                                  setModalState(() {
+                                                    isSelectedNormal =
+                                                        !isSelectedNormal;
+                                                  });
+                                                },
+                                                padding: EdgeInsets.zero,
+                                                value: isSelectedNormal,
+                                                style: GoogleFonts.notoSans(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.normal,
+                                                  color: HexColor('#707070'),
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: LabeledCheckbox(
+                                                checkColor: Colors.white,
+                                                activeColor:
+                                                    HexColor('#707070'),
+                                                label: 'Low',
+                                                onChanged: (newValue) {
+                                                  setModalState(() {
+                                                    isSelectedLow =
+                                                        !isSelectedLow;
+                                                  });
+                                                },
+                                                padding: EdgeInsets.zero,
+                                                value: isSelectedLow,
+                                                style: GoogleFonts.notoSans(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.normal,
+                                                  color: HexColor('#707070'),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.only(top: 20),
+                                        child: ConstrainedBox(
+                                          constraints: BoxConstraints.tightFor(
+                                              width: 150, height: 55),
+                                          child: ElevatedButton(
+                                            onPressed: () async {
+                                              Navigator.pop(context);
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(30.0),
+                                              ),
+                                              primary:
+                                                  MyAutoPilotStyles.appColor,
+                                            ),
+                                            child: Text(
+                                              'SET FILTER',
+                                              style: GoogleFonts.notoSerif(
+                                                fontSize: 17,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          });
+                        });
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.only(
+                      left: 10,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    primary: isSelectedTaskType
+                        ? selectedBackgroundColour
+                        : unselectedBackgroundColour,
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Task Type',
+                        style: GoogleFonts.notoSerif(
+                          fontSize: 12,
+                          color: isSelectedTaskType
+                              ? selectedTextColour
+                              : unselectedTextColour,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      /* SizedBox(
+                                                                                                                                                                    width: 10,
+                                                                                                                                                                  ), */
+                      Icon(
+                        Icons.arrow_drop_down,
+                        color: isSelectedTaskType
+                            ? selectedDropDownColour
+                            : unselectedDropDownColour,
+                        size: 36,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            Expanded(
-              child: ListView(
-                children: getSearchResults(),
-              ),
-            )
-          ],
-        ),
+          ),
+          Expanded(
+            child: ListView(
+              children: getSearchResults(),
+            ),
+          )
+        ],
       ),
     );
   }

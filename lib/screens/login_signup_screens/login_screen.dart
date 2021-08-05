@@ -100,8 +100,8 @@ class _LoginScreenState extends State<LoginScreen> {
         /* Navigator.pop(context); //return data along with pop*/
         return new Future(() => false);
       },
-      child: Scaffold(
-        body: SafeArea(
+      child: Material(
+        child: SafeArea(
           child: SingleChildScrollView(
             child: Container(
               margin: EdgeInsets.only(top: 20),
@@ -347,18 +347,18 @@ class _LoginScreenState extends State<LoginScreen> {
                             return Align(
                               // Other animation types kept here for re-use.
                               /* child: FadeTransition(
-                                            opacity: animation,
-                                            child: child,
-                                        ), */
+                                              opacity: animation,
+                                              child: child,
+                                          ), */
                               /* child: ScaleTransition(
-                                            scale: animation,
-                                            child: child,
-                                        ), */
+                                              scale: animation,
+                                              child: child,
+                                          ), */
                               /* child: SizeTransition(
-                                            sizeFactor: animation,
-                                            child: child,
-                                            axisAlignment: 0.0,
-                                        ), */
+                                              sizeFactor: animation,
+                                              child: child,
+                                              axisAlignment: 0.0,
+                                          ), */
                               child: SlideTransition(
                                 position: Tween(
                                         begin: Offset(1.0, 0.0),
@@ -527,18 +527,18 @@ class _LoginScreenState extends State<LoginScreen> {
                                       return Align(
                                         // Other animation types kept here for re-use.
                                         /* child: FadeTransition(
-                                                  opacity: animation,
-                                                  child: child,
-                                              ), */
+                                                    opacity: animation,
+                                                    child: child,
+                                                ), */
                                         /* child: ScaleTransition(
-                                                  scale: animation,
-                                                  child: child,
-                                              ), */
+                                                    scale: animation,
+                                                    child: child,
+                                                ), */
                                         /* child: SizeTransition(
-                                                  sizeFactor: animation,
-                                                  child: child,
-                                                  axisAlignment: 0.0,
-                                              ), */
+                                                    sizeFactor: animation,
+                                                    child: child,
+                                                    axisAlignment: 0.0,
+                                                ), */
                                         child: SlideTransition(
                                           position: Tween(
                                                   begin: Offset(1.0, 0.0),
@@ -627,18 +627,18 @@ class _LoginScreenState extends State<LoginScreen> {
                                       return Align(
                                         // Other animation types kept here for re-use.
                                         /* child: FadeTransition(
-                                            opacity: animation,
-                                            child: child,
-                                        ), */
+                                              opacity: animation,
+                                              child: child,
+                                          ), */
                                         /* child: ScaleTransition(
-                                            scale: animation,
-                                            child: child,
-                                        ), */
+                                              scale: animation,
+                                              child: child,
+                                          ), */
                                         /* child: SizeTransition(
-                                            sizeFactor: animation,
-                                            child: child,
-                                            axisAlignment: 0.0,
-                                        ), */
+                                              sizeFactor: animation,
+                                              child: child,
+                                              axisAlignment: 0.0,
+                                          ), */
                                         child: SlideTransition(
                                           position: Tween(
                                                   begin: Offset(1.0, 0.0),

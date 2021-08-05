@@ -73,71 +73,36 @@ class _MyAutoPilotDrawerState extends State<MyAutoPilotDrawer> {
                               height: 22,
                               width: 22,
                             ),
-                            onPressed: () {
-                              showDialog<void>(
+                            onPressed: () async {
+                              await showDialog(
+                                //show confirm dialogue
+                                //the return value will be from "Yes" or "No" options
                                 context: context,
                                 barrierDismissible:
                                     false, // user must tap button!
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Text(
-                                      'Exit MyAutoPilot',
-                                      style: TextStyle(
-                                        fontFamily: 'Proxima',
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
-                                        color: Colors.black,
-                                      ),
+                                builder: (context) => AlertDialog(
+                                  title: Text('Exit App'),
+                                  content:
+                                      Text('Do you want to exit MyAutoPilot?'),
+                                  actions: [
+                                    ElevatedButton(
+                                      onPressed: () =>
+                                          Navigator.of(context).pop(false),
+                                      //return false when click on "NO"
+                                      child: Text('No'),
                                     ),
-                                    content: SingleChildScrollView(
-                                      child: ListBody(
-                                        children: <Widget>[
-                                          Text(
-                                            'Are you sure?',
-                                            style: TextStyle(
-                                              fontFamily: 'Proxima',
-                                              fontSize: 15,
-                                              color: Colors.black,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop(true);
+                                        if (Platform.isAndroid)
+                                          SystemChannels.platform.invokeMethod(
+                                              'SystemNavigator.pop');
+                                      },
+                                      //return true when click on "Yes"
+                                      child: Text('Yes'),
                                     ),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        child: Text(
-                                          ' Yes ',
-                                          style: TextStyle(
-                                            fontFamily: 'Proxima',
-                                            fontSize: 16,
-                                            color: Colors.red,
-                                          ),
-                                        ),
-                                        onPressed: () async {
-                                          // Show the progress dialogue.
-
-                                          if (Platform.isAndroid)
-                                            SystemChannels.platform
-                                                .invokeMethod(
-                                                    'SystemNavigator.pop');
-                                        },
-                                      ),
-                                      TextButton(
-                                        child: Text(
-                                          ' No ',
-                                          style: TextStyle(
-                                            fontFamily: 'Proxima',
-                                            fontSize: 16,
-                                            color: MyAutoPilotStyles.appColor,
-                                          ),
-                                        ),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-                                    ],
-                                  );
-                                },
+                                  ],
+                                ),
                               );
                             },
                           )

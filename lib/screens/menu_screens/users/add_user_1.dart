@@ -230,260 +230,187 @@ class _AddUser1State extends State<AddUser1>
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () => Future.sync(onWillPop),
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Container(
-              //height: MediaQuery.of(context).size.height,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                //mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 40.0,
-                      right: 40.0,
-                      top: 20,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Add Users',
-                              style: GoogleFonts.notoSerif(
-                                color: HexColor('#707070'),
-                                fontWeight: FontWeight.normal,
-                                fontSize: 18,
-                              ),
-                            ),
-                            Text('15 users of 50 users remaining',
-                                style: GoogleFonts.notoSerif(
-                                  color: MyAutoPilotStyles.appColor,
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 12,
-                                )),
-                          ],
-                        ),
-                      ],
-                    ),
+      child: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            //height: MediaQuery.of(context).size.height,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              //mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 40.0,
+                    right: 40.0,
+                    top: 20,
                   ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Add Users',
+                            style: GoogleFonts.notoSerif(
+                              color: HexColor('#707070'),
+                              fontWeight: FontWeight.normal,
+                              fontSize: 18,
+                            ),
+                          ),
+                          Text('15 users of 50 users remaining',
+                              style: GoogleFonts.notoSerif(
+                                color: MyAutoPilotStyles.appColor,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 12,
+                              )),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 40.0,
+                    right: 40.0,
+                    top: 5,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(right: 5.0),
+                        child: Text(
+                          'Mark HOD',
+                          style: GoogleFonts.notoSerif(
+                            color: HexColor('#707070'),
+                            fontWeight: FontWeight.normal,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                      Switch(
+                        value: markHod,
+                        onChanged: (value) {
+                          setState(() {
+                            markHod = value;
+                            print(markHod);
+                          });
+                        },
+                        activeTrackColor: MyAutoPilotStyles.appColor,
+                        activeColor: HexColor('#669db6'),
+                        inactiveThumbColor: HexColor('#C9C9C9'),
+                        inactiveTrackColor: HexColor('#707070'),
+                      ),
+                    ],
+                  ),
+                ),
+                Stack(children: [
                   Padding(
                     padding: const EdgeInsets.only(
                       left: 40.0,
                       right: 40.0,
                       top: 5,
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(right: 5.0),
-                          child: Text(
-                            'Mark HOD',
-                            style: GoogleFonts.notoSerif(
-                              color: HexColor('#707070'),
-                              fontWeight: FontWeight.normal,
-                              fontSize: 14,
-                            ),
+                    child: TextField(
+                      controller: _userNameController,
+                      onChanged: (value) {
+                        _timesTappedUserName += 1;
+                      },
+                      decoration: InputDecoration(
+                        labelStyle: GoogleFonts.notoSerif(
+                          fontSize: 14,
+                          color: HexColor('#C9C9C9'),
+                          fontWeight: FontWeight.normal,
+                          //decoration: TextDecoration.underline,
+                        ),
+                        prefixIcon: Transform.scale(
+                          scale: 0.7,
+                          child: SvgPicture.asset(
+                            'assets/images/user.svg',
+                            color: MyAutoPilotStyles.appColor,
+                            height: 10,
+                            width: 10,
                           ),
                         ),
-                        Switch(
-                          value: markHod,
-                          onChanged: (value) {
-                            setState(() {
-                              markHod = value;
-                              print(markHod);
-                            });
-                          },
-                          activeTrackColor: MyAutoPilotStyles.appColor,
-                          activeColor: HexColor('#669db6'),
-                          inactiveThumbColor: HexColor('#C9C9C9'),
-                          inactiveTrackColor: HexColor('#707070'),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide:
+                              BorderSide(color: MyAutoPilotStyles.appColor),
                         ),
-                      ],
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide:
+                              BorderSide(color: MyAutoPilotStyles.appColor),
+                        ),
+                        hintText: 'Full Name',
+                        hintStyle: GoogleFonts.notoSerif(
+                          fontSize: 14,
+                          color: HexColor('#C9C9C9'),
+                          fontWeight: FontWeight.normal,
+                          //decoration: TextDecoration.underline,
+                        ),
+                      ),
                     ),
                   ),
-                  Stack(children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 40.0,
-                        right: 40.0,
-                        top: 5,
-                      ),
-                      child: TextField(
-                        controller: _userNameController,
-                        onChanged: (value) {
-                          _timesTappedUserName += 1;
+                  !_isUserNameValid
+                      ? Positioned(
+                          right: 50.0,
+                          top: 55.0,
+                          child: new Container(
+                            child: Text(
+                              '$_validationText',
+                              style: TextStyle(
+                                color: Globals.validationColor,
+                                fontSize: 10.0,
+                              ),
+                            ),
+                          ),
+                        )
+                      : Container()
+                ]),
+
+                // ISD Codes and Country Codes
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 40.0,
+                    right: 40.0,
+                    top: 20,
+                  ),
+                  child: Stack(
+                    children: [
+                      DropdownSearch<Map<String, dynamic>>(
+                        showSelectedItem: false,
+                        itemAsString: (item) {
+                          return item['ISD'] +
+                              ' (' +
+                              (item['countryCode']) +
+                              ')';
                         },
-                        decoration: InputDecoration(
+                        dropDownButton: DecoratedIcon(
+                          Icons.arrow_drop_down,
+                          size: 36,
+                          color: MyAutoPilotStyles.appColor,
+                          shadows: [
+                            BoxShadow(
+                              color: Colors.black54,
+                              blurRadius: 8.0,
+                              offset: Offset(1.0, 2.0),
+                            ),
+                            BoxShadow(
+                              blurRadius: 12.0,
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
+                        showAsSuffixIcons: true,
+                        validator: (v) => v == null ? "required field" : null,
+                        dropdownSearchDecoration: InputDecoration(
                           labelStyle: GoogleFonts.notoSerif(
                             fontSize: 14,
                             color: HexColor('#C9C9C9'),
                             fontWeight: FontWeight.normal,
-                            //decoration: TextDecoration.underline,
                           ),
                           prefixIcon: Transform.scale(
                             scale: 0.7,
-                            child: SvgPicture.asset(
-                              'assets/images/user.svg',
-                              color: MyAutoPilotStyles.appColor,
-                              height: 10,
-                              width: 10,
-                            ),
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide:
-                                BorderSide(color: MyAutoPilotStyles.appColor),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide:
-                                BorderSide(color: MyAutoPilotStyles.appColor),
-                          ),
-                          hintText: 'Full Name',
-                          hintStyle: GoogleFonts.notoSerif(
-                            fontSize: 14,
-                            color: HexColor('#C9C9C9'),
-                            fontWeight: FontWeight.normal,
-                            //decoration: TextDecoration.underline,
-                          ),
-                        ),
-                      ),
-                    ),
-                    !_isUserNameValid
-                        ? Positioned(
-                            right: 50.0,
-                            top: 55.0,
-                            child: new Container(
-                              child: Text(
-                                '$_validationText',
-                                style: TextStyle(
-                                  color: Globals.validationColor,
-                                  fontSize: 10.0,
-                                ),
-                              ),
-                            ),
-                          )
-                        : Container()
-                  ]),
-
-                  // ISD Codes and Country Codes
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 40.0,
-                      right: 40.0,
-                      top: 20,
-                    ),
-                    child: Stack(
-                      children: [
-                        DropdownSearch<Map<String, dynamic>>(
-                          showSelectedItem: false,
-                          itemAsString: (item) {
-                            return item['ISD'] +
-                                ' (' +
-                                (item['countryCode']) +
-                                ')';
-                          },
-                          dropDownButton: DecoratedIcon(
-                            Icons.arrow_drop_down,
-                            size: 36,
-                            color: MyAutoPilotStyles.appColor,
-                            shadows: [
-                              BoxShadow(
-                                color: Colors.black54,
-                                blurRadius: 8.0,
-                                offset: Offset(1.0, 2.0),
-                              ),
-                              BoxShadow(
-                                blurRadius: 12.0,
-                                color: Colors.white,
-                              ),
-                            ],
-                          ),
-                          showAsSuffixIcons: true,
-                          validator: (v) => v == null ? "required field" : null,
-                          dropdownSearchDecoration: InputDecoration(
-                            labelStyle: GoogleFonts.notoSerif(
-                              fontSize: 14,
-                              color: HexColor('#C9C9C9'),
-                              fontWeight: FontWeight.normal,
-                            ),
-                            prefixIcon: Transform.scale(
-                              scale: 0.7,
-                              child: SvgPicture.asset(
-                                'assets/images/phone.svg',
-                                color: MyAutoPilotStyles.appColor,
-                                height: 10,
-                                width: 10,
-                              ),
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: MyAutoPilotStyles.appColor),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: MyAutoPilotStyles.appColor),
-                            ),
-                            hintStyle: GoogleFonts.notoSerif(
-                              fontSize: 14,
-                              color: HexColor('#C9C9C9'),
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                          mode: Mode.DIALOG,
-                          items: Globals.countryISDCodes,
-                          maxHeight:
-                              (Globals.countryISDCodes.length).toDouble() * 55,
-                          showClearButton: false,
-                          selectedItem: selectedCountryISDCode,
-                          onChanged: (value) async {
-                            selectedCountryISDCode = value!;
-                            _countryISDCode = '';
-                          },
-                        ),
-                        /* Positioned(
-                          left: 50,
-                          top: 10,
-                          child: Text(_countryISDCode,
-                              style: GoogleFonts.notoSerif(
-                                fontSize: 14,
-                                color: HexColor('#C9C9C9'),
-                                fontWeight: FontWeight.normal,
-                                //decoration: TextDecoration.underline,
-                              )),
-                        ) */
-                      ],
-                    ),
-                  ),
-                  Stack(children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 40.0,
-                        right: 40.0,
-                        top: 20,
-                      ),
-                      child: TextField(
-                        controller: _phoneNumberController,
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
-                          LengthLimitingTextInputFormatter(10)
-                        ],
-                        onChanged: (value) {
-                          _timesTappedPhone += 1;
-                        },
-                        decoration: InputDecoration(
-                          labelStyle: GoogleFonts.notoSerif(
-                            fontSize: 14,
-                            color: HexColor('#C9C9C9'),
-                            fontWeight: FontWeight.normal,
-                          ),
-                          prefixIcon: Transform.scale(
-                            scale: 0.6,
                             child: SvgPicture.asset(
                               'assets/images/phone.svg',
                               color: MyAutoPilotStyles.appColor,
@@ -499,174 +426,245 @@ class _AddUser1State extends State<AddUser1>
                             borderSide:
                                 BorderSide(color: MyAutoPilotStyles.appColor),
                           ),
-                          hintText: 'Phone Number',
                           hintStyle: GoogleFonts.notoSerif(
                             fontSize: 14,
                             color: HexColor('#C9C9C9'),
                             fontWeight: FontWeight.normal,
-                            //decoration: TextDecoration.underline,
                           ),
                         ),
-                      ),
-                    ),
-                    !_isPhoneValid
-                        ? Positioned(
-                            right: 50.0,
-                            top: 55.0,
-                            child: new Container(
-                              child: Text(
-                                '$_validationText',
-                                style: TextStyle(
-                                  color: Globals.validationColor,
-                                  fontSize: 10.0,
-                                ),
-                              ),
-                            ),
-                          )
-                        : Container()
-                  ]),
-                  Stack(children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 40.0,
-                        right: 40.0,
-                        top: 20,
-                      ),
-                      child: TextField(
-                        controller: _emailController,
-                        onChanged: (value) {
-                          _timesTappedEmail += 1;
+                        mode: Mode.DIALOG,
+                        items: Globals.countryISDCodes,
+                        maxHeight:
+                            (Globals.countryISDCodes.length).toDouble() * 55,
+                        showClearButton: false,
+                        selectedItem: selectedCountryISDCode,
+                        onChanged: (value) async {
+                          selectedCountryISDCode = value!;
+                          _countryISDCode = '';
                         },
-                        decoration: InputDecoration(
-                          labelStyle: GoogleFonts.notoSerif(
-                            fontSize: 14,
-                            color: HexColor('#C9C9C9'),
-                            fontWeight: FontWeight.normal,
-                            //decoration: TextDecoration.underline,
+                      ),
+                      /* Positioned(
+                          left: 50,
+                          top: 10,
+                          child: Text(_countryISDCode,
+                              style: GoogleFonts.notoSerif(
+                                fontSize: 14,
+                                color: HexColor('#C9C9C9'),
+                                fontWeight: FontWeight.normal,
+                                //decoration: TextDecoration.underline,
+                              )),
+                        ) */
+                    ],
+                  ),
+                ),
+                Stack(children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 40.0,
+                      right: 40.0,
+                      top: 20,
+                    ),
+                    child: TextField(
+                      controller: _phoneNumberController,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        LengthLimitingTextInputFormatter(10)
+                      ],
+                      onChanged: (value) {
+                        _timesTappedPhone += 1;
+                      },
+                      decoration: InputDecoration(
+                        labelStyle: GoogleFonts.notoSerif(
+                          fontSize: 14,
+                          color: HexColor('#C9C9C9'),
+                          fontWeight: FontWeight.normal,
+                        ),
+                        prefixIcon: Transform.scale(
+                          scale: 0.6,
+                          child: SvgPicture.asset(
+                            'assets/images/phone.svg',
+                            color: MyAutoPilotStyles.appColor,
+                            height: 10,
+                            width: 10,
                           ),
-                          prefixIcon: Transform.scale(
-                            scale: 0.7,
-                            child: SvgPicture.asset(
-                              'assets/images/email.svg',
-                              color: MyAutoPilotStyles.appColor,
-                              height: 10,
-                              width: 10,
-                            ),
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide:
-                                BorderSide(color: MyAutoPilotStyles.appColor),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide:
-                                BorderSide(color: MyAutoPilotStyles.appColor),
-                          ),
-                          hintText: 'Email',
-                          hintStyle: GoogleFonts.notoSerif(
-                            fontSize: 14,
-                            color: HexColor('#C9C9C9'),
-                            fontWeight: FontWeight.normal,
-                            //decoration: TextDecoration.underline,
-                          ),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide:
+                              BorderSide(color: MyAutoPilotStyles.appColor),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide:
+                              BorderSide(color: MyAutoPilotStyles.appColor),
+                        ),
+                        hintText: 'Phone Number',
+                        hintStyle: GoogleFonts.notoSerif(
+                          fontSize: 14,
+                          color: HexColor('#C9C9C9'),
+                          fontWeight: FontWeight.normal,
+                          //decoration: TextDecoration.underline,
                         ),
                       ),
                     ),
-                    !_isEmailBlank
-                        ? Positioned(
-                            right: 50.0,
-                            top: 55.0,
-                            child: new Container(
-                              child: Text(
-                                '$_validationText',
-                                style: TextStyle(
-                                  color: Globals.validationColor,
-                                  fontSize: 10.0,
-                                ),
+                  ),
+                  !_isPhoneValid
+                      ? Positioned(
+                          right: 50.0,
+                          top: 55.0,
+                          child: new Container(
+                            child: Text(
+                              '$_validationText',
+                              style: TextStyle(
+                                color: Globals.validationColor,
+                                fontSize: 10.0,
                               ),
                             ),
-                          )
-                        : (!_isValidEmail
-                            ? Positioned(
-                                right: 50.0,
-                                top: 55.0,
-                                child: new Container(
-                                  child: Text(
-                                    'Please enter a valid email',
-                                    style: TextStyle(
-                                      color: Globals.validationColor,
-                                      fontSize: 10.0,
-                                    ),
+                          ),
+                        )
+                      : Container()
+                ]),
+                Stack(children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 40.0,
+                      right: 40.0,
+                      top: 20,
+                    ),
+                    child: TextField(
+                      controller: _emailController,
+                      onChanged: (value) {
+                        _timesTappedEmail += 1;
+                      },
+                      decoration: InputDecoration(
+                        labelStyle: GoogleFonts.notoSerif(
+                          fontSize: 14,
+                          color: HexColor('#C9C9C9'),
+                          fontWeight: FontWeight.normal,
+                          //decoration: TextDecoration.underline,
+                        ),
+                        prefixIcon: Transform.scale(
+                          scale: 0.7,
+                          child: SvgPicture.asset(
+                            'assets/images/email.svg',
+                            color: MyAutoPilotStyles.appColor,
+                            height: 10,
+                            width: 10,
+                          ),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide:
+                              BorderSide(color: MyAutoPilotStyles.appColor),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide:
+                              BorderSide(color: MyAutoPilotStyles.appColor),
+                        ),
+                        hintText: 'Email',
+                        hintStyle: GoogleFonts.notoSerif(
+                          fontSize: 14,
+                          color: HexColor('#C9C9C9'),
+                          fontWeight: FontWeight.normal,
+                          //decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                  ),
+                  !_isEmailBlank
+                      ? Positioned(
+                          right: 50.0,
+                          top: 55.0,
+                          child: new Container(
+                            child: Text(
+                              '$_validationText',
+                              style: TextStyle(
+                                color: Globals.validationColor,
+                                fontSize: 10.0,
+                              ),
+                            ),
+                          ),
+                        )
+                      : (!_isValidEmail
+                          ? Positioned(
+                              right: 50.0,
+                              top: 55.0,
+                              child: new Container(
+                                child: Text(
+                                  'Please enter a valid email',
+                                  style: TextStyle(
+                                    color: Globals.validationColor,
+                                    fontSize: 10.0,
                                   ),
                                 ),
-                              )
-                            : Container())
-                  ]),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 40.0,
-                      right: 40.0,
-                      top: 20,
-                    ),
-                    child: Stack(
-                      children: [
-                        DropdownSearch<String>(
-                          dropDownButton: DecoratedIcon(
-                            Icons.arrow_drop_down,
-                            size: 36,
-                            color: MyAutoPilotStyles.appColor,
-                            shadows: [
-                              BoxShadow(
-                                color: Colors.black54,
-                                blurRadius: 8.0,
-                                offset: Offset(1.0, 2.0),
                               ),
-                              BoxShadow(
-                                blurRadius: 12.0,
-                                color: Colors.white,
-                              ),
-                            ],
+                            )
+                          : Container())
+                ]),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 40.0,
+                    right: 40.0,
+                    top: 20,
+                  ),
+                  child: Stack(
+                    children: [
+                      DropdownSearch<String>(
+                        dropDownButton: DecoratedIcon(
+                          Icons.arrow_drop_down,
+                          size: 36,
+                          color: MyAutoPilotStyles.appColor,
+                          shadows: [
+                            BoxShadow(
+                              color: Colors.black54,
+                              blurRadius: 8.0,
+                              offset: Offset(1.0, 2.0),
+                            ),
+                            BoxShadow(
+                              blurRadius: 12.0,
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
+                        showAsSuffixIcons: true,
+                        validator: (v) => v == null ? "required field" : null,
+                        dropdownSearchDecoration: InputDecoration(
+                          labelStyle: GoogleFonts.notoSerif(
+                            fontSize: 14,
+                            color: HexColor('#C9C9C9'),
+                            fontWeight: FontWeight.normal,
                           ),
-                          showAsSuffixIcons: true,
-                          validator: (v) => v == null ? "required field" : null,
-                          dropdownSearchDecoration: InputDecoration(
-                            labelStyle: GoogleFonts.notoSerif(
-                              fontSize: 14,
-                              color: HexColor('#C9C9C9'),
-                              fontWeight: FontWeight.normal,
-                            ),
-                            prefixIcon: Transform.scale(
-                              scale: 0.7,
-                              child: SvgPicture.asset(
-                                'assets/images/department.svg',
-                                color: MyAutoPilotStyles.appColor,
-                                height: 10,
-                                width: 10,
-                              ),
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: MyAutoPilotStyles.appColor),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: MyAutoPilotStyles.appColor),
-                            ),
-                            hintStyle: GoogleFonts.notoSerif(
-                              fontSize: 14,
-                              color: HexColor('#C9C9C9'),
-                              fontWeight: FontWeight.normal,
+                          prefixIcon: Transform.scale(
+                            scale: 0.7,
+                            child: SvgPicture.asset(
+                              'assets/images/department.svg',
+                              color: MyAutoPilotStyles.appColor,
+                              height: 10,
+                              width: 10,
                             ),
                           ),
-                          mode: Mode.DIALOG,
-                          showSelectedItem: false,
-                          items: departments,
-                          maxHeight: (departments.length) <= 3
-                              ? (departments.length).toDouble() * 55
-                              : 160,
-                          showClearButton: false,
-                          onChanged: (value) async {
-                            _departmentController.text = value ?? '';
-                            /* ChefPrintFormData chefPrintFormData = ChefPrintFormData(
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: MyAutoPilotStyles.appColor),
+                          ),
+                          hintStyle: GoogleFonts.notoSerif(
+                            fontSize: 14,
+                            color: HexColor('#C9C9C9'),
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                        mode: Mode.DIALOG,
+                        showSelectedItem: false,
+                        items: departments,
+                        maxHeight: (departments.length) <= 3
+                            ? (departments.length).toDouble() * 55
+                            : 160,
+                        showClearButton: false,
+                        onChanged: (value) async {
+                          _departmentController.text = value ?? '';
+                          /* ChefPrintFormData chefPrintFormData = ChefPrintFormData(
             fieldName: 'store_Number_Of_Auto_Print_Chef', value: value);
 
         var result = {};
@@ -689,50 +687,126 @@ class _AddUser1State extends State<AddUser1>
             setState(() {});
           },
         ); */
-                          },
-                          //popupItemDisabled: (String s) => s.startsWith('I'),
-                          /* selectedItem: chefPrintDataModel
+                        },
+                        //popupItemDisabled: (String s) => s.startsWith('I'),
+                        /* selectedItem: chefPrintDataModel
           .chefPrint.setting.storeNumberOfAutoPrintChef
           .toString(), */
-                          selectedItem: _departmentController.text,
+                        selectedItem: _departmentController.text,
+                      ),
+                      Positioned(
+                        left: 50,
+                        top: 10,
+                        child: Text(_departmentText,
+                            style: GoogleFonts.notoSerif(
+                              fontSize: 14,
+                              color: HexColor('#C9C9C9'),
+                              fontWeight: FontWeight.normal,
+                              //decoration: TextDecoration.underline,
+                            )),
+                      )
+                    ],
+                  ),
+                ),
+                Stack(children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 40.0,
+                      right: 40.0,
+                      top: 20,
+                    ),
+                    child: TextField(
+                      controller: _designationController,
+                      onChanged: (value) {
+                        _timesTappedDesignation += 1;
+                      },
+                      decoration: InputDecoration(
+                        labelStyle: GoogleFonts.notoSerif(
+                          fontSize: 14,
+                          color: HexColor('#C9C9C9'),
+                          fontWeight: FontWeight.normal,
+                          //decoration: TextDecoration.underline,
                         ),
-                        Positioned(
-                          left: 50,
-                          top: 10,
-                          child: Text(_departmentText,
-                              style: GoogleFonts.notoSerif(
-                                fontSize: 14,
-                                color: HexColor('#C9C9C9'),
-                                fontWeight: FontWeight.normal,
-                                //decoration: TextDecoration.underline,
-                              )),
-                        )
-                      ],
+                        prefixIcon: Transform.scale(
+                          scale: 0.7,
+                          child: SvgPicture.asset(
+                            'assets/images/designation.svg',
+                            color: MyAutoPilotStyles.appColor,
+                            height: 10,
+                            width: 10,
+                          ),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide:
+                              BorderSide(color: MyAutoPilotStyles.appColor),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide:
+                              BorderSide(color: MyAutoPilotStyles.appColor),
+                        ),
+                        hintText: 'Designation',
+                        hintStyle: GoogleFonts.notoSerif(
+                          fontSize: 14,
+                          color: HexColor('#C9C9C9'),
+                          fontWeight: FontWeight.normal,
+                          //decoration: TextDecoration.underline,
+                        ),
+                      ),
                     ),
                   ),
-                  Stack(children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 40.0,
-                        right: 40.0,
-                        top: 20,
-                      ),
-                      child: TextField(
-                        controller: _designationController,
-                        onChanged: (value) {
-                          _timesTappedDesignation += 1;
-                        },
-                        decoration: InputDecoration(
+                  !_isDesignationValid
+                      ? Positioned(
+                          right: 50.0,
+                          top: 55.0,
+                          child: new Container(
+                            child: Text(
+                              '$_validationText',
+                              style: TextStyle(
+                                color: Globals.validationColor,
+                                fontSize: 10.0,
+                              ),
+                            ),
+                          ),
+                        )
+                      : Container()
+                ]),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 40.0,
+                    right: 40.0,
+                    top: 20,
+                  ),
+                  child: Stack(
+                    children: [
+                      DropdownSearch<String>(
+                        dropDownButton: DecoratedIcon(
+                          Icons.arrow_drop_down,
+                          size: 36,
+                          color: MyAutoPilotStyles.appColor,
+                          shadows: [
+                            BoxShadow(
+                              color: Colors.black54,
+                              blurRadius: 8.0,
+                              offset: Offset(1.0, 2.0),
+                            ),
+                            BoxShadow(
+                              blurRadius: 12.0,
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
+                        showAsSuffixIcons: true,
+                        validator: (v) => v == null ? "required field" : null,
+                        dropdownSearchDecoration: InputDecoration(
                           labelStyle: GoogleFonts.notoSerif(
                             fontSize: 14,
                             color: HexColor('#C9C9C9'),
                             fontWeight: FontWeight.normal,
-                            //decoration: TextDecoration.underline,
                           ),
                           prefixIcon: Transform.scale(
                             scale: 0.7,
                             child: SvgPicture.asset(
-                              'assets/images/designation.svg',
+                              'assets/images/level.svg',
                               color: MyAutoPilotStyles.appColor,
                               height: 10,
                               width: 10,
@@ -746,98 +820,22 @@ class _AddUser1State extends State<AddUser1>
                             borderSide:
                                 BorderSide(color: MyAutoPilotStyles.appColor),
                           ),
-                          hintText: 'Designation',
                           hintStyle: GoogleFonts.notoSerif(
                             fontSize: 14,
                             color: HexColor('#C9C9C9'),
                             fontWeight: FontWeight.normal,
-                            //decoration: TextDecoration.underline,
                           ),
                         ),
-                      ),
-                    ),
-                    !_isDesignationValid
-                        ? Positioned(
-                            right: 50.0,
-                            top: 55.0,
-                            child: new Container(
-                              child: Text(
-                                '$_validationText',
-                                style: TextStyle(
-                                  color: Globals.validationColor,
-                                  fontSize: 10.0,
-                                ),
-                              ),
-                            ),
-                          )
-                        : Container()
-                  ]),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 40.0,
-                      right: 40.0,
-                      top: 20,
-                    ),
-                    child: Stack(
-                      children: [
-                        DropdownSearch<String>(
-                          dropDownButton: DecoratedIcon(
-                            Icons.arrow_drop_down,
-                            size: 36,
-                            color: MyAutoPilotStyles.appColor,
-                            shadows: [
-                              BoxShadow(
-                                color: Colors.black54,
-                                blurRadius: 8.0,
-                                offset: Offset(1.0, 2.0),
-                              ),
-                              BoxShadow(
-                                blurRadius: 12.0,
-                                color: Colors.white,
-                              ),
-                            ],
-                          ),
-                          showAsSuffixIcons: true,
-                          validator: (v) => v == null ? "required field" : null,
-                          dropdownSearchDecoration: InputDecoration(
-                            labelStyle: GoogleFonts.notoSerif(
-                              fontSize: 14,
-                              color: HexColor('#C9C9C9'),
-                              fontWeight: FontWeight.normal,
-                            ),
-                            prefixIcon: Transform.scale(
-                              scale: 0.7,
-                              child: SvgPicture.asset(
-                                'assets/images/level.svg',
-                                color: MyAutoPilotStyles.appColor,
-                                height: 10,
-                                width: 10,
-                              ),
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: MyAutoPilotStyles.appColor),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: MyAutoPilotStyles.appColor),
-                            ),
-                            hintStyle: GoogleFonts.notoSerif(
-                              fontSize: 14,
-                              color: HexColor('#C9C9C9'),
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                          mode: Mode.DIALOG,
-                          showSelectedItem: false,
-                          items: levels,
-                          maxHeight: (levels.length) <= 3
-                              ? (levels.length).toDouble() * 55
-                              : 160,
-                          showClearButton: false,
-                          onChanged: (value) async {
-                            _levelController.text = value ?? '';
-                            /* ChefPrintFormData chefPrintFormData = ChefPrintFormData(
+                        mode: Mode.DIALOG,
+                        showSelectedItem: false,
+                        items: levels,
+                        maxHeight: (levels.length) <= 3
+                            ? (levels.length).toDouble() * 55
+                            : 160,
+                        showClearButton: false,
+                        onChanged: (value) async {
+                          _levelController.text = value ?? '';
+                          /* ChefPrintFormData chefPrintFormData = ChefPrintFormData(
             fieldName: 'store_Number_Of_Auto_Print_Chef', value: value);
 
         var result = {};
@@ -860,367 +858,355 @@ class _AddUser1State extends State<AddUser1>
             setState(() {});
           },
         ); */
-                          },
-                          //popupItemDisabled: (String s) => s.startsWith('I'),
-                          /* selectedItem: chefPrintDataModel
+                        },
+                        //popupItemDisabled: (String s) => s.startsWith('I'),
+                        /* selectedItem: chefPrintDataModel
           .chefPrint.setting.storeNumberOfAutoPrintChef
           .toString(), */
-                          selectedItem: _levelController.text,
-                        ),
-                        Positioned(
-                          left: 50,
-                          top: 10,
-                          child: Text(_levelText,
-                              style: GoogleFonts.notoSerif(
-                                fontSize: 14,
-                                color: HexColor('#C9C9C9'),
-                                fontWeight: FontWeight.normal,
-                                //decoration: TextDecoration.underline,
-                              )),
-                        )
-                      ],
-                    ),
+                        selectedItem: _levelController.text,
+                      ),
+                      Positioned(
+                        left: 50,
+                        top: 10,
+                        child: Text(_levelText,
+                            style: GoogleFonts.notoSerif(
+                              fontSize: 14,
+                              color: HexColor('#C9C9C9'),
+                              fontWeight: FontWeight.normal,
+                              //decoration: TextDecoration.underline,
+                            )),
+                      )
+                    ],
                   ),
-                  Stack(children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 40.0,
-                        right: 40.0,
-                        top: 20,
-                      ),
-                      child: TextField(
-                        controller: _subordinateCountController,
-                        onChanged: (value) {
-                          _timesTappedSubordinateCount += 1;
-                        },
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
-                          LengthLimitingTextInputFormatter(10)
-                        ],
-                        decoration: InputDecoration(
-                          labelStyle: GoogleFonts.notoSerif(
-                            fontSize: 14,
-                            color: HexColor('#C9C9C9'),
-                            fontWeight: FontWeight.normal,
-                            //decoration: TextDecoration.underline,
-                          ),
-                          prefixIcon: Transform.scale(
-                            scale: 0.7,
-                            child: SvgPicture.asset(
-                              'assets/images/subourdiante.svg',
-                              color: MyAutoPilotStyles.appColor,
-                              height: 10,
-                              width: 10,
-                            ),
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide:
-                                BorderSide(color: MyAutoPilotStyles.appColor),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide:
-                                BorderSide(color: MyAutoPilotStyles.appColor),
-                          ),
-                          hintText: 'Subordinate Count',
-                          hintStyle: GoogleFonts.notoSerif(
-                            fontSize: 14,
-                            color: HexColor('#C9C9C9'),
-                            fontWeight: FontWeight.normal,
-                            //decoration: TextDecoration.underline,
-                          ),
-                        ),
-                      ),
-                    ),
-                    !_isSubordinateCountValid
-                        ? Positioned(
-                            right: 50.0,
-                            top: 55.0,
-                            child: new Container(
-                              child: Text(
-                                '$_validationText',
-                                style: TextStyle(
-                                  color: Globals.validationColor,
-                                  fontSize: 10.0,
-                                ),
-                              ),
-                            ),
-                          )
-                        : Container()
-                  ]),
+                ),
+                Stack(children: [
                   Padding(
                     padding: const EdgeInsets.only(
                       left: 40.0,
                       right: 40.0,
                       top: 20,
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        InkWell(
-                          onTap: () async {
-                            await showModalBottomSheet(
-                                context: context,
-                                backgroundColor: Colors.transparent,
-                                builder: (builder) {
-                                  return StatefulBuilder(builder:
-                                      (BuildContext context,
-                                          StateSetter setModalState) {
-                                    return Align(
-                                      alignment: Alignment.bottomCenter,
-                                      child: ConstrainedBox(
-                                        constraints: BoxConstraints.tight(
-                                          Size(
-                                              MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  90 /
-                                                  100,
-                                              450),
-                                        ),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.only(
-                                              topLeft:
-                                                  const Radius.circular(20.0),
-                                              topRight:
-                                                  const Radius.circular(20.0),
-                                            ),
+                    child: TextField(
+                      controller: _subordinateCountController,
+                      onChanged: (value) {
+                        _timesTappedSubordinateCount += 1;
+                      },
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        LengthLimitingTextInputFormatter(10)
+                      ],
+                      decoration: InputDecoration(
+                        labelStyle: GoogleFonts.notoSerif(
+                          fontSize: 14,
+                          color: HexColor('#C9C9C9'),
+                          fontWeight: FontWeight.normal,
+                          //decoration: TextDecoration.underline,
+                        ),
+                        prefixIcon: Transform.scale(
+                          scale: 0.7,
+                          child: SvgPicture.asset(
+                            'assets/images/subourdiante.svg',
+                            color: MyAutoPilotStyles.appColor,
+                            height: 10,
+                            width: 10,
+                          ),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide:
+                              BorderSide(color: MyAutoPilotStyles.appColor),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide:
+                              BorderSide(color: MyAutoPilotStyles.appColor),
+                        ),
+                        hintText: 'Subordinate Count',
+                        hintStyle: GoogleFonts.notoSerif(
+                          fontSize: 14,
+                          color: HexColor('#C9C9C9'),
+                          fontWeight: FontWeight.normal,
+                          //decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                  ),
+                  !_isSubordinateCountValid
+                      ? Positioned(
+                          right: 50.0,
+                          top: 55.0,
+                          child: new Container(
+                            child: Text(
+                              '$_validationText',
+                              style: TextStyle(
+                                color: Globals.validationColor,
+                                fontSize: 10.0,
+                              ),
+                            ),
+                          ),
+                        )
+                      : Container()
+                ]),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 40.0,
+                    right: 40.0,
+                    top: 20,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      InkWell(
+                        onTap: () async {
+                          await showModalBottomSheet(
+                              context: context,
+                              backgroundColor: Colors.transparent,
+                              builder: (builder) {
+                                return StatefulBuilder(builder:
+                                    (BuildContext context,
+                                        StateSetter setModalState) {
+                                  return Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: ConstrainedBox(
+                                      constraints: BoxConstraints.tight(
+                                        Size(
+                                            MediaQuery.of(context).size.width *
+                                                90 /
+                                                100,
+                                            450),
+                                      ),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.only(
+                                            topLeft:
+                                                const Radius.circular(20.0),
+                                            topRight:
+                                                const Radius.circular(20.0),
                                           ),
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                margin: EdgeInsets.only(
-                                                  top: 30,
-                                                  left: 30,
-                                                ),
-                                                child: Row(
-                                                  children: [
-                                                    Text(
-                                                      'Bulk upload users',
-                                                      style:
-                                                          GoogleFonts.notoSerif(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: MyAutoPilotStyles
-                                                            .appColor,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                top: 30,
+                                                left: 30,
                                               ),
-                                              Container(
-                                                margin: EdgeInsets.only(
-                                                  top: 20,
-                                                  //left: 30,
-                                                ),
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    75 /
-                                                    100,
-                                                child: Text(
-                                                  'Make sure that you have maintained the format structure provided to upload your users.',
-                                                  style: GoogleFonts.notoSans(
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                    color: HexColor('#707070'),
-                                                  ),
-                                                ),
-                                              ),
-                                              Container(
-                                                margin: EdgeInsets.only(
-                                                  top: 10,
-                                                  //left: 30,
-                                                ),
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    75 /
-                                                    100,
-                                                child: Row(
-                                                  children: [
-                                                    Text(
-                                                      'Upload the file and create your users.',
-                                                      style:
-                                                          GoogleFonts.notoSans(
-                                                        fontSize: 14,
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                        color:
-                                                            HexColor('#707070'),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              // Upload File Button
-                                              Row(
+                                              child: Row(
                                                 children: [
-                                                  Container(
-                                                    padding: EdgeInsets.only(
-                                                      top: 20,
-                                                      left: 35,
-                                                    ),
-                                                    child: ConstrainedBox(
-                                                      constraints:
-                                                          BoxConstraints
-                                                              .tightFor(
-                                                                  width: 200,
-                                                                  height: 55),
-                                                      child: ElevatedButton(
-                                                        onPressed: () async {
-                                                          FilePickerResult?
-                                                              result =
-                                                              await FilePicker
-                                                                  .platform
-                                                                  .pickFiles(
-                                                                      /*
-                                                                    type: FileType.custom,
-                                                                    allowedExtensions: ['csv','jpg', 'pdf', 'doc'],
-                                                                    */
-                                                                      );
-
-                                                          if (result != null) {
-                                                            File file = File(
-                                                                result
-                                                                    .files
-                                                                    .single
-                                                                    .path!);
-                                                            PlatformFile
-                                                                fileDetails =
-                                                                result.files
-                                                                    .first;
-
-                                                            print(
-                                                                '***************${fileDetails.name}');
-                                                            print(
-                                                                '***************${fileDetails.extension}');
-                                                            print(
-                                                                '***************${fileDetails.path}');
-                                                            print(
-                                                                '####################${file.path}');
-                                                            setModalState(() {
-                                                              isFileUploaded =
-                                                                  true;
-                                                              uploadedFile =
-                                                                  fileDetails
-                                                                      .name;
-                                                            });
-                                                          } else {
-                                                            // User canceled the picker
-                                                            setModalState(() {
-                                                              isFileUploaded =
-                                                                  false;
-                                                            });
-                                                          }
-                                                        },
-                                                        style: ElevatedButton
-                                                            .styleFrom(
-                                                          shape:
-                                                              RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5.0),
-                                                          ),
-                                                          primary:
-                                                              MyAutoPilotStyles
-                                                                  .appColor,
-                                                        ),
-                                                        child: Text(
-                                                          'Upload File',
-                                                          style: GoogleFonts
-                                                              .notoSans(
-                                                            fontSize: 16,
-                                                            color: Colors.white,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .normal,
-                                                          ),
-                                                        ),
-                                                      ),
+                                                  Text(
+                                                    'Bulk upload users',
+                                                    style:
+                                                        GoogleFonts.notoSerif(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: MyAutoPilotStyles
+                                                          .appColor,
                                                     ),
                                                   ),
                                                 ],
                                               ),
-                                              // This is the widget where the uploaded file name can be seen
-                                              // and also can be cancelled.
-                                              Opacity(
-                                                opacity: isFileUploaded ? 1 : 0,
-                                                child: Stack(children: [
-                                                  Container(
-                                                    margin: EdgeInsets.only(
-                                                      top: 30,
-                                                      left: 30,
-                                                    ),
-                                                    //height: 100,
-                                                    child: Row(
-                                                      children: [
-                                                        Text(
-                                                          uploadedFile,
-                                                          style: GoogleFonts
-                                                              .notoSans(
-                                                            fontSize: 14,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .normal,
-                                                            color: HexColor(
-                                                                '#707070'),
-                                                          ),
-                                                        ),
-                                                      ],
+                                            ),
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                top: 20,
+                                                //left: 30,
+                                              ),
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  75 /
+                                                  100,
+                                              child: Text(
+                                                'Make sure that you have maintained the format structure provided to upload your users.',
+                                                style: GoogleFonts.notoSans(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.normal,
+                                                  color: HexColor('#707070'),
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                top: 10,
+                                                //left: 30,
+                                              ),
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  75 /
+                                                  100,
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    'Upload the file and create your users.',
+                                                    style: GoogleFonts.notoSans(
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                      color:
+                                                          HexColor('#707070'),
                                                     ),
                                                   ),
-                                                  Positioned(
-                                                    right: 20,
-                                                    top: 10,
-                                                    child: ConstrainedBox(
-                                                      constraints:
-                                                          BoxConstraints
-                                                              .tightFor(
-                                                                  width: 35,
-                                                                  height: 35),
-                                                      child: Container(
-                                                        decoration:
-                                                            BoxDecoration(
+                                                ],
+                                              ),
+                                            ),
+                                            // Upload File Button
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  padding: EdgeInsets.only(
+                                                    top: 20,
+                                                    left: 35,
+                                                  ),
+                                                  child: ConstrainedBox(
+                                                    constraints:
+                                                        BoxConstraints.tightFor(
+                                                            width: 200,
+                                                            height: 55),
+                                                    child: ElevatedButton(
+                                                      onPressed: () async {
+                                                        FilePickerResult?
+                                                            result =
+                                                            await FilePicker
+                                                                .platform
+                                                                .pickFiles(
+                                                                    /*
+                                                                    type: FileType.custom,
+                                                                    allowedExtensions: ['csv','jpg', 'pdf', 'doc'],
+                                                                    */
+                                                                    );
+
+                                                        if (result != null) {
+                                                          File file = File(
+                                                              result
+                                                                  .files
+                                                                  .single
+                                                                  .path!);
+                                                          PlatformFile
+                                                              fileDetails =
+                                                              result
+                                                                  .files.first;
+
+                                                          print(
+                                                              '***************${fileDetails.name}');
+                                                          print(
+                                                              '***************${fileDetails.extension}');
+                                                          print(
+                                                              '***************${fileDetails.path}');
+                                                          print(
+                                                              '####################${file.path}');
+                                                          setModalState(() {
+                                                            isFileUploaded =
+                                                                true;
+                                                            uploadedFile =
+                                                                fileDetails
+                                                                    .name;
+                                                          });
+                                                        } else {
+                                                          // User canceled the picker
+                                                          setModalState(() {
+                                                            isFileUploaded =
+                                                                false;
+                                                          });
+                                                        }
+                                                      },
+                                                      style: ElevatedButton
+                                                          .styleFrom(
+                                                        shape:
+                                                            RoundedRectangleBorder(
                                                           borderRadius:
-                                                              BorderRadius.all(
-                                                            Radius.circular(
-                                                                50.0),
-                                                          ),
-                                                          border: Border.all(
-                                                            color: HexColor(
-                                                                '#C9C9C9'),
-                                                            width: 1.0,
-                                                          ),
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      5.0),
                                                         ),
-                                                        child: ClipOval(
-                                                          child: Material(
-                                                            color: Colors
-                                                                .white, // Button color
-                                                            child: InkWell(
-                                                              splashColor: Colors
-                                                                  .red, // Splash color
-                                                              onTap: () {
-                                                                setModalState(
-                                                                    () {
-                                                                  isFileUploaded =
-                                                                      false;
-                                                                });
-                                                              },
-                                                              child: SizedBox(
-                                                                width: 56,
-                                                                height: 56,
-                                                                child: Icon(
-                                                                  Icons.close,
-                                                                  color: HexColor(
-                                                                      '#C9C9C9'),
-                                                                  size: 16,
-                                                                ),
+                                                        primary:
+                                                            MyAutoPilotStyles
+                                                                .appColor,
+                                                      ),
+                                                      child: Text(
+                                                        'Upload File',
+                                                        style: GoogleFonts
+                                                            .notoSans(
+                                                          fontSize: 16,
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            // This is the widget where the uploaded file name can be seen
+                                            // and also can be cancelled.
+                                            Opacity(
+                                              opacity: isFileUploaded ? 1 : 0,
+                                              child: Stack(children: [
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                    top: 30,
+                                                    left: 30,
+                                                  ),
+                                                  //height: 100,
+                                                  child: Row(
+                                                    children: [
+                                                      Text(
+                                                        uploadedFile,
+                                                        style: GoogleFonts
+                                                            .notoSans(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          color: HexColor(
+                                                              '#707070'),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  right: 20,
+                                                  top: 10,
+                                                  child: ConstrainedBox(
+                                                    constraints:
+                                                        BoxConstraints.tightFor(
+                                                            width: 35,
+                                                            height: 35),
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                          Radius.circular(50.0),
+                                                        ),
+                                                        border: Border.all(
+                                                          color: HexColor(
+                                                              '#C9C9C9'),
+                                                          width: 1.0,
+                                                        ),
+                                                      ),
+                                                      child: ClipOval(
+                                                        child: Material(
+                                                          color: Colors
+                                                              .white, // Button color
+                                                          child: InkWell(
+                                                            splashColor: Colors
+                                                                .red, // Splash color
+                                                            onTap: () {
+                                                              setModalState(() {
+                                                                isFileUploaded =
+                                                                    false;
+                                                              });
+                                                            },
+                                                            child: SizedBox(
+                                                              width: 56,
+                                                              height: 56,
+                                                              child: Icon(
+                                                                Icons.close,
+                                                                color: HexColor(
+                                                                    '#C9C9C9'),
+                                                                size: 16,
                                                               ),
                                                             ),
                                                           ),
@@ -1228,146 +1214,145 @@ class _AddUser1State extends State<AddUser1>
                                                       ),
                                                     ),
                                                   ),
-                                                ]),
-                                              ),
+                                                ),
+                                              ]),
+                                            ),
 
-                                              Container(
-                                                padding:
-                                                    EdgeInsets.only(top: 20),
-                                                child: ConstrainedBox(
-                                                  constraints:
-                                                      BoxConstraints.tightFor(
-                                                          width: 150,
-                                                          height: 55),
-                                                  child: ElevatedButton(
-                                                    onPressed: () async {},
-                                                    style: ElevatedButton
-                                                        .styleFrom(
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(30.0),
-                                                      ),
-                                                      primary: MyAutoPilotStyles
-                                                          .appColor,
+                                            Container(
+                                              padding: EdgeInsets.only(top: 20),
+                                              child: ConstrainedBox(
+                                                constraints:
+                                                    BoxConstraints.tightFor(
+                                                        width: 150, height: 55),
+                                                child: ElevatedButton(
+                                                  onPressed: () async {},
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              30.0),
                                                     ),
-                                                    child: Text(
-                                                      'ADD USERS',
-                                                      style:
-                                                          GoogleFonts.notoSerif(
-                                                        fontSize: 17,
-                                                        color: Colors.white,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
+                                                    primary: MyAutoPilotStyles
+                                                        .appColor,
+                                                  ),
+                                                  child: Text(
+                                                    'ADD USERS',
+                                                    style:
+                                                        GoogleFonts.notoSerif(
+                                                      fontSize: 17,
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                     ),
                                                   ),
                                                 ),
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                    );
-                                  });
+                                    ),
+                                  );
                                 });
-                            isFileUploaded = false;
-                          },
-                          child: Text(
-                            'Bulk Upload',
-                            style: GoogleFonts.notoSerif(
-                              color: MyAutoPilotStyles.appColor,
-                              fontWeight: FontWeight.normal,
-                              fontSize: 14,
-                            ),
+                              });
+                          isFileUploaded = false;
+                        },
+                        child: Text(
+                          'Bulk Upload',
+                          style: GoogleFonts.notoSerif(
+                            color: MyAutoPilotStyles.appColor,
+                            fontWeight: FontWeight.normal,
+                            fontSize: 14,
                           ),
                         ),
-                        SizedBox(width: 10),
-                        InkWell(
-                          onTap: () {},
-                          child: Row(
-                            children: [
-                              Text(
-                                '(',
-                                style: GoogleFonts.notoSerif(
-                                  color: MyAutoPilotStyles.appColor,
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 14,
-                                ),
+                      ),
+                      SizedBox(width: 10),
+                      InkWell(
+                        onTap: () {},
+                        child: Row(
+                          children: [
+                            Text(
+                              '(',
+                              style: GoogleFonts.notoSerif(
+                                color: MyAutoPilotStyles.appColor,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 14,
                               ),
-                              Text(
-                                'Download Format',
-                                style: GoogleFonts.notoSerif(
-                                  color: MyAutoPilotStyles.appColor,
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 14,
-                                  decoration: TextDecoration.underline,
-                                ),
+                            ),
+                            Text(
+                              'Download Format',
+                              style: GoogleFonts.notoSerif(
+                                color: MyAutoPilotStyles.appColor,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 14,
+                                decoration: TextDecoration.underline,
                               ),
-                              Text(
-                                ')',
-                                style: GoogleFonts.notoSerif(
-                                  color: MyAutoPilotStyles.appColor,
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 14,
-                                ),
+                            ),
+                            Text(
+                              ')',
+                              style: GoogleFonts.notoSerif(
+                                color: MyAutoPilotStyles.appColor,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 14,
                               ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(25),
-                    child: ConstrainedBox(
-                      constraints:
-                          BoxConstraints.tightFor(width: 130, height: 55),
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          if (!_isUserNameValid ||
-                              _userNameController.text.isEmpty ||
-                              !_isPhoneValid ||
-                              _phoneNumberController.text.isEmpty ||
-                              !_isEmailBlank ||
-                              _emailController.text.isEmpty ||
-                              !_isDesignationValid ||
-                              _designationController.text.isEmpty ||
-                              !_isSubordinateCountValid ||
-                              _subordinateCountController.text.isEmpty) {
-                            if (_userNameController.text.isEmpty)
-                              _isUserNameValid = false;
-                            if (_phoneNumberController.text.isEmpty)
-                              _isPhoneValid = false;
-                            if (_emailController.text.isEmpty)
-                              _isEmailBlank = false;
-                            if (_designationController.text.isEmpty)
-                              _isDesignationValid = false;
-                            if (_subordinateCountController.text.isEmpty)
-                              _isSubordinateCountValid = false;
+                ),
+                Padding(
+                  padding: EdgeInsets.all(25),
+                  child: ConstrainedBox(
+                    constraints:
+                        BoxConstraints.tightFor(width: 130, height: 55),
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        if (!_isUserNameValid ||
+                            _userNameController.text.isEmpty ||
+                            !_isPhoneValid ||
+                            _phoneNumberController.text.isEmpty ||
+                            !_isEmailBlank ||
+                            _emailController.text.isEmpty ||
+                            !_isDesignationValid ||
+                            _designationController.text.isEmpty ||
+                            !_isSubordinateCountValid ||
+                            _subordinateCountController.text.isEmpty) {
+                          if (_userNameController.text.isEmpty)
+                            _isUserNameValid = false;
+                          if (_phoneNumberController.text.isEmpty)
+                            _isPhoneValid = false;
+                          if (_emailController.text.isEmpty)
+                            _isEmailBlank = false;
+                          if (_designationController.text.isEmpty)
+                            _isDesignationValid = false;
+                          if (_subordinateCountController.text.isEmpty)
+                            _isSubordinateCountValid = false;
 
-                            setState(() {});
-                            ShowMessage.showFlushBar(
-                                context, 'Please rectify the errors.');
-                          } else if (!Globals.isEmail(
-                              _emailController.text.trim())) {
-                            setState(() {
-                              _isValidEmail = false;
-                            });
-                            ShowMessage.showFlushBar(
-                                context, 'Please rectify the errors.');
-                          } else {
-                            setState(() {
-                              _isUserNameValid = true;
-                              _isPhoneValid = true;
-                              _isEmailBlank = true;
-                              _isValidEmail = true;
-                              _isDesignationValid = true;
-                              _isSubordinateCountValid = true;
-                            });
+                          setState(() {});
+                          ShowMessage.showFlushBar(
+                              context, 'Please rectify the errors.');
+                        } else if (!Globals.isEmail(
+                            _emailController.text.trim())) {
+                          setState(() {
+                            _isValidEmail = false;
+                          });
+                          ShowMessage.showFlushBar(
+                              context, 'Please rectify the errors.');
+                        } else {
+                          setState(() {
+                            _isUserNameValid = true;
+                            _isPhoneValid = true;
+                            _isEmailBlank = true;
+                            _isValidEmail = true;
+                            _isDesignationValid = true;
+                            _isSubordinateCountValid = true;
+                          });
 
-                            /* showDialog(
+                          /* showDialog(
                                 context: context,
                                 barrierDismissible: false,
                                 builder: (BuildContext context) {
@@ -1375,9 +1360,9 @@ class _AddUser1State extends State<AddUser1>
                                 },
                               ); */
 
-                            // API call for Sign Up
+                          // API call for Sign Up
 
-                            /* await Future.delayed(new Duration(seconds: 3), () {
+                          /* await Future.delayed(new Duration(seconds: 3), () {
                                 Navigator.pop(context); //pop dialog
                               }).then((value) {
                                 // After successfull signup, show a dialog to return to the login screen.
@@ -1572,27 +1557,26 @@ class _AddUser1State extends State<AddUser1>
                                   },
                                 );
                               }); */
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          primary: MyAutoPilotStyles.appColor,
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
                         ),
-                        child: Text(
-                          'ADD USER',
-                          style: GoogleFonts.notoSerif(
-                            fontSize: 17,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        primary: MyAutoPilotStyles.appColor,
+                      ),
+                      child: Text(
+                        'ADD USER',
+                        style: GoogleFonts.notoSerif(
+                          fontSize: 17,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

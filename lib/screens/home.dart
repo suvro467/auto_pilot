@@ -343,11 +343,33 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () {
+      onWillPop: () async {
         // Quit the app.
-        if (Platform.isAndroid)
-          SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-        return new Future(() => false);
+        return await showDialog(
+          //show confirm dialogue
+          //the return value will be from "Yes" or "No" options
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('Exit App'),
+            content: Text('Do you want to exit MyAutoPilot?'),
+            actions: [
+              ElevatedButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                //return false when click on "NO"
+                child: Text('No'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop(true);
+                  if (Platform.isAndroid)
+                    SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+                },
+                //return true when click on "Yes"
+                child: Text('Yes'),
+              ),
+            ],
+          ),
+        );
       },
       child: Scaffold(
         key: _scaffoldKey,
