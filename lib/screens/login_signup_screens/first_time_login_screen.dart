@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:auto_pilot/screens/home.dart';
 import 'package:auto_pilot/screens/login_signup_screens/change_password_screen.dart';
+import 'package:auto_pilot/screens/login_signup_screens/confirm_plan.dart';
 import 'package:auto_pilot/screens/login_signup_screens/signup_screen.dart';
 import 'package:auto_pilot/shared/globals.dart';
 import 'package:auto_pilot/shared/presentation/styles.dart';
@@ -431,9 +432,11 @@ class _FirstTimeLoginScreenState extends State<FirstTimeLoginScreen> {
 
                                 await Future.delayed(new Duration(seconds: 3),
                                     () {
+                                  // Insert sign up related stuffs here.
+                                  // API Call.
                                   Navigator.pop(context); //pop dialog
                                 }).then((value) {
-                                  // After successfull login, navigate to the home screen
+                                  // After successfull login, navigate to the plan selection screen if the user does not have a plan activated.
                                   Navigator.pushReplacement(
                                     context,
                                     PageRouteBuilder(
@@ -443,7 +446,7 @@ class _FirstTimeLoginScreenState extends State<FirstTimeLoginScreen> {
                                           Animation<double> animation,
                                           Animation<double>
                                               secondaryAnimation) {
-                                        return HomeScreen();
+                                        return ConfirmPlanScreen();
                                       },
                                       transitionsBuilder: (BuildContext context,
                                           Animation<double> animation,
