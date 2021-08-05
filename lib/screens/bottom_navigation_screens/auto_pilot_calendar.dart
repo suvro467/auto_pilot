@@ -10,8 +10,10 @@ class AutoPilotCalendar extends StatefulWidget {
 class _AutoPilotCalendarState extends State<AutoPilotCalendar> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(child: Text('Dashboard of Calendar')),
+    return Material(
+      child: Container(
+        child: Center(child: Text('Dashboard of Calendar')),
+      ),
     );
   }
 }

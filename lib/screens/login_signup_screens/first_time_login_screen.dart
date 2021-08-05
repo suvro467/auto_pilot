@@ -103,378 +103,527 @@ class _FirstTimeLoginScreenState extends State<FirstTimeLoginScreen> {
         /* Navigator.pop(context); //return data along with pop*/
         return new Future(() => false);
       },
-      child: SafeArea(
-        child: Container(
-          margin: EdgeInsets.only(top: 20),
-          width: MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                      height: 75.0,
-                      width: 75.0,
-                      margin: EdgeInsets.only(
-                        top: 25,
-                        bottom: 20,
-                      ),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.transparent,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.2),
-                            offset: Offset(0.0, 1.0), //(x,y)
-                            blurRadius: 1.0,
-                          ),
-                        ],
-                      ),
-                      child: Image(
-                        image: AssetImage('assets/icons/logopng.png'),
-                      ),
-                    ),
-                    Container(
-                      child: Text(
-                        'Welcome to My Autopilot',
-                        style: GoogleFonts.notoSerif(
-                          fontSize: 16,
-                          color: MyAutoPilotStyles.appColor,
-                          fontWeight: FontWeight.normal,
+      child: Material(
+        child: SafeArea(
+          child: Container(
+            margin: EdgeInsets.only(top: 20),
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        height: 75.0,
+                        width: 75.0,
+                        margin: EdgeInsets.only(
+                          top: 25,
+                          bottom: 20,
                         ),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(
-                        left: 50,
-                        right: 50,
-                        top: 10,
-                      ),
-                      child: Text(
-                        'Since you are logging in for the first time, you need to regenerate your password after verifying your email id and phone number. ',
-                        style: GoogleFonts.notoSans(
-                          fontSize: 14,
-                          color: HexColor('#707070'),
-                          fontWeight: FontWeight.normal,
-                        ),
-                        textAlign: TextAlign.left,
-                      ),
-                    ),
-                    Stack(children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 50.0,
-                          right: 50,
-                          top: 20,
-                        ),
-                        child: TextField(
-                          controller: _smsOTPController,
-                          keyboardType: TextInputType.number,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly,
-                            //LengthLimitingTextInputFormatter(8)
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.transparent,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.2),
+                              offset: Offset(0.0, 1.0), //(x,y)
+                              blurRadius: 1.0,
+                            ),
                           ],
-                          onChanged: (value) {
-                            _timesTappedSmsOTP += 1;
-                          },
-                          decoration: InputDecoration(
-                            labelStyle: GoogleFonts.notoSerif(
-                              fontSize: 14,
-                              color: HexColor('#C9C9C9'),
-                              fontWeight: FontWeight.normal,
-                              //decoration: TextDecoration.underline,
-                            ),
-                            prefixIcon: Transform.scale(
-                              scale: 0.7,
-                              child: SvgPicture.asset(
-                                'assets/images/otp.svg',
-                                color: MyAutoPilotStyles.appColor,
-                                //semanticsLabel: 'Email Mobile',
-                                height: 10,
-                                width: 10,
-                              ),
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: MyAutoPilotStyles.appColor),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: MyAutoPilotStyles.appColor),
-                            ),
-                            hintText: 'Enter OTP sent via SMS',
-                            hintStyle: GoogleFonts.notoSerif(
-                              fontSize: 14,
-                              color: HexColor('#C9C9C9'),
-                              fontWeight: FontWeight.normal,
-                              //decoration: TextDecoration.underline,
-                            ),
+                        ),
+                        child: Image(
+                          image: AssetImage('assets/icons/logopng.png'),
+                        ),
+                      ),
+                      Container(
+                        child: Text(
+                          'Welcome to My Autopilot',
+                          style: GoogleFonts.notoSerif(
+                            fontSize: 16,
+                            color: MyAutoPilotStyles.appColor,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                       ),
-                      !_isSmsOTPValid
-                          ? Positioned(
-                              right: 50.0,
-                              top: 55.0,
-                              child: new Container(
-                                child: Text(
-                                  '$_validationText',
-                                  style: TextStyle(
-                                    color: Globals.validationColor,
-                                    fontSize: 10.0,
-                                  ),
-                                ),
-                              ),
-                            )
-                          : Container()
-                    ]),
-                    Stack(children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 50.0,
+                      Container(
+                        padding: EdgeInsets.only(
+                          left: 50,
                           right: 50,
-                          top: 20,
+                          top: 10,
                         ),
-                        child: TextField(
-                          controller: _emailOTPController,
-                          keyboardType: TextInputType.number,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly,
-                            //LengthLimitingTextInputFormatter(8)
-                          ],
-                          onChanged: (value) {
-                            _timesTappedEmailOTP += 1;
-                          },
-                          decoration: InputDecoration(
-                            labelStyle: GoogleFonts.notoSerif(
-                              fontSize: 14,
-                              color: HexColor('#C9C9C9'),
-                              fontWeight: FontWeight.normal,
-                              //decoration: TextDecoration.underline,
-                            ),
-                            prefixIcon: Transform.scale(
-                              scale: 0.7,
-                              child: SvgPicture.asset(
-                                'assets/images/otp.svg',
-                                color: MyAutoPilotStyles.appColor,
-                                //semanticsLabel: 'Email Mobile',
-                                height: 10,
-                                width: 10,
-                              ),
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: MyAutoPilotStyles.appColor),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: MyAutoPilotStyles.appColor),
-                            ),
-                            hintText: 'Enter OTP sent via EMail',
-                            hintStyle: GoogleFonts.notoSerif(
-                              fontSize: 14,
-                              color: HexColor('#C9C9C9'),
-                              fontWeight: FontWeight.normal,
-                              //decoration: TextDecoration.underline,
-                            ),
+                        child: Text(
+                          'Since you are logging in for the first time, you need to regenerate your password after verifying your email id and phone number. ',
+                          style: GoogleFonts.notoSans(
+                            fontSize: 14,
+                            color: HexColor('#707070'),
+                            fontWeight: FontWeight.normal,
                           ),
+                          textAlign: TextAlign.left,
                         ),
                       ),
-                      !_isEmailOTPValid
-                          ? Positioned(
-                              right: 50.0,
-                              top: 55.0,
-                              child: new Container(
-                                child: Text(
-                                  '$_validationText',
-                                  style: TextStyle(
-                                    color: Globals.validationColor,
-                                    fontSize: 10.0,
-                                  ),
-                                ),
+                      Stack(children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 50.0,
+                            right: 50,
+                            top: 20,
+                          ),
+                          child: TextField(
+                            controller: _smsOTPController,
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                              //LengthLimitingTextInputFormatter(8)
+                            ],
+                            onChanged: (value) {
+                              _timesTappedSmsOTP += 1;
+                            },
+                            decoration: InputDecoration(
+                              labelStyle: GoogleFonts.notoSerif(
+                                fontSize: 14,
+                                color: HexColor('#C9C9C9'),
+                                fontWeight: FontWeight.normal,
+                                //decoration: TextDecoration.underline,
                               ),
-                            )
-                          : Container()
-                    ]),
-                    Stack(children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 50.0,
-                          right: 50,
-                          top: 20,
-                        ),
-                        child: TextField(
-                          controller: _passwordController,
-                          onChanged: (value) {
-                            _timesTappedPassword += 1;
-                          },
-                          obscureText: _isObscure,
-                          decoration: InputDecoration(
-                            labelStyle: GoogleFonts.notoSerif(
-                              fontSize: 14,
-                              color: HexColor('#C9C9C9'),
-                              fontWeight: FontWeight.normal,
-                              //decoration: TextDecoration.underline,
-                            ),
-                            prefixIcon: Transform.scale(
-                              scale: 0.7,
-                              child: SvgPicture.asset(
-                                'assets/images/password.svg',
-                                color: MyAutoPilotStyles.appColor,
-                                //semanticsLabel: 'Email Mobile',
-                                height: 10,
-                                width: 10,
-                              ),
-                            ),
-                            suffixIcon: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  _isObscure = !_isObscure;
-                                });
-                              },
-                              child: Transform.scale(
+                              prefixIcon: Transform.scale(
                                 scale: 0.7,
                                 child: SvgPicture.asset(
-                                  _isObscure
-                                      ? 'assets/images/hide.svg'
-                                      : 'assets/images/show.svg',
+                                  'assets/images/otp.svg',
                                   color: MyAutoPilotStyles.appColor,
                                   //semanticsLabel: 'Email Mobile',
                                   height: 10,
                                   width: 10,
                                 ),
                               ),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: MyAutoPilotStyles.appColor),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: MyAutoPilotStyles.appColor),
+                              ),
+                              hintText: 'Enter OTP sent via SMS',
+                              hintStyle: GoogleFonts.notoSerif(
+                                fontSize: 14,
+                                color: HexColor('#C9C9C9'),
+                                fontWeight: FontWeight.normal,
+                                //decoration: TextDecoration.underline,
+                              ),
                             ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: MyAutoPilotStyles.appColor),
+                          ),
+                        ),
+                        !_isSmsOTPValid
+                            ? Positioned(
+                                right: 50.0,
+                                top: 55.0,
+                                child: new Container(
+                                  child: Text(
+                                    '$_validationText',
+                                    style: TextStyle(
+                                      color: Globals.validationColor,
+                                      fontSize: 10.0,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Container()
+                      ]),
+                      Stack(children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 50.0,
+                            right: 50,
+                            top: 20,
+                          ),
+                          child: TextField(
+                            controller: _emailOTPController,
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                              //LengthLimitingTextInputFormatter(8)
+                            ],
+                            onChanged: (value) {
+                              _timesTappedEmailOTP += 1;
+                            },
+                            decoration: InputDecoration(
+                              labelStyle: GoogleFonts.notoSerif(
+                                fontSize: 14,
+                                color: HexColor('#C9C9C9'),
+                                fontWeight: FontWeight.normal,
+                                //decoration: TextDecoration.underline,
+                              ),
+                              prefixIcon: Transform.scale(
+                                scale: 0.7,
+                                child: SvgPicture.asset(
+                                  'assets/images/otp.svg',
+                                  color: MyAutoPilotStyles.appColor,
+                                  //semanticsLabel: 'Email Mobile',
+                                  height: 10,
+                                  width: 10,
+                                ),
+                              ),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: MyAutoPilotStyles.appColor),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: MyAutoPilotStyles.appColor),
+                              ),
+                              hintText: 'Enter OTP sent via EMail',
+                              hintStyle: GoogleFonts.notoSerif(
+                                fontSize: 14,
+                                color: HexColor('#C9C9C9'),
+                                fontWeight: FontWeight.normal,
+                                //decoration: TextDecoration.underline,
+                              ),
                             ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: MyAutoPilotStyles.appColor),
+                          ),
+                        ),
+                        !_isEmailOTPValid
+                            ? Positioned(
+                                right: 50.0,
+                                top: 55.0,
+                                child: new Container(
+                                  child: Text(
+                                    '$_validationText',
+                                    style: TextStyle(
+                                      color: Globals.validationColor,
+                                      fontSize: 10.0,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Container()
+                      ]),
+                      Stack(children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 50.0,
+                            right: 50,
+                            top: 20,
+                          ),
+                          child: TextField(
+                            controller: _passwordController,
+                            onChanged: (value) {
+                              _timesTappedPassword += 1;
+                            },
+                            obscureText: _isObscure,
+                            decoration: InputDecoration(
+                              labelStyle: GoogleFonts.notoSerif(
+                                fontSize: 14,
+                                color: HexColor('#C9C9C9'),
+                                fontWeight: FontWeight.normal,
+                                //decoration: TextDecoration.underline,
+                              ),
+                              prefixIcon: Transform.scale(
+                                scale: 0.7,
+                                child: SvgPicture.asset(
+                                  'assets/images/password.svg',
+                                  color: MyAutoPilotStyles.appColor,
+                                  //semanticsLabel: 'Email Mobile',
+                                  height: 10,
+                                  width: 10,
+                                ),
+                              ),
+                              suffixIcon: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _isObscure = !_isObscure;
+                                  });
+                                },
+                                child: Transform.scale(
+                                  scale: 0.7,
+                                  child: SvgPicture.asset(
+                                    _isObscure
+                                        ? 'assets/images/hide.svg'
+                                        : 'assets/images/show.svg',
+                                    color: MyAutoPilotStyles.appColor,
+                                    //semanticsLabel: 'Email Mobile',
+                                    height: 10,
+                                    width: 10,
+                                  ),
+                                ),
+                              ),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: MyAutoPilotStyles.appColor),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: MyAutoPilotStyles.appColor),
+                              ),
+                              hintText: 'Password',
+                              hintStyle: GoogleFonts.notoSerif(
+                                fontSize: 14,
+                                color: HexColor('#C9C9C9'),
+                                fontWeight: FontWeight.normal,
+                                //decoration: TextDecoration.underline,
+                              ),
                             ),
-                            hintText: 'Password',
-                            hintStyle: GoogleFonts.notoSerif(
-                              fontSize: 14,
-                              color: HexColor('#C9C9C9'),
-                              fontWeight: FontWeight.normal,
-                              //decoration: TextDecoration.underline,
+                          ),
+                        ),
+                        !_isPasswordValid
+                            ? Positioned(
+                                right: 50.0,
+                                top: 55.0,
+                                child: new Container(
+                                  child: Text(
+                                    '$_validationText',
+                                    style: TextStyle(
+                                      color: Globals.validationColor,
+                                      fontSize: 10.0,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Container()
+                      ]),
+                      Padding(
+                        padding: EdgeInsets.only(top: 50),
+                        child: ConstrainedBox(
+                          constraints:
+                              BoxConstraints.tightFor(width: 130, height: 55),
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              if (!_isSmsOTPValid ||
+                                  _smsOTPController.text.isEmpty ||
+                                  !_isEmailOTPValid ||
+                                  _emailOTPController.text.isEmpty ||
+                                  !_isPasswordValid ||
+                                  _passwordController.text.isEmpty) {
+                                if (_smsOTPController.text.isEmpty)
+                                  _isSmsOTPValid = false;
+                                if (_emailOTPController.text.isEmpty)
+                                  _isEmailOTPValid = false;
+                                if (_passwordController.text.isEmpty)
+                                  _isPasswordValid = false;
+
+                                setState(() {});
+                                ShowMessage.showFlushBar(
+                                    context, 'Please rectify the errors.');
+                              } else {
+                                setState(() {
+                                  _isSmsOTPValid = true;
+                                  _isEmailOTPValid = true;
+                                  _isPasswordValid = true;
+                                });
+
+                                // Do Login related stuffs.
+                                showDialog(
+                                  context: context,
+                                  barrierDismissible: false,
+                                  builder: (BuildContext context) {
+                                    return LoadingDialog();
+                                  },
+                                );
+
+                                // Store user related information in the Globals file here
+                                // Need to delete the hardcoded values here
+
+                                Globals.userFirstName = 'Kuntal';
+                                Globals.userLastName = 'Dutta';
+                                Globals.designation = 'Managing Director';
+
+                                await Future.delayed(new Duration(seconds: 3),
+                                    () {
+                                  Navigator.pop(context); //pop dialog
+                                }).then((value) {
+                                  // After successfull login, navigate to the home screen
+                                  Navigator.pushReplacement(
+                                    context,
+                                    PageRouteBuilder(
+                                      transitionDuration:
+                                          Duration(milliseconds: 500),
+                                      pageBuilder: (BuildContext context,
+                                          Animation<double> animation,
+                                          Animation<double>
+                                              secondaryAnimation) {
+                                        return HomeScreen();
+                                      },
+                                      transitionsBuilder: (BuildContext context,
+                                          Animation<double> animation,
+                                          Animation<double> secondaryAnimation,
+                                          Widget child) {
+                                        return Align(
+                                          // Other animation types kept here for re-use.
+                                          /* child: FadeTransition(
+                                                        opacity: animation,
+                                                        child: child,
+                                                    ), */
+                                          /* child: ScaleTransition(
+                                                        scale: animation,
+                                                        child: child,
+                                                    ), */
+                                          /* child: SizeTransition(
+                                                        sizeFactor: animation,
+                                                        child: child,
+                                                        axisAlignment: 0.0,
+                                                    ), */
+                                          child: SlideTransition(
+                                            position: Tween(
+                                              begin: Offset(1.0, 0.0),
+                                              end: Offset(0.0, 0.0),
+                                            ).animate(animation),
+                                            child: child,
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  );
+                                });
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0),
+                              ),
+                              primary: MyAutoPilotStyles.appColor,
+                            ),
+                            child: Text(
+                              'CONFIRM',
+                              style: GoogleFonts.notoSerif(
+                                fontSize: 17,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                      !_isPasswordValid
-                          ? Positioned(
-                              right: 50.0,
-                              top: 55.0,
-                              child: new Container(
-                                child: Text(
-                                  '$_validationText',
-                                  style: TextStyle(
-                                    color: Globals.validationColor,
-                                    fontSize: 10.0,
-                                  ),
-                                ),
-                              ),
-                            )
-                          : Container()
-                    ]),
-                    Padding(
-                      padding: EdgeInsets.only(top: 50),
-                      child: ConstrainedBox(
-                        constraints:
-                            BoxConstraints.tightFor(width: 130, height: 55),
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            if (!_isSmsOTPValid ||
-                                _smsOTPController.text.isEmpty ||
-                                !_isEmailOTPValid ||
-                                _emailOTPController.text.isEmpty ||
-                                !_isPasswordValid ||
-                                _passwordController.text.isEmpty) {
-                              if (_smsOTPController.text.isEmpty)
-                                _isSmsOTPValid = false;
-                              if (_emailOTPController.text.isEmpty)
-                                _isEmailOTPValid = false;
-                              if (_passwordController.text.isEmpty)
-                                _isPasswordValid = false;
-
-                              setState(() {});
-                              ShowMessage.showFlushBar(
-                                  context, 'Please rectify the errors.');
-                            } else {
-                              setState(() {
-                                _isSmsOTPValid = true;
-                                _isEmailOTPValid = true;
-                                _isPasswordValid = true;
-                              });
-
-                              // Do Login related stuffs.
-                              showDialog(
-                                context: context,
-                                barrierDismissible: false,
-                                builder: (BuildContext context) {
-                                  return LoadingDialog();
-                                },
-                              );
-
-                              // Store user related information in the Globals file here
-                              // Need to delete the hardcoded values here
-
-                              Globals.userFirstName = 'Kuntal';
-                              Globals.userLastName = 'Dutta';
-                              Globals.designation = 'Managing Director';
-
-                              await Future.delayed(new Duration(seconds: 3),
-                                  () {
-                                Navigator.pop(context); //pop dialog
-                              }).then((value) {
-                                // After successfull login, navigate to the home screen
-                                Navigator.pushReplacement(
-                                  context,
-                                  PageRouteBuilder(
-                                    transitionDuration:
-                                        Duration(milliseconds: 500),
-                                    pageBuilder: (BuildContext context,
-                                        Animation<double> animation,
-                                        Animation<double> secondaryAnimation) {
-                                      return HomeScreen();
-                                    },
-                                    transitionsBuilder: (BuildContext context,
-                                        Animation<double> animation,
-                                        Animation<double> secondaryAnimation,
-                                        Widget child) {
-                                      return Align(
-                                        // Other animation types kept here for re-use.
-                                        /* child: FadeTransition(
+                      /* Flexible(
+                          fit: FlexFit.loose,
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(0, 0, 25, 0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  ConstrainedBox(
+                                    constraints: BoxConstraints.tightFor(
+                                        width: 100, height: 35),
+                                    child: ElevatedButton(
+                                      onPressed: () async {
+                                        await Navigator.push(
+                                          context,
+                                          PageRouteBuilder(
+                                            transitionDuration:
+                                                Duration(milliseconds: 500),
+                                            pageBuilder: (BuildContext context,
+                                                Animation<double> animation,
+                                                Animation<double>
+                                                    secondaryAnimation) {
+                                              return SignUpScreen();
+                                            },
+                                            transitionsBuilder: (BuildContext context,
+                                                Animation<double> animation,
+                                                Animation<double> secondaryAnimation,
+                                                Widget child) {
+                                              return Align(
+                                                // Other animation types kept here for re-use.
+                                                /* child: FadeTransition(
                                                       opacity: animation,
                                                       child: child,
                                                   ), */
-                                        /* child: ScaleTransition(
+                                                /* child: ScaleTransition(
                                                       scale: animation,
                                                       child: child,
                                                   ), */
-                                        /* child: SizeTransition(
+                                                /* child: SizeTransition(
                                                       sizeFactor: animation,
                                                       child: child,
                                                       axisAlignment: 0.0,
                                                   ), */
-                                        child: SlideTransition(
-                                          position: Tween(
-                                            begin: Offset(1.0, 0.0),
-                                            end: Offset(0.0, 0.0),
-                                          ).animate(animation),
-                                          child: child,
+                                                child: SlideTransition(
+                                                  position: Tween(
+                                                          begin: Offset(1.0, 0.0),
+                                                          end: Offset(0.0, 0.0))
+                                                      .animate(animation),
+                                                  child: child,
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        );
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(30.0),
                                         ),
-                                      );
-                                    },
+                                        primary: MyAutoPilotStyles.appColor,
+                                      ),
+                                      child: Text(
+                                        'Back',
+                                        style: GoogleFonts.notoSerif(
+                                          fontSize: 13,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                );
-                              });
-                            }
+                                ],
+                              ),
+                            ),
+                          ),
+                        ), */
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(0, 0, 25, 25),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      ConstrainedBox(
+                        constraints:
+                            BoxConstraints.tightFor(width: 100, height: 35),
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            await Navigator.push(
+                              context,
+                              PageRouteBuilder(
+                                transitionDuration: Duration(milliseconds: 500),
+                                pageBuilder: (BuildContext context,
+                                    Animation<double> animation,
+                                    Animation<double> secondaryAnimation) {
+                                  return SignUpScreen();
+                                },
+                                transitionsBuilder: (BuildContext context,
+                                    Animation<double> animation,
+                                    Animation<double> secondaryAnimation,
+                                    Widget child) {
+                                  return Align(
+                                    // Other animation types kept here for re-use.
+                                    /* child: FadeTransition(
+                                                      opacity: animation,
+                                                      child: child,
+                                                  ), */
+                                    /* child: ScaleTransition(
+                                                      scale: animation,
+                                                      child: child,
+                                                  ), */
+                                    /* child: SizeTransition(
+                                                      sizeFactor: animation,
+                                                      child: child,
+                                                      axisAlignment: 0.0,
+                                                  ), */
+                                    child: SlideTransition(
+                                      position: Tween(
+                                              begin: Offset(1.0, 0.0),
+                                              end: Offset(0.0, 0.0))
+                                          .animate(animation),
+                                      child: child,
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
@@ -483,166 +632,20 @@ class _FirstTimeLoginScreenState extends State<FirstTimeLoginScreen> {
                             primary: MyAutoPilotStyles.appColor,
                           ),
                           child: Text(
-                            'CONFIRM',
+                            'Back',
                             style: GoogleFonts.notoSerif(
-                              fontSize: 17,
+                              fontSize: 13,
                               color: Colors.white,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.normal,
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    /* Flexible(
-                        fit: FlexFit.loose,
-                        child: Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(0, 0, 25, 0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                ConstrainedBox(
-                                  constraints: BoxConstraints.tightFor(
-                                      width: 100, height: 35),
-                                  child: ElevatedButton(
-                                    onPressed: () async {
-                                      await Navigator.push(
-                                        context,
-                                        PageRouteBuilder(
-                                          transitionDuration:
-                                              Duration(milliseconds: 500),
-                                          pageBuilder: (BuildContext context,
-                                              Animation<double> animation,
-                                              Animation<double>
-                                                  secondaryAnimation) {
-                                            return SignUpScreen();
-                                          },
-                                          transitionsBuilder: (BuildContext context,
-                                              Animation<double> animation,
-                                              Animation<double> secondaryAnimation,
-                                              Widget child) {
-                                            return Align(
-                                              // Other animation types kept here for re-use.
-                                              /* child: FadeTransition(
-                                                    opacity: animation,
-                                                    child: child,
-                                                ), */
-                                              /* child: ScaleTransition(
-                                                    scale: animation,
-                                                    child: child,
-                                                ), */
-                                              /* child: SizeTransition(
-                                                    sizeFactor: animation,
-                                                    child: child,
-                                                    axisAlignment: 0.0,
-                                                ), */
-                                              child: SlideTransition(
-                                                position: Tween(
-                                                        begin: Offset(1.0, 0.0),
-                                                        end: Offset(0.0, 0.0))
-                                                    .animate(animation),
-                                                child: child,
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                      );
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30.0),
-                                      ),
-                                      primary: MyAutoPilotStyles.appColor,
-                                    ),
-                                    child: Text(
-                                      'Back',
-                                      style: GoogleFonts.notoSerif(
-                                        fontSize: 13,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ), */
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(0, 0, 25, 25),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    ConstrainedBox(
-                      constraints:
-                          BoxConstraints.tightFor(width: 100, height: 35),
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          await Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              transitionDuration: Duration(milliseconds: 500),
-                              pageBuilder: (BuildContext context,
-                                  Animation<double> animation,
-                                  Animation<double> secondaryAnimation) {
-                                return SignUpScreen();
-                              },
-                              transitionsBuilder: (BuildContext context,
-                                  Animation<double> animation,
-                                  Animation<double> secondaryAnimation,
-                                  Widget child) {
-                                return Align(
-                                  // Other animation types kept here for re-use.
-                                  /* child: FadeTransition(
-                                                    opacity: animation,
-                                                    child: child,
-                                                ), */
-                                  /* child: ScaleTransition(
-                                                    scale: animation,
-                                                    child: child,
-                                                ), */
-                                  /* child: SizeTransition(
-                                                    sizeFactor: animation,
-                                                    child: child,
-                                                    axisAlignment: 0.0,
-                                                ), */
-                                  child: SlideTransition(
-                                    position: Tween(
-                                            begin: Offset(1.0, 0.0),
-                                            end: Offset(0.0, 0.0))
-                                        .animate(animation),
-                                    child: child,
-                                  ),
-                                );
-                              },
-                            ),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          primary: MyAutoPilotStyles.appColor,
-                        ),
-                        child: Text(
-                          'Back',
-                          style: GoogleFonts.notoSerif(
-                            fontSize: 13,
-                            color: Colors.white,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

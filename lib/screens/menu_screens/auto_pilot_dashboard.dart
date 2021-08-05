@@ -193,482 +193,417 @@ class _DashboardState extends State<Dashboard>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      //height: MediaQuery.of(context).size.height,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        //mainAxisSize: MainAxisSize.min,
-        children: [
-          // This is the top card showing the total number of tasks completed, tasks ontime, approved benchmark.
-          Transform.scale(
-            scale: 0.9,
-            child: Container(
-              margin: EdgeInsets.only(top: 10),
-              child: Card(
-                elevation: 5,
-                shadowColor: Colors.black,
-                //color: Colors.amber[100],
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.elliptical(15, 15),
-                    bottomRight: Radius.elliptical(15, 15),
-                    topLeft: Radius.elliptical(15, 15),
-                    bottomLeft: Radius.elliptical(15, 15),
+    return Material(
+      child: Container(
+        //height: MediaQuery.of(context).size.height,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          //mainAxisSize: MainAxisSize.min,
+          children: [
+            // This is the top card showing the total number of tasks completed, tasks ontime, approved benchmark.
+            Transform.scale(
+              scale: 0.9,
+              child: Container(
+                margin: EdgeInsets.only(top: 10),
+                child: Card(
+                  elevation: 5,
+                  shadowColor: Colors.black,
+                  //color: Colors.amber[100],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.elliptical(15, 15),
+                      bottomRight: Radius.elliptical(15, 15),
+                      topLeft: Radius.elliptical(15, 15),
+                      bottomLeft: Radius.elliptical(15, 15),
+                    ),
                   ),
-                ),
-                clipBehavior: Clip.antiAlias,
+                  clipBehavior: Clip.antiAlias,
 
-                child: Container(
-                  //width: MediaQuery.of(context).size.width * 80 / 100,
-                  height: 125,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: 130,
-                        padding: EdgeInsets.only(top: 10),
-                        child: Column(
-                          //crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Stack(children: [
-                              PieChart(
-                                dataMap: tasksCompleted,
-                                animationDuration: Duration(milliseconds: 800),
-                                chartLegendSpacing: 0,
-                                chartRadius: 50,
-                                colorList: [
-                                  HexColor('#416271'),
-                                  Colors.transparent
-                                ],
-                                initialAngleInDegree: 270,
-                                chartType: ChartType.disc,
-                                //ringStrokeWidth: 32,
-                                //centerText: "HYBRID",
-                                legendOptions: LegendOptions(
-                                  showLegendsInRow: true,
-                                  legendPosition: LegendPosition.right,
-                                  showLegends: false,
-                                  legendShape: BoxShape.circle,
-                                  legendTextStyle: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                chartValuesOptions: ChartValuesOptions(
-                                  showChartValueBackground: true,
-                                  showChartValues: false,
-                                  showChartValuesInPercentage: false,
-                                  showChartValuesOutside: true,
-                                  decimalPlaces: 1,
-                                ),
-                              ),
-                              Positioned(
-                                left: 95,
-                                top: 35,
-                                child: Text(
-                                  tasksCompleted['Flutter']!
-                                      .toStringAsFixed(0)
-                                      .toString(),
-                                  style: GoogleFonts.notoSerif(
-                                    color: HexColor('#707070'),
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                left: 113,
-                                top: 38,
-                                child: Text(
-                                  '%',
-                                  style: GoogleFonts.notoSerif(
-                                    color: HexColor('#707070'),
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 8,
-                                  ),
-                                ),
-                              ),
-                            ]),
-                            Container(
-                              //margin: const EdgeInsets.only(left: 20.0),
-                              child: Column(
-                                children: [
-                                  Text(
-                                    'TASKS',
-                                    style: GoogleFonts.notoSerif(
-                                      fontSize: 10,
-                                      color: HexColor('#075A80'),
-                                      fontWeight: FontWeight.normal,
+                  child: Container(
+                    //width: MediaQuery.of(context).size.width * 80 / 100,
+                    height: 125,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 130,
+                          padding: EdgeInsets.only(top: 10),
+                          child: Column(
+                            //crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Stack(children: [
+                                PieChart(
+                                  dataMap: tasksCompleted,
+                                  animationDuration:
+                                      Duration(milliseconds: 800),
+                                  chartLegendSpacing: 0,
+                                  chartRadius: 50,
+                                  colorList: [
+                                    HexColor('#416271'),
+                                    Colors.transparent
+                                  ],
+                                  initialAngleInDegree: 270,
+                                  chartType: ChartType.disc,
+                                  //ringStrokeWidth: 32,
+                                  //centerText: "HYBRID",
+                                  legendOptions: LegendOptions(
+                                    showLegendsInRow: true,
+                                    legendPosition: LegendPosition.right,
+                                    showLegends: false,
+                                    legendShape: BoxShape.circle,
+                                    legendTextStyle: TextStyle(
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  Text(
-                                    'COMPLETED',
+                                  chartValuesOptions: ChartValuesOptions(
+                                    showChartValueBackground: true,
+                                    showChartValues: false,
+                                    showChartValuesInPercentage: false,
+                                    showChartValuesOutside: true,
+                                    decimalPlaces: 1,
+                                  ),
+                                ),
+                                Positioned(
+                                  left: 95,
+                                  top: 35,
+                                  child: Text(
+                                    tasksCompleted['Flutter']!
+                                        .toStringAsFixed(0)
+                                        .toString(),
                                     style: GoogleFonts.notoSerif(
-                                      fontSize: 10,
-                                      color: HexColor('#075A80'),
+                                      color: HexColor('#707070'),
                                       fontWeight: FontWeight.normal,
+                                      fontSize: 14,
                                     ),
                                   ),
-                                ],
+                                ),
+                                Positioned(
+                                  left: 113,
+                                  top: 38,
+                                  child: Text(
+                                    '%',
+                                    style: GoogleFonts.notoSerif(
+                                      color: HexColor('#707070'),
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 8,
+                                    ),
+                                  ),
+                                ),
+                              ]),
+                              Container(
+                                //margin: const EdgeInsets.only(left: 20.0),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      'TASKS',
+                                      style: GoogleFonts.notoSerif(
+                                        fontSize: 10,
+                                        color: HexColor('#075A80'),
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                    Text(
+                                      'COMPLETED',
+                                      style: GoogleFonts.notoSerif(
+                                        fontSize: 10,
+                                        color: HexColor('#075A80'),
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 10),
-                        color: Colors.grey.withOpacity(0.4),
-                        width: 1,
-                      ),
-                      Container(
-                        width: 130,
-                        padding: EdgeInsets.only(top: 10),
-                        child: Column(
-                          //crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Stack(children: [
-                              PieChart(
-                                dataMap: tasksOnTime,
-                                animationDuration: Duration(milliseconds: 800),
-                                chartLegendSpacing: 0,
-                                chartRadius: 50,
-                                colorList: [
-                                  HexColor('#075A80'),
-                                  Colors.transparent
-                                ],
-                                initialAngleInDegree: 270,
-                                chartType: ChartType.disc,
-                                //ringStrokeWidth: 32,
-                                //centerText: "HYBRID",
-                                legendOptions: LegendOptions(
-                                  showLegendsInRow: true,
-                                  legendPosition: LegendPosition.right,
-                                  showLegends: false,
-                                  legendShape: BoxShape.circle,
-                                  legendTextStyle: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                chartValuesOptions: ChartValuesOptions(
-                                  showChartValueBackground: true,
-                                  showChartValues: false,
-                                  showChartValuesInPercentage: false,
-                                  showChartValuesOutside: true,
-                                  decimalPlaces: 1,
-                                ),
-                              ),
-                              Positioned(
-                                left: 95,
-                                top: 35,
-                                child: Text(
-                                  tasksOnTime['Flutter']!
-                                      .toStringAsFixed(0)
-                                      .toString(),
-                                  style: GoogleFonts.notoSerif(
-                                    color: HexColor('#707070'),
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                left: 113,
-                                top: 38,
-                                child: Text(
-                                  '%',
-                                  style: GoogleFonts.notoSerif(
-                                    color: HexColor('#707070'),
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 8,
-                                  ),
-                                ),
-                              ),
-                            ]),
-                            Container(
-                              child: Column(
-                                children: [
-                                  Text(
-                                    'TASKS',
-                                    style: GoogleFonts.notoSerif(
-                                      fontSize: 10,
-                                      color: HexColor('#075A80'),
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                                  ),
-                                  Text(
-                                    'ON TIME',
-                                    style: GoogleFonts.notoSerif(
-                                      fontSize: 10,
-                                      color: HexColor('#075A80'),
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
+                        Container(
+                          margin: const EdgeInsets.symmetric(vertical: 10),
+                          color: Colors.grey.withOpacity(0.4),
+                          width: 1,
                         ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 10),
-                        color: Colors.grey.withOpacity(0.4),
-                        width: 1,
-                      ),
-                      Container(
-                        width: 130,
-                        padding: EdgeInsets.only(top: 10),
-                        child: Column(
-                          //crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Stack(children: [
-                              PieChart(
-                                dataMap: approvedBenchaMark,
-                                animationDuration: Duration(milliseconds: 800),
-                                chartLegendSpacing: 0,
-                                chartRadius: 50,
-                                colorList: [
-                                  HexColor('#82C4E2'),
-                                  Colors.transparent
-                                ],
-                                initialAngleInDegree: 270,
-                                chartType: ChartType.disc,
-                                //ringStrokeWidth: 32,
-                                //centerText: "HYBRID",
-                                legendOptions: LegendOptions(
-                                  showLegendsInRow: true,
-                                  legendPosition: LegendPosition.right,
-                                  showLegends: false,
-                                  legendShape: BoxShape.circle,
-                                  legendTextStyle: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                chartValuesOptions: ChartValuesOptions(
-                                  showChartValueBackground: true,
-                                  showChartValues: false,
-                                  showChartValuesInPercentage: false,
-                                  showChartValuesOutside: true,
-                                  decimalPlaces: 1,
-                                ),
-                              ),
-                              Positioned(
-                                left: 95,
-                                top: 35,
-                                child: Text(
-                                  approvedBenchaMark['Flutter']!
-                                      .toStringAsFixed(0)
-                                      .toString(),
-                                  style: GoogleFonts.notoSerif(
-                                    color: HexColor('#707070'),
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                left: 113,
-                                top: 38,
-                                child: Text(
-                                  '%',
-                                  style: GoogleFonts.notoSerif(
-                                    color: HexColor('#707070'),
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 8,
-                                  ),
-                                ),
-                              ),
-                            ]),
-                            Container(
-                              child: Column(
-                                children: [
-                                  Text(
-                                    'APPROVED',
-                                    style: GoogleFonts.notoSerif(
-                                      fontSize: 10,
-                                      color: HexColor('#075A80'),
-                                      fontWeight: FontWeight.normal,
+                        Container(
+                          width: 130,
+                          padding: EdgeInsets.only(top: 10),
+                          child: Column(
+                            //crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Stack(children: [
+                                PieChart(
+                                  dataMap: tasksOnTime,
+                                  animationDuration:
+                                      Duration(milliseconds: 800),
+                                  chartLegendSpacing: 0,
+                                  chartRadius: 50,
+                                  colorList: [
+                                    HexColor('#075A80'),
+                                    Colors.transparent
+                                  ],
+                                  initialAngleInDegree: 270,
+                                  chartType: ChartType.disc,
+                                  //ringStrokeWidth: 32,
+                                  //centerText: "HYBRID",
+                                  legendOptions: LegendOptions(
+                                    showLegendsInRow: true,
+                                    legendPosition: LegendPosition.right,
+                                    showLegends: false,
+                                    legendShape: BoxShape.circle,
+                                    legendTextStyle: TextStyle(
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  Text(
-                                    'BENCHMARK',
+                                  chartValuesOptions: ChartValuesOptions(
+                                    showChartValueBackground: true,
+                                    showChartValues: false,
+                                    showChartValuesInPercentage: false,
+                                    showChartValuesOutside: true,
+                                    decimalPlaces: 1,
+                                  ),
+                                ),
+                                Positioned(
+                                  left: 95,
+                                  top: 35,
+                                  child: Text(
+                                    tasksOnTime['Flutter']!
+                                        .toStringAsFixed(0)
+                                        .toString(),
                                     style: GoogleFonts.notoSerif(
-                                      fontSize: 10,
-                                      color: HexColor('#075A80'),
+                                      color: HexColor('#707070'),
                                       fontWeight: FontWeight.normal,
+                                      fontSize: 14,
                                     ),
                                   ),
-                                ],
+                                ),
+                                Positioned(
+                                  left: 113,
+                                  top: 38,
+                                  child: Text(
+                                    '%',
+                                    style: GoogleFonts.notoSerif(
+                                      color: HexColor('#707070'),
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 8,
+                                    ),
+                                  ),
+                                ),
+                              ]),
+                              Container(
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      'TASKS',
+                                      style: GoogleFonts.notoSerif(
+                                        fontSize: 10,
+                                        color: HexColor('#075A80'),
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                    Text(
+                                      'ON TIME',
+                                      style: GoogleFonts.notoSerif(
+                                        fontSize: 10,
+                                        color: HexColor('#075A80'),
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                        Container(
+                          margin: const EdgeInsets.symmetric(vertical: 10),
+                          color: Colors.grey.withOpacity(0.4),
+                          width: 1,
+                        ),
+                        Container(
+                          width: 130,
+                          padding: EdgeInsets.only(top: 10),
+                          child: Column(
+                            //crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Stack(children: [
+                                PieChart(
+                                  dataMap: approvedBenchaMark,
+                                  animationDuration:
+                                      Duration(milliseconds: 800),
+                                  chartLegendSpacing: 0,
+                                  chartRadius: 50,
+                                  colorList: [
+                                    HexColor('#82C4E2'),
+                                    Colors.transparent
+                                  ],
+                                  initialAngleInDegree: 270,
+                                  chartType: ChartType.disc,
+                                  //ringStrokeWidth: 32,
+                                  //centerText: "HYBRID",
+                                  legendOptions: LegendOptions(
+                                    showLegendsInRow: true,
+                                    legendPosition: LegendPosition.right,
+                                    showLegends: false,
+                                    legendShape: BoxShape.circle,
+                                    legendTextStyle: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  chartValuesOptions: ChartValuesOptions(
+                                    showChartValueBackground: true,
+                                    showChartValues: false,
+                                    showChartValuesInPercentage: false,
+                                    showChartValuesOutside: true,
+                                    decimalPlaces: 1,
+                                  ),
+                                ),
+                                Positioned(
+                                  left: 95,
+                                  top: 35,
+                                  child: Text(
+                                    approvedBenchaMark['Flutter']!
+                                        .toStringAsFixed(0)
+                                        .toString(),
+                                    style: GoogleFonts.notoSerif(
+                                      color: HexColor('#707070'),
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  left: 113,
+                                  top: 38,
+                                  child: Text(
+                                    '%',
+                                    style: GoogleFonts.notoSerif(
+                                      color: HexColor('#707070'),
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 8,
+                                    ),
+                                  ),
+                                ),
+                              ]),
+                              Container(
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      'APPROVED',
+                                      style: GoogleFonts.notoSerif(
+                                        fontSize: 10,
+                                        color: HexColor('#075A80'),
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                    Text(
+                                      'BENCHMARK',
+                                      style: GoogleFonts.notoSerif(
+                                        fontSize: 10,
+                                        color: HexColor('#075A80'),
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          // CuprtinoTabBars Example
+            // CuprtinoTabBars Example
 
-          // Custom Tab Bar
-          Container(
-            width: MediaQuery.of(context).size.width * 90 / 100,
-            margin: EdgeInsets.only(
-              top: 20,
-              bottom: 20,
-            ),
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
-                  border:
-                      Border.all(width: 2, color: MyAutoPilotStyles.appColor)),
-              child: TabBar(
-                labelPadding: EdgeInsets.zero,
-                labelStyle: GoogleFonts.notoSerif(
-                  color: Colors.white,
-                  fontWeight: FontWeight.normal,
-                  fontSize: 14,
+            // Custom Tab Bar
+            Container(
+              width: MediaQuery.of(context).size.width * 90 / 100,
+              margin: EdgeInsets.only(
+                top: 20,
+                bottom: 20,
+              ),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(25)),
+                    border: Border.all(
+                        width: 2, color: MyAutoPilotStyles.appColor)),
+                child: TabBar(
+                  labelPadding: EdgeInsets.zero,
+                  labelStyle: GoogleFonts.notoSerif(
+                    color: Colors.white,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 14,
+                  ),
+                  controller: _tabController,
+                  // give the indicator a decoration (color and border radius)
+                  indicator: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                      25.0,
+                    ),
+                    color: MyAutoPilotStyles.appColor,
+                  ),
+                  unselectedLabelStyle: GoogleFonts.notoSerif(
+                    color: HexColor('#707070'),
+                    fontWeight: FontWeight.normal,
+                    fontSize: 14,
+                  ),
+
+                  unselectedLabelColor: HexColor('#707070'),
+                  tabs: [
+                    Container(
+                      width: 65,
+                      child: Tab(
+                        text: 'Today',
+                      ),
+                    ),
+                    Container(
+                      width: 65,
+                      child: Tab(
+                        text: 'Weekly',
+                      ),
+                    ),
+                    Container(
+                      width: 65,
+                      child: Tab(
+                        text: 'Monthly',
+                      ),
+                    ),
+                    Container(
+                      //width: 65,
+                      child: Tab(
+                        text: 'Over Due',
+                      ),
+                    ),
+                  ],
                 ),
+              ),
+            ),
+
+            // Custom TabBarView
+            Flexible(
+              fit: FlexFit.loose,
+              child: TabBarView(
                 controller: _tabController,
-                // give the indicator a decoration (color and border radius)
-                indicator: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    25.0,
-                  ),
-                  color: MyAutoPilotStyles.appColor,
-                ),
-                unselectedLabelStyle: GoogleFonts.notoSerif(
-                  color: HexColor('#707070'),
-                  fontWeight: FontWeight.normal,
-                  fontSize: 14,
-                ),
-
-                unselectedLabelColor: HexColor('#707070'),
-                tabs: [
-                  Container(
-                    width: 65,
-                    child: Tab(
-                      text: 'Today',
-                    ),
-                  ),
-                  Container(
-                    width: 65,
-                    child: Tab(
-                      text: 'Weekly',
-                    ),
-                  ),
-                  Container(
-                    width: 65,
-                    child: Tab(
-                      text: 'Monthly',
-                    ),
-                  ),
-                  Container(
-                    //width: 65,
-                    child: Tab(
-                      text: 'Over Due',
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-
-          // Custom TabBarView
-          Flexible(
-            fit: FlexFit.loose,
-            child: TabBarView(
-              controller: _tabController,
-              children: [
-                // Today
-                ListView(children: [
-                  InkWell(
-                    onTap: () async {
-                      await goToTaskList(_tabController.index, 0);
-                    },
-                    child: Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
+                children: [
+                  // Today
+                  ListView(children: [
+                    InkWell(
+                      onTap: () async {
+                        await goToTaskList(_tabController.index, 0);
+                      },
+                      child: Card(
+                        elevation: 5,
+                        shadowColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.elliptical(2, 2),
+                            bottomRight: Radius.elliptical(2, 2),
+                            topLeft: Radius.elliptical(2, 2),
+                            bottomLeft: Radius.elliptical(2, 2),
+                          ),
                         ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: Container(
-                        padding: EdgeInsets.only(left: 20, right: 20),
-                        height: 70,
-                        color: Colors.white,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Transform.scale(
-                                    scale: 2.5,
-                                    child: SvgPicture.asset(
-                                      'assets/images/delegate task.svg',
-                                      color: MyAutoPilotStyles.appColor,
-                                      //semanticsLabel: 'Email Mobile',
-                                      height: 10,
-                                      width: 10,
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                      left: 20,
-                                    ),
-                                    child: Text(
-                                      totalDelegatedTasks.toString(),
-                                      style: GoogleFonts.notoSerif(
-                                        color: HexColor('#707070'),
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                      left: 10,
-                                    ),
-                                    child: Text(
-                                      'Delegated Tasks',
-                                      style: GoogleFonts.notoSerif(
-                                        color: HexColor('#707070'),
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ),
-                                ]),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      goToTaskList(_tabController.index, 1);
-                    },
-                    child: Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      //color: Colors.amber[100],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
-                        ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: Container(
+                        clipBehavior: Clip.antiAlias,
+                        child: Container(
                           padding: EdgeInsets.only(left: 20, right: 20),
                           height: 70,
                           color: Colors.white,
@@ -681,7 +616,7 @@ class _DashboardState extends State<Dashboard>
                                     Transform.scale(
                                       scale: 2.5,
                                       child: SvgPicture.asset(
-                                        'assets/images/repeat.svg',
+                                        'assets/images/delegate task.svg',
                                         color: MyAutoPilotStyles.appColor,
                                         //semanticsLabel: 'Email Mobile',
                                         height: 10,
@@ -693,7 +628,7 @@ class _DashboardState extends State<Dashboard>
                                         left: 20,
                                       ),
                                       child: Text(
-                                        totalRepeatTasks.toString(),
+                                        totalDelegatedTasks.toString(),
                                         style: GoogleFonts.notoSerif(
                                           color: HexColor('#707070'),
                                           fontWeight: FontWeight.bold,
@@ -706,7 +641,7 @@ class _DashboardState extends State<Dashboard>
                                         left: 10,
                                       ),
                                       child: Text(
-                                        'Repeat Tasks',
+                                        'Delegated Tasks',
                                         style: GoogleFonts.notoSerif(
                                           color: HexColor('#707070'),
                                           fontWeight: FontWeight.normal,
@@ -716,298 +651,96 @@ class _DashboardState extends State<Dashboard>
                                     ),
                                   ]),
                             ],
-                          )),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      goToTaskList(_tabController.index, 2);
-                    },
-                    child: Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      //color: Colors.amber[100],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
-                        ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: Container(
-                        padding: EdgeInsets.only(left: 20, right: 20),
-                        height: 70,
-                        color: Colors.white,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Transform.scale(
-                                    scale: 2.5,
-                                    child: SvgPicture.asset(
-                                      'assets/images/support.svg',
-                                      color: MyAutoPilotStyles.appColor,
-                                      //semanticsLabel: 'Email Mobile',
-                                      height: 10,
-                                      width: 10,
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                      left: 20,
-                                    ),
-                                    child: Text(
-                                      totalSupportTasks.toString(),
-                                      style: GoogleFonts.notoSerif(
-                                        color: HexColor('#707070'),
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                      left: 10,
-                                    ),
-                                    child: Text(
-                                      'Support Tasks',
-                                      style: GoogleFonts.notoSerif(
-                                        color: HexColor('#707070'),
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ),
-                                ]),
-                          ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      goToTaskList(_tabController.index, 3);
-                    },
-                    child: Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      //color: Colors.amber[100],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
+                    InkWell(
+                      onTap: () {
+                        goToTaskList(_tabController.index, 1);
+                      },
+                      child: Card(
+                        elevation: 5,
+                        shadowColor: Colors.black,
+                        //color: Colors.amber[100],
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.elliptical(2, 2),
+                            bottomRight: Radius.elliptical(2, 2),
+                            topLeft: Radius.elliptical(2, 2),
+                            bottomLeft: Radius.elliptical(2, 2),
+                          ),
                         ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: Container(
-                          padding: EdgeInsets.only(left: 20, right: 20),
-                          height: 70,
-                          color: Colors.white,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Transform.scale(
-                                      scale: 2.5,
-                                      child: SvgPicture.asset(
-                                        'assets/images/personal tasks.svg',
-                                        color: MyAutoPilotStyles.appColor,
-                                        //semanticsLabel: 'Email Mobile',
-                                        height: 10,
-                                        width: 10,
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 20,
-                                      ),
-                                      child: Text(
-                                        totalPersonalTasks.toString(),
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
+                        clipBehavior: Clip.antiAlias,
+                        child: Container(
+                            padding: EdgeInsets.only(left: 20, right: 20),
+                            height: 70,
+                            color: Colors.white,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Transform.scale(
+                                        scale: 2.5,
+                                        child: SvgPicture.asset(
+                                          'assets/images/repeat.svg',
+                                          color: MyAutoPilotStyles.appColor,
+                                          //semanticsLabel: 'Email Mobile',
+                                          height: 10,
+                                          width: 10,
                                         ),
                                       ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 10,
-                                      ),
-                                      child: Text(
-                                        'Personal Tasks',
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 16,
+                                      Container(
+                                        padding: EdgeInsets.only(
+                                          left: 20,
+                                        ),
+                                        child: Text(
+                                          totalRepeatTasks.toString(),
+                                          style: GoogleFonts.notoSerif(
+                                            color: HexColor('#707070'),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ]),
-                            ],
-                          )),
-                    ),
-                  ),
-                ]),
-                // Weekly
-                ListView(children: [
-                  InkWell(
-                    onTap: () {},
-                    child: Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      //color: Colors.amber[100],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
-                        ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: Container(
-                        padding: EdgeInsets.only(left: 20, right: 20),
-                        height: 70,
-                        color: Colors.white,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Transform.scale(
-                                    scale: 2.5,
-                                    child: SvgPicture.asset(
-                                      'assets/images/delegate task.svg',
-                                      color: MyAutoPilotStyles.appColor,
-                                      //semanticsLabel: 'Email Mobile',
-                                      height: 10,
-                                      width: 10,
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                      left: 20,
-                                    ),
-                                    child: Text(
-                                      totalDelegatedTasksWeekly.toString(),
-                                      style: GoogleFonts.notoSerif(
-                                        color: HexColor('#707070'),
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                      left: 10,
-                                    ),
-                                    child: Text(
-                                      'Delegated Tasks',
-                                      style: GoogleFonts.notoSerif(
-                                        color: HexColor('#707070'),
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ),
-                                ]),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    child: Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      //color: Colors.amber[100],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
-                        ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: Container(
-                          padding: EdgeInsets.only(left: 20, right: 20),
-                          height: 70,
-                          color: Colors.white,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Transform.scale(
-                                      scale: 2.5,
-                                      child: SvgPicture.asset(
-                                        'assets/images/repeat.svg',
-                                        color: MyAutoPilotStyles.appColor,
-                                        //semanticsLabel: 'Email Mobile',
-                                        height: 10,
-                                        width: 10,
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 20,
-                                      ),
-                                      child: Text(
-                                        totalRepeatTasksWeekly.toString(),
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
+                                      Container(
+                                        padding: EdgeInsets.only(
+                                          left: 10,
+                                        ),
+                                        child: Text(
+                                          'Repeat Tasks',
+                                          style: GoogleFonts.notoSerif(
+                                            color: HexColor('#707070'),
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 16,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(
-                                        left: 10,
-                                      ),
-                                      child: Text(
-                                        'Repeat Tasks',
-                                        style: GoogleFonts.notoSerif(
-                                          color: HexColor('#707070'),
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                  ]),
-                            ],
-                          )),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    child: Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      //color: Colors.amber[100],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
-                        ),
+                                    ]),
+                              ],
+                            )),
                       ),
-                      clipBehavior: Clip.antiAlias,
-                      child: Container(
+                    ),
+                    InkWell(
+                      onTap: () {
+                        goToTaskList(_tabController.index, 2);
+                      },
+                      child: Card(
+                        elevation: 5,
+                        shadowColor: Colors.black,
+                        //color: Colors.amber[100],
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.elliptical(2, 2),
+                            bottomRight: Radius.elliptical(2, 2),
+                            topLeft: Radius.elliptical(2, 2),
+                            bottomLeft: Radius.elliptical(2, 2),
+                          ),
+                        ),
+                        clipBehavior: Clip.antiAlias,
+                        child: Container(
                           padding: EdgeInsets.only(left: 20, right: 20),
                           height: 70,
                           color: Colors.white,
@@ -1032,7 +765,7 @@ class _DashboardState extends State<Dashboard>
                                         left: 20,
                                       ),
                                       child: Text(
-                                        totalSupportTasksWeekly.toString(),
+                                        totalSupportTasks.toString(),
                                         style: GoogleFonts.notoSerif(
                                           color: HexColor('#707070'),
                                           fontWeight: FontWeight.bold,
@@ -1055,625 +788,897 @@ class _DashboardState extends State<Dashboard>
                                     ),
                                   ]),
                             ],
-                          )),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    child: Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      //color: Colors.amber[100],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
-                        ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: Container(
-                        padding: EdgeInsets.only(left: 20, right: 20),
-                        height: 70,
-                        color: Colors.white,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Transform.scale(
-                                    scale: 2.5,
-                                    child: SvgPicture.asset(
-                                      'assets/images/personal tasks.svg',
-                                      color: MyAutoPilotStyles.appColor,
-                                      //semanticsLabel: 'Email Mobile',
-                                      height: 10,
-                                      width: 10,
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                      left: 20,
-                                    ),
-                                    child: Text(
-                                      totalPersonalTasksWeekly.toString(),
-                                      style: GoogleFonts.notoSerif(
-                                        color: HexColor('#707070'),
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                      left: 10,
-                                    ),
-                                    child: Text(
-                                      'Personal Tasks',
-                                      style: GoogleFonts.notoSerif(
-                                        color: HexColor('#707070'),
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ),
-                                ]),
-                          ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ]),
+                    InkWell(
+                      onTap: () {
+                        goToTaskList(_tabController.index, 3);
+                      },
+                      child: Card(
+                        elevation: 5,
+                        shadowColor: Colors.black,
+                        //color: Colors.amber[100],
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.elliptical(2, 2),
+                            bottomRight: Radius.elliptical(2, 2),
+                            topLeft: Radius.elliptical(2, 2),
+                            bottomLeft: Radius.elliptical(2, 2),
+                          ),
+                        ),
+                        clipBehavior: Clip.antiAlias,
+                        child: Container(
+                            padding: EdgeInsets.only(left: 20, right: 20),
+                            height: 70,
+                            color: Colors.white,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Transform.scale(
+                                        scale: 2.5,
+                                        child: SvgPicture.asset(
+                                          'assets/images/personal tasks.svg',
+                                          color: MyAutoPilotStyles.appColor,
+                                          //semanticsLabel: 'Email Mobile',
+                                          height: 10,
+                                          width: 10,
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.only(
+                                          left: 20,
+                                        ),
+                                        child: Text(
+                                          totalPersonalTasks.toString(),
+                                          style: GoogleFonts.notoSerif(
+                                            color: HexColor('#707070'),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.only(
+                                          left: 10,
+                                        ),
+                                        child: Text(
+                                          'Personal Tasks',
+                                          style: GoogleFonts.notoSerif(
+                                            color: HexColor('#707070'),
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                    ]),
+                              ],
+                            )),
+                      ),
+                    ),
+                  ]),
+                  // Weekly
+                  ListView(children: [
+                    InkWell(
+                      onTap: () {},
+                      child: Card(
+                        elevation: 5,
+                        shadowColor: Colors.black,
+                        //color: Colors.amber[100],
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.elliptical(2, 2),
+                            bottomRight: Radius.elliptical(2, 2),
+                            topLeft: Radius.elliptical(2, 2),
+                            bottomLeft: Radius.elliptical(2, 2),
+                          ),
+                        ),
+                        clipBehavior: Clip.antiAlias,
+                        child: Container(
+                          padding: EdgeInsets.only(left: 20, right: 20),
+                          height: 70,
+                          color: Colors.white,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Transform.scale(
+                                      scale: 2.5,
+                                      child: SvgPicture.asset(
+                                        'assets/images/delegate task.svg',
+                                        color: MyAutoPilotStyles.appColor,
+                                        //semanticsLabel: 'Email Mobile',
+                                        height: 10,
+                                        width: 10,
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                        left: 20,
+                                      ),
+                                      child: Text(
+                                        totalDelegatedTasksWeekly.toString(),
+                                        style: GoogleFonts.notoSerif(
+                                          color: HexColor('#707070'),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                        left: 10,
+                                      ),
+                                      child: Text(
+                                        'Delegated Tasks',
+                                        style: GoogleFonts.notoSerif(
+                                          color: HexColor('#707070'),
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                  ]),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Card(
+                        elevation: 5,
+                        shadowColor: Colors.black,
+                        //color: Colors.amber[100],
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.elliptical(2, 2),
+                            bottomRight: Radius.elliptical(2, 2),
+                            topLeft: Radius.elliptical(2, 2),
+                            bottomLeft: Radius.elliptical(2, 2),
+                          ),
+                        ),
+                        clipBehavior: Clip.antiAlias,
+                        child: Container(
+                            padding: EdgeInsets.only(left: 20, right: 20),
+                            height: 70,
+                            color: Colors.white,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Transform.scale(
+                                        scale: 2.5,
+                                        child: SvgPicture.asset(
+                                          'assets/images/repeat.svg',
+                                          color: MyAutoPilotStyles.appColor,
+                                          //semanticsLabel: 'Email Mobile',
+                                          height: 10,
+                                          width: 10,
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.only(
+                                          left: 20,
+                                        ),
+                                        child: Text(
+                                          totalRepeatTasksWeekly.toString(),
+                                          style: GoogleFonts.notoSerif(
+                                            color: HexColor('#707070'),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.only(
+                                          left: 10,
+                                        ),
+                                        child: Text(
+                                          'Repeat Tasks',
+                                          style: GoogleFonts.notoSerif(
+                                            color: HexColor('#707070'),
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                    ]),
+                              ],
+                            )),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Card(
+                        elevation: 5,
+                        shadowColor: Colors.black,
+                        //color: Colors.amber[100],
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.elliptical(2, 2),
+                            bottomRight: Radius.elliptical(2, 2),
+                            topLeft: Radius.elliptical(2, 2),
+                            bottomLeft: Radius.elliptical(2, 2),
+                          ),
+                        ),
+                        clipBehavior: Clip.antiAlias,
+                        child: Container(
+                            padding: EdgeInsets.only(left: 20, right: 20),
+                            height: 70,
+                            color: Colors.white,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Transform.scale(
+                                        scale: 2.5,
+                                        child: SvgPicture.asset(
+                                          'assets/images/support.svg',
+                                          color: MyAutoPilotStyles.appColor,
+                                          //semanticsLabel: 'Email Mobile',
+                                          height: 10,
+                                          width: 10,
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.only(
+                                          left: 20,
+                                        ),
+                                        child: Text(
+                                          totalSupportTasksWeekly.toString(),
+                                          style: GoogleFonts.notoSerif(
+                                            color: HexColor('#707070'),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.only(
+                                          left: 10,
+                                        ),
+                                        child: Text(
+                                          'Support Tasks',
+                                          style: GoogleFonts.notoSerif(
+                                            color: HexColor('#707070'),
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                    ]),
+                              ],
+                            )),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Card(
+                        elevation: 5,
+                        shadowColor: Colors.black,
+                        //color: Colors.amber[100],
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.elliptical(2, 2),
+                            bottomRight: Radius.elliptical(2, 2),
+                            topLeft: Radius.elliptical(2, 2),
+                            bottomLeft: Radius.elliptical(2, 2),
+                          ),
+                        ),
+                        clipBehavior: Clip.antiAlias,
+                        child: Container(
+                          padding: EdgeInsets.only(left: 20, right: 20),
+                          height: 70,
+                          color: Colors.white,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Transform.scale(
+                                      scale: 2.5,
+                                      child: SvgPicture.asset(
+                                        'assets/images/personal tasks.svg',
+                                        color: MyAutoPilotStyles.appColor,
+                                        //semanticsLabel: 'Email Mobile',
+                                        height: 10,
+                                        width: 10,
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                        left: 20,
+                                      ),
+                                      child: Text(
+                                        totalPersonalTasksWeekly.toString(),
+                                        style: GoogleFonts.notoSerif(
+                                          color: HexColor('#707070'),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                        left: 10,
+                                      ),
+                                      child: Text(
+                                        'Personal Tasks',
+                                        style: GoogleFonts.notoSerif(
+                                          color: HexColor('#707070'),
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                  ]),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ]),
 
-                // Monthly
-                ListView(children: [
-                  InkWell(
-                    onTap: () {},
-                    child: Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      //color: Colors.amber[100],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
+                  // Monthly
+                  ListView(children: [
+                    InkWell(
+                      onTap: () {},
+                      child: Card(
+                        elevation: 5,
+                        shadowColor: Colors.black,
+                        //color: Colors.amber[100],
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.elliptical(2, 2),
+                            bottomRight: Radius.elliptical(2, 2),
+                            topLeft: Radius.elliptical(2, 2),
+                            bottomLeft: Radius.elliptical(2, 2),
+                          ),
                         ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: Container(
-                        padding: EdgeInsets.only(left: 20, right: 20),
-                        height: 70,
-                        color: Colors.white,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Transform.scale(
-                                    scale: 2.5,
-                                    child: SvgPicture.asset(
-                                      'assets/images/delegate task.svg',
-                                      color: MyAutoPilotStyles.appColor,
-                                      //semanticsLabel: 'Email Mobile',
-                                      height: 10,
-                                      width: 10,
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                      left: 20,
-                                    ),
-                                    child: Text(
-                                      totalDelegatedTasksMonthly.toString(),
-                                      style: GoogleFonts.notoSerif(
-                                        color: HexColor('#707070'),
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
+                        clipBehavior: Clip.antiAlias,
+                        child: Container(
+                          padding: EdgeInsets.only(left: 20, right: 20),
+                          height: 70,
+                          color: Colors.white,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Transform.scale(
+                                      scale: 2.5,
+                                      child: SvgPicture.asset(
+                                        'assets/images/delegate task.svg',
+                                        color: MyAutoPilotStyles.appColor,
+                                        //semanticsLabel: 'Email Mobile',
+                                        height: 10,
+                                        width: 10,
                                       ),
                                     ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                      left: 10,
-                                    ),
-                                    child: Text(
-                                      'Delegated Tasks',
-                                      style: GoogleFonts.notoSerif(
-                                        color: HexColor('#707070'),
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 16,
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                        left: 20,
+                                      ),
+                                      child: Text(
+                                        totalDelegatedTasksMonthly.toString(),
+                                        style: GoogleFonts.notoSerif(
+                                          color: HexColor('#707070'),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ]),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    child: Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      //color: Colors.amber[100],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
-                        ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: Container(
-                        padding: EdgeInsets.only(left: 20, right: 20),
-                        height: 70,
-                        color: Colors.white,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Transform.scale(
-                                    scale: 2.5,
-                                    child: SvgPicture.asset(
-                                      'assets/images/repeat.svg',
-                                      color: MyAutoPilotStyles.appColor,
-                                      //semanticsLabel: 'Email Mobile',
-                                      height: 10,
-                                      width: 10,
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                      left: 20,
-                                    ),
-                                    child: Text(
-                                      totalRepeatTasksMonthly.toString(),
-                                      style: GoogleFonts.notoSerif(
-                                        color: HexColor('#707070'),
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                        left: 10,
+                                      ),
+                                      child: Text(
+                                        'Delegated Tasks',
+                                        style: GoogleFonts.notoSerif(
+                                          color: HexColor('#707070'),
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 16,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                      left: 10,
-                                    ),
-                                    child: Text(
-                                      'Repeat Tasks',
-                                      style: GoogleFonts.notoSerif(
-                                        color: HexColor('#707070'),
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ),
-                                ]),
-                          ],
+                                  ]),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    child: Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      //color: Colors.amber[100],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
+                    InkWell(
+                      onTap: () {},
+                      child: Card(
+                        elevation: 5,
+                        shadowColor: Colors.black,
+                        //color: Colors.amber[100],
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.elliptical(2, 2),
+                            bottomRight: Radius.elliptical(2, 2),
+                            topLeft: Radius.elliptical(2, 2),
+                            bottomLeft: Radius.elliptical(2, 2),
+                          ),
                         ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: Container(
-                        padding: EdgeInsets.only(left: 20, right: 20),
-                        height: 70,
-                        color: Colors.white,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Transform.scale(
-                                    scale: 2.5,
-                                    child: SvgPicture.asset(
-                                      'assets/images/support.svg',
-                                      color: MyAutoPilotStyles.appColor,
-                                      //semanticsLabel: 'Email Mobile',
-                                      height: 10,
-                                      width: 10,
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                      left: 20,
-                                    ),
-                                    child: Text(
-                                      totalSupportTasksMonthly.toString(),
-                                      style: GoogleFonts.notoSerif(
-                                        color: HexColor('#707070'),
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
+                        clipBehavior: Clip.antiAlias,
+                        child: Container(
+                          padding: EdgeInsets.only(left: 20, right: 20),
+                          height: 70,
+                          color: Colors.white,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Transform.scale(
+                                      scale: 2.5,
+                                      child: SvgPicture.asset(
+                                        'assets/images/repeat.svg',
+                                        color: MyAutoPilotStyles.appColor,
+                                        //semanticsLabel: 'Email Mobile',
+                                        height: 10,
+                                        width: 10,
                                       ),
                                     ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                      left: 10,
-                                    ),
-                                    child: Text(
-                                      'Support Tasks',
-                                      style: GoogleFonts.notoSerif(
-                                        color: HexColor('#707070'),
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 16,
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                        left: 20,
+                                      ),
+                                      child: Text(
+                                        totalRepeatTasksMonthly.toString(),
+                                        style: GoogleFonts.notoSerif(
+                                          color: HexColor('#707070'),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ]),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    child: Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      //color: Colors.amber[100],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
-                        ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: Container(
-                        padding: EdgeInsets.only(left: 20, right: 20),
-                        height: 70,
-                        color: Colors.white,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Transform.scale(
-                                    scale: 2.5,
-                                    child: SvgPicture.asset(
-                                      'assets/images/personal tasks.svg',
-                                      color: MyAutoPilotStyles.appColor,
-                                      //semanticsLabel: 'Email Mobile',
-                                      height: 10,
-                                      width: 10,
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                      left: 20,
-                                    ),
-                                    child: Text(
-                                      totalPersonalTasksMonthly.toString(),
-                                      style: GoogleFonts.notoSerif(
-                                        color: HexColor('#707070'),
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                        left: 10,
+                                      ),
+                                      child: Text(
+                                        'Repeat Tasks',
+                                        style: GoogleFonts.notoSerif(
+                                          color: HexColor('#707070'),
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 16,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                      left: 10,
-                                    ),
-                                    child: Text(
-                                      'Personal Tasks',
-                                      style: GoogleFonts.notoSerif(
-                                        color: HexColor('#707070'),
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ),
-                                ]),
-                          ],
+                                  ]),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ]),
+                    InkWell(
+                      onTap: () {},
+                      child: Card(
+                        elevation: 5,
+                        shadowColor: Colors.black,
+                        //color: Colors.amber[100],
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.elliptical(2, 2),
+                            bottomRight: Radius.elliptical(2, 2),
+                            topLeft: Radius.elliptical(2, 2),
+                            bottomLeft: Radius.elliptical(2, 2),
+                          ),
+                        ),
+                        clipBehavior: Clip.antiAlias,
+                        child: Container(
+                          padding: EdgeInsets.only(left: 20, right: 20),
+                          height: 70,
+                          color: Colors.white,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Transform.scale(
+                                      scale: 2.5,
+                                      child: SvgPicture.asset(
+                                        'assets/images/support.svg',
+                                        color: MyAutoPilotStyles.appColor,
+                                        //semanticsLabel: 'Email Mobile',
+                                        height: 10,
+                                        width: 10,
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                        left: 20,
+                                      ),
+                                      child: Text(
+                                        totalSupportTasksMonthly.toString(),
+                                        style: GoogleFonts.notoSerif(
+                                          color: HexColor('#707070'),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                        left: 10,
+                                      ),
+                                      child: Text(
+                                        'Support Tasks',
+                                        style: GoogleFonts.notoSerif(
+                                          color: HexColor('#707070'),
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                  ]),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Card(
+                        elevation: 5,
+                        shadowColor: Colors.black,
+                        //color: Colors.amber[100],
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.elliptical(2, 2),
+                            bottomRight: Radius.elliptical(2, 2),
+                            topLeft: Radius.elliptical(2, 2),
+                            bottomLeft: Radius.elliptical(2, 2),
+                          ),
+                        ),
+                        clipBehavior: Clip.antiAlias,
+                        child: Container(
+                          padding: EdgeInsets.only(left: 20, right: 20),
+                          height: 70,
+                          color: Colors.white,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Transform.scale(
+                                      scale: 2.5,
+                                      child: SvgPicture.asset(
+                                        'assets/images/personal tasks.svg',
+                                        color: MyAutoPilotStyles.appColor,
+                                        //semanticsLabel: 'Email Mobile',
+                                        height: 10,
+                                        width: 10,
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                        left: 20,
+                                      ),
+                                      child: Text(
+                                        totalPersonalTasksMonthly.toString(),
+                                        style: GoogleFonts.notoSerif(
+                                          color: HexColor('#707070'),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                        left: 10,
+                                      ),
+                                      child: Text(
+                                        'Personal Tasks',
+                                        style: GoogleFonts.notoSerif(
+                                          color: HexColor('#707070'),
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                  ]),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ]),
 
-                // Over Due
-                ListView(children: [
-                  InkWell(
-                    onTap: () {},
-                    child: Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      //color: Colors.amber[100],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
+                  // Over Due
+                  ListView(children: [
+                    InkWell(
+                      onTap: () {},
+                      child: Card(
+                        elevation: 5,
+                        shadowColor: Colors.black,
+                        //color: Colors.amber[100],
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.elliptical(2, 2),
+                            bottomRight: Radius.elliptical(2, 2),
+                            topLeft: Radius.elliptical(2, 2),
+                            bottomLeft: Radius.elliptical(2, 2),
+                          ),
                         ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: Container(
-                        padding: EdgeInsets.only(left: 20, right: 20),
-                        height: 70,
-                        color: Colors.white,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Transform.scale(
-                                    scale: 2.5,
-                                    child: SvgPicture.asset(
-                                      'assets/images/delegate task.svg',
-                                      color: MyAutoPilotStyles.appColor,
-                                      //semanticsLabel: 'Email Mobile',
-                                      height: 10,
-                                      width: 10,
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                      left: 20,
-                                    ),
-                                    child: Text(
-                                      totalDelegatedTasksOverDue.toString(),
-                                      style: GoogleFonts.notoSerif(
-                                        color: HexColor('#707070'),
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
+                        clipBehavior: Clip.antiAlias,
+                        child: Container(
+                          padding: EdgeInsets.only(left: 20, right: 20),
+                          height: 70,
+                          color: Colors.white,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Transform.scale(
+                                      scale: 2.5,
+                                      child: SvgPicture.asset(
+                                        'assets/images/delegate task.svg',
+                                        color: MyAutoPilotStyles.appColor,
+                                        //semanticsLabel: 'Email Mobile',
+                                        height: 10,
+                                        width: 10,
                                       ),
                                     ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                      left: 10,
-                                    ),
-                                    child: Text(
-                                      'Delegated Tasks',
-                                      style: GoogleFonts.notoSerif(
-                                        color: HexColor('#707070'),
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 16,
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                        left: 20,
+                                      ),
+                                      child: Text(
+                                        totalDelegatedTasksOverDue.toString(),
+                                        style: GoogleFonts.notoSerif(
+                                          color: HexColor('#707070'),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ]),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    child: Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      //color: Colors.amber[100],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
-                        ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: Container(
-                        padding: EdgeInsets.only(left: 20, right: 20),
-                        height: 70,
-                        color: Colors.white,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Transform.scale(
-                                    scale: 2.5,
-                                    child: SvgPicture.asset(
-                                      'assets/images/repeat.svg',
-                                      color: MyAutoPilotStyles.appColor,
-                                      //semanticsLabel: 'Email Mobile',
-                                      height: 10,
-                                      width: 10,
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                      left: 20,
-                                    ),
-                                    child: Text(
-                                      totalRepeatTasksOverDue.toString(),
-                                      style: GoogleFonts.notoSerif(
-                                        color: HexColor('#707070'),
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                        left: 10,
+                                      ),
+                                      child: Text(
+                                        'Delegated Tasks',
+                                        style: GoogleFonts.notoSerif(
+                                          color: HexColor('#707070'),
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 16,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                      left: 10,
-                                    ),
-                                    child: Text(
-                                      'Repeat Tasks',
-                                      style: GoogleFonts.notoSerif(
-                                        color: HexColor('#707070'),
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ),
-                                ]),
-                          ],
+                                  ]),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    child: Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      //color: Colors.amber[100],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
+                    InkWell(
+                      onTap: () {},
+                      child: Card(
+                        elevation: 5,
+                        shadowColor: Colors.black,
+                        //color: Colors.amber[100],
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.elliptical(2, 2),
+                            bottomRight: Radius.elliptical(2, 2),
+                            topLeft: Radius.elliptical(2, 2),
+                            bottomLeft: Radius.elliptical(2, 2),
+                          ),
                         ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: Container(
-                        padding: EdgeInsets.only(left: 20, right: 20),
-                        height: 70,
-                        color: Colors.white,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Transform.scale(
-                                    scale: 2.5,
-                                    child: SvgPicture.asset(
-                                      'assets/images/support.svg',
-                                      color: MyAutoPilotStyles.appColor,
-                                      //semanticsLabel: 'Email Mobile',
-                                      height: 10,
-                                      width: 10,
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                      left: 20,
-                                    ),
-                                    child: Text(
-                                      totalSupportTasksOverDue.toString(),
-                                      style: GoogleFonts.notoSerif(
-                                        color: HexColor('#707070'),
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
+                        clipBehavior: Clip.antiAlias,
+                        child: Container(
+                          padding: EdgeInsets.only(left: 20, right: 20),
+                          height: 70,
+                          color: Colors.white,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Transform.scale(
+                                      scale: 2.5,
+                                      child: SvgPicture.asset(
+                                        'assets/images/repeat.svg',
+                                        color: MyAutoPilotStyles.appColor,
+                                        //semanticsLabel: 'Email Mobile',
+                                        height: 10,
+                                        width: 10,
                                       ),
                                     ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                      left: 10,
-                                    ),
-                                    child: Text(
-                                      'Support Tasks',
-                                      style: GoogleFonts.notoSerif(
-                                        color: HexColor('#707070'),
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 16,
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                        left: 20,
+                                      ),
+                                      child: Text(
+                                        totalRepeatTasksOverDue.toString(),
+                                        style: GoogleFonts.notoSerif(
+                                          color: HexColor('#707070'),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ]),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    child: Card(
-                      elevation: 5,
-                      shadowColor: Colors.black,
-                      //color: Colors.amber[100],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.elliptical(2, 2),
-                          bottomRight: Radius.elliptical(2, 2),
-                          topLeft: Radius.elliptical(2, 2),
-                          bottomLeft: Radius.elliptical(2, 2),
-                        ),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: Container(
-                        padding: EdgeInsets.only(left: 20, right: 20),
-                        height: 70,
-                        color: Colors.white,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Transform.scale(
-                                    scale: 2.5,
-                                    child: SvgPicture.asset(
-                                      'assets/images/personal tasks.svg',
-                                      color: MyAutoPilotStyles.appColor,
-                                      //semanticsLabel: 'Email Mobile',
-                                      height: 10,
-                                      width: 10,
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                      left: 20,
-                                    ),
-                                    child: Text(
-                                      totalPersonalTasksOverDue.toString(),
-                                      style: GoogleFonts.notoSerif(
-                                        color: HexColor('#707070'),
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                        left: 10,
+                                      ),
+                                      child: Text(
+                                        'Repeat Tasks',
+                                        style: GoogleFonts.notoSerif(
+                                          color: HexColor('#707070'),
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 16,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                      left: 10,
-                                    ),
-                                    child: Text(
-                                      'Personal Tasks',
-                                      style: GoogleFonts.notoSerif(
-                                        color: HexColor('#707070'),
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ),
-                                ]),
-                          ],
+                                  ]),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ]),
-              ],
-            ),
-          )
-        ],
+                    InkWell(
+                      onTap: () {},
+                      child: Card(
+                        elevation: 5,
+                        shadowColor: Colors.black,
+                        //color: Colors.amber[100],
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.elliptical(2, 2),
+                            bottomRight: Radius.elliptical(2, 2),
+                            topLeft: Radius.elliptical(2, 2),
+                            bottomLeft: Radius.elliptical(2, 2),
+                          ),
+                        ),
+                        clipBehavior: Clip.antiAlias,
+                        child: Container(
+                          padding: EdgeInsets.only(left: 20, right: 20),
+                          height: 70,
+                          color: Colors.white,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Transform.scale(
+                                      scale: 2.5,
+                                      child: SvgPicture.asset(
+                                        'assets/images/support.svg',
+                                        color: MyAutoPilotStyles.appColor,
+                                        //semanticsLabel: 'Email Mobile',
+                                        height: 10,
+                                        width: 10,
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                        left: 20,
+                                      ),
+                                      child: Text(
+                                        totalSupportTasksOverDue.toString(),
+                                        style: GoogleFonts.notoSerif(
+                                          color: HexColor('#707070'),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                        left: 10,
+                                      ),
+                                      child: Text(
+                                        'Support Tasks',
+                                        style: GoogleFonts.notoSerif(
+                                          color: HexColor('#707070'),
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                  ]),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Card(
+                        elevation: 5,
+                        shadowColor: Colors.black,
+                        //color: Colors.amber[100],
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.elliptical(2, 2),
+                            bottomRight: Radius.elliptical(2, 2),
+                            topLeft: Radius.elliptical(2, 2),
+                            bottomLeft: Radius.elliptical(2, 2),
+                          ),
+                        ),
+                        clipBehavior: Clip.antiAlias,
+                        child: Container(
+                          padding: EdgeInsets.only(left: 20, right: 20),
+                          height: 70,
+                          color: Colors.white,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Transform.scale(
+                                      scale: 2.5,
+                                      child: SvgPicture.asset(
+                                        'assets/images/personal tasks.svg',
+                                        color: MyAutoPilotStyles.appColor,
+                                        //semanticsLabel: 'Email Mobile',
+                                        height: 10,
+                                        width: 10,
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                        left: 20,
+                                      ),
+                                      child: Text(
+                                        totalPersonalTasksOverDue.toString(),
+                                        style: GoogleFonts.notoSerif(
+                                          color: HexColor('#707070'),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                        left: 10,
+                                      ),
+                                      child: Text(
+                                        'Personal Tasks',
+                                        style: GoogleFonts.notoSerif(
+                                          color: HexColor('#707070'),
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                  ]),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ]),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

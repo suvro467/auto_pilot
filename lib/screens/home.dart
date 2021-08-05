@@ -376,7 +376,7 @@ class _HomeScreenState extends State<HomeScreen> {
         drawer: myAutoPilotDrawer,
         drawerEnableOpenDragGesture: false,
         //endDrawerEnableOpenDragGesture: false,
-
+        resizeToAvoidBottomInset: false,
         appBar: myAutoPilotAppBar,
         body: SafeArea(
           child: SizedBox.expand(
