@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:auto_pilot/shared/presentation/styles.dart';
+import 'package:auto_pilot/shared/widgets/masked_text_input_formatter.dart';
 import 'package:auto_pilot/shared/widgets/rounded_rectangular_shadow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -75,13 +76,13 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         children: [
                           Container(
                             padding: EdgeInsets.only(
-                              left: 20,
+                              left: 30,
                               top: 10,
                             ),
                             child: Text(
                               'Complete Payment',
                               style: GoogleFonts.notoSerif(
-                                fontSize: 18,
+                                fontSize: 16,
                                 color: HexColor('#707070'),
                                 fontWeight: FontWeight.normal,
                               ),
@@ -93,7 +94,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       SizedBox(height: 30),
                       Padding(
                         padding: EdgeInsets.only(
-                          left: 20,
+                          left: 30,
                         ),
                         child: Row(
                           children: [
@@ -143,7 +144,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         child: Card(
                           elevation: 4,
                           shadowColor: Colors.black,
-                          color: Colors.amber[100],
+                          //color: Colors.amber[100],
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.only(
                               topRight: Radius.elliptical(15, 15),
@@ -154,15 +155,289 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           ),
                           clipBehavior: Clip.antiAlias,
                           child: Container(
-                            height: 250,
+                            height: 300,
+                            width: MediaQuery.of(context).size.width * 85 / 100,
                             color: Colors.white,
+                            padding: const EdgeInsets.only(
+                              left: 10.0,
+                              top: 10,
+                              right: 10.0,
+                            ),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                    left: 2,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Name on Card',
+                                        style: GoogleFonts.notoSans(
+                                          fontSize: 12,
+                                          color: HexColor('#707070'),
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Card(
+                                        elevation: 4,
+                                        shadowColor: Colors.black,
+                                        color: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                            Radius.elliptical(5, 5),
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                            left: 5.0,
+                                            right: 5,
+                                          ),
+                                          child: TextFormField(
+                                            textInputAction:
+                                                TextInputAction.next,
+                                            cursorColor:
+                                                Colors.grey.withOpacity(0.8),
+                                            style: GoogleFonts.notoSans(
+                                              fontSize: 16,
+                                              color: HexColor('#707070'),
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                            decoration: InputDecoration(
+                                              //hintText: 'Name',
+                                              focusedBorder: InputBorder.none,
+                                              enabledBorder: InputBorder.none,
+                                              errorBorder: InputBorder.none,
+                                              disabledBorder: InputBorder.none,
+                                              border: InputBorder.none,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                    left: 2,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Card Number',
+                                        style: GoogleFonts.notoSans(
+                                          fontSize: 12,
+                                          color: HexColor('#707070'),
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Card(
+                                        elevation: 4,
+                                        shadowColor: Colors.black,
+                                        color: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                            Radius.elliptical(5, 5),
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                            left: 5.0,
+                                            right: 5,
+                                          ),
+                                          child: TextFormField(
+                                            keyboardType: TextInputType.number,
+                                            inputFormatters: [
+                                              MaskedTextInputFormatter(
+                                                mask: 'xxxx xxxx xxxx xxxx',
+                                                separator: ' ',
+                                              ),
+                                            ],
+                                            textInputAction:
+                                                TextInputAction.next,
+                                            cursorColor:
+                                                Colors.grey.withOpacity(0.8),
+                                            style: GoogleFonts.notoSans(
+                                              fontSize: 16,
+                                              color: HexColor('#707070'),
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                            decoration: InputDecoration(
+                                              //hintText: 'Name',
+                                              focusedBorder: InputBorder.none,
+                                              enabledBorder: InputBorder.none,
+                                              errorBorder: InputBorder.none,
+                                              disabledBorder: InputBorder.none,
+                                              border: InputBorder.none,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                    left: 2,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          'Expiry',
+                                          style: GoogleFonts.notoSans(
+                                            fontSize: 12,
+                                            color: HexColor('#707070'),
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          'CVV',
+                                          style: GoogleFonts.notoSans(
+                                            fontSize: 12,
+                                            color: HexColor('#707070'),
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Card(
+                                        elevation: 4,
+                                        shadowColor: Colors.black,
+                                        color: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                            Radius.elliptical(5, 5),
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                            left: 5.0,
+                                            right: 5,
+                                          ),
+                                          child: TextFormField(
+                                            keyboardType: TextInputType.number,
+                                            inputFormatters: [
+                                              MaskedTextInputFormatter(
+                                                mask: 'xx/xx',
+                                                separator: '/',
+                                              ),
+                                            ],
+                                            textInputAction:
+                                                TextInputAction.next,
+                                            cursorColor:
+                                                Colors.grey.withOpacity(0.8),
+                                            style: GoogleFonts.notoSans(
+                                              fontSize: 16,
+                                              color: HexColor('#707070'),
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                            decoration: InputDecoration(
+                                              hintText: 'MM / YY',
+                                              hintStyle: GoogleFonts.notoSans(
+                                                fontSize: 16,
+                                                color: HexColor('#707070'),
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                              focusedBorder: InputBorder.none,
+                                              enabledBorder: InputBorder.none,
+                                              errorBorder: InputBorder.none,
+                                              disabledBorder: InputBorder.none,
+                                              border: InputBorder.none,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Card(
+                                        elevation: 4,
+                                        shadowColor: Colors.black,
+                                        color: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                            Radius.elliptical(5, 5),
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                            left: 5.0,
+                                            right: 5,
+                                          ),
+                                          child: TextFormField(
+                                            keyboardType: TextInputType.number,
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter
+                                                  .digitsOnly,
+                                              LengthLimitingTextInputFormatter(
+                                                  3)
+                                            ],
+                                            textInputAction:
+                                                TextInputAction.next,
+                                            cursorColor:
+                                                Colors.grey.withOpacity(0.8),
+                                            style: GoogleFonts.notoSans(
+                                              fontSize: 16,
+                                              color: HexColor('#707070'),
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                            decoration: InputDecoration(
+                                              //hintText: 'Name',
+                                              focusedBorder: InputBorder.none,
+                                              enabledBorder: InputBorder.none,
+                                              errorBorder: InputBorder.none,
+                                              disabledBorder: InputBorder.none,
+                                              border: InputBorder.none,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       )
                     ],
                   ),
                 ),
-                Container(
+                /* Container(
                   padding: EdgeInsets.fromLTRB(0, 0, 10, 25),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -180,7 +455,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       ),
                     ],
                   ),
-                ),
+                ), */
               ],
             ),
           ),
