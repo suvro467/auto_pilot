@@ -21,11 +21,14 @@ class PaymentScreen extends StatefulWidget {
 
 class _PaymentScreenState extends State<PaymentScreen> {
   final TextEditingController _customerNameController = TextEditingController();
+  final TextEditingController _cardNumberController = TextEditingController();
 
   late String _validationText;
   late bool _isCustomerNameValid;
+  late bool _isCardNumberValid;
 
   late int _timesTappedCustomerName;
+  late int _timesTappedCardNumber;
 
   @override
   void initState() {
@@ -33,8 +36,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
     _validationText = 'Please fill in this field';
     _isCustomerNameValid = true;
+    _isCardNumberValid = true;
 
     _timesTappedCustomerName = 0;
+    _timesTappedCardNumber = 0;
 
     // Start listening to changes
     _customerNameController.addListener(() {
@@ -46,6 +51,23 @@ class _PaymentScreenState extends State<PaymentScreen> {
       } else {
         setState(() {
           _isCustomerNameValid = true;
+        });
+      }
+    });
+
+    _cardNumberController.addListener(() {
+      if (_cardNumberController.text.isEmpty && _timesTappedCardNumber > 0) {
+        setState(() {
+          _isCardNumberValid = false;
+        });
+      } else if (_cardNumberController.text.isNotEmpty &&
+          _cardNumberController.text.length != 19) {
+        setState(() {
+          _isCardNumberValid = true;
+        });
+      } else {
+        setState(() {
+          _isCardNumberValid = true;
         });
       }
     });
@@ -316,38 +338,84 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                             Radius.elliptical(5, 5),
                                           ),
                                         ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                            left: 5.0,
-                                            right: 5,
-                                          ),
-                                          child: TextFormField(
-                                            keyboardType: TextInputType.number,
-                                            inputFormatters: [
-                                              MaskedTextInputFormatter(
-                                                mask: 'xxxx xxxx xxxx xxxx',
-                                                separator: ' ',
+                                        child: Stack(children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 5.0,
+                                              right: 5,
+                                            ),
+                                            child: TextFormField(
+                                              validator: (value) {
+                                                return null;
+                                              },
+                                              controller: _cardNumberController,
+                                              onChanged: (value) {
+                                                _timesTappedCardNumber += 1;
+                                              },
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              inputFormatters: [
+                                                MaskedTextInputFormatter(
+                                                  mask: 'xxxx xxxx xxxx xxxx',
+                                                  separator: ' ',
+                                                ),
+                                              ],
+                                              textInputAction:
+                                                  TextInputAction.next,
+                                              cursorColor:
+                                                  Colors.grey.withOpacity(0.8),
+                                              style: GoogleFonts.notoSans(
+                                                fontSize: 16,
+                                                color: HexColor('#707070'),
+                                                fontWeight: FontWeight.normal,
                                               ),
-                                            ],
-                                            textInputAction:
-                                                TextInputAction.next,
-                                            cursorColor:
-                                                Colors.grey.withOpacity(0.8),
-                                            style: GoogleFonts.notoSans(
-                                              fontSize: 16,
-                                              color: HexColor('#707070'),
-                                              fontWeight: FontWeight.normal,
-                                            ),
-                                            decoration: InputDecoration(
-                                              //hintText: 'Name',
-                                              focusedBorder: InputBorder.none,
-                                              enabledBorder: InputBorder.none,
-                                              errorBorder: InputBorder.none,
-                                              disabledBorder: InputBorder.none,
-                                              border: InputBorder.none,
+                                              decoration: InputDecoration(
+                                                //hintText: 'Name',
+                                                focusedBorder: InputBorder.none,
+                                                enabledBorder: InputBorder.none,
+                                                errorBorder: InputBorder.none,
+                                                disabledBorder:
+                                                    InputBorder.none,
+                                                border: InputBorder.none,
+                                              ),
                                             ),
                                           ),
-                                        ),
+                                          !_isCardNumberValid
+                                              ? Positioned(
+                                                  right: 5.0,
+                                                  top: 30.0,
+                                                  child: new Container(
+                                                    child: Text(
+                                                      '$_validationText',
+                                                      style: TextStyle(
+                                                        color: Globals
+                                                            .validationColor,
+                                                        fontSize: 10.0,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                )
+                                              : (_cardNumberController
+                                                          .text.isNotEmpty &&
+                                                      _cardNumberController
+                                                              .text.length !=
+                                                          19
+                                                  ? Positioned(
+                                                      right: 5.0,
+                                                      top: 30.0,
+                                                      child: new Container(
+                                                        child: Text(
+                                                          'Value must be 16 digits.',
+                                                          style: TextStyle(
+                                                            color: MyAutoPilotStyles
+                                                                .validationColor,
+                                                            fontSize: 10.0,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    )
+                                                  : Container())
+                                        ]),
                                       ),
                                     )
                                   ],
@@ -493,10 +561,16 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                         onPressed: () async {
                                           if (!_isCustomerNameValid ||
                                               _customerNameController
+                                                  .text.isEmpty ||
+                                              !_isCardNumberValid ||
+                                              _cardNumberController
                                                   .text.isEmpty) {
                                             if (_customerNameController
                                                 .text.isEmpty)
                                               _isCustomerNameValid = false;
+                                            if (_cardNumberController
+                                                .text.isEmpty)
+                                              _isCardNumberValid = false;
 
                                             setState(() {});
                                             ShowMessage.showFlushBar(context,
@@ -504,6 +578,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                           } else {
                                             setState(() {
                                               _isCustomerNameValid = true;
+                                              _isCardNumberValid = true;
                                             });
 
                                             showDialog(
