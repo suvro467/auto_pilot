@@ -22,13 +22,16 @@ class PaymentScreen extends StatefulWidget {
 class _PaymentScreenState extends State<PaymentScreen> {
   final TextEditingController _customerNameController = TextEditingController();
   final TextEditingController _cardNumberController = TextEditingController();
+  final TextEditingController _expiryDateController = TextEditingController();
 
   late String _validationText;
   late bool _isCustomerNameValid;
   late bool _isCardNumberValid;
+  late bool _isExpiryDateValid;
 
   late int _timesTappedCustomerName;
   late int _timesTappedCardNumber;
+  late int _timesTappedExpiryDate;
 
   @override
   void initState() {
@@ -37,9 +40,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
     _validationText = 'Please fill in this field';
     _isCustomerNameValid = true;
     _isCardNumberValid = true;
+    _isExpiryDateValid = true;
 
     _timesTappedCustomerName = 0;
     _timesTappedCardNumber = 0;
+    _timesTappedExpiryDate = 0;
 
     // Start listening to changes
     _customerNameController.addListener(() {
@@ -71,11 +76,30 @@ class _PaymentScreenState extends State<PaymentScreen> {
         });
       }
     });
+
+    _expiryDateController.addListener(() {
+      if (_expiryDateController.text.isEmpty && _timesTappedExpiryDate > 0) {
+        setState(() {
+          _isExpiryDateValid = false;
+        });
+      } else if (_expiryDateController.text.isNotEmpty &&
+          _expiryDateController.text.length != 5) {
+        setState(() {
+          _isExpiryDateValid = true;
+        });
+      } else {
+        setState(() {
+          _isExpiryDateValid = true;
+        });
+      }
+    });
   }
 
   @override
   void dispose() {
     _customerNameController.dispose();
+    _cardNumberController.dispose();
+    _expiryDateController.dispose();
     super.dispose();
   }
 
@@ -467,43 +491,89 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                             Radius.elliptical(5, 5),
                                           ),
                                         ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                            left: 5.0,
-                                            right: 5,
-                                          ),
-                                          child: TextFormField(
-                                            keyboardType: TextInputType.number,
-                                            inputFormatters: [
-                                              MaskedTextInputFormatter(
-                                                mask: 'xx/xx',
-                                                separator: '/',
-                                              ),
-                                            ],
-                                            textInputAction:
-                                                TextInputAction.next,
-                                            cursorColor:
-                                                Colors.grey.withOpacity(0.8),
-                                            style: GoogleFonts.notoSans(
-                                              fontSize: 16,
-                                              color: HexColor('#707070'),
-                                              fontWeight: FontWeight.normal,
+                                        child: Stack(children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 5.0,
+                                              right: 5,
                                             ),
-                                            decoration: InputDecoration(
-                                              hintText: 'MM / YY',
-                                              hintStyle: GoogleFonts.notoSans(
+                                            child: TextFormField(
+                                              validator: (value) {
+                                                return null;
+                                              },
+                                              controller: _expiryDateController,
+                                              onChanged: (value) {
+                                                _timesTappedExpiryDate += 1;
+                                              },
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              inputFormatters: [
+                                                MaskedTextInputFormatter(
+                                                  mask: 'xx/xx',
+                                                  separator: '/',
+                                                ),
+                                              ],
+                                              textInputAction:
+                                                  TextInputAction.next,
+                                              cursorColor:
+                                                  Colors.grey.withOpacity(0.8),
+                                              style: GoogleFonts.notoSans(
                                                 fontSize: 16,
                                                 color: HexColor('#707070'),
                                                 fontWeight: FontWeight.normal,
                                               ),
-                                              focusedBorder: InputBorder.none,
-                                              enabledBorder: InputBorder.none,
-                                              errorBorder: InputBorder.none,
-                                              disabledBorder: InputBorder.none,
-                                              border: InputBorder.none,
+                                              decoration: InputDecoration(
+                                                hintText: 'MM / YY',
+                                                hintStyle: GoogleFonts.notoSans(
+                                                  fontSize: 16,
+                                                  color: HexColor('#707070'),
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                                focusedBorder: InputBorder.none,
+                                                enabledBorder: InputBorder.none,
+                                                errorBorder: InputBorder.none,
+                                                disabledBorder:
+                                                    InputBorder.none,
+                                                border: InputBorder.none,
+                                              ),
                                             ),
                                           ),
-                                        ),
+                                          !_isExpiryDateValid
+                                              ? Positioned(
+                                                  right: 5.0,
+                                                  top: 30.0,
+                                                  child: new Container(
+                                                    child: Text(
+                                                      'Required',
+                                                      style: TextStyle(
+                                                        color: Globals
+                                                            .validationColor,
+                                                        fontSize: 10.0,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                )
+                                              : (_expiryDateController
+                                                          .text.isNotEmpty &&
+                                                      _expiryDateController
+                                                              .text.length !=
+                                                          5
+                                                  ? Positioned(
+                                                      right: 5.0,
+                                                      top: 30.0,
+                                                      child: new Container(
+                                                        child: Text(
+                                                          'Invalid Date.',
+                                                          style: TextStyle(
+                                                            color: MyAutoPilotStyles
+                                                                .validationColor,
+                                                            fontSize: 10.0,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    )
+                                                  : Container())
+                                        ]),
                                       ),
                                     ),
                                     Expanded(
@@ -569,13 +639,24 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                                       .text.isNotEmpty &&
                                                   _cardNumberController
                                                           .text.length !=
-                                                      19)) {
+                                                      19) ||
+                                              !_isExpiryDateValid ||
+                                              _expiryDateController
+                                                  .text.isEmpty ||
+                                              (_expiryDateController
+                                                      .text.isNotEmpty &&
+                                                  _expiryDateController
+                                                          .text.length !=
+                                                      5)) {
                                             if (_customerNameController
                                                 .text.isEmpty)
                                               _isCustomerNameValid = false;
                                             if (_cardNumberController
                                                 .text.isEmpty)
                                               _isCardNumberValid = false;
+                                            if (_expiryDateController
+                                                .text.isEmpty)
+                                              _isExpiryDateValid = false;
 
                                             setState(() {});
                                             ShowMessage.showFlushBar(context,
