@@ -4,6 +4,7 @@ import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:auto_pilot/shared/widgets/rounded_rectangular_shadow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -191,10 +192,30 @@ class _ConfirmPlanScreenState extends State<ConfirmPlanScreen> {
                                                       ],
                                                     ),
                                                   ),
-
                                                   Container(
                                                     margin: EdgeInsets.only(
-                                                      top: 40,
+                                                      top: 10,
+                                                      left: 30,
+                                                    ),
+                                                    child: Row(
+                                                      children: [
+                                                        Text(
+                                                          plans[0]['cost'],
+                                                          style: GoogleFonts
+                                                              .notoSans(
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: HexColor(
+                                                                '#707070'),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                      //top: 40,
                                                       left: 30,
                                                     ),
                                                     child: Row(
@@ -216,73 +237,186 @@ class _ConfirmPlanScreenState extends State<ConfirmPlanScreen> {
                                                   ),
                                                   Container(
                                                     margin: EdgeInsets.only(
-                                                      top: 5,
+                                                      top: 10,
                                                       left: 30,
-                                                      right: 40,
                                                     ),
                                                     child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
                                                       children: [
-                                                        Container(
-                                                          width: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width *
-                                                              35 /
-                                                              100,
-                                                          child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              Container(),
-                                                              Text(
-                                                                'From',
-                                                                style: GoogleFonts
-                                                                    .notoSans(
-                                                                  fontSize: 10,
-                                                                  color: HexColor(
-                                                                      '#707070'),
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .normal,
-                                                                ),
-                                                              )
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        Container(
-                                                          width: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width *
-                                                              35 /
-                                                              100,
-                                                          child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              Text(
-                                                                'To',
-                                                                style: GoogleFonts
-                                                                    .notoSans(
-                                                                  fontSize: 10,
-                                                                  color: HexColor(
-                                                                      '#707070'),
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .normal,
-                                                                ),
-                                                              )
-                                                            ],
+                                                        Text(
+                                                          plans[0]['desc'],
+                                                          style: GoogleFonts
+                                                              .notoSans(
+                                                            fontSize: 12,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .normal,
+                                                            color: HexColor(
+                                                                '#707070'),
                                                           ),
                                                         ),
                                                       ],
                                                     ),
-                                                  ), // Set Filter Button
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                      top: 20,
+                                                      left: 30,
+                                                      right: 30,
+                                                    ),
+                                                    child: Card(
+                                                      color:
+                                                          HexColor('#075A80'),
+                                                      elevation: 5,
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(50),
+                                                      ),
+                                                      child: Container(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                          left: 30,
+                                                          right: 30,
+                                                          top: 10,
+                                                        ),
+                                                        height: 105,
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Column(
+                                                              children: [
+                                                                SvgPicture
+                                                                    .asset(
+                                                                  'assets/images/all business.svg',
+                                                                  color: Colors
+                                                                      .white,
+                                                                  //semanticsLabel: 'Email Mobile',
+                                                                  height: 40,
+                                                                  width: 40,
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 10,
+                                                                ),
+                                                                Text(
+                                                                  'Business',
+                                                                  style: GoogleFonts
+                                                                      .notoSans(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .normal,
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
+                                                                ),
+                                                                Text(
+                                                                  'Ready',
+                                                                  style: GoogleFonts
+                                                                      .notoSans(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .normal,
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Column(
+                                                              children: [
+                                                                SvgPicture
+                                                                    .asset(
+                                                                  'assets/images/quick set-up.svg',
+                                                                  color: Colors
+                                                                      .white,
+                                                                  //semanticsLabel: 'Email Mobile',
+                                                                  height: 40,
+                                                                  width: 40,
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 10,
+                                                                ),
+                                                                Text(
+                                                                  'Quick',
+                                                                  style: GoogleFonts
+                                                                      .notoSans(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .normal,
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
+                                                                ),
+                                                                Text(
+                                                                  'Set-Up',
+                                                                  style: GoogleFonts
+                                                                      .notoSans(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .normal,
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Column(
+                                                              children: [
+                                                                SvgPicture
+                                                                    .asset(
+                                                                  'assets/images/Boost Efficiency.svg',
+                                                                  color: Colors
+                                                                      .white,
+                                                                  //semanticsLabel: 'Email Mobile',
+                                                                  height: 40,
+                                                                  width: 40,
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 10,
+                                                                ),
+                                                                Text(
+                                                                  'Outcome',
+                                                                  style: GoogleFonts
+                                                                      .notoSans(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .normal,
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
+                                                                ),
+                                                                Text(
+                                                                  'Driven',
+                                                                  style: GoogleFonts
+                                                                      .notoSans(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .normal,
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
                                                   Container(
                                                     padding: EdgeInsets.only(
                                                         top: 20),
