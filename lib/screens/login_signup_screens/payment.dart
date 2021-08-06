@@ -93,24 +93,70 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       SizedBox(height: 30),
                       Padding(
                         padding: EdgeInsets.only(
-                          left: 10,
-                          right: 10,
-                          top: 15,
+                          left: 20,
                         ),
                         child: Row(
                           children: [
-                            InkWell(
-                              onTap: () {},
-                              child: Text(
-                                'Compare Plan',
-                                style: GoogleFonts.notoSerif(
-                                  fontSize: 14,
-                                  color: MyAutoPilotStyles.appColor,
-                                  fontWeight: FontWeight.normal,
-                                ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 20.0),
+                              child: SvgPicture.asset(
+                                'assets/images/american-express.svg',
+                                height: 40,
+                                width: 40,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 20.0),
+                              child: SvgPicture.asset(
+                                'assets/images/credit-card.svg',
+                                height: 40,
+                                width: 40,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 20.0),
+                              child: SvgPicture.asset(
+                                'assets/images/mastercard.svg',
+                                height: 40,
+                                width: 40,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 10.0),
+                              child: SvgPicture.asset(
+                                'assets/images/upi.svg',
+                                height: 30,
+                                width: 30,
                               ),
                             ),
                           ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 20,
+                          right: 20,
+                        ),
+                        child: Card(
+                          elevation: 4,
+                          shadowColor: Colors.black,
+                          color: Colors.amber[100],
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.elliptical(15, 15),
+                              bottomRight: Radius.elliptical(15, 15),
+                              topLeft: Radius.elliptical(15, 15),
+                              bottomLeft: Radius.elliptical(15, 15),
+                            ),
+                          ),
+                          clipBehavior: Clip.antiAlias,
+                          child: Container(
+                            height: 250,
+                            color: Colors.white,
+                          ),
                         ),
                       )
                     ],
