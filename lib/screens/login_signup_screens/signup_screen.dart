@@ -308,11 +308,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           validator: (value) {
                             return null;
                           },
+                          textInputAction: TextInputAction.next,
                           controller: _emailController,
                           onChanged: (value) {
                             _timesTappedEmail += 1;
                           },
-                          textInputAction: TextInputAction.next,
                           decoration: InputDecoration(
                             labelStyle: GoogleFonts.notoSerif(
                               fontSize: 14,
