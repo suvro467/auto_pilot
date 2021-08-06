@@ -32,9 +32,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     //Globals.selectedAppLanguage = Globals.appLanguages[0];
     return WillPopScope(
       onWillPop: () {
-        if (Platform.isAndroid)
-          SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-        /* Navigator.pop(context); //return data along with pop*/
+        Navigator.pop(context); //return data along with pop
         return new Future(() => false);
       },
       child: Material(
@@ -407,7 +405,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                                   3)
                                             ],
                                             textInputAction:
-                                                TextInputAction.next,
+                                                TextInputAction.done,
                                             cursorColor:
                                                 Colors.grey.withOpacity(0.8),
                                             style: GoogleFonts.notoSans(

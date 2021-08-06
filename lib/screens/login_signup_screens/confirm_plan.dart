@@ -599,8 +599,56 @@ class _ConfirmPlanScreenState extends State<ConfirmPlanScreen> {
                                                                     height: 55),
                                                         child: ElevatedButton(
                                                           onPressed: () async {
-                                                            goToPaymentScreen(
-                                                                '1');
+                                                            /* await goToPaymentScreen(
+                                                                '1'); */
+                                                            Navigator.pop(
+                                                                context);
+                                                            await Navigator
+                                                                .push(
+                                                              context,
+                                                              PageRouteBuilder(
+                                                                transitionDuration:
+                                                                    Duration(
+                                                                        milliseconds:
+                                                                            500),
+                                                                pageBuilder: (BuildContext context,
+                                                                    Animation<
+                                                                            double>
+                                                                        animation,
+                                                                    Animation<
+                                                                            double>
+                                                                        secondaryAnimation) {
+                                                                  return PaymentScreen();
+                                                                },
+                                                                transitionsBuilder: (BuildContext context,
+                                                                    Animation<
+                                                                            double>
+                                                                        animation,
+                                                                    Animation<
+                                                                            double>
+                                                                        secondaryAnimation,
+                                                                    Widget
+                                                                        child) {
+                                                                  return Align(
+                                                                    child:
+                                                                        SlideTransition(
+                                                                      position:
+                                                                          Tween(
+                                                                        begin: Offset(
+                                                                            1.0,
+                                                                            0.0),
+                                                                        end: Offset(
+                                                                            0.0,
+                                                                            0.0),
+                                                                      ).animate(
+                                                                              animation),
+                                                                      child:
+                                                                          child,
+                                                                    ),
+                                                                  );
+                                                                },
+                                                              ),
+                                                            );
                                                           },
                                                           style: ElevatedButton
                                                               .styleFrom(
@@ -3017,8 +3065,8 @@ class _ConfirmPlanScreenState extends State<ConfirmPlanScreen> {
     );
   }
 
-  void goToPaymentScreen(String planName) {
-    Navigator.push(
+  Future<void> goToPaymentScreen(String planName) async {
+    await Navigator.push(
       context,
       PageRouteBuilder(
         transitionDuration: Duration(milliseconds: 500),
