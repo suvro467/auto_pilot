@@ -27,34 +27,55 @@ class _ConfirmPlanScreenState extends State<ConfirmPlanScreen> {
         'name': 'Single User',
         'cost': 'Rs. 4000',
         'period': 'billed annually',
-        'desc': 'This is the best plan for self-employed and freelancer'
+        'desc': 'This is the best plan for self-employed and freelancer',
+        'text1': 'Ease of design and implementation at speed with high ROI',
+        'text2': 'Solutions for any size company or industry',
+        'text3':
+            'Connect sales, service, marketing, commerce and IT, personalize experiences',
       },
       {
         'name': 'Upto 10 Users',
         'cost': 'Rs. 500 / user / month',
         'period': 'billed annually',
         'desc':
-            'This is the best plan for small organisations on the path to growth'
+            'This is the best plan for small organisations on the path to growth',
+        'text1': 'Ease of design and implementation at speed with high ROI',
+        'text2': 'Solutions for any size company or industry',
+        'text3':
+            'Connect sales, service, marketing, commerce and IT, personalize experiences',
       },
       {
         'name': 'Upto 50 Users',
         'cost': 'Rs. 400 / user / month',
         'period': 'billed annually',
-        'desc': 'Best plan for mid size companies working on business processes'
+        'desc':
+            'Best plan for mid size companies working on business processes',
+        'text1': 'Ease of design and implementation at speed with high ROI',
+        'text2': 'Solutions for any size company or industry',
+        'text3':
+            'Connect sales, service, marketing, commerce and IT, personalize experiences',
       },
       {
         'name': 'More than 50 Users',
         'cost': 'Rs. 300 / user / month',
         'period': 'billed annually',
         'desc':
-            'Best plan for large organization working on streamlining their business processes'
+            'Best plan for large organization working on streamlining their business processes',
+        'text1': 'Ease of design and implementation at speed with high ROI',
+        'text2': 'Solutions for any size company or industry',
+        'text3':
+            'Connect sales, service, marketing, commerce and IT, personalize experiences',
       },
       {
         'name': '& Days Trial',
         'cost': 'Rs. 500',
         'period': 'billed One-Time',
         'desc':
-            'Try out the application with upto 50 users before subscribing to any plan'
+            'Try out the application with upto 50 users before subscribing to any plan',
+        'text1': 'Ease of design and implementation at speed with high ROI',
+        'text2': 'Solutions for any size company or industry',
+        'text3':
+            'Connect sales, service, marketing, commerce and IT, personalize experiences',
       },
     ];
   }
@@ -154,7 +175,7 @@ class _ConfirmPlanScreenState extends State<ConfirmPlanScreen> {
                                                           .width *
                                                       90 /
                                                       100,
-                                                  430),
+                                                  500),
                                             ),
                                             child: Container(
                                               decoration: BoxDecoration(
@@ -417,6 +438,137 @@ class _ConfirmPlanScreenState extends State<ConfirmPlanScreen> {
                                                       ),
                                                     ),
                                                   ),
+                                                  Stack(children: [
+                                                    Row(
+                                                      children: [
+                                                        Flexible(
+                                                          child: Container(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                              left: 50,
+                                                              right: 30,
+                                                              top: 20,
+                                                            ),
+                                                            child: Text(
+                                                              plans[0]['text1'],
+                                                              style: GoogleFonts
+                                                                  .notoSans(
+                                                                fontSize: 14,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                                color: HexColor(
+                                                                    '#707070'),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    Positioned(
+                                                      left: 20,
+                                                      child: Text(
+                                                        '1',
+                                                        style: GoogleFonts
+                                                            .notoSerif(
+                                                          fontSize: 36,
+                                                          color:
+                                                              MyAutoPilotStyles
+                                                                  .appColor,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ]),
+                                                  Stack(children: [
+                                                    Row(
+                                                      children: [
+                                                        Flexible(
+                                                          child: Container(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                              left: 50,
+                                                              right: 30,
+                                                              top: 20,
+                                                            ),
+                                                            child: Text(
+                                                              plans[0]['text2'],
+                                                              style: GoogleFonts
+                                                                  .notoSans(
+                                                                fontSize: 14,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                                color: HexColor(
+                                                                    '#707070'),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    Positioned(
+                                                      left: 20,
+                                                      child: Text(
+                                                        '2',
+                                                        style: GoogleFonts
+                                                            .notoSerif(
+                                                          fontSize: 36,
+                                                          color:
+                                                              MyAutoPilotStyles
+                                                                  .appColor,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ]),
+                                                  Stack(children: [
+                                                    Row(
+                                                      children: [
+                                                        Flexible(
+                                                          child: Container(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                              left: 50,
+                                                              right: 30,
+                                                              top: 20,
+                                                            ),
+                                                            child: Text(
+                                                              plans[0]['text3'],
+                                                              style: GoogleFonts
+                                                                  .notoSans(
+                                                                fontSize: 14,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                                color: HexColor(
+                                                                    '#707070'),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    Positioned(
+                                                      left: 20,
+                                                      child: Text(
+                                                        '3',
+                                                        style: GoogleFonts
+                                                            .notoSerif(
+                                                          fontSize: 36,
+                                                          color:
+                                                              MyAutoPilotStyles
+                                                                  .appColor,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ]),
+
+                                                  // Confirm Button
                                                   Container(
                                                     padding: EdgeInsets.only(
                                                         top: 20),
