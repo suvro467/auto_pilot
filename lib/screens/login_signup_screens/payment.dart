@@ -564,7 +564,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                                   .text.isEmpty ||
                                               !_isCardNumberValid ||
                                               _cardNumberController
-                                                  .text.isEmpty) {
+                                                  .text.isEmpty ||
+                                              (_cardNumberController
+                                                      .text.isNotEmpty &&
+                                                  _cardNumberController
+                                                          .text.length !=
+                                                      19)) {
                                             if (_customerNameController
                                                 .text.isEmpty)
                                               _isCustomerNameValid = false;
