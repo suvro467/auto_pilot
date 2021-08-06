@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:auto_pilot/screens/login_signup_screens/payment.dart';
 import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:auto_pilot/shared/widgets/rounded_rectangular_shadow.dart';
 import 'package:flutter/material.dart';
@@ -597,8 +598,10 @@ class _ConfirmPlanScreenState extends State<ConfirmPlanScreen> {
                                                                     width: 150,
                                                                     height: 55),
                                                         child: ElevatedButton(
-                                                          onPressed:
-                                                              () async {},
+                                                          onPressed: () async {
+                                                            goToPaymentScreen(
+                                                                '1');
+                                                          },
                                                           style: ElevatedButton
                                                               .styleFrom(
                                                             shape:
@@ -3010,6 +3013,31 @@ class _ConfirmPlanScreenState extends State<ConfirmPlanScreen> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  void goToPaymentScreen(String planName) {
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        transitionDuration: Duration(milliseconds: 500),
+        pageBuilder: (BuildContext context, Animation<double> animation,
+            Animation<double> secondaryAnimation) {
+          return PaymentScreen();
+        },
+        transitionsBuilder: (BuildContext context, Animation<double> animation,
+            Animation<double> secondaryAnimation, Widget child) {
+          return Align(
+            child: SlideTransition(
+              position: Tween(
+                begin: Offset(1.0, 0.0),
+                end: Offset(0.0, 0.0),
+              ).animate(animation),
+              child: child,
+            ),
+          );
+        },
       ),
     );
   }
