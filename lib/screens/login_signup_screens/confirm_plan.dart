@@ -22,10 +22,46 @@ class ConfirmPlanScreen extends StatefulWidget {
 
 class _ConfirmPlanScreenState extends State<ConfirmPlanScreen> {
   bool _isObscure = true;
+  List<Map<String, dynamic>> plans = [];
 
   @override
   void initState() {
     super.initState();
+    plans = [
+      {
+        'name': 'Single User',
+        'cost': 'Rs. 4000',
+        'period': 'billed annually',
+        'desc': 'This is the best plan for self-employed and freelancer'
+      },
+      {
+        'name': 'Upto 10 Users',
+        'cost': 'Rs. 500 / user / month',
+        'period': 'billed annually',
+        'desc':
+            'This is the best plan for small organisations on the path to growth'
+      },
+      {
+        'name': 'Upto 50 Users',
+        'cost': 'Rs. 400 / user / month',
+        'period': 'billed annually',
+        'desc': 'Best plan for mid size companies working on business processes'
+      },
+      {
+        'name': 'More than 50 Users',
+        'cost': 'Rs. 300 / user / month',
+        'period': 'billed annually',
+        'desc':
+            'Best plan for large organization working on streamlining their business processes'
+      },
+      {
+        'name': '& Days Trial',
+        'cost': 'Rs. 500',
+        'period': 'billed One-Time',
+        'desc':
+            'Try out the application with upto 50 users before subscribing to any plan'
+      },
+    ];
   }
 
   @override
@@ -108,7 +144,7 @@ class _ConfirmPlanScreenState extends State<ConfirmPlanScreen> {
                           children: [
                             Expanded(
                               child: InkWell(
-                                onTap: () {},
+                                onTap: () async {},
                                 child: Container(
                                   child: CustomPaint(
                                     painter: RoundedRectangularShadowPainter(
