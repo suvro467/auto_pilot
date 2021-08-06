@@ -1,15 +1,9 @@
 import 'dart:io';
 
-import 'package:auto_pilot/screens/home.dart';
-import 'package:auto_pilot/screens/login_signup_screens/signup_screen.dart';
-import 'package:auto_pilot/shared/globals.dart';
 import 'package:auto_pilot/shared/presentation/styles.dart';
-import 'package:auto_pilot/shared/widgets/loading_dialog.dart';
 import 'package:auto_pilot/shared/widgets/rounded_rectangular_shadow.dart';
-import 'package:auto_pilot/shared/widgets/show_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -144,7 +138,195 @@ class _ConfirmPlanScreenState extends State<ConfirmPlanScreen> {
                           children: [
                             Expanded(
                               child: InkWell(
-                                onTap: () async {},
+                                onTap: () async {
+                                  await showModalBottomSheet(
+                                      context: context,
+                                      backgroundColor: Colors.transparent,
+                                      builder: (builder) {
+                                        return Align(
+                                          alignment: Alignment.bottomCenter,
+                                          child: ConstrainedBox(
+                                            constraints: BoxConstraints.tight(
+                                              Size(
+                                                  MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      90 /
+                                                      100,
+                                                  430),
+                                            ),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.only(
+                                                  topLeft:
+                                                      const Radius.circular(
+                                                          20.0),
+                                                  topRight:
+                                                      const Radius.circular(
+                                                          20.0),
+                                                ),
+                                              ),
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                      top: 30,
+                                                      left: 30,
+                                                    ),
+                                                    child: Row(
+                                                      children: [
+                                                        Text(
+                                                          plans[0]['name'],
+                                                          style: GoogleFonts
+                                                              .notoSerif(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color:
+                                                                MyAutoPilotStyles
+                                                                    .appColor,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                      top: 40,
+                                                      left: 30,
+                                                    ),
+                                                    child: Row(
+                                                      children: [
+                                                        Text(
+                                                          plans[0]['period'],
+                                                          style: GoogleFonts
+                                                              .notoSans(
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .normal,
+                                                            color: HexColor(
+                                                                '#707070'),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                      top: 5,
+                                                      left: 30,
+                                                      right: 40,
+                                                    ),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Container(
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              35 /
+                                                              100,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .end,
+                                                            children: [
+                                                              Container(),
+                                                              Text(
+                                                                'From',
+                                                                style: GoogleFonts
+                                                                    .notoSans(
+                                                                  fontSize: 10,
+                                                                  color: HexColor(
+                                                                      '#707070'),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .normal,
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              35 /
+                                                              100,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .end,
+                                                            children: [
+                                                              Text(
+                                                                'To',
+                                                                style: GoogleFonts
+                                                                    .notoSans(
+                                                                  fontSize: 10,
+                                                                  color: HexColor(
+                                                                      '#707070'),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .normal,
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ), // Set Filter Button
+                                                  Container(
+                                                    padding: EdgeInsets.only(
+                                                        top: 20),
+                                                    child: ConstrainedBox(
+                                                      constraints:
+                                                          BoxConstraints
+                                                              .tightFor(
+                                                                  width: 150,
+                                                                  height: 55),
+                                                      child: ElevatedButton(
+                                                        onPressed: () async {},
+                                                        style: ElevatedButton
+                                                            .styleFrom(
+                                                          shape:
+                                                              RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        30.0),
+                                                          ),
+                                                          primary:
+                                                              MyAutoPilotStyles
+                                                                  .appColor,
+                                                        ),
+                                                        child: Text(
+                                                          'CONFIRM',
+                                                          style: GoogleFonts
+                                                              .notoSerif(
+                                                            fontSize: 17,
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      });
+                                },
                                 child: Container(
                                   child: CustomPaint(
                                     painter: RoundedRectangularShadowPainter(
