@@ -665,6 +665,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                             setState(() {
                                               _isCustomerNameValid = true;
                                               _isCardNumberValid = true;
+                                              _isExpiryDateValid = true;
                                             });
 
                                             showDialog(
