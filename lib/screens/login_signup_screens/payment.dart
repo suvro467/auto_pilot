@@ -23,15 +23,18 @@ class _PaymentScreenState extends State<PaymentScreen> {
   final TextEditingController _customerNameController = TextEditingController();
   final TextEditingController _cardNumberController = TextEditingController();
   final TextEditingController _expiryDateController = TextEditingController();
+  final TextEditingController _cvvController = TextEditingController();
 
   late String _validationText;
   late bool _isCustomerNameValid;
   late bool _isCardNumberValid;
   late bool _isExpiryDateValid;
+  late bool _isCvvValid;
 
   late int _timesTappedCustomerName;
   late int _timesTappedCardNumber;
   late int _timesTappedExpiryDate;
+  late int _timesTappedCvv;
 
   @override
   void initState() {
@@ -41,10 +44,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
     _isCustomerNameValid = true;
     _isCardNumberValid = true;
     _isExpiryDateValid = true;
+    _isCvvValid = true;
 
     _timesTappedCustomerName = 0;
     _timesTappedCardNumber = 0;
     _timesTappedExpiryDate = 0;
+    _timesTappedCvv = 0;
 
     // Start listening to changes
     _customerNameController.addListener(() {
@@ -93,6 +98,23 @@ class _PaymentScreenState extends State<PaymentScreen> {
         });
       }
     });
+
+    _cvvController.addListener(() {
+      if (_cvvController.text.isEmpty && _timesTappedCvv > 0) {
+        setState(() {
+          _isCvvValid = false;
+        });
+      } else if (_cvvController.text.isNotEmpty &&
+          _cvvController.text.length != 3) {
+        setState(() {
+          _isCvvValid = true;
+        });
+      } else {
+        setState(() {
+          _isCvvValid = true;
+        });
+      }
+    });
   }
 
   @override
@@ -100,6 +122,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     _customerNameController.dispose();
     _cardNumberController.dispose();
     _expiryDateController.dispose();
+    _cvvController.dispose();
     super.dispose();
   }
 
@@ -586,38 +609,84 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                             Radius.elliptical(5, 5),
                                           ),
                                         ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                            left: 5.0,
-                                            right: 5,
-                                          ),
-                                          child: TextFormField(
-                                            keyboardType: TextInputType.number,
-                                            inputFormatters: [
-                                              FilteringTextInputFormatter
-                                                  .digitsOnly,
-                                              LengthLimitingTextInputFormatter(
-                                                  3)
-                                            ],
-                                            textInputAction:
-                                                TextInputAction.done,
-                                            cursorColor:
-                                                Colors.grey.withOpacity(0.8),
-                                            style: GoogleFonts.notoSans(
-                                              fontSize: 16,
-                                              color: HexColor('#707070'),
-                                              fontWeight: FontWeight.normal,
+                                        child: Stack(children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 5.0,
+                                              right: 5,
                                             ),
-                                            decoration: InputDecoration(
-                                              //hintText: 'Name',
-                                              focusedBorder: InputBorder.none,
-                                              enabledBorder: InputBorder.none,
-                                              errorBorder: InputBorder.none,
-                                              disabledBorder: InputBorder.none,
-                                              border: InputBorder.none,
+                                            child: TextFormField(
+                                              validator: (value) {
+                                                return null;
+                                              },
+                                              controller: _cvvController,
+                                              onChanged: (value) {
+                                                _timesTappedCvv += 1;
+                                              },
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly,
+                                                LengthLimitingTextInputFormatter(
+                                                    3)
+                                              ],
+                                              textInputAction:
+                                                  TextInputAction.done,
+                                              cursorColor:
+                                                  Colors.grey.withOpacity(0.8),
+                                              style: GoogleFonts.notoSans(
+                                                fontSize: 16,
+                                                color: HexColor('#707070'),
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                              decoration: InputDecoration(
+                                                //hintText: 'Name',
+                                                focusedBorder: InputBorder.none,
+                                                enabledBorder: InputBorder.none,
+                                                errorBorder: InputBorder.none,
+                                                disabledBorder:
+                                                    InputBorder.none,
+                                                border: InputBorder.none,
+                                              ),
                                             ),
                                           ),
-                                        ),
+                                          !_isCvvValid
+                                              ? Positioned(
+                                                  right: 5.0,
+                                                  top: 30.0,
+                                                  child: new Container(
+                                                    child: Text(
+                                                      'Required',
+                                                      style: TextStyle(
+                                                        color: Globals
+                                                            .validationColor,
+                                                        fontSize: 10.0,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                )
+                                              : (_cvvController
+                                                          .text.isNotEmpty &&
+                                                      _cvvController
+                                                              .text.length !=
+                                                          3
+                                                  ? Positioned(
+                                                      right: 5.0,
+                                                      top: 30.0,
+                                                      child: new Container(
+                                                        child: Text(
+                                                          'Invalid CVV.',
+                                                          style: TextStyle(
+                                                            color: MyAutoPilotStyles
+                                                                .validationColor,
+                                                            fontSize: 10.0,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    )
+                                                  : Container())
+                                        ]),
                                       ),
                                     ),
                                   ],
@@ -647,7 +716,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                                       .text.isNotEmpty &&
                                                   _expiryDateController
                                                           .text.length !=
-                                                      5)) {
+                                                      5) ||
+                                              !_isCvvValid ||
+                                              _cvvController.text.isEmpty ||
+                                              (_cvvController.text.isNotEmpty &&
+                                                  _cvvController.text.length !=
+                                                      3)) {
                                             if (_customerNameController
                                                 .text.isEmpty)
                                               _isCustomerNameValid = false;
@@ -657,16 +731,19 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                             if (_expiryDateController
                                                 .text.isEmpty)
                                               _isExpiryDateValid = false;
+                                            if (_cvvController.text.isEmpty)
+                                              _isCvvValid = false;
 
                                             setState(() {});
                                             ShowMessage.showFlushBar(context,
                                                 'Please rectify the errors.');
                                           } else {
-                                            setState(() {
+                                            /* setState(() {
                                               _isCustomerNameValid = true;
                                               _isCardNumberValid = true;
                                               _isExpiryDateValid = true;
-                                            });
+                                              _isCvvValid = true;
+                                            }); */
 
                                             showDialog(
                                               context: context,
