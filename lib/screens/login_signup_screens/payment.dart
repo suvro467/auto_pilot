@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:auto_pilot/screens/home.dart';
 import 'package:auto_pilot/shared/globals.dart';
 import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:auto_pilot/shared/widgets/loading_dialog.dart';
@@ -759,7 +760,41 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                                 new Duration(seconds: 3), () {
                                               Navigator.pop(
                                                   context); //pop dialog
-                                            }).then((value) {
+                                            }).then((value) async {
+                                              await Navigator.pushReplacement(
+                                                context,
+                                                PageRouteBuilder(
+                                                  transitionDuration: Duration(
+                                                      milliseconds: 500),
+                                                  pageBuilder: (BuildContext
+                                                          context,
+                                                      Animation<double>
+                                                          animation,
+                                                      Animation<double>
+                                                          secondaryAnimation) {
+                                                    return HomeScreen();
+                                                  },
+                                                  transitionsBuilder:
+                                                      (BuildContext context,
+                                                          Animation<double>
+                                                              animation,
+                                                          Animation<double>
+                                                              secondaryAnimation,
+                                                          Widget child) {
+                                                    return Align(
+                                                      child: SlideTransition(
+                                                        position: Tween(
+                                                                begin: Offset(
+                                                                    1.0, 0.0),
+                                                                end: Offset(
+                                                                    0.0, 0.0))
+                                                            .animate(animation),
+                                                        child: child,
+                                                      ),
+                                                    );
+                                                  },
+                                                ),
+                                              );
                                               // After successfull signup, show a dialog to return to the login screen.
                                               // If sign up is successfull without any errors, show the following screen
                                               /* showDialog(
