@@ -914,7 +914,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                                                             55),
                                                                     child: ElevatedButton(
                                                                         onPressed: () async {
-                                                                          await Navigator
+                                                                          Navigator
                                                                               .pushReplacement(
                                                                             context,
                                                                             PageRouteBuilder(
