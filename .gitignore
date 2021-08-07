@@ -52,3 +52,4 @@ app.*.map.json
 .flutter-plugins-dependencies
 .dart_tool/flutter_build/cd7df02e827653e1508281c4e2e758bc/.filecache
 .packages
+.flutter-plugins
