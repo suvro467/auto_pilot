@@ -1010,7 +1010,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         String year = '20' + text.substring(3, 5);
         if (DateTime.now().year > int.parse(year)) {
           return false;
-        } else if (int.parse(month) > 12) {
+        } else if (int.parse(month) > 12 || int.parse(month) == 0) {
           return false;
         } else if (int.parse(year) == DateTime.now().year &&
             DateTime.now().month > int.parse(month)) {
