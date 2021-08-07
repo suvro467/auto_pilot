@@ -14,7 +14,8 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PaymentScreen extends StatefulWidget {
-  const PaymentScreen({Key? key}) : super(key: key);
+  int planNumberSelected;
+  PaymentScreen({required this.planNumberSelected, Key? key}) : super(key: key);
 
   @override
   _PaymentScreenState createState() => _PaymentScreenState();
@@ -761,43 +762,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                               Navigator.pop(
                                                   context); //pop dialog
                                             }).then((value) async {
-                                              await Navigator.pushReplacement(
-                                                context,
-                                                PageRouteBuilder(
-                                                  transitionDuration: Duration(
-                                                      milliseconds: 500),
-                                                  pageBuilder: (BuildContext
-                                                          context,
-                                                      Animation<double>
-                                                          animation,
-                                                      Animation<double>
-                                                          secondaryAnimation) {
-                                                    return HomeScreen();
-                                                  },
-                                                  transitionsBuilder:
-                                                      (BuildContext context,
-                                                          Animation<double>
-                                                              animation,
-                                                          Animation<double>
-                                                              secondaryAnimation,
-                                                          Widget child) {
-                                                    return Align(
-                                                      child: SlideTransition(
-                                                        position: Tween(
-                                                                begin: Offset(
-                                                                    1.0, 0.0),
-                                                                end: Offset(
-                                                                    0.0, 0.0))
-                                                            .animate(animation),
-                                                        child: child,
-                                                      ),
-                                                    );
-                                                  },
-                                                ),
-                                              );
-                                              // After successfull signup, show a dialog to return to the login screen.
-                                              // If sign up is successfull without any errors, show the following screen
-                                              /* showDialog(
+                                              // If Payment is successfull, show a message to the user.
+
+                                              await showDialog(
                                                 context: context,
                                                 barrierDismissible: false,
                                                 builder:
@@ -954,7 +921,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                                                             PageRouteBuilder(
                                                                               transitionDuration: Duration(milliseconds: 500),
                                                                               pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
-                                                                                return FirstTimeLoginScreen();
+                                                                                return HomeScreen();
                                                                               },
                                                                               transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
                                                                                 return Align(
@@ -977,7 +944,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                                                               MyAutoPilotStyles.appColor,
                                                                         ),
                                                                         child: Text(
-                                                                          'GO TO LOGIN',
+                                                                          'GO TO DASHBOARD',
                                                                           style:
                                                                               GoogleFonts.notoSerif(
                                                                             fontSize:
@@ -999,7 +966,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                                   );
                                                 },
                                               );
-                                             */
+                                              // After successfull signup, show a dialog to return to the login screen.
+                                              // If sign up is successfull without any errors, show the following screen
                                             });
                                           }
                                         },
