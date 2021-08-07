@@ -97,6 +97,11 @@ class _AddUser1State extends State<AddUser1>
   String uploadedFile = '';
   bool isFileUploaded = false;
 
+  late FocusNode focusNodePhoneNumber;
+  late FocusNode focusNodeEmail;
+  late FocusNode focusNodeDesignation;
+  late FocusNode focusNodeSubordinateCount;
+
   @override
   void initState() {
     super.initState();
@@ -115,6 +120,11 @@ class _AddUser1State extends State<AddUser1>
     _timesTappedEmail = 0;
     _timesTappedDesignation = 0;
     _timesTappedSubordinateCount = 0;
+
+    focusNodePhoneNumber = FocusNode();
+    focusNodeEmail = FocusNode();
+    focusNodeDesignation = FocusNode();
+    focusNodeSubordinateCount = FocusNode();
 
     // Start listening to changes
     _userNameController.addListener(() {
@@ -216,7 +226,6 @@ class _AddUser1State extends State<AddUser1>
 
   @override
   void dispose() {
-    super.dispose();
     _tabController.dispose();
     _userNameController.dispose();
     _emailController.dispose();
@@ -224,6 +233,12 @@ class _AddUser1State extends State<AddUser1>
     _designationController.dispose();
     _levelController.dispose();
     _subordinateCountController.dispose();
+
+    focusNodePhoneNumber.dispose();
+    focusNodeEmail.dispose();
+    focusNodeDesignation.dispose();
+    focusNodeSubordinateCount.dispose();
+    super.dispose();
   }
 
   @override
@@ -319,6 +334,10 @@ class _AddUser1State extends State<AddUser1>
                             return null;
                           },
                           textInputAction: TextInputAction.next,
+                          onFieldSubmitted: (v) {
+                            FocusScope.of(context)
+                                .requestFocus(focusNodePhoneNumber);
+                          },
                           controller: _userNameController,
                           onChanged: (value) {
                             _timesTappedUserName += 1;
@@ -477,6 +496,10 @@ class _AddUser1State extends State<AddUser1>
                             return null;
                           },
                           textInputAction: TextInputAction.next,
+                          focusNode: focusNodePhoneNumber,
+                          onFieldSubmitted: (v) {
+                            FocusScope.of(context).requestFocus(focusNodeEmail);
+                          },
                           controller: _phoneNumberController,
                           keyboardType: TextInputType.number,
                           inputFormatters: [
@@ -550,6 +573,11 @@ class _AddUser1State extends State<AddUser1>
                           controller: _emailController,
                           onChanged: (value) {
                             _timesTappedEmail += 1;
+                          },
+                          focusNode: focusNodeEmail,
+                          onFieldSubmitted: (v) {
+                            FocusScope.of(context)
+                                .requestFocus(focusNodeDesignation);
                           },
                           decoration: InputDecoration(
                             labelStyle: GoogleFonts.notoSerif(
@@ -741,6 +769,11 @@ class _AddUser1State extends State<AddUser1>
                           onChanged: (value) {
                             _timesTappedDesignation += 1;
                           },
+                          focusNode: focusNodeDesignation,
+                          onFieldSubmitted: (v) {
+                            FocusScope.of(context)
+                                .requestFocus(focusNodeSubordinateCount);
+                          },
                           decoration: InputDecoration(
                             labelStyle: GoogleFonts.notoSerif(
                               fontSize: 14,
@@ -917,6 +950,7 @@ class _AddUser1State extends State<AddUser1>
                           onChanged: (value) {
                             _timesTappedSubordinateCount += 1;
                           },
+                          focusNode: focusNodeSubordinateCount,
                           keyboardType: TextInputType.number,
                           inputFormatters: [
                             FilteringTextInputFormatter.digitsOnly,
