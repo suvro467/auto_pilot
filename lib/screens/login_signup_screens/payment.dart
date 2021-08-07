@@ -89,9 +89,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
           _isExpiryDateValid = false;
         });
       } else if (_expiryDateController.text.isNotEmpty &&
-          _expiryDateController.text.length != 5) {
+          !isValidMonthYear(_expiryDateController.text)) {
         setState(() {
-          _isExpiryDateValid = true;
+          _isExpiryDateValid = false;
         });
       } else {
         setState(() {
@@ -568,7 +568,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                                   top: 30.0,
                                                   child: new Container(
                                                     child: Text(
-                                                      'Required',
+                                                      'Invalid Date',
                                                       style: TextStyle(
                                                         color: Globals
                                                             .validationColor,
@@ -577,26 +577,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                                     ),
                                                   ),
                                                 )
-                                              : (_expiryDateController
-                                                          .text.isNotEmpty &&
-                                                      _expiryDateController
-                                                              .text.length !=
-                                                          5
-                                                  ? Positioned(
-                                                      right: 5.0,
-                                                      top: 30.0,
-                                                      child: new Container(
-                                                        child: Text(
-                                                          'Invalid Date.',
-                                                          style: TextStyle(
-                                                            color: MyAutoPilotStyles
-                                                                .validationColor,
-                                                            fontSize: 10.0,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    )
-                                                  : Container())
+                                              : Container()
                                         ]),
                                       ),
                                     ),
@@ -1020,5 +1001,28 @@ class _PaymentScreenState extends State<PaymentScreen> {
         ),
       ),
     );
+  }
+
+  bool isValidMonthYear(String text) {
+    if (text.isNotEmpty) {
+      if (text.length == 5) {
+        String month = text.substring(0, 2);
+        String year = '20' + text.substring(3, 5);
+        if (DateTime.now().year > int.parse(year)) {
+          return false;
+        } else if (int.parse(month) > 12) {
+          return false;
+        } else if (int.parse(year) == DateTime.now().year &&
+            DateTime.now().month > int.parse(month)) {
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
   }
 }
