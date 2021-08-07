@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:auto_pilot/shared/globals.dart';
 import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:auto_pilot/shared/widgets/loading_dialog.dart';
 import 'package:flutter/material.dart';
