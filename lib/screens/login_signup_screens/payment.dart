@@ -5,7 +5,6 @@ import 'package:auto_pilot/shared/globals.dart';
 import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:auto_pilot/shared/widgets/loading_dialog.dart';
 import 'package:auto_pilot/shared/widgets/masked_text_input_formatter.dart';
-import 'package:auto_pilot/shared/widgets/rounded_rectangular_shadow.dart';
 import 'package:auto_pilot/shared/widgets/show_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,7 +13,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PaymentScreen extends StatefulWidget {
-  int planNumberSelected;
+  final int planNumberSelected;
   PaymentScreen({required this.planNumberSelected, Key? key}) : super(key: key);
 
   @override
@@ -778,7 +777,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                                       child: Center(
                                                         child: SizedBox(
                                                           //width: width,
-                                                          height: 400,
+                                                          height: 290,
                                                           child: Container(
                                                             decoration:
                                                                 BoxDecoration(
@@ -848,7 +847,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                                                           top:
                                                                               20),
                                                                   child: Text(
-                                                                    'You can now login',
+                                                                    'Payment is successful.',
                                                                     style: GoogleFonts
                                                                         .notoSerif(
                                                                       fontSize:
@@ -862,7 +861,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                                                     ),
                                                                   ),
                                                                 ),
-                                                                Container(
+                                                                /* Container(
                                                                   margin:
                                                                       EdgeInsets
                                                                           .only(
@@ -884,8 +883,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                                                       //decoration: TextDecoration.underline,
                                                                     ),
                                                                   ),
-                                                                ),
-                                                                Container(
+                                                                ), */
+                                                                /* Container(
                                                                   child: Text(
                                                                     'login to the app and start using.',
                                                                     style: GoogleFonts
@@ -900,7 +899,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                                                       //decoration: TextDecoration.underline,
                                                                     ),
                                                                   ),
-                                                                ),
+                                                                ), */
                                                                 Padding(
                                                                   padding:
                                                                       EdgeInsets
@@ -910,7 +909,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                                                       ConstrainedBox(
                                                                     constraints: BoxConstraints.tightFor(
                                                                         width:
-                                                                            160,
+                                                                            210,
                                                                         height:
                                                                             55),
                                                                     child: ElevatedButton(
@@ -948,7 +947,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                                                           style:
                                                                               GoogleFonts.notoSerif(
                                                                             fontSize:
-                                                                                17,
+                                                                                15,
                                                                             color:
                                                                                 Colors.white,
                                                                             fontWeight:
