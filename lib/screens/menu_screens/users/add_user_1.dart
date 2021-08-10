@@ -7,6 +7,7 @@ import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:auto_pilot/shared/widgets/show_message.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -409,85 +410,109 @@ class _AddUser1State extends State<AddUser1>
                       ),
                       child: Stack(
                         children: [
-                          DropdownSearch<Map<String, dynamic>>(
-                            showSelectedItem: false,
-                            itemAsString: (item) {
-                              return item['ISD'] +
-                                  ' (' +
-                                  (item['countryCode']) +
-                                  ')';
-                            },
-                            dropDownButton: DecoratedIcon(
-                              Icons.arrow_drop_down,
-                              size: 36,
-                              color: MyAutoPilotStyles.appColor,
-                              shadows: [
-                                BoxShadow(
-                                  color: Colors.black54,
-                                  blurRadius: 8.0,
-                                  offset: Offset(1.0, 2.0),
-                                ),
-                                BoxShadow(
-                                  blurRadius: 12.0,
-                                  color: Colors.white,
-                                ),
-                              ],
-                            ),
-                            showAsSuffixIcons: true,
-                            validator: (v) =>
-                                v == null ? "required field" : null,
-                            dropdownSearchDecoration: InputDecoration(
-                              labelStyle: GoogleFonts.notoSerif(
-                                fontSize: 14,
-                                color: HexColor('#C9C9C9'),
-                                fontWeight: FontWeight.normal,
-                              ),
-                              prefixIcon: Transform.scale(
-                                scale: 0.7,
-                                child: SvgPicture.asset(
-                                  'assets/images/phone.svg',
-                                  color: MyAutoPilotStyles.appColor,
-                                  height: 10,
-                                  width: 10,
-                                ),
-                              ),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: MyAutoPilotStyles.appColor),
-                              ),
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: MyAutoPilotStyles.appColor),
-                              ),
-                              hintStyle: GoogleFonts.notoSerif(
-                                fontSize: 14,
-                                color: HexColor('#C9C9C9'),
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                            mode: Mode.DIALOG,
-                            items: Globals.countryISDCodes,
-                            maxHeight:
-                                (Globals.countryISDCodes.length).toDouble() *
-                                    55,
-                            showClearButton: false,
-                            selectedItem: selectedCountryISDCode,
-                            onChanged: (value) async {
-                              selectedCountryISDCode = value!;
-                              _countryISDCode = '';
-                            },
-                          ),
-                          /* Positioned(
-                              left: 50,
-                              top: 10,
-                              child: Text(_countryISDCode,
+                          Row(
+                            children: [
+                              Expanded(
+                                child: DropdownButton(
+                                  selectedItemBuilder: (BuildContext context) {
+                                    return Globals.countryISDCodes.map<Widget>(
+                                        (Map<String, dynamic> items) {
+                                      return Padding(
+                                        padding: EdgeInsets.only(
+                                          left: 40.0,
+                                          top: 15,
+                                        ),
+                                        child: Text(
+                                          items['ISD'] +
+                                              ' (' +
+                                              items['countryCode'] +
+                                              ')',
+                                          style: GoogleFonts.notoSerif(
+                                            fontSize: 14,
+                                            color: HexColor('#707070'),
+                                            fontWeight: FontWeight.normal,
+                                            //decoration: TextDecoration.underline,
+                                          ),
+                                        ),
+                                      );
+                                    }).toList();
+                                  },
+                                  elevation: 16,
+                                  iconSize: 36,
+                                  iconEnabledColor: MyAutoPilotStyles.appColor,
+                                  underline: Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: Divider(
+                                      color: MyAutoPilotStyles.appColor,
+                                      height: 1.0,
+                                      thickness: 1,
+                                    ),
+                                  ),
                                   style: GoogleFonts.notoSerif(
                                     fontSize: 14,
-                                    color: HexColor('#C9C9C9'),
+                                    color: HexColor('#707070'),
                                     fontWeight: FontWeight.normal,
-                                    //decoration: TextDecoration.underline,
-                                  )),
-                            ) */
+                                  ),
+                                  value: selectedCountryISDCode,
+                                  isExpanded: true,
+                                  icon: Icon(
+                                    Icons.arrow_drop_down,
+                                    color: MyAutoPilotStyles.appColor,
+                                    //size: 30,
+                                  ),
+                                  items: Globals.countryISDCodes
+                                      .map((Map<String, dynamic> items) {
+                                    return DropdownMenuItem(
+                                      value: items,
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                            //left: 40.0,
+                                            //top: 15,
+                                            ),
+                                        child: Text(
+                                          items['ISD'] +
+                                              ' (' +
+                                              items['countryCode'] +
+                                              ')',
+                                          style: GoogleFonts.notoSerif(
+                                            fontSize: 14,
+                                            color: HexColor('#707070'),
+                                            fontWeight: FontWeight.normal,
+                                            //decoration: TextDecoration.underline,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      /* selectedCountryISDCode = Globals.countryISDCodes
+                                                  .where((element) =>
+                                                      element['name'] == value)
+                                                  .first; */
+
+                                      selectedCountryISDCode = Globals
+                                          .countryISDCodes
+                                          .firstWhere((element) => mapEquals(
+                                              element,
+                                              value as Map<String, dynamic>));
+                                      _countryISDCode = '';
+                                    });
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                          Positioned(
+                            //left: 20,
+                            top: 5,
+                            child: SvgPicture.asset(
+                              'assets/images/phone.svg',
+                              color: MyAutoPilotStyles.appColor,
+                              height: 30,
+                              width: 30,
+                            ),
+                          )
                         ],
                       ),
                     ),
