@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:auto_pilot/screens/home.dart';
+import 'package:auto_pilot/screens/menu_screens/users/user_list1.dart';
 import 'package:auto_pilot/shared/globals.dart';
 import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:auto_pilot/shared/widgets/loading_dialog.dart';
@@ -13,8 +14,15 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PaymentScreen extends StatefulWidget {
-  final int planNumberSelected;
-  PaymentScreen({required this.planNumberSelected, Key? key}) : super(key: key);
+  final String calledFrom;
+  int planNumberSelected;
+  double amountPerYear;
+  PaymentScreen(
+      {required this.calledFrom,
+      this.planNumberSelected = 0,
+      this.amountPerYear = 0,
+      Key? key})
+      : super(key: key);
 
   @override
   _PaymentScreenState createState() => _PaymentScreenState();
@@ -895,24 +903,49 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                                                             55),
                                                                     child: ElevatedButton(
                                                                         onPressed: () async {
-                                                                          Navigator
-                                                                              .pushReplacement(
-                                                                            context,
-                                                                            PageRouteBuilder(
-                                                                              transitionDuration: Duration(milliseconds: 500),
-                                                                              pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
-                                                                                return HomeScreen();
-                                                                              },
-                                                                              transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
-                                                                                return Align(
-                                                                                  child: SlideTransition(
-                                                                                    position: Tween(begin: Offset(1.0, 0.0), end: Offset(0.0, 0.0)).animate(animation),
-                                                                                    child: child,
-                                                                                  ),
-                                                                                );
-                                                                              },
-                                                                            ),
-                                                                          );
+                                                                          if (widget.calledFrom ==
+                                                                              'confirm_plan.dart') {
+                                                                            Navigator.pushReplacement(
+                                                                              context,
+                                                                              PageRouteBuilder(
+                                                                                transitionDuration: Duration(milliseconds: 500),
+                                                                                pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+                                                                                  return HomeScreen(
+                                                                                    initialPage: 0,
+                                                                                  );
+                                                                                },
+                                                                                transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+                                                                                  return Align(
+                                                                                    child: SlideTransition(
+                                                                                      position: Tween(begin: Offset(1.0, 0.0), end: Offset(0.0, 0.0)).animate(animation),
+                                                                                      child: child,
+                                                                                    ),
+                                                                                  );
+                                                                                },
+                                                                              ),
+                                                                            );
+                                                                          } else if (widget.calledFrom ==
+                                                                              'add_user_1.dart') {
+                                                                            Navigator.pushReplacement(
+                                                                              context,
+                                                                              PageRouteBuilder(
+                                                                                transitionDuration: Duration(milliseconds: 500),
+                                                                                pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+                                                                                  return HomeScreen(
+                                                                                    initialPage: 5,
+                                                                                  );
+                                                                                },
+                                                                                transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+                                                                                  return Align(
+                                                                                    child: SlideTransition(
+                                                                                      position: Tween(begin: Offset(1.0, 0.0), end: Offset(0.0, 0.0)).animate(animation),
+                                                                                      child: child,
+                                                                                    ),
+                                                                                  );
+                                                                                },
+                                                                              ),
+                                                                            );
+                                                                          }
                                                                         },
                                                                         style: ElevatedButton.styleFrom(
                                                                           shape:
@@ -924,7 +957,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                                                               MyAutoPilotStyles.appColor,
                                                                         ),
                                                                         child: Text(
-                                                                          'GO TO DASHBOARD',
+                                                                          widget.calledFrom == 'confirm_plan.dart'
+                                                                              ? 'GO TO DASHBOARD'
+                                                                              : (widget.calledFrom == 'add_user_1.dart' ? 'OK' : 'OK'),
                                                                           style:
                                                                               GoogleFonts.notoSerif(
                                                                             fontSize:

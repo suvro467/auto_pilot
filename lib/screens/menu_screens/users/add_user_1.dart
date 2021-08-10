@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:auto_pilot/screens/login_signup_screens/payment.dart';
 import 'package:auto_pilot/shared/globals.dart';
 import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:auto_pilot/shared/widgets/show_message.dart';
@@ -1851,6 +1852,58 @@ class _AddUser1State extends State<AddUser1>
                                                     child: ElevatedButton(
                                                       onPressed: () async {
                                                         Navigator.pop(context);
+                                                        await Navigator.push(
+                                                          context,
+                                                          PageRouteBuilder(
+                                                            transitionDuration:
+                                                                Duration(
+                                                                    milliseconds:
+                                                                        500),
+                                                            pageBuilder: (BuildContext
+                                                                    context,
+                                                                Animation<
+                                                                        double>
+                                                                    animation,
+                                                                Animation<
+                                                                        double>
+                                                                    secondaryAnimation) {
+                                                              return PaymentScreen(
+                                                                  calledFrom:
+                                                                      'add_user_1.dart',
+                                                                  amountPerYear:
+                                                                      amountPerYear);
+                                                            },
+                                                            transitionsBuilder:
+                                                                (BuildContext
+                                                                        context,
+                                                                    Animation<
+                                                                            double>
+                                                                        animation,
+                                                                    Animation<
+                                                                            double>
+                                                                        secondaryAnimation,
+                                                                    Widget
+                                                                        child) {
+                                                              return Align(
+                                                                child:
+                                                                    SlideTransition(
+                                                                  position:
+                                                                      Tween(
+                                                                    begin:
+                                                                        Offset(
+                                                                            1.0,
+                                                                            0.0),
+                                                                    end: Offset(
+                                                                        0.0,
+                                                                        0.0),
+                                                                  ).animate(
+                                                                          animation),
+                                                                  child: child,
+                                                                ),
+                                                              );
+                                                            },
+                                                          ),
+                                                        );
                                                       },
                                                       style: ElevatedButton
                                                           .styleFrom(

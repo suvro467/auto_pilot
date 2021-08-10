@@ -529,7 +529,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                           Animation<double> animation,
                                           Animation<double>
                                               secondaryAnimation) {
-                                        return HomeScreen();
+                                        return HomeScreen(
+                                          initialPage: 0,
+                                        );
                                       },
                                       transitionsBuilder: (BuildContext context,
                                           Animation<double> animation,

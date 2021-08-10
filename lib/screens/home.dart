@@ -16,7 +16,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  final int initialPage;
+  const HomeScreen({required this.initialPage, Key? key}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -41,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     _pageController = PageController(
       keepPage: false,
-      initialPage: 0,
+      initialPage: widget.initialPage,
     );
 
     isDrawerClicked = true;
