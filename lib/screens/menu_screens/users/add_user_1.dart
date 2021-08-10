@@ -413,15 +413,62 @@ class _AddUser1State extends State<AddUser1>
                           Row(
                             children: [
                               Expanded(
-                                child: DropdownButton(
-                                  selectedItemBuilder: (BuildContext context) {
-                                    return Globals.countryISDCodes.map<Widget>(
-                                        (Map<String, dynamic> items) {
-                                      return Padding(
-                                        padding: EdgeInsets.only(
-                                          left: 40.0,
-                                          top: 15,
-                                        ),
+                                child: ButtonTheme(
+                                  alignedDropdown: true,
+                                  child: DropdownButton(
+                                    selectedItemBuilder:
+                                        (BuildContext context) {
+                                      return Globals.countryISDCodes
+                                          .map<Widget>(
+                                              (Map<String, dynamic> items) {
+                                        return Padding(
+                                          padding: EdgeInsets.only(
+                                            left: 30.0,
+                                            top: 15,
+                                          ),
+                                          child: Text(
+                                            items['ISD'] +
+                                                ' (' +
+                                                items['countryCode'] +
+                                                ')',
+                                            style: GoogleFonts.notoSerif(
+                                              fontSize: 14,
+                                              color: HexColor('#707070'),
+                                              fontWeight: FontWeight.normal,
+                                              //decoration: TextDecoration.underline,
+                                            ),
+                                          ),
+                                        );
+                                      }).toList();
+                                    },
+                                    elevation: 16,
+                                    iconSize: 36,
+                                    iconEnabledColor:
+                                        MyAutoPilotStyles.appColor,
+                                    underline: Padding(
+                                      padding: const EdgeInsets.only(top: 8.0),
+                                      child: Divider(
+                                        color: MyAutoPilotStyles.appColor,
+                                        height: 1.0,
+                                        thickness: 1,
+                                      ),
+                                    ),
+                                    style: GoogleFonts.notoSerif(
+                                      fontSize: 14,
+                                      color: HexColor('#707070'),
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                    value: selectedCountryISDCode,
+                                    isExpanded: true,
+                                    icon: Icon(
+                                      Icons.arrow_drop_down,
+                                      color: MyAutoPilotStyles.appColor,
+                                      //size: 30,
+                                    ),
+                                    items: Globals.countryISDCodes
+                                        .map((Map<String, dynamic> items) {
+                                      return DropdownMenuItem(
+                                        value: items,
                                         child: Text(
                                           items['ISD'] +
                                               ' (' +
@@ -435,76 +482,29 @@ class _AddUser1State extends State<AddUser1>
                                           ),
                                         ),
                                       );
-                                    }).toList();
-                                  },
-                                  elevation: 16,
-                                  iconSize: 36,
-                                  iconEnabledColor: MyAutoPilotStyles.appColor,
-                                  underline: Padding(
-                                    padding: const EdgeInsets.only(top: 8.0),
-                                    child: Divider(
-                                      color: MyAutoPilotStyles.appColor,
-                                      height: 1.0,
-                                      thickness: 1,
-                                    ),
-                                  ),
-                                  style: GoogleFonts.notoSerif(
-                                    fontSize: 14,
-                                    color: HexColor('#707070'),
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                  value: selectedCountryISDCode,
-                                  isExpanded: true,
-                                  icon: Icon(
-                                    Icons.arrow_drop_down,
-                                    color: MyAutoPilotStyles.appColor,
-                                    //size: 30,
-                                  ),
-                                  items: Globals.countryISDCodes
-                                      .map((Map<String, dynamic> items) {
-                                    return DropdownMenuItem(
-                                      value: items,
-                                      child: Padding(
-                                        padding: EdgeInsets.only(
-                                            //left: 40.0,
-                                            //top: 15,
-                                            ),
-                                        child: Text(
-                                          items['ISD'] +
-                                              ' (' +
-                                              items['countryCode'] +
-                                              ')',
-                                          style: GoogleFonts.notoSerif(
-                                            fontSize: 14,
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.normal,
-                                            //decoration: TextDecoration.underline,
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  }).toList(),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      /* selectedCountryISDCode = Globals.countryISDCodes
-                                                  .where((element) =>
-                                                      element['name'] == value)
-                                                  .first; */
+                                    }).toList(),
+                                    onChanged: (value) {
+                                      setState(() {
+                                        /* selectedCountryISDCode = Globals.countryISDCodes
+                                                    .where((element) =>
+                                                        element['name'] == value)
+                                                    .first; */
 
-                                      selectedCountryISDCode = Globals
-                                          .countryISDCodes
-                                          .firstWhere((element) => mapEquals(
-                                              element,
-                                              value as Map<String, dynamic>));
-                                      _countryISDCode = '';
-                                    });
-                                  },
+                                        selectedCountryISDCode = Globals
+                                            .countryISDCodes
+                                            .firstWhere((element) => mapEquals(
+                                                element,
+                                                value as Map<String, dynamic>));
+                                        _countryISDCode = '';
+                                      });
+                                    },
+                                  ),
                                 ),
                               ),
                             ],
                           ),
                           Positioned(
-                            //left: 20,
+                            left: 10,
                             top: 5,
                             child: SvgPicture.asset(
                               'assets/images/phone.svg',
@@ -688,7 +688,7 @@ class _AddUser1State extends State<AddUser1>
                               Icons.arrow_drop_down,
                               size: 36,
                               color: MyAutoPilotStyles.appColor,
-                              shadows: [
+                              /* shadows: [
                                 BoxShadow(
                                   color: Colors.black54,
                                   blurRadius: 8.0,
@@ -698,7 +698,7 @@ class _AddUser1State extends State<AddUser1>
                                   blurRadius: 12.0,
                                   color: Colors.white,
                                 ),
-                              ],
+                              ], */
                             ),
                             showAsSuffixIcons: true,
                             validator: (v) =>
