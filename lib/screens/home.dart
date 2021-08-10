@@ -25,6 +25,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState> _addUserScaffoldKey = GlobalKey<ScaffoldState>();
   late PageController _pageController;
   late int _currentIndex;
   bool isDrawerClicked = true;
@@ -329,7 +330,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return Container(
                   // Add User Screen 1
                   child: AddUser1(
-                    scaffoldKey: _scaffoldKey,
+                    scaffoldKey: _addUserScaffoldKey,
                     pageController: _pageController,
                   ),
                 );
@@ -345,32 +346,37 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        // Quit the app.
-        return await showDialog(
-          //show confirm dialogue
-          //the return value will be from "Yes" or "No" options
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text('Exit App'),
-            content: Text('Do you want to exit MyAutoPilot?'),
-            actions: [
-              ElevatedButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                //return false when click on "NO"
-                child: Text('No'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop(true);
-                  if (Platform.isAndroid)
-                    SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-                },
-                //return true when click on "Yes"
-                child: Text('Yes'),
-              ),
-            ],
-          ),
-        );
+        if (_pageController.page!.toInt() != 6) {
+          // Quit the app.
+          return await showDialog(
+            //show confirm dialogue
+            //the return value will be from "Yes" or "No" options
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text('Exit App'),
+              content: Text('Do you want to exit MyAutoPilot?'),
+              actions: [
+                ElevatedButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  //return false when click on "NO"
+                  child: Text('No'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(true);
+                    if (Platform.isAndroid)
+                      SystemChannels.platform
+                          .invokeMethod('SystemNavigator.pop');
+                  },
+                  //return true when click on "Yes"
+                  child: Text('Yes'),
+                ),
+              ],
+            ),
+          );
+        } else {
+          return true;
+        }
       },
       child: Scaffold(
         key: _scaffoldKey,

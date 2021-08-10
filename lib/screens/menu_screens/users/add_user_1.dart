@@ -20,14 +20,13 @@ class AddUser1 extends StatefulWidget {
 
   /* final int tabMenuSelected;
   final int taskItemTapped; */
-  const AddUser1(
-      {required this.scaffoldKey,
-      required this.pageController,
+  const AddUser1({
+    required this.scaffoldKey,
+    required this.pageController,
 
-      /* required this.tabMenuSelected,
+    /* required this.tabMenuSelected,
       required this.taskItemTapped, */
-      Key? key})
-      : super(key: key);
+  });
 
   @override
   _AddUser1State createState() => _AddUser1State();
@@ -251,9 +250,10 @@ class _AddUser1State extends State<AddUser1>
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
+      key: widget.scaffoldKey,
       onWillPop: () => Future.sync(onWillPop),
-      child: Material(
-        child: SafeArea(
+      child: Scaffold(
+        body: SafeArea(
           child: SingleChildScrollView(
             child: Container(
               //height: MediaQuery.of(context).size.height,
@@ -1968,6 +1968,16 @@ class _AddUser1State extends State<AddUser1>
   }
 
   FutureOr<bool> onWillPop() async {
+    // Reset the page to it's initial state
+    // before going to the previous screen
+    setState(() {
+      _isUserNameValid = true;
+      _isPhoneValid = true;
+      _isEmailBlank = true;
+      _isValidEmail = true;
+      _isDesignationValid = true;
+      _isSubordinateCountValid = true;
+    });
     await widget.pageController.animateToPage(
       5,
       duration: Duration(milliseconds: 500),
