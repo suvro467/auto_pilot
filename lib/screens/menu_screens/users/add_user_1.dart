@@ -410,109 +410,84 @@ class _AddUser1State extends State<AddUser1>
                       ),
                       child: Stack(
                         children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: ButtonTheme(
-                                  alignedDropdown: true,
-                                  child: DropdownButton(
-                                    selectedItemBuilder:
-                                        (BuildContext context) {
-                                      return Globals.countryISDCodes
-                                          .map<Widget>(
-                                              (Map<String, dynamic> items) {
-                                        return Padding(
-                                          padding: EdgeInsets.only(
-                                            left: 30.0,
-                                            top: 15,
-                                          ),
-                                          child: Text(
-                                            items['ISD'] +
-                                                ' (' +
-                                                items['countryCode'] +
-                                                ')',
-                                            style: GoogleFonts.notoSerif(
-                                              fontSize: 14,
-                                              color: HexColor('#707070'),
-                                              fontWeight: FontWeight.normal,
-                                              //decoration: TextDecoration.underline,
-                                            ),
-                                          ),
-                                        );
-                                      }).toList();
-                                    },
-                                    elevation: 16,
-                                    iconSize: 36,
-                                    iconEnabledColor:
-                                        MyAutoPilotStyles.appColor,
-                                    underline: Padding(
-                                      padding: const EdgeInsets.only(top: 8.0),
-                                      child: Divider(
-                                        color: MyAutoPilotStyles.appColor,
-                                        height: 1.0,
-                                        thickness: 1,
-                                      ),
-                                    ),
-                                    style: GoogleFonts.notoSerif(
-                                      fontSize: 14,
-                                      color: HexColor('#707070'),
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                                    value: selectedCountryISDCode,
-                                    isExpanded: true,
-                                    icon: Icon(
-                                      Icons.arrow_drop_down,
-                                      color: MyAutoPilotStyles.appColor,
-                                      //size: 30,
-                                    ),
-                                    items: Globals.countryISDCodes
-                                        .map((Map<String, dynamic> items) {
-                                      return DropdownMenuItem(
-                                        value: items,
-                                        child: Text(
-                                          items['ISD'] +
-                                              ' (' +
-                                              items['countryCode'] +
-                                              ')',
-                                          style: GoogleFonts.notoSerif(
-                                            fontSize: 14,
-                                            color: HexColor('#707070'),
-                                            fontWeight: FontWeight.normal,
-                                            //decoration: TextDecoration.underline,
-                                          ),
-                                        ),
-                                      );
-                                    }).toList(),
-                                    onChanged: (value) {
-                                      setState(() {
-                                        /* selectedCountryISDCode = Globals.countryISDCodes
-                                                    .where((element) =>
-                                                        element['name'] == value)
-                                                    .first; */
-
-                                        selectedCountryISDCode = Globals
-                                            .countryISDCodes
-                                            .firstWhere((element) => mapEquals(
-                                                element,
-                                                value as Map<String, dynamic>));
-                                        _countryISDCode = '';
-                                      });
-                                    },
-                                  ),
+                          DropdownSearch<Map<String, dynamic>>(
+                            showSelectedItem: false,
+                            itemAsString: (item) {
+                              return item['ISD'] +
+                                  ' (' +
+                                  (item['countryCode']) +
+                                  ')';
+                            },
+                            dropDownButton: DecoratedIcon(
+                              Icons.arrow_drop_down,
+                              size: 36,
+                              color: MyAutoPilotStyles.appColor,
+                              /* shadows: [
+                                BoxShadow(
+                                  color: Colors.black54,
+                                  blurRadius: 8.0,
+                                  offset: Offset(1.0, 2.0),
+                                ),
+                                BoxShadow(
+                                  blurRadius: 12.0,
+                                  color: Colors.white,
+                                ),
+                              ], */
+                            ),
+                            showAsSuffixIcons: true,
+                            validator: (v) =>
+                                v == null ? "required field" : null,
+                            dropdownSearchDecoration: InputDecoration(
+                              labelStyle: GoogleFonts.notoSerif(
+                                fontSize: 14,
+                                color: HexColor('#707070'),
+                                fontWeight: FontWeight.normal,
+                                //decoration: TextDecoration.underline,
+                              ),
+                              prefixIcon: Transform.scale(
+                                scale: 0.7,
+                                child: SvgPicture.asset(
+                                  'assets/images/phone.svg',
+                                  color: MyAutoPilotStyles.appColor,
+                                  height: 10,
+                                  width: 10,
                                 ),
                               ),
-                            ],
-                          ),
-                          Positioned(
-                            left: 10,
-                            top: 5,
-                            child: SvgPicture.asset(
-                              'assets/images/phone.svg',
-                              color: MyAutoPilotStyles.appColor,
-                              height: 30,
-                              width: 30,
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: MyAutoPilotStyles.appColor),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: MyAutoPilotStyles.appColor),
+                              ),
+                              hintStyle: GoogleFonts.notoSerif(
+                                fontSize: 14,
+                                color: HexColor('#C9C9C9'),
+                                fontWeight: FontWeight.normal,
+                              ),
                             ),
-                          )
+                            mode: Mode.DIALOG,
+                            items: Globals.countryISDCodes,
+                            maxHeight: 160,
+                            showClearButton: false,
+                            selectedItem: selectedCountryISDCode,
+                            onChanged: (value) async {
+                              selectedCountryISDCode = value!;
+                              _countryISDCode = '';
+                            },
+                          ),
+                          /* Positioned(
+                              left: 50,
+                              top: 10,
+                              child: Text(_countryISDCode,
+                                  style: GoogleFonts.notoSerif(
+                                    fontSize: 14,
+                                    color: HexColor('#C9C9C9'),
+                                    fontWeight: FontWeight.normal,
+                                    //decoration: TextDecoration.underline,
+                                  )),
+                            ) */
                         ],
                       ),
                     ),
@@ -869,7 +844,7 @@ class _AddUser1State extends State<AddUser1>
                               Icons.arrow_drop_down,
                               size: 36,
                               color: MyAutoPilotStyles.appColor,
-                              shadows: [
+                              /* shadows: [
                                 BoxShadow(
                                   color: Colors.black54,
                                   blurRadius: 8.0,
@@ -879,7 +854,7 @@ class _AddUser1State extends State<AddUser1>
                                   blurRadius: 12.0,
                                   color: Colors.white,
                                 ),
-                              ],
+                              ], */
                             ),
                             showAsSuffixIcons: true,
                             validator: (v) =>
