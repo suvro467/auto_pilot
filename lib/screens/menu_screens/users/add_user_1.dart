@@ -102,6 +102,9 @@ class _AddUser1State extends State<AddUser1>
   late FocusNode focusNodeDesignation;
   late FocusNode focusNodeSubordinateCount;
 
+  late double noOfUsers;
+  late double amountPerYear;
+
   @override
   void initState() {
     super.initState();
@@ -222,6 +225,9 @@ class _AddUser1State extends State<AddUser1>
         });
       }
     });
+
+    noOfUsers = 1.00;
+    amountPerYear = 1000.00;
   }
 
   @override
@@ -1433,211 +1439,452 @@ class _AddUser1State extends State<AddUser1>
                                 _isSubordinateCountValid = true;
                               });
 
-                              /* showDialog(
-                                    context: context,
-                                    barrierDismissible: false,
-                                    builder: (BuildContext context) {
-                                      return LoadingDialog();
-                                    },
-                                  ); */
+                              // API Call, if plan subscribed by the user has reached maximum users
+                              // then show a screen where users can recharge for more users.
 
-                              // API call for Sign Up
-
-                              /* await Future.delayed(new Duration(seconds: 3), () {
-                                    Navigator.pop(context); //pop dialog
-                                  }).then((value) {
-                                    // After successfull signup, show a dialog to return to the login screen.
-                                    // If sign up is successfull without any errors, show the following screen
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (BuildContext context) {
-                                        return WillPopScope(
-                                          onWillPop: () async =>
-                                              false, // Need to change this to false later.
-                                          child: Material(
-                                            type: MaterialType.transparency,
-                                            child: Center(
-                                              child: SizedBox(
-                                                //width: width,
-                                                height: 400,
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    shape: BoxShape.rectangle,
-                                                    borderRadius:
-                                                        BorderRadius.circular(10),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.black26,
-                                                        blurRadius: 10.0,
-                                                        offset: const Offset(0.0, 10.0),
-                                                      ),
-                                                    ],
+                              await showModalBottomSheet(
+                                  context: context,
+                                  backgroundColor: Colors.transparent,
+                                  isScrollControlled: true,
+                                  builder: (builder) {
+                                    return StatefulBuilder(builder:
+                                        (BuildContext context,
+                                            StateSetter setModalState) {
+                                      return Align(
+                                        alignment: Alignment.bottomCenter,
+                                        child: ConstrainedBox(
+                                          constraints: BoxConstraints.tight(
+                                            Size(
+                                                MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    90 /
+                                                    100,
+                                                460),
+                                          ),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.only(
+                                                topLeft:
+                                                    const Radius.circular(20.0),
+                                                topRight:
+                                                    const Radius.circular(20.0),
+                                              ),
+                                            ),
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                    top: 30,
+                                                    left: 30,
                                                   ),
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.center,
-                                                    children: <Widget>[
-                                                      Container(
-                                                        height: 75.0,
-                                                        width: 75.0,
-                                                        margin:
-                                                            EdgeInsets.only(top: 50),
-                                                        decoration: BoxDecoration(
-                                                          shape: BoxShape.circle,
-                                                          color: Colors.transparent,
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: Colors.grey
-                                                                  .withOpacity(0.2),
-                                                              offset: Offset(
-                                                                  0.0, 1.0), //(x,y)
-                                                              blurRadius: 1.0,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        child: Image(
-                                                            image: AssetImage(
-                                                                'assets/icons/logopng.png')),
-                                                      ),
-                                                      Container(
-                                                        margin:
-                                                            EdgeInsets.only(top: 20),
-                                                        child: Text(
-                                                          'You can now login',
-                                                          style: GoogleFonts.notoSerif(
-                                                            fontSize: 16,
-                                                            color: MyAutoPilotStyles
-                                                                .appColor,
-                                                            fontWeight: FontWeight.bold,
-                                                            //decoration: TextDecoration.underline,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        margin: EdgeInsets.only(
-                                                          top: 20,
-                                                          left: 20,
-                                                          right: 20,
-                                                        ),
-                                                        child: Text(
-                                                          'Your password has been set. You can now',
-                                                          style: GoogleFonts.notoSans(
-                                                            fontSize: 14,
-                                                            color: HexColor('#707070'),
-                                                            fontWeight:
-                                                                FontWeight.normal,
-                                                            //decoration: TextDecoration.underline,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        child: Text(
-                                                          'login to the app and start using.',
-                                                          style: GoogleFonts.notoSans(
-                                                            fontSize: 14,
-                                                            color: HexColor('#707070'),
-                                                            fontWeight:
-                                                                FontWeight.normal,
-                                                            //decoration: TextDecoration.underline,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding: EdgeInsets.all(25),
-                                                        child: ConstrainedBox(
-                                                          constraints:
-                                                              BoxConstraints.tightFor(
-                                                                  width: 160,
-                                                                  height: 55),
-                                                          child: ElevatedButton(
-                                                              onPressed: () async {
-                                                                await Navigator
-                                                                    .pushReplacement(
-                                                                  context,
-                                                                  PageRouteBuilder(
-                                                                    transitionDuration:
-                                                                        Duration(
-                                                                            milliseconds:
-                                                                                500),
-                                                                    pageBuilder: (BuildContext
-                                                                            context,
-                                                                        Animation<
-                                                                                double>
-                                                                            animation,
-                                                                        Animation<
-                                                                                double>
-                                                                            secondaryAnimation) {
-                                                                      return FirstTimeLoginScreen();
-                                                                    },
-                                                                    transitionsBuilder:
-                                                                        (BuildContext
-                                                                                context,
-                                                                            Animation<
-                                                                                    double>
-                                                                                animation,
-                                                                            Animation<
-                                                                                    double>
-                                                                                secondaryAnimation,
-                                                                            Widget
-                                                                                child) {
-                                                                      return Align(
-                                                                        child:
-                                                                            SlideTransition(
-                                                                          position: Tween(
-                                                                                  begin: Offset(
-                                                                                      1.0,
-                                                                                      0.0),
-                                                                                  end: Offset(
-                                                                                      0.0,
-                                                                                      0.0))
-                                                                              .animate(
-                                                                                  animation),
-                                                                          child: child,
-                                                                        ),
-                                                                      );
-                                                                    },
-                                                                  ),
-                                                                );
-                                                              },
-                                                              style: ElevatedButton
-                                                                  .styleFrom(
-                                                                shape:
-                                                                    RoundedRectangleBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              30.0),
-                                                                ),
-                                                                primary:
-                                                                    MyAutoPilotStyles
-                                                                        .appColor,
-                                                              ),
-                                                              child: Text(
-                                                                'GO TO LOGIN',
-                                                                style: GoogleFonts
-                                                                    .notoSerif(
-                                                                  fontSize: 17,
-                                                                  color: Colors.white,
-                                                                  fontWeight:
-                                                                      FontWeight.bold,
-                                                                ),
-                                                              )),
+                                                  child: Row(
+                                                    children: [
+                                                      Text(
+                                                        'Top-up your Users',
+                                                        style: GoogleFonts
+                                                            .notoSerif(
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color:
+                                                              MyAutoPilotStyles
+                                                                  .appColor,
                                                         ),
                                                       ),
                                                     ],
                                                   ),
                                                 ),
-                                              ),
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                    top: 10,
+                                                    left: 30,
+                                                  ),
+                                                  child: Row(
+                                                    children: [
+                                                      Text(
+                                                        'Getting short on your users!',
+                                                        style: GoogleFonts
+                                                            .notoSans(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          color: HexColor(
+                                                              '#707070'),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                    left: 30,
+                                                  ),
+                                                  child: Row(
+                                                    children: [
+                                                      Text(
+                                                        'No worries we have your covered.',
+                                                        style: GoogleFonts
+                                                            .notoSans(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          color: HexColor(
+                                                              '#707070'),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                    top: 10,
+                                                    left: 30,
+                                                  ),
+                                                  child: Row(
+                                                    children: [
+                                                      Text(
+                                                        'Top up your users at just Rs. 500 per year',
+                                                        style: GoogleFonts
+                                                            .notoSans(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          color: HexColor(
+                                                              '#707070'),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                    left: 30,
+                                                  ),
+                                                  child: Row(
+                                                    children: [
+                                                      Text(
+                                                        'and continue your journey to efficiency.',
+                                                        style: GoogleFonts
+                                                            .notoSans(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          color: HexColor(
+                                                              '#707070'),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                // Show the number of Users here
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                    top: 30,
+                                                  ),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        '${noOfUsers.toInt()}',
+                                                        style: GoogleFonts
+                                                            .notoSerif(
+                                                          fontSize: 36,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color:
+                                                              MyAutoPilotStyles
+                                                                  .appColor,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                // Slider
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                    left: 30,
+                                                    right: 30,
+                                                  ),
+                                                  child: SliderTheme(
+                                                    data: SliderThemeData(
+                                                        thumbColor:
+                                                            MyAutoPilotStyles
+                                                                .appColor,
+                                                        /* thumbShape:
+                                                          RoundSliderThumbShape(
+                                                        enabledThumbRadius: 20,
+                                                      ), */
+                                                        activeTrackColor:
+                                                            MyAutoPilotStyles
+                                                                .appColor,
+                                                        inactiveTrackColor:
+                                                            HexColor(
+                                                                '#DDDDDD')),
+                                                    child: Slider(
+                                                      value: noOfUsers,
+                                                      onChanged:
+                                                          (double value) {
+                                                        setModalState(() {
+                                                          noOfUsers = value;
+                                                          // Calculate amountPerYear value
+                                                          if (noOfUsers <= 25)
+                                                            amountPerYear =
+                                                                1000.00;
+                                                          else if (noOfUsers <=
+                                                              50)
+                                                            amountPerYear =
+                                                                1000.00 * 1.75;
+                                                          else if (noOfUsers <=
+                                                              75)
+                                                            amountPerYear =
+                                                                1000.00 *
+                                                                    1.75 *
+                                                                    1.5;
+                                                          else
+                                                            amountPerYear =
+                                                                1000.00 *
+                                                                    1.75 *
+                                                                    1.5 *
+                                                                    1.25;
+                                                        });
+                                                      },
+                                                      //divisions: 3,
+                                                      label: '$noOfUsers',
+                                                      min: 1,
+                                                      max: 100,
+                                                    ),
+                                                  ),
+                                                ),
+                                                // Plus and Minus button to control the slider
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                    left: 40,
+                                                    right: 40,
+                                                  ),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      // Minus button
+                                                      ConstrainedBox(
+                                                        constraints:
+                                                            BoxConstraints
+                                                                .tightFor(
+                                                                    width: 35,
+                                                                    height: 35),
+                                                        child: Container(
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .all(
+                                                              Radius.circular(
+                                                                  50.0),
+                                                            ),
+                                                            /* border: Border.all(
+                                                              color: HexColor(
+                                                                  '#C9C9C9'),
+                                                              width: 1.0,
+                                                            ), */
+                                                          ),
+                                                          child: ClipOval(
+                                                            child: Material(
+                                                              color: Colors
+                                                                  .white, // Button color
+                                                              child: InkWell(
+                                                                splashColor: Colors
+                                                                    .blue, // Splash color
+                                                                onTap: () {
+                                                                  setModalState(
+                                                                      () {
+                                                                    if (noOfUsers >
+                                                                        1.00)
+                                                                      noOfUsers =
+                                                                          noOfUsers -
+                                                                              1.00;
+                                                                  });
+                                                                },
+                                                                child: SizedBox(
+                                                                  width: 56,
+                                                                  height: 56,
+                                                                  child: Icon(
+                                                                    Icons
+                                                                        .remove,
+                                                                    color: HexColor(
+                                                                        '#707070'),
+                                                                    size: 24,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      // Add Button
+                                                      ConstrainedBox(
+                                                        constraints:
+                                                            BoxConstraints
+                                                                .tightFor(
+                                                                    width: 35,
+                                                                    height: 35),
+                                                        child: Container(
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .all(
+                                                              Radius.circular(
+                                                                  50.0),
+                                                            ),
+                                                            /* border: Border.all(
+                                                              color: HexColor(
+                                                                  '#C9C9C9'),
+                                                              width: 1.0,
+                                                            ), */
+                                                          ),
+                                                          child: ClipOval(
+                                                            child: Material(
+                                                              color: Colors
+                                                                  .white, // Button color
+                                                              child: InkWell(
+                                                                splashColor: Colors
+                                                                    .blue, // Splash color
+                                                                onTap: () {
+                                                                  setModalState(
+                                                                      () {
+                                                                    if (noOfUsers <
+                                                                        100.00)
+                                                                      noOfUsers =
+                                                                          noOfUsers +
+                                                                              1.00;
+                                                                  });
+                                                                },
+                                                                child: SizedBox(
+                                                                  width: 56,
+                                                                  height: 56,
+                                                                  child: Icon(
+                                                                    Icons.add,
+                                                                    color: HexColor(
+                                                                        '#707070'),
+                                                                    size: 24,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                // Show the amount per year costing here
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                    top: 10,
+                                                    //left: 30,
+                                                  ),
+                                                  alignment: Alignment.center,
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .baseline,
+                                                    textBaseline:
+                                                        TextBaseline.alphabetic,
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Text(
+                                                        'Amount: ',
+                                                        style: GoogleFonts
+                                                            .notoSerif(
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color:
+                                                              MyAutoPilotStyles
+                                                                  .appColor,
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        ' Rs ${amountPerYear.toStringAsFixed(2)} ',
+                                                        style: GoogleFonts
+                                                            .notoSerif(
+                                                          fontSize: 24,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: HexColor(
+                                                              '#707070'),
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        'per year',
+                                                        style: GoogleFonts
+                                                            .notoSerif(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          color: HexColor(
+                                                              '#707070'),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+
+                                                // Top Up Button
+                                                Container(
+                                                  padding:
+                                                      EdgeInsets.only(top: 20),
+                                                  child: ConstrainedBox(
+                                                    constraints:
+                                                        BoxConstraints.tightFor(
+                                                            width: 150,
+                                                            height: 55),
+                                                    child: ElevatedButton(
+                                                      onPressed: () async {
+                                                        Navigator.pop(context);
+                                                      },
+                                                      style: ElevatedButton
+                                                          .styleFrom(
+                                                        shape:
+                                                            RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      30.0),
+                                                        ),
+                                                        primary:
+                                                            MyAutoPilotStyles
+                                                                .appColor,
+                                                      ),
+                                                      child: Text(
+                                                        'TOP UP',
+                                                        style: GoogleFonts
+                                                            .notoSerif(
+                                                          fontSize: 17,
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                        );
-                                      },
-                                    );
-                                  }); */
+                                        ),
+                                      );
+                                    });
+                                  });
                             }
                           },
                           style: ElevatedButton.styleFrom(
