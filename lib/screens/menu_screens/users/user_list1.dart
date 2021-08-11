@@ -36,6 +36,8 @@ class _UserListScreen1State extends State<UserListScreen1>
   bool isSupportExpanded = false;
   bool isPersonalExpanded = false;
 
+  bool _archiveUserTasks = false;
+
   Map<String, double> tasksCompleted = {'Flutter': 90, 'Kotlin': 10};
   Map<String, double> tasksOnTime = {'Flutter': 60, 'Kotlin': 40};
   Map<String, double> approvedBenchaMark = {'Flutter': 80, 'Kotlin': 20};
@@ -514,6 +516,35 @@ class _UserListScreen1State extends State<UserListScreen1>
                                                                             color:
                                                                                 HexColor('#707070'),
                                                                           ),
+                                                                        ),
+                                                                      ),
+                                                                      Container(
+                                                                        width: MediaQuery.of(context)
+                                                                            .size
+                                                                            .width,
+                                                                        /* padding:
+                                                                            EdgeInsets.only(left: 30), */
+                                                                        child:
+                                                                            Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.start,
+                                                                          children: [
+                                                                            Flexible(
+                                                                              child: CheckboxListTile(
+                                                                                activeColor: MyAutoPilotStyles.appColor,
+
+                                                                                value: _archiveUserTasks,
+                                                                                onChanged: (newValue) {
+                                                                                  setModalState(() {
+                                                                                    _archiveUserTasks = !_archiveUserTasks;
+                                                                                  });
+                                                                                },
+
+                                                                                controlAffinity: ListTileControlAffinity.leading, //  <-- leading Checkbox
+                                                                              ),
+                                                                            ),
+                                                                            Flexible(child: Text('Archive User Tasks')),
+                                                                          ],
                                                                         ),
                                                                       ),
 
