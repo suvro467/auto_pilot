@@ -415,6 +415,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                                   mask: 'xxxx xxxx xxxx xxxx',
                                                   separator: ' ',
                                                 ),
+                                                FilteringTextInputFormatter
+                                                    .deny(RegExp(r'[.-]')),
                                               ],
                                               textInputAction:
                                                   TextInputAction.next,
