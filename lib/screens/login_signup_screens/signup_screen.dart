@@ -37,6 +37,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   late bool _isCustomerNameValid;
   late bool _isEmailBlank;
   late bool _isPhoneValid;
+  late bool _isValidMobileNumber;
   late bool _isPasswordValid;
   late bool _isValidEmail;
   late bool _isSmsOTPValid;
@@ -51,6 +52,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Map<String, dynamic> selectedCountryISDCode = {};
   late String _countryISDCode;
 
+  late FocusNode focusNodeEmail;
+  late FocusNode focusNodePhoneNumber;
+  late FocusNode focusNodePassword;
+  late FocusNode focusNodeOTPSms;
+  late FocusNode focusNodeOTPEmail;
+
   @override
   void initState() {
     super.initState();
@@ -59,6 +66,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _isCustomerNameValid = true;
     _isEmailBlank = true;
     _isPhoneValid = true;
+    _isValidMobileNumber = true;
     _isPasswordValid = true;
     _isValidEmail = true;
     _isSmsOTPValid = true;
@@ -69,6 +77,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _timesTappedPassword = 0;
     _timesTappedSmsOTP = 0;
     _timesTappedEmailOTP = 0;
+
+    focusNodeEmail = FocusNode();
+    focusNodePhoneNumber = FocusNode();
+    focusNodePassword = FocusNode();
+    focusNodeOTPSms = FocusNode();
+    focusNodeOTPEmail = FocusNode();
 
     // Start listening to changes
     _customerNameController.addListener(() {
@@ -105,10 +119,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
       if (_phoneNumberController.text.isEmpty && _timesTappedPhone > 0) {
         setState(() {
           _isPhoneValid = false;
+          _isValidMobileNumber = true;
+        });
+      } else if (!Globals.isValidMobileNumber(_phoneNumberController.text) &&
+          _timesTappedPhone > 0) {
+        setState(() {
+          _isPhoneValid = true;
+          _isValidMobileNumber = false;
         });
       } else {
         setState(() {
           _isPhoneValid = true;
+          _isValidMobileNumber = true;
         });
       }
     });
@@ -148,6 +170,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
         });
       }
     });
+
+    /* if (_phoneNumberController.text.isNotEmpty && _timesTappedPhone > 0) {
+      if (!Globals.isValidMobileNumber(_phoneNumberController.text))
+        setState(() {
+          _isValidMobileNumber = false;
+        });
+      else
+        setState(() {
+          _isValidMobileNumber = true;
+        });
+    } */
   }
 
   @override
@@ -158,6 +191,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _passwordController.dispose();
     _smsOTPController.dispose();
     _emailOTPController.dispose();
+
+    focusNodeEmail.dispose();
+    focusNodePhoneNumber.dispose();
+    focusNodePassword.dispose();
+    focusNodeOTPSms.dispose();
+    focusNodeOTPEmail.dispose();
     super.dispose();
   }
 
@@ -257,7 +296,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               _timesTappedCustomerName += 1;
                             },
                             textInputAction: TextInputAction.next,
-                            onFieldSubmitted: (v) {},
+                            onFieldSubmitted: (v) {
+                              FocusScope.of(context)
+                                  .requestFocus(focusNodeEmail);
+                            },
                             decoration: InputDecoration(
                               labelStyle: GoogleFonts.notoSerif(
                                 fontSize: 14,
@@ -323,6 +365,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               return null;
                             },
                             textInputAction: TextInputAction.next,
+                            focusNode: focusNodeEmail,
+                            onFieldSubmitted: (v) {
+                              FocusScope.of(context)
+                                  .requestFocus(focusNodePhoneNumber);
+                            },
                             controller: _emailController,
                             onChanged: (value) {
                               _timesTappedEmail += 1;
@@ -641,6 +688,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       _timesTappedPhone += 1;
                                     },
                                     textInputAction: TextInputAction.next,
+                                    focusNode: focusNodePhoneNumber,
+                                    onFieldSubmitted: (v) {
+                                      FocusScope.of(context)
+                                          .requestFocus(focusNodePassword);
+                                    },
                                     decoration: InputDecoration(
                                       labelStyle: GoogleFonts.notoSerif(
                                         fontSize: 14,
@@ -689,7 +741,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           ),
                                         ),
                                       )
-                                    : Container()
+                                    : (!_isValidMobileNumber
+                                        ? Positioned(
+                                            right: 50.0,
+                                            top: 55.0,
+                                            child: new Container(
+                                              child: Text(
+                                                'Invalid mobile number',
+                                                style: TextStyle(
+                                                  color:
+                                                      Globals.validationColor,
+                                                  fontSize: 10.0,
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        : Container())
                               ]),
                             ),
                           ],
@@ -711,6 +778,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               _timesTappedPassword += 1;
                             },
                             textInputAction: TextInputAction.next,
+                            focusNode: focusNodePassword,
+                            onFieldSubmitted: (v) {
+                              FocusScope.of(context)
+                                  .requestFocus(focusNodeOTPSms);
+                            },
                             obscureText: _isObscure,
                             decoration: InputDecoration(
                               labelStyle: GoogleFonts.notoSerif(
@@ -803,6 +875,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               _timesTappedSmsOTP += 1;
                             },
                             textInputAction: TextInputAction.next,
+                            focusNode: focusNodeOTPSms,
+                            onFieldSubmitted: (v) {
+                              FocusScope.of(context)
+                                  .requestFocus(focusNodeOTPEmail);
+                            },
                             decoration: InputDecoration(
                               labelStyle: GoogleFonts.notoSerif(
                                 fontSize: 14,
@@ -871,6 +948,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               FilteringTextInputFormatter.digitsOnly,
                               //LengthLimitingTextInputFormatter(8)
                             ],
+                            textInputAction: TextInputAction.done,
+                            focusNode: focusNodeOTPEmail,
                             onChanged: (value) {
                               _timesTappedEmailOTP += 1;
                             },
@@ -1020,11 +1099,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   });
                                   ShowMessage.showFlushBar(
                                       context, 'Please rectify the errors.');
+                                } else if (!(Globals.isValidMobileNumber(
+                                    _phoneNumberController.text))) {
+                                  setState(() {
+                                    _isValidMobileNumber = false;
+                                  });
+                                  ShowMessage.showFlushBar(
+                                      context, 'Please rectify the errors.');
                                 } else {
                                   setState(() {
                                     _isCustomerNameValid = true;
                                     _isEmailBlank = true;
                                     _isPhoneValid = true;
+                                    _isValidMobileNumber = true;
                                     _isPasswordValid = true;
                                     _isValidEmail = true;
                                     _isSmsOTPValid = true;
