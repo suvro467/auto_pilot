@@ -60,7 +60,9 @@ class _AddUser1State extends State<AddUser1>
   late bool _isPhoneValid;
   late bool _isEmailBlank; // This checks for blank email address
   late bool _isValidEmail; // This checks for valid email address
+  late bool _isDepartmentValid;
   late bool _isDesignationValid;
+  late bool _isLevelValid;
   late bool _isSubordinateCountValid;
 
   late String _validationText;
@@ -117,7 +119,9 @@ class _AddUser1State extends State<AddUser1>
     _isPhoneValid = true;
     _isEmailBlank = true;
     _isValidEmail = true;
+    _isDepartmentValid = true;
     _isDesignationValid = true;
+    _isLevelValid = true;
     _isSubordinateCountValid = true;
     _timesTappedUserName = 0;
     _timesTappedPhone = 0;
@@ -179,10 +183,12 @@ class _AddUser1State extends State<AddUser1>
       if (_departmentController.text.isEmpty) {
         setState(() {
           _departmentText = 'Department';
+          _isDepartmentValid = false;
         });
       } else {
         setState(() {
           _departmentText = '';
+          _isDepartmentValid = true;
         });
       }
     });
@@ -206,10 +212,12 @@ class _AddUser1State extends State<AddUser1>
       if (_levelController.text.isEmpty) {
         setState(() {
           _levelText = 'Level';
+          _isLevelValid = false;
         });
       } else {
         setState(() {
           _levelText = '';
+          _isLevelValid = true;
         });
       }
     });
@@ -445,7 +453,7 @@ class _AddUser1State extends State<AddUser1>
                                 //decoration: TextDecoration.underline,
                               ),
                               prefixIcon: Transform.scale(
-                                scale: 0.7,
+                                scale: 0.6,
                                 child: SvgPicture.asset(
                                   'assets/images/phone.svg',
                                   color: MyAutoPilotStyles.appColor,
@@ -756,7 +764,22 @@ class _AddUser1State extends State<AddUser1>
                                   fontWeight: FontWeight.normal,
                                   //decoration: TextDecoration.underline,
                                 )),
-                          )
+                          ),
+                          !_isDepartmentValid
+                              ? Positioned(
+                                  right: 10.0,
+                                  top: 35.0,
+                                  child: new Container(
+                                    child: Text(
+                                      'Please select a department',
+                                      style: TextStyle(
+                                        color: Globals.validationColor,
+                                        fontSize: 10.0,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : Container(),
                         ],
                       ),
                     ),
@@ -937,7 +960,22 @@ class _AddUser1State extends State<AddUser1>
                                   fontWeight: FontWeight.normal,
                                   //decoration: TextDecoration.underline,
                                 )),
-                          )
+                          ),
+                          !_isLevelValid
+                              ? Positioned(
+                                  right: 10.0,
+                                  top: 35.0,
+                                  child: new Container(
+                                    child: Text(
+                                      'Please select a level',
+                                      style: TextStyle(
+                                        color: Globals.validationColor,
+                                        fontSize: 10.0,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : Container(),
                         ],
                       ),
                     ),
@@ -1405,8 +1443,12 @@ class _AddUser1State extends State<AddUser1>
                                 _phoneNumberController.text.isEmpty ||
                                 !_isEmailBlank ||
                                 _emailController.text.isEmpty ||
+                                !_isDepartmentValid ||
+                                _departmentController.text.isEmpty ||
                                 !_isDesignationValid ||
                                 _designationController.text.isEmpty ||
+                                !_isLevelValid ||
+                                _levelController.text.isEmpty ||
                                 !_isSubordinateCountValid ||
                                 _subordinateCountController.text.isEmpty) {
                               if (_userNameController.text.isEmpty)
@@ -1415,8 +1457,12 @@ class _AddUser1State extends State<AddUser1>
                                 _isPhoneValid = false;
                               if (_emailController.text.isEmpty)
                                 _isEmailBlank = false;
+                              if (_departmentController.text.isEmpty)
+                                _isDepartmentValid = false;
                               if (_designationController.text.isEmpty)
                                 _isDesignationValid = false;
+                              if (_levelController.text.isEmpty)
+                                _isLevelValid = false;
                               if (_subordinateCountController.text.isEmpty)
                                 _isSubordinateCountValid = false;
 
@@ -1436,7 +1482,9 @@ class _AddUser1State extends State<AddUser1>
                                 _isPhoneValid = true;
                                 _isEmailBlank = true;
                                 _isValidEmail = true;
+                                _isDepartmentValid = true;
                                 _isDesignationValid = true;
+                                _isLevelValid = true;
                                 _isSubordinateCountValid = true;
                               });
 
@@ -1975,8 +2023,12 @@ class _AddUser1State extends State<AddUser1>
       _isPhoneValid = true;
       _isEmailBlank = true;
       _isValidEmail = true;
+      _isDepartmentValid = true;
       _isDesignationValid = true;
+      _isLevelValid = true;
       _isSubordinateCountValid = true;
+      _departmentText = 'Department';
+      _levelText = 'Level';
     });
     await widget.pageController.animateToPage(
       5,
