@@ -18,12 +18,14 @@ import 'package:decorated_icon/decorated_icon.dart';
 class AddUser1 extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final PageController pageController;
+  final bool isEdit;
 
   /* final int tabMenuSelected;
   final int taskItemTapped; */
   const AddUser1({
     required this.scaffoldKey,
     required this.pageController,
+    this.isEdit = false,
 
     /* required this.tabMenuSelected,
       required this.taskItemTapped, */
