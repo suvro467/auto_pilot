@@ -245,6 +245,7 @@ class _AddUser1State extends State<AddUser1>
   void dispose() {
     _tabController.dispose();
     _userNameController.dispose();
+    _phoneNumberController.dispose();
     _emailController.dispose();
     _departmentController.dispose();
     _designationController.dispose();
@@ -397,7 +398,7 @@ class _AddUser1State extends State<AddUser1>
                       !_isUserNameValid
                           ? Positioned(
                               right: 50.0,
-                              top: 55.0,
+                              top: 40.0,
                               child: new Container(
                                 child: Text(
                                   '$_validationText',
