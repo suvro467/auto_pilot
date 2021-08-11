@@ -50,24 +50,21 @@ class _LoginScreenState extends State<LoginScreen> {
       if (_userNameController.text.isEmpty && _timesTappedUserName > 0) {
         setState(() {
           _isUserNameValid = false;
+          _isUserNameValidMobileOrEmail = true;
+        });
+      } else if (!(Globals.isEmail(_userNameController.text) ||
+              Globals.isValidMobileNumber(_userNameController.text)) &&
+          _timesTappedUserName > 0) {
+        setState(() {
+          _isUserNameValidMobileOrEmail = false;
+          _isUserNameValid = true;
         });
       } else {
         setState(() {
           _isUserNameValid = true;
+          _isUserNameValidMobileOrEmail = true;
         });
       }
-
-      /* if (_userNameController.text.isNotEmpty && _timesTappedUserName > 0) {
-        if (!Globals.isEmail(_userNameController.text) ||
-            !Globals.isValidMobileNumber(_userNameController.text))
-          setState(() {
-            _isUserNameValidMobileOrEmail = false;
-          });
-        else
-          setState(() {
-            _isUserNameValidMobileOrEmail = true;
-          });
-      } */
     });
 
     _passwordController.addListener(() {
