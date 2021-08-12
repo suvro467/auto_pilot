@@ -1,7 +1,11 @@
 import 'dart:io';
 
+import 'package:auto_pilot/shared/globals.dart';
 import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:auto_pilot/shared/widgets/loading_dialog.dart';
+import 'package:auto_pilot/shared/widgets/show_message.dart';
+import 'package:decorated_icon/decorated_icon.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -31,6 +35,14 @@ class UserListScreen1 extends StatefulWidget {
 class _UserListScreen1State extends State<UserListScreen1>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+
+  final TextEditingController _departmentController = TextEditingController();
+
+  late bool _isDepartmentValid;
+
+  late String _validationText;
+  late String _departmentText;
+
   bool isDelegatesExpanded = false;
   bool isRepeatExpanded = false;
   bool isSupportExpanded = false;
@@ -44,17 +56,40 @@ class _UserListScreen1State extends State<UserListScreen1>
 
   //String baseUrl = Globals.baseUrl;
 
+  List<String> users = ["User 1", "User 2", "User 3", "User 4"];
+
   @override
   void initState() {
     super.initState();
 
     _tabController = TabController(length: 4, vsync: this);
+
+    _isDepartmentValid = true;
+
+    _departmentController.text = '';
+    _departmentText = 'Choose user';
+
+    _departmentController.addListener(() {
+      if (_departmentController.text.isEmpty) {
+        setState(() {
+          _departmentText = 'Department';
+          _isDepartmentValid = false;
+        });
+      } else {
+        setState(() {
+          _departmentText = '';
+          _isDepartmentValid = true;
+        });
+      }
+    });
   }
 
   @override
   void dispose() {
-    super.dispose();
     _tabController.dispose();
+    _departmentController.dispose();
+    _departmentText = '';
+    super.dispose();
   }
 
   Future<bool> showExitPopup() async {
@@ -377,6 +412,14 @@ class _UserListScreen1State extends State<UserListScreen1>
                                                   splashColor: Colors.orange
                                                       .withAlpha(30),
                                                   onTap: () async {
+                                                    // Here reset the user selected to blank.
+                                                    _departmentController.text =
+                                                        '';
+                                                    _departmentText =
+                                                        _departmentController
+                                                                .text.isNotEmpty
+                                                            ? ''
+                                                            : 'Choose user';
                                                     await showModalBottomSheet(
                                                         context: context,
                                                         backgroundColor:
@@ -518,36 +561,146 @@ class _UserListScreen1State extends State<UserListScreen1>
                                                                           ),
                                                                         ),
                                                                       ),
-                                                                      Container(
-                                                                        width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width,
-                                                                        /* padding:
-                                                                            EdgeInsets.only(left: 30), */
-                                                                        child:
-                                                                            Row(
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.start,
-                                                                          children: [
-                                                                            Flexible(
-                                                                              child: CheckboxListTile(
-                                                                                activeColor: MyAutoPilotStyles.appColor,
-
-                                                                                value: _archiveUserTasks,
-                                                                                onChanged: (newValue) {
-                                                                                  setModalState(() {
-                                                                                    _archiveUserTasks = !_archiveUserTasks;
-                                                                                  });
-                                                                                },
-
-                                                                                controlAffinity: ListTileControlAffinity.leading, //  <-- leading Checkbox
+                                                                      Row(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.start,
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        children: [
+                                                                          Container(
+                                                                            alignment:
+                                                                                Alignment.centerLeft,
+                                                                            width:
+                                                                                250,
+                                                                            child:
+                                                                                CheckboxListTile(
+                                                                              activeColor: MyAutoPilotStyles.appColor,
+                                                                              dense: true,
+                                                                              value: _archiveUserTasks,
+                                                                              onChanged: (newValue) {
+                                                                                setModalState(() {
+                                                                                  _archiveUserTasks = !_archiveUserTasks;
+                                                                                  if (_archiveUserTasks) _isDepartmentValid = true;
+                                                                                });
+                                                                              },
+                                                                              title: Text(
+                                                                                'Archive User Tasks',
+                                                                                style: GoogleFonts.notoSans(
+                                                                                  color: HexColor('#707070'),
+                                                                                  fontWeight: FontWeight.normal,
+                                                                                  fontSize: 14,
+                                                                                ),
                                                                               ),
+                                                                              controlAffinity: ListTileControlAffinity.leading, //  <-- leading Checkbox
                                                                             ),
-                                                                            Flexible(child: Text('Archive User Tasks')),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                      Padding(
+                                                                        padding:
+                                                                            const EdgeInsets.only(
+                                                                          left:
+                                                                              40.0,
+                                                                          right:
+                                                                              40.0,
+                                                                          top:
+                                                                              20,
+                                                                        ),
+                                                                        child:
+                                                                            Stack(
+                                                                          children: [
+                                                                            DropdownSearch<String>(
+                                                                              dropDownButton: DecoratedIcon(
+                                                                                Icons.arrow_drop_down,
+                                                                                size: 36,
+                                                                                color: MyAutoPilotStyles.appColor,
+                                                                                /* shadows: [
+                                BoxShadow(
+                                  color: Colors.black54,
+                                  blurRadius: 8.0,
+                                  offset: Offset(1.0, 2.0),
+                                ),
+                                BoxShadow(
+                                  blurRadius: 12.0,
+                                  color: Colors.white,
+                                ),
+                              ], */
+                                                                              ),
+                                                                              showAsSuffixIcons: true,
+                                                                              validator: (v) => v == null ? "required field" : null,
+                                                                              dropdownSearchDecoration: InputDecoration(
+                                                                                labelStyle: GoogleFonts.notoSerif(
+                                                                                  fontSize: 14,
+                                                                                  color: HexColor('#C9C9C9'),
+                                                                                  fontWeight: FontWeight.normal,
+                                                                                ),
+                                                                                prefixIcon: Transform.scale(
+                                                                                  scale: 0.7,
+                                                                                  child: SvgPicture.asset(
+                                                                                    'assets/images/department.svg',
+                                                                                    color: MyAutoPilotStyles.appColor,
+                                                                                    height: 10,
+                                                                                    width: 10,
+                                                                                  ),
+                                                                                ),
+                                                                                enabledBorder: UnderlineInputBorder(
+                                                                                  borderSide: BorderSide(color: MyAutoPilotStyles.appColor),
+                                                                                ),
+                                                                                focusedBorder: UnderlineInputBorder(
+                                                                                  borderSide: BorderSide(color: MyAutoPilotStyles.appColor),
+                                                                                ),
+                                                                                hintStyle: GoogleFonts.notoSerif(
+                                                                                  fontSize: 14,
+                                                                                  color: HexColor('#C9C9C9'),
+                                                                                  fontWeight: FontWeight.normal,
+                                                                                ),
+                                                                              ),
+                                                                              mode: Mode.DIALOG,
+                                                                              showSelectedItem: false,
+                                                                              items: users,
+                                                                              maxHeight: (users.length) <= 3 ? (users.length).toDouble() * 55 : 160,
+                                                                              showClearButton: false,
+                                                                              onChanged: (value) async {
+                                                                                setModalState(() {
+                                                                                  _departmentController.text = value ?? '';
+                                                                                  _departmentText = _departmentController.text.isNotEmpty ? '' : 'Choose user';
+                                                                                });
+                                                                              },
+                                                                              //popupItemDisabled: (String s) => s.startsWith('I'),
+                                                                              /* selectedItem: chefPrintDataModel
+                          .chefPrint.setting.storeNumberOfAutoPrintChef
+                          .toString(), */
+                                                                              selectedItem: _departmentController.text,
+                                                                            ),
+                                                                            Positioned(
+                                                                              left: 50,
+                                                                              top: 10,
+                                                                              child: Text(_departmentText,
+                                                                                  style: GoogleFonts.notoSerif(
+                                                                                    fontSize: 14,
+                                                                                    color: HexColor('#C9C9C9'),
+                                                                                    fontWeight: FontWeight.normal,
+                                                                                    //decoration: TextDecoration.underline,
+                                                                                  )),
+                                                                            ),
+                                                                            !_isDepartmentValid
+                                                                                ? Positioned(
+                                                                                    right: 10.0,
+                                                                                    top: 35.0,
+                                                                                    child: new Container(
+                                                                                      child: Text(
+                                                                                        'Please select a department',
+                                                                                        style: TextStyle(
+                                                                                          color: Globals.validationColor,
+                                                                                          fontSize: 10.0,
+                                                                                        ),
+                                                                                      ),
+                                                                                    ),
+                                                                                  )
+                                                                                : Container(),
                                                                           ],
                                                                         ),
                                                                       ),
-
                                                                       // Top Up Button
                                                                       Container(
                                                                         padding:
@@ -561,27 +714,36 @@ class _UserListScreen1State extends State<UserListScreen1>
                                                                               ElevatedButton(
                                                                             onPressed:
                                                                                 () async {
-                                                                              Navigator.pop(context);
-                                                                              /* await Navigator.push(
-                                                                                context,
-                                                                                PageRouteBuilder(
-                                                                                  transitionDuration: Duration(milliseconds: 500),
-                                                                                  pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
-                                                                                    return PaymentScreen(calledFrom: 'add_user_1.dart', amountPerYear: amountPerYear);
+                                                                              // If 'Archive User Tasks' is checked then no need to select any user.
+                                                                              if (_archiveUserTasks) {
+                                                                                _isDepartmentValid = true;
+                                                                              } else if (!_archiveUserTasks && _departmentController.text.isEmpty) {
+                                                                                _isDepartmentValid = false;
+                                                                              }
+
+                                                                              if (!_isDepartmentValid) {
+                                                                                /* if (_departmentController.text.isEmpty && !_archiveUserTasks) {
+                                                                                  _isDepartmentValid = false;
+                                                                                } */
+                                                                                setModalState(() {});
+                                                                                ShowMessage.showFlushBar(context, 'Please rectify the errors.');
+                                                                              } else {
+                                                                                setModalState(() {
+                                                                                  _isDepartmentValid = true;
+                                                                                });
+
+                                                                                showDialog(
+                                                                                  context: context,
+                                                                                  barrierDismissible: false,
+                                                                                  builder: (BuildContext context) {
+                                                                                    return LoadingDialog();
                                                                                   },
-                                                                                  transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
-                                                                                    return Align(
-                                                                                      child: SlideTransition(
-                                                                                        position: Tween(
-                                                                                          begin: Offset(1.0, 0.0),
-                                                                                          end: Offset(0.0, 0.0),
-                                                                                        ).animate(animation),
-                                                                                        child: child,
-                                                                                      ),
-                                                                                    );
-                                                                                  },
-                                                                                ),
-                                                                              ); */
+                                                                                );
+
+                                                                                await Future.delayed(new Duration(seconds: 3), () {
+                                                                                  Navigator.pop(context); //pop dialog
+                                                                                }).then((value) {});
+                                                                              }
                                                                             },
                                                                             style:
                                                                                 ElevatedButton.styleFrom(
@@ -608,7 +770,11 @@ class _UserListScreen1State extends State<UserListScreen1>
                                                               ),
                                                             );
                                                           });
-                                                        });
+                                                        }).then((value) {
+                                                      _departmentText =
+                                                          'Choose user';
+                                                      _archiveUserTasks = false;
+                                                    });
                                                   },
                                                   child: SvgPicture.asset(
                                                     'assets/images/delete.svg',
