@@ -7,7 +7,6 @@ import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:auto_pilot/shared/widgets/show_message.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -93,9 +92,6 @@ class _AddUser1State extends State<AddUser1>
     'Level 3',
     'Level 4',
   ];
-
-  /* Map<String, dynamic> selectedCountryISDCode =
-      Globals.countryISDCodes.where((element) => false); */
 
   Map<String, dynamic> selectedCountryISDCode = {};
 
@@ -751,10 +747,6 @@ class _AddUser1State extends State<AddUser1>
                           },
                         ); */
                             },
-                            //popupItemDisabled: (String s) => s.startsWith('I'),
-                            /* selectedItem: chefPrintDataModel
-                          .chefPrint.setting.storeNumberOfAutoPrintChef
-                          .toString(), */
                             selectedItem: _departmentController.text,
                           ),
                           Positioned(
@@ -923,34 +915,7 @@ class _AddUser1State extends State<AddUser1>
                             showClearButton: false,
                             onChanged: (value) async {
                               _levelController.text = value ?? '';
-                              /* ChefPrintFormData chefPrintFormData = ChefPrintFormData(
-                fieldName: 'store_Number_Of_Auto_Print_Chef', value: value);
-                    
-                        var result = {};
-                        await updateSettings(chefPrintFormData).then((value) {
-                          result = value;
-                          ShowMessage.showSnackBarWithStatus(
-                  context, result['msg'], 'success');
-                          setState(() {});
-                        }).onError((error, stackTrace) {
-                          ShowMessage.showSnackBarWithStatus(context,
-                  'Could not update data, please try again later.', 'error');
-                    
-                          setState(() {});
-                        }).timeout(
-                          Duration(seconds: 5),
-                          onTimeout: () {
-                ShowMessage.showSnackBarWithStatus(context,
-                    'Could not update data, please try again later.', 'error');
-                    
-                setState(() {});
-                          },
-                        ); */
                             },
-                            //popupItemDisabled: (String s) => s.startsWith('I'),
-                            /* selectedItem: chefPrintDataModel
-                          .chefPrint.setting.storeNumberOfAutoPrintChef
-                          .toString(), */
                             selectedItem: _levelController.text,
                           ),
                           Positioned(
