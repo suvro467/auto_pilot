@@ -36,12 +36,12 @@ class _UserListScreen1State extends State<UserListScreen1>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
-  final TextEditingController _departmentController = TextEditingController();
+  final TextEditingController _userController = TextEditingController();
 
-  late bool _isDepartmentValid;
+  late bool _isUserSelected;
 
   late String _validationText;
-  late String _departmentText;
+  late String _userText;
 
   bool isDelegatesExpanded = false;
   bool isRepeatExpanded = false;
@@ -64,21 +64,22 @@ class _UserListScreen1State extends State<UserListScreen1>
 
     _tabController = TabController(length: 4, vsync: this);
 
-    _isDepartmentValid = true;
+    _validationText = 'Please select a user';
+    _isUserSelected = true;
 
-    _departmentController.text = '';
-    _departmentText = 'Choose user';
+    _userController.text = '';
+    _userText = 'Choose user';
 
-    _departmentController.addListener(() {
-      if (_departmentController.text.isEmpty) {
+    _userController.addListener(() {
+      if (_userController.text.isEmpty) {
         setState(() {
-          _departmentText = 'Department';
-          _isDepartmentValid = false;
+          _userText = 'Choose user';
+          _isUserSelected = false;
         });
       } else {
         setState(() {
-          _departmentText = '';
-          _isDepartmentValid = true;
+          _userText = '';
+          _isUserSelected = true;
         });
       }
     });
@@ -87,8 +88,8 @@ class _UserListScreen1State extends State<UserListScreen1>
   @override
   void dispose() {
     _tabController.dispose();
-    _departmentController.dispose();
-    _departmentText = '';
+    _userController.dispose();
+    _userText = '';
     super.dispose();
   }
 
@@ -413,13 +414,14 @@ class _UserListScreen1State extends State<UserListScreen1>
                                                       .withAlpha(30),
                                                   onTap: () async {
                                                     // Here reset the user selected to blank.
-                                                    _departmentController.text =
-                                                        '';
-                                                    _departmentText =
-                                                        _departmentController
-                                                                .text.isNotEmpty
-                                                            ? ''
-                                                            : 'Choose user';
+                                                    _userController.text = '';
+                                                    _userText = _userController
+                                                            .text.isNotEmpty
+                                                        ? ''
+                                                        : 'Choose user';
+                                                    // While clicking on the delete button assume all the validation checks are passed,
+                                                    // hence we are assigning true to _isUserSelected.
+                                                    _isUserSelected = true;
                                                     await showModalBottomSheet(
                                                         context: context,
                                                         backgroundColor:
@@ -580,7 +582,9 @@ class _UserListScreen1State extends State<UserListScreen1>
                                                                               onChanged: (newValue) {
                                                                                 setModalState(() {
                                                                                   _archiveUserTasks = !_archiveUserTasks;
-                                                                                  if (_archiveUserTasks) _isDepartmentValid = true;
+                                                                                  if (_archiveUserTasks) {
+                                                                                    _isUserSelected = true;
+                                                                                  }
                                                                                 });
                                                                               },
                                                                               title: Text(
@@ -637,7 +641,7 @@ class _UserListScreen1State extends State<UserListScreen1>
                                                                                 prefixIcon: Transform.scale(
                                                                                   scale: 0.7,
                                                                                   child: SvgPicture.asset(
-                                                                                    'assets/images/department.svg',
+                                                                                    'assets/images/user.svg',
                                                                                     color: MyAutoPilotStyles.appColor,
                                                                                     height: 10,
                                                                                     width: 10,
@@ -662,20 +666,20 @@ class _UserListScreen1State extends State<UserListScreen1>
                                                                               showClearButton: false,
                                                                               onChanged: (value) async {
                                                                                 setModalState(() {
-                                                                                  _departmentController.text = value ?? '';
-                                                                                  _departmentText = _departmentController.text.isNotEmpty ? '' : 'Choose user';
+                                                                                  _userController.text = value ?? '';
+                                                                                  _userText = _userController.text.isNotEmpty ? '' : 'Choose user';
                                                                                 });
                                                                               },
                                                                               //popupItemDisabled: (String s) => s.startsWith('I'),
                                                                               /* selectedItem: chefPrintDataModel
                           .chefPrint.setting.storeNumberOfAutoPrintChef
                           .toString(), */
-                                                                              selectedItem: _departmentController.text,
+                                                                              selectedItem: _userController.text,
                                                                             ),
                                                                             Positioned(
                                                                               left: 50,
                                                                               top: 10,
-                                                                              child: Text(_departmentText,
+                                                                              child: Text(_userText,
                                                                                   style: GoogleFonts.notoSerif(
                                                                                     fontSize: 14,
                                                                                     color: HexColor('#C9C9C9'),
@@ -683,13 +687,13 @@ class _UserListScreen1State extends State<UserListScreen1>
                                                                                     //decoration: TextDecoration.underline,
                                                                                   )),
                                                                             ),
-                                                                            !_isDepartmentValid
+                                                                            !_isUserSelected
                                                                                 ? Positioned(
                                                                                     right: 10.0,
                                                                                     top: 35.0,
                                                                                     child: new Container(
                                                                                       child: Text(
-                                                                                        'Please select a department',
+                                                                                        '$_validationText',
                                                                                         style: TextStyle(
                                                                                           color: Globals.validationColor,
                                                                                           fontSize: 10.0,
@@ -716,20 +720,17 @@ class _UserListScreen1State extends State<UserListScreen1>
                                                                                 () async {
                                                                               // If 'Archive User Tasks' is checked then no need to select any user.
                                                                               if (_archiveUserTasks) {
-                                                                                _isDepartmentValid = true;
-                                                                              } else if (!_archiveUserTasks && _departmentController.text.isEmpty) {
-                                                                                _isDepartmentValid = false;
+                                                                                _isUserSelected = true;
+                                                                              } else if (!_archiveUserTasks && _userController.text.isEmpty) {
+                                                                                _isUserSelected = false;
                                                                               }
 
-                                                                              if (!_isDepartmentValid) {
-                                                                                /* if (_departmentController.text.isEmpty && !_archiveUserTasks) {
-                                                                                  _isDepartmentValid = false;
-                                                                                } */
+                                                                              if (!_isUserSelected) {
                                                                                 setModalState(() {});
                                                                                 ShowMessage.showFlushBar(context, 'Please rectify the errors.');
                                                                               } else {
                                                                                 setModalState(() {
-                                                                                  _isDepartmentValid = true;
+                                                                                  _isUserSelected = true;
                                                                                 });
 
                                                                                 showDialog(
@@ -742,6 +743,8 @@ class _UserListScreen1State extends State<UserListScreen1>
 
                                                                                 await Future.delayed(new Duration(seconds: 3), () {
                                                                                   Navigator.pop(context); //pop dialog
+                                                                                  Navigator.pop(context);
+                                                                                  ShowMessage.showSnackBarWithStatus(context, 'User is successfully deleted.', 'success');
                                                                                 }).then((value) {});
                                                                               }
                                                                             },
@@ -771,8 +774,7 @@ class _UserListScreen1State extends State<UserListScreen1>
                                                             );
                                                           });
                                                         }).then((value) {
-                                                      _departmentText =
-                                                          'Choose user';
+                                                      _userText = 'Choose user';
                                                       _archiveUserTasks = false;
                                                     });
                                                   },
