@@ -352,20 +352,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Animation<double> secondaryAnimation,
                                 Widget child) {
                               return Align(
-                                // Other animation types kept here for re-use.
-                                /* child: FadeTransition(
-                                                opacity: animation,
-                                                child: child,
-                                            ), */
-                                /* child: ScaleTransition(
-                                                scale: animation,
-                                                child: child,
-                                            ), */
-                                /* child: SizeTransition(
-                                                sizeFactor: animation,
-                                                child: child,
-                                                axisAlignment: 0.0,
-                                            ), */
                                 child: SlideTransition(
                                   position: Tween(
                                           begin: Offset(1.0, 0.0),

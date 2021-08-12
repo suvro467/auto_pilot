@@ -6,8 +6,6 @@ import 'package:auto_pilot/shared/globals.dart';
 import 'package:auto_pilot/shared/presentation/styles.dart';
 import 'package:auto_pilot/shared/widgets/loading_dialog.dart';
 import 'package:auto_pilot/shared/widgets/show_message.dart';
-import 'package:decorated_icon/decorated_icon.dart';
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -448,65 +446,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            /* Container(
-                              width: 180,
-                              padding: const EdgeInsets.only(
-                                left: 50.0,
-                                //right: 50,
-                                top: 20,
-                              ),
-                              child: TextFormField(
-                                validator: (value) {
-                                  return null;
-                                },
-                                enabled: false,
-                                decoration: InputDecoration(
-                                  disabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: MyAutoPilotStyles.appColor),
-                                  ),
-                                  labelStyle: GoogleFonts.notoSerif(
-                                    fontSize: 14,
-                                    color: HexColor('#C9C9C9'),
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                  prefixIcon: Transform.scale(
-                                    scale: 0.6,
-                                    child: SvgPicture.asset(
-                                      'assets/images/phone.svg',
-                                      color: MyAutoPilotStyles.appColor,
-                                      //semanticsLabel: 'Email Mobile',
-                                      height: 10,
-                                      width: 10,
-                                    ),
-                                  ),
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: MyAutoPilotStyles.appColor),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: MyAutoPilotStyles.appColor),
-                                  ),
-                                  hintText: '+91 (IND)',
-                                  hintStyle: GoogleFonts.notoSerif(
-                                    fontSize: 14,
-                                    color: HexColor('#C9C9C9'),
-                                    fontWeight: FontWeight.normal,
-                                    //decoration: TextDecoration.underline,
-                                  ),
-                                ),
-                              ),
-                            ), */
-                            /* Transform.scale(
-                              scale: 0.6,
-                              child: SvgPicture.asset(
-                                'assets/images/phone.svg',
-                                color: MyAutoPilotStyles.appColor,
-                                height: 10,
-                                width: 10,
-                              ),
-                            ), */
                             Stack(children: [
                               Container(
                                 width: 200,
@@ -639,11 +578,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   }).toList(),
                                   onChanged: (value) {
                                     setState(() {
-                                      /* selectedCountryISDCode = Globals.countryISDCodes
-                                            .where((element) =>
-                                                element['name'] == value)
-                                            .first; */
-
                                       selectedCountryISDCode = Globals
                                           .countryISDCodes
                                           .firstWhere((element) => mapEquals(
@@ -1406,20 +1340,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                                     secondaryAnimation,
                                                 Widget child) {
                                           return Align(
-                                            // Other animation types kept here for re-use.
-                                            /* child: FadeTransition(
-                                                        opacity: animation,
-                                                        child: child,
-                                                    ), */
-                                            /* child: ScaleTransition(
-                                                        scale: animation,
-                                                        child: child,
-                                                    ), */
-                                            /* child: SizeTransition(
-                                                        sizeFactor: animation,
-                                                        child: child,
-                                                        axisAlignment: 0.0,
-                                                    ), */
                                             child: SlideTransition(
                                               position: Tween(
                                                       begin: Offset(1.0, 0.0),
